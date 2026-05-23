@@ -1,0 +1,3470 @@
+	  <!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* EDIT: 전체 색상표 / 색을 바꿀 때는 아래 변수값만 먼저 수정하면 됩니다. */
+:root{
+  --dark-bg-1:#050712;
+  --dark-bg-2:#081832;
+  --dark-bg-3:#171437;
+  --dark-bg-4:#281333;
+  --dark-bg-5:#061f24;
+  --dark-glow-teal:rgba(45,212,191,.18);
+  --dark-glow-blue:rgba(34,211,238,.28);
+  --dark-glow-purple:rgba(139,92,246,.28);
+  --dark-glow-rose:rgba(236,72,153,.18);
+
+  --light-bg-1:#f8fbff;
+  --light-bg-2:#eaf7ff;
+  --light-bg-3:#edf1ff;
+  --light-bg-4:#f3edff;
+  --light-bg-5:#eefcf7;
+
+  --hero-accent-dark:linear-gradient(135deg,#22d3ee 0%,#a78bfa 48%,#f472b6 100%);
+  --hero-accent-light:linear-gradient(135deg,#0284c7 0%,#38bdf8 34%,#8b5cf6 66%,#14b8a6 100%);
+  --skill-graph-dark:linear-gradient(90deg,#22d3ee,#60a5fa,#7c3aed);
+  --skill-graph-light:linear-gradient(90deg,#38bdf8,#8b5cf6,#2dd4bf);
+  --section-bg-dark:#0a0f1d;
+  --section-bg-light:#eef4ff;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body{
+  font-family:'Pretendard',sans-serif;
+  background:#0d1328;
+  color:white;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+  cursor:none;
+}
+body.light-mode{
+  background:#f6f8ff;
+  color:#111827;
+}
+
+body.light-mode .background{
+  background:
+  linear-gradient(rgba(79,70,229,.24) 1.2px, transparent 1.2px),
+  linear-gradient(90deg, rgba(79,70,229,.24) 1.2px, transparent 1.2px),
+  radial-gradient(circle at 14% 18%, rgba(56,189,248,.26), transparent 28%),
+  radial-gradient(circle at 82% 22%, rgba(168,85,247,.22), transparent 32%),
+  radial-gradient(circle at 52% 84%, rgba(45,212,191,.18), transparent 34%),
+  linear-gradient(135deg,
+    var(--light-bg-1) 0%,
+    var(--light-bg-2) 18%,
+    var(--light-bg-3) 42%,
+    var(--light-bg-4) 72%,
+    var(--light-bg-5) 100%);
+
+  background-size:
+    56px 56px,
+    56px 56px,
+    auto,
+    auto,
+    auto,
+    auto;
+}
+
+body.light-mode .project-info{
+  background:linear-gradient(
+    to top,
+    rgba(255,255,255,.9) 0%,
+    rgba(255,255,255,.62) 58%,
+    rgba(255,255,255,0) 100%
+  );
+  border-top:none;
+}
+
+body.light-mode .skill-detail-sub,
+body.light-mode .skill-detail-card p{
+  color:rgba(17,24,39,.82);
+}
+
+body.light-mode .skill-detail-card h4{
+  color:rgba(17,24,39,.5);
+}
+
+body.light-mode .skill-detail-title{
+  color:#111827;
+}
+
+body.light-mode .skill-tab.active,
+body.light-mode .skill-tab:hover{
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(0,0,0,.14);
+  transform:translateY(-3px);
+}
+
+body.light-mode .skill-tab.active{
+  background:
+    radial-gradient(circle at 32% 20%, rgba(14,165,233,.24), transparent 45%),
+    linear-gradient(135deg, rgba(56,189,248,.18), rgba(139,92,246,.2), rgba(45,212,191,.16));
+  border:1px solid rgba(79,70,229,.3);
+  box-shadow:
+    0 0 26px rgba(139,92,246,.16),
+    inset 0 0 0 1px rgba(255,255,255,.6);
+}
+
+body.light-mode .skill-tab::before,
+body.light-mode .skill-tab::after{
+  border-color:rgba(99,102,241,.52);
+}
+
+body.light-mode .skill-tab.active::before,
+body.light-mode .skill-tab.active::after,
+body.light-mode .skill-tab:hover::before,
+body.light-mode .skill-tab:hover::after{
+  border-color:rgba(56,189,248,.72);
+}
+
+body.light-mode .hero-cell.hero-outline{
+  color:transparent;
+  -webkit-text-stroke:1px rgba(17,24,39,.82);
+}
+
+.mode-toggle{
+  position:fixed;
+  top:24px;
+  right:24px;
+  z-index:1000;
+
+  width:54px;
+  height:54px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+
+  backdrop-filter:blur(20px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 0 2px;
+
+  color:white;
+  font-size:34px;
+  line-height:0;
+  font-family:Georgia,'Times New Roman',serif;
+  cursor:none;
+
+  transition:.3s;
+}
+
+.contact-toggle{
+  position:fixed;
+  top:24px;
+  right:90px;
+  z-index:1000;
+
+  width:140px;
+  height:54px;
+
+  border:none;
+  border-radius:999px;
+
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+
+  backdrop-filter:blur(20px);
+
+  color:white;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:.04em;
+
+  cursor:none;
+
+  transition:.3s;
+}
+
+.portfolio-nav{
+  position:fixed;
+  top:24px;
+  left:24px;
+  z-index:1000;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px;
+  border-radius:999px;
+
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(20px);
+}
+
+.portfolio-nav a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:0 12px;
+  border-radius:999px;
+  color:rgba(255,255,255,.78);
+  font-size:12px;
+  font-weight:800;
+  text-decoration:none;
+  letter-spacing:0;
+  cursor:none;
+  transition:.25s ease;
+}
+
+.portfolio-nav a:hover{
+  background:rgba(255,255,255,.12);
+  color:white;
+}
+
+body.light-mode .portfolio-nav{
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(0,0,0,.08);
+}
+
+body.light-mode .portfolio-nav a{
+  color:rgba(17,24,39,.68);
+}
+
+body.light-mode .portfolio-nav a:hover{
+  background:rgba(0,0,0,.06);
+  color:#111827;
+}
+
+.contact-toggle:hover{
+  transform:scale(1.05);
+}
+
+body.light-mode .contact-toggle{
+  background:rgba(255,255,255,.7);
+  color:#111827;
+  border:1px solid rgba(0,0,0,.08);  
+}
+
+.contact-panel{
+  position:fixed;
+  top:0;
+  right:-420px;
+  width:380px;
+  height:100vh;
+
+  background:rgba(15,20,40,.92);
+  backdrop-filter:blur(24px);
+
+  border-left:1px solid rgba(255,255,255,.1);
+
+  z-index:9998;
+
+  transition:.4s ease;
+  padding:40px;
+}
+
+.contact-panel.active{
+  right:0;
+}
+
+.contact-inner h2{
+  font-size:32px;
+  margin-bottom:24px;
+}
+
+.contact-inner p{
+  font-size:16px;
+  margin-bottom:12px;
+  color:rgba(255,255,255,.75);
+}
+
+body.light-mode .contact-panel{
+  background:rgba(255,255,255,.92);
+  border-left:1px solid rgba(0,0,0,.08);
+}
+
+body.light-mode .contact-inner p{
+  color:rgba(0,0,0,.65);
+}
+
+.mode-toggle:hover{
+  transform:scale(1.08);
+}
+
+body.light-mode .mode-toggle{
+  background:rgba(255,255,255,.7);
+  color:#111827;
+  border:1px solid rgba(0,0,0,.08);
+}
+
+ 
+.scroll-progress-bar{
+  position:fixed;
+  top:0;
+  left:0;
+
+  width:0%;
+  height:4px;
+
+  background:linear-gradient(90deg,#22d3ee,#60a5fa,#7c3aed);
+
+  z-index:10000;
+
+  transition:width .08s linear;
+  box-shadow:0 0 22px rgba(96,165,250,.44);
+}
+
+body.light-mode .scroll-progress-bar{
+  background:linear-gradient(90deg,#38bdf8,#8b5cf6,#2dd4bf);
+  box-shadow:0 0 24px rgba(139,92,246,.34);
+}
+
+.background{
+  position:fixed;
+  inset:0;
+  background:
+    /* EDIT: 다크모드 배경색 / 위 :root의 dark 변수들을 바꾸면 전체 분위기가 바뀝니다. */
+    radial-gradient(circle at 22% 18%, var(--dark-glow-teal), transparent 32%),
+    radial-gradient(circle at 82% 16%, rgba(129,140,248,.2), transparent 34%),
+    radial-gradient(circle at 54% 86%, rgba(244,114,182,.14), transparent 36%),
+    linear-gradient(150deg,
+      var(--dark-bg-1) 0%,
+      var(--dark-bg-2) 24%,
+      var(--dark-bg-3) 50%,
+      var(--dark-bg-4) 74%,
+      var(--dark-bg-5) 100%);
+  overflow:hidden;
+  pointer-events:none;
+  z-index:-10;
+}
+
+.background::after{
+  content:'';
+  position:absolute;
+  top:-120%;
+  left:-120%;
+  width:340%;
+  height:340%;
+  background:
+    radial-gradient(circle at 18% 20%, var(--dark-glow-blue), transparent 24%),
+    radial-gradient(circle at 80% 24%, var(--dark-glow-purple), transparent 27%),
+    radial-gradient(circle at 58% 74%, var(--dark-glow-rose), transparent 30%),
+    radial-gradient(circle at 36% 76%, rgba(20,184,166,.16), transparent 30%),
+    linear-gradient(to bottom, rgba(255,255,255,.035), transparent 42%, rgba(0,0,0,.18));
+  mix-blend-mode:screen;
+  opacity:.78;
+  animation:orbFloat 14s ease-in-out infinite alternate;
+  will-change:transform;
+}
+
+body.light-mode .background::after{
+  background:
+    radial-gradient(circle at 18% 24%, rgba(14,165,233,.72), transparent 24%),
+    radial-gradient(circle at 80% 28%, rgba(147,51,234,.58), transparent 27%),
+    radial-gradient(circle at 50% 78%, rgba(20,184,166,.5), transparent 31%),
+    radial-gradient(circle at 34% 64%, rgba(96,165,250,.42), transparent 28%),
+    linear-gradient(to bottom, rgba(255,255,255,.16), transparent 46%, rgba(219,234,254,.12));
+  mix-blend-mode:normal;
+  opacity:.92;
+}
+
+.background::before{
+  content:'';
+  position:absolute;
+  top:-140%;
+  left:-140%;
+  width:380%;
+  height:380%;
+  background:
+    radial-gradient(circle at 32% 32%, rgba(255,255,255,.06), transparent 20%),
+    radial-gradient(circle at 70% 62%, rgba(96,165,250,.12), transparent 25%),
+    radial-gradient(circle at 44% 52%, rgba(45,212,191,.08), transparent 24%);
+  transform:translateX(0%) rotate(-5deg);
+  animation:lightSweep 16s ease-in-out infinite alternate;
+  mix-blend-mode:screen;
+  will-change:transform, opacity;
+}
+
+.keyword-cloud{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:1;
+}
+
+.talent-keyword{
+  position:absolute;
+  left:var(--keyword-x,50%);
+  top:var(--keyword-y,50%);
+  transform:translate(-50%,-50%) scale(.94);
+  color:var(--keyword-color,rgba(255,255,255,.42));
+  font-size:var(--keyword-size,13px);
+  font-weight:var(--keyword-weight,500);
+  letter-spacing:0;
+  white-space:nowrap;
+  opacity:0;
+  text-shadow:0 0 18px rgba(34,211,238,.18);
+  animation:keywordFloat var(--keyword-duration,6s) ease-in-out forwards;
+}
+
+body.light-mode .talent-keyword{
+  color:rgba(17,24,39,.28);
+  text-shadow:none;
+}
+
+body.light-mode .background::before{
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(255,255,255,.72) 44%, transparent 58%),
+    linear-gradient(245deg, transparent 0%, rgba(14,165,233,.28) 42%, transparent 60%),
+    linear-gradient(18deg, transparent 0%, rgba(168,85,247,.18) 46%, transparent 62%);
+  mix-blend-mode:normal;
+}
+
+
+@keyframes orbFloat{
+  0%{
+    transform:translate3d(-2%, -1%, 0) scale(1.06);
+  }
+  50%{
+    transform:translate3d(2%, 2%, 0) scale(1.1);
+  }
+  100%{
+    transform:translate3d(3%, -2%, 0) scale(1.14);
+  }
+}
+
+@keyframes lightSweep{
+  0%{
+    transform:translateX(-2%) translateY(-1%) rotate(-4deg);
+    opacity:.52;
+  }
+  50%{
+    transform:translateX(2%) translateY(2%) rotate(1deg);
+    opacity:.82;
+  }
+  100%{
+    transform:translateX(3%) translateY(-2%) rotate(4deg);
+    opacity:.68;
+  }
+}
+
+@keyframes keywordFloat{
+  0%{
+    opacity:0;
+    transform:translate(-50%, calc(-50% + 12px)) scale(.9);
+  }
+  18%{
+    opacity:.72;
+  }
+  72%{
+    opacity:.72;
+  }
+  100%{
+    opacity:0;
+    transform:translate(-50%, calc(-50% - 18px)) scale(1.05);
+  }
+}
+
+
+.cursor-light{
+  position:fixed;
+  width:122px;
+  height:122px;
+  border-radius:50%;
+
+  background:
+  radial-gradient(circle,
+  rgba(34,211,238,.9) 0%,
+  rgba(124,58,237,.52) 26%,
+  rgba(96,165,250,.24) 48%,
+  rgba(255,255,255,0) 74%);
+
+  filter:blur(14px);
+
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+
+  z-index:9996;
+
+  transition:
+  background .25s ease,
+  filter .25s ease;
+
+  mix-blend-mode:screen;
+
+  opacity:1;
+}
+
+body.light-mode .cursor-light{
+
+  width:122px;
+  height:122px;
+
+  background:
+  radial-gradient(circle,
+  rgba(109,40,217,.92) 0%,
+  rgba(147,51,234,.56) 26%,
+  rgba(192,132,252,.22) 48%,
+  rgba(255,255,255,0) 74%);
+
+  filter:blur(14px);
+
+  mix-blend-mode:multiply;
+
+  opacity:.9;
+}
+
+.custom-cursor{
+  position:fixed;
+
+  width:18px;
+  height:30px;
+
+  clip-path:polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+  border:none;
+
+  background:rgba(255,255,255,.34);
+
+  backdrop-filter:blur(12px);
+
+  transform:translate(-50%,-50%);
+
+  pointer-events:none;
+
+  z-index:9999;
+
+  transition:
+    width .18s ease,
+    height .18s ease,
+    background .18s ease,
+    transform .12s ease;
+
+  mix-blend-mode:screen;
+}
+
+body.light-mode .custom-cursor{
+  background:rgba(168,85,247,.62);
+  mix-blend-mode:multiply;
+}
+
+
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:120px 24px 80px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-copy{
+  --hero-cell:clamp(96px, 10vw, 154px);
+  --hero-gap:20px;
+  --hero-line-dark:rgba(255,255,255,.58);
+  --hero-line-light:rgba(0,0,0,.72);
+
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, var(--hero-cell));
+  grid-template-rows:repeat(3, var(--hero-cell));
+  column-gap:0;
+  row-gap:var(--hero-gap);
+
+  width:calc(var(--hero-cell) * 3);
+
+  background:none;
+  backdrop-filter:none;
+  box-shadow:none;
+}
+
+.hero-copy::before,
+.hero-copy::after{
+  content:'';
+  position:absolute;
+  width:2px;
+  height:var(--hero-gap);
+  top:var(--hero-cell);
+  background:var(--hero-line-dark);
+  box-shadow:0 calc(var(--hero-cell) + var(--hero-gap)) 0 var(--hero-line-dark);
+  pointer-events:none;
+  z-index:10;
+}
+
+.hero-copy::before{
+  left:0;
+}
+
+.hero-copy::after{
+  right:0;
+}
+
+
+.hero-cell{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-top:2px solid rgba(255,255,255,.58);
+  border-bottom:2px solid rgba(255,255,255,.58);
+  border-left:2px solid rgba(255,255,255,.58);
+  border-right:none;
+
+  font-size:clamp(54px,6.2vw,104px);
+  line-height:1;
+  letter-spacing:.06em;
+  font-weight:800;
+
+  background:transparent;
+}
+
+.hero-cell:nth-child(3n){
+  border-right:2px solid rgba(255,255,255,.58);
+}
+
+.hero-cell:nth-child(-n+3),
+.hero-cell:nth-child(n+4):nth-child(-n+6),
+.hero-cell:nth-child(n+7){
+  border-top:2px solid rgba(255,255,255,.58);
+  border-bottom:2px solid rgba(255,255,255,.58);
+}
+
+
+body.light-mode .hero-cell{
+  outline:none;
+  color:#111827;
+  background:transparent;
+}
+
+.hero-accent{
+  color:#67e8f9;
+  /* EDIT: 메인 문구 '현장이' 다크모드 색 / :root의 --hero-accent-dark 수정 */
+  background:var(--hero-accent-dark);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 34px rgba(34,211,238,.34);
+}
+
+.hero-cell:nth-child(1){ grid-column:1; grid-row:1; }
+.hero-cell:nth-child(2){ grid-column:2; grid-row:1; }
+.hero-cell:nth-child(3){ grid-column:3; grid-row:1; }
+.hero-cell:nth-child(4){ grid-column:1; grid-row:2; }
+.hero-cell:nth-child(5){ grid-column:2; grid-row:2; }
+.hero-cell:nth-child(6){ grid-column:3; grid-row:2; }
+.hero-cell:nth-child(7){ grid-column:1; grid-row:3; }
+.hero-cell:nth-child(8){ grid-column:2; grid-row:3; }
+.hero-cell:nth-child(9){ grid-column:3; grid-row:3; }
+
+
+body.light-mode .hero-copy,
+body.light-mode .hero-cell{
+  border-color:rgba(0,0,0,.32);
+}
+
+body.light-mode .hero-copy{
+  background:none;
+  box-shadow:none;
+}
+
+body.light-mode .hero-copy::before,
+body.light-mode .hero-copy::after{
+  background:var(--hero-line-light);
+  box-shadow:0 calc(var(--hero-cell) + var(--hero-gap)) 0 var(--hero-line-light);
+}
+
+
+body.light-mode .hero-cell{
+  border-top-color:rgba(0,0,0,.72);
+  border-bottom-color:rgba(0,0,0,.72);
+  border-left-color:rgba(0,0,0,.72);
+  border-right-color:transparent;
+}
+
+body.light-mode .hero-accent{
+  color:#0ea5e9;
+  /* EDIT: 메인 문구 '현장이' 라이트모드 색 / :root의 --hero-accent-light 수정 */
+  background:var(--hero-accent-light);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:none;
+}
+
+body.light-mode .hero-cell:nth-child(3n){
+  border-right-color:rgba(0,0,0,.72);
+}
+
+body.light-mode .hero-cell:nth-child(-n+3),
+body.light-mode .hero-cell:nth-child(n+4):nth-child(-n+6),
+body.light-mode .hero-cell:nth-child(n+7){
+  border-top-color:rgba(0,0,0,.72);
+  border-bottom-color:rgba(0,0,0,.72);
+}
+
+
+.hero-outline{
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.8);
+}
+
+.scroll-indicator{
+  position:absolute;
+  bottom:34px;
+  left:50%;
+  transform:translateX(-50%);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+
+  opacity:1;
+
+  pointer-events:none;
+}
+
+.scroll-arrow{
+  font-size:24px;
+  color:rgba(255,255,255,.85);
+  animation:bounce 2.4s cubic-bezier(.4,0,.2,1) infinite;
+}
+
+.scroll-line{
+  width:1px;
+  height:34px;
+  background:rgba(255,255,255,.3);
+}
+
+body.light-mode .scroll-arrow{
+  color:rgba(0,0,0,.6);
+}
+
+body.light-mode .scroll-line{
+  background:rgba(0,0,0,.2);
+}
+
+@keyframes bounce{
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(8px);
+  }
+}
+
+/* EDIT: 스킬단 레이아웃/스킬 상세 패널 스타일 */
+
+
+.skills-section{
+  width:92%;
+  height:auto;
+  margin:0 auto;
+  padding-top:64px;
+  padding-bottom:64px;
+  scroll-margin-top:0;
+  overflow:visible;
+}
+
+
+.skills-layout{
+  --skill-sidebar-width:396px;
+  --skill-sidebar-safe-padding:18px;
+  --skill-gap:12px;
+  --skill-tab-size:calc((var(--skill-sidebar-width) - (var(--skill-sidebar-safe-padding) * 2) - (var(--skill-gap) * 2)) / 3);
+  --skill-panel-height:calc((var(--skill-tab-size) * 4) + (var(--skill-gap) * 3));
+
+  display:grid;
+  grid-template-columns:var(--skill-sidebar-width) minmax(0,1fr);
+  gap:32px;
+  height:var(--skill-panel-height);
+  min-height:0;
+  align-items:stretch;
+  overflow:visible;
+}
+
+.skills-sidebar{
+  width:var(--skill-sidebar-width);
+  height:calc(var(--skill-panel-height) + (var(--skill-sidebar-safe-padding) * 2));
+  display:grid;
+  grid-template-columns:repeat(3,var(--skill-tab-size));
+  grid-template-rows:repeat(4,var(--skill-tab-size));
+  gap:var(--skill-gap);
+  padding:var(--skill-sidebar-safe-padding);
+  margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
+  overflow:visible;
+}
+
+.skill-tab{
+  width:100%;
+  height:100%;
+  aspect-ratio:1/1;
+  min-height:auto;
+  position:relative;
+  overflow:visible;
+  border-radius:18px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+  transition:.28s ease;
+  cursor:none;
+}
+
+.skill-tab::before,
+.skill-tab::after{
+  content:'';
+  position:absolute;
+  width:30px;
+  height:30px;
+  pointer-events:none;
+  opacity:.58;
+  transition:.28s ease;
+  z-index:2;
+}
+
+.skill-tab::before{
+  top:9px;
+  left:9px;
+  border-top:4px solid rgba(255,255,255,.5);
+  border-left:4px solid rgba(255,255,255,.5);
+  border-radius:12px 0 0 0;
+}
+
+.skill-tab::after{
+  right:9px;
+  bottom:9px;
+  border-right:4px solid rgba(255,255,255,.5);
+  border-bottom:4px solid rgba(255,255,255,.5);
+  border-radius:0 0 12px 0;
+}
+
+.skill-tab img{
+  width:58px;
+  height:58px;
+  display:block;
+  object-fit:contain;
+  position:relative;
+  z-index:1;
+}
+
+
+.skill-tab span{
+  display:none;
+}
+
+.skill-tab.active,
+.skill-tab:hover{
+  transform:scale(1.07) !important;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.07);
+}
+
+.skill-tab.active{
+  background:
+    radial-gradient(circle at 30% 22%, rgba(34,211,238,.22), transparent 45%),
+    linear-gradient(135deg, rgba(34,211,238,.14), rgba(124,58,237,.18));
+  border-color:rgba(96,165,250,.45);
+  box-shadow:
+    0 0 34px rgba(96,165,250,.28),
+    inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+.skill-tab.active::before,
+.skill-tab.active::after,
+.skill-tab:hover::before,
+.skill-tab:hover::after{
+  width:30px;
+  height:30px;
+  opacity:1;
+  border-color:rgba(96,165,250,.72);
+}
+
+.skill-tab.active::before,
+.skill-tab.active::after,
+.skill-tab:hover::before,
+.skill-tab:hover::after{
+  width:38px;
+  height:38px;
+}
+
+.skill-detail{
+  position:relative;
+  align-self:stretch;
+  height:var(--skill-panel-height);
+  border-radius:30px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  padding:36px;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+}
+
+.skill-detail-top{
+  display:block;
+  margin-bottom:0;
+  padding-top:34px;
+  text-align:left;
+}
+
+.skill-detail-title{
+  font-size:48px;
+  font-weight:800;
+  letter-spacing:-2.5px;
+}
+
+.skill-detail-sub{
+  margin-top:12px;
+  font-size:15px;
+  line-height:1.65;
+  color:rgba(255,255,255,.65);
+}
+
+.skill-barometer{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:min(820px,92%);
+  min-width:0;
+  margin:0;
+}
+
+.skill-barometer-top{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:12px;
+}
+
+.skill-barometer-label{
+  font-size:12px;
+  letter-spacing:.08em;
+  opacity:.55;
+}
+
+.skill-barometer-track{
+  position:relative;
+  width:100%;
+  height:42px;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+}
+
+.skill-barometer-fill{
+  position:absolute;
+  left:0;
+  top:0;
+  width:85%;
+  height:100%;
+  border-radius:999px;
+  /* EDIT: 스킬 그래프 다크모드 색 / :root의 --skill-graph-dark 수정 */
+  background:var(--skill-graph-dark);
+  box-shadow:0 0 24px rgba(96,165,250,.34);
+  transition:width .36s ease;
+  z-index:1;
+}
+
+.skill-barometer-track.segmented{
+  display:block;
+}
+
+.skill-boundary{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:1px;
+  background:rgba(255,255,255,.34);
+  z-index:2;
+}
+
+.skill-boundary.low{
+  left:33.333%;
+}
+
+.skill-boundary.mid{
+  left:66.666%;
+}
+
+.skill-scale-labels{
+  position:absolute;
+  inset:0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  align-items:center;
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0;
+  color:rgba(255,255,255,.52);
+  pointer-events:none;
+  z-index:3;
+}
+
+.skill-scale-labels span.active{
+  color:#fff;
+  text-shadow:0 0 16px rgba(255,255,255,.35);
+}
+
+body.light-mode .skill-barometer-track{
+  background:rgba(0,0,0,.06);
+  border:1px solid rgba(0,0,0,.08);
+}
+
+body.light-mode .skill-barometer-fill{
+  /* EDIT: 스킬 그래프 라이트모드 색 / :root의 --skill-graph-light 수정 */
+  background:var(--skill-graph-light);
+  box-shadow:0 0 18px rgba(139,92,246,.24);
+}
+
+body.light-mode .skill-boundary{
+  background:rgba(17,24,39,.22);
+}
+
+body.light-mode .skill-scale-labels{
+  color:rgba(17,24,39,.48);
+}
+
+body.light-mode .skill-scale-labels span.active{
+  color:#111827;
+  text-shadow:none;
+}
+
+
+
+
+
+.skill-detail-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  margin-top:auto;
+  padding-bottom:0;
+}
+
+.skill-detail-card{
+  border-radius:20px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  padding:20px;
+}
+
+.skill-detail-card h4{
+  font-size:12px;
+  letter-spacing:.08em;
+  opacity:.6;
+  margin-bottom:8px;
+}
+
+.skill-detail-card p{
+  font-size:15px;
+  line-height:1.55;
+}
+
+.experience-section{
+  width:92%;
+  height:auto;
+  margin:0 auto;
+  padding-top:64px;
+  padding-bottom:64px;
+  scroll-margin-top:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+.section-heading{
+  width:92%;
+  margin:0 auto 20px;
+  font-size:clamp(42px,5vw,88px);
+  letter-spacing:-4px;
+  font-weight:800;
+}
+
+.experience-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  height:clamp(300px, 42svh, 390px);
+  min-height:0;
+  margin-top:18px;
+  align-items:stretch;
+}
+
+.experience-card{
+  position:relative;
+  padding:24px;
+  border-radius:22px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  overflow:hidden;
+  transition:.35s ease;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  height:100%;
+}
+
+.experience-card:hover{
+  transform:translateY(-8px);
+  border:1px solid rgba(255,255,255,.18);
+}
+
+body.light-mode .experience-card{
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(0,0,0,.08);
+}
+
+.exp-main{
+  display:grid;
+  grid-template-columns:148px minmax(0,1fr);
+  align-items:center;
+  gap:20px;
+  width:100%;
+  margin:14px 0 18px;
+}
+
+
+.exp-logo{
+  width:140px;
+  height:58px;
+  display:block;
+  object-fit:contain;
+  object-position:center center;
+  margin:0 auto;
+}
+
+.exp-logo[alt="KODA"]{
+  width:140px;
+  height:56px;
+}
+
+.exp-logo[alt="NMG"]{
+  width:140px;
+  height:54px;
+}
+
+.exp-text{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:7px;
+  text-align:left;
+  min-width:0;
+  padding-top:2px;
+}
+
+body.light-mode .exp-logo{
+  opacity:.95;
+}
+
+
+.exp-label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+
+body.light-mode .exp-label{
+  background:rgba(0,0,0,.04);
+  border:1px solid rgba(0,0,0,.06);
+}
+
+.exp-company{
+  font-size:32px;
+  font-weight:700;
+  letter-spacing:-1px;
+  margin-bottom:0;
+}
+
+.exp-org{
+  display:block;
+  margin-bottom:7px;
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:-.4px;
+  color:rgba(255,255,255,.9);
+}
+
+body.light-mode .exp-org{
+  color:rgba(17,24,39,.88);
+}
+.exp-period{
+  display:block;
+  margin-top:0;
+  font-size:15px;
+  font-weight:300;
+  letter-spacing:0;
+  color:rgba(255,255,255,.56);
+}
+
+body.light-mode .exp-period{
+  color:rgba(17,24,39,.54);
+}
+
+.exp-role{
+  font-size:15px;
+  line-height:1.45;
+  color:rgba(255,255,255,.7);
+  margin-bottom:0;
+}
+
+body.light-mode .exp-role{
+  color:rgba(0,0,0,.6);
+}
+
+.exp-meta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.exp-meta span{
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:12px;
+  color:rgba(255,255,255,.72);
+}
+
+body.light-mode .exp-meta span{
+  background:rgba(0,0,0,.04);
+  border:1px solid rgba(0,0,0,.06);
+  color:rgba(0,0,0,.65);
+}
+
+.profile-section,
+.workflow-section,
+.quality-section{
+  width:100%;
+  min-height:auto;
+  height:auto;
+  padding-top:64px;
+  padding-bottom:64px;
+  scroll-margin-top:0;
+  overflow:visible;
+  display:flex;
+  flex-direction:column;
+}
+
+.profile-layout,
+.workflow-grid,
+.quality-layout{
+  width:92%;
+  margin:0 auto;
+}
+
+.profile-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);
+  gap:24px;
+  align-items:stretch;
+  min-height:clamp(430px, 58svh, 560px);
+}
+
+.profile-card,
+.workflow-card,
+.quality-card,
+.quality-panel{
+  border-radius:28px;
+}
+
+.profile-card{
+  padding:32px;
+  display:flex;
+  flex-direction:column;
+}
+
+.profile-kicker,
+.workflow-step,
+.quality-kicker{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:7px 12px;
+  margin-bottom:18px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.68);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.06em;
+}
+
+.profile-title{
+  font-size:clamp(32px,3.6vw,52px);
+  line-height:1.05;
+  letter-spacing:-2px;
+  font-weight:800;
+  margin-bottom:22px;
+}
+
+.name-accent{
+  color:#67e8f9;
+  background:var(--hero-accent-dark);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 28px rgba(34,211,238,.3);
+}
+
+.profile-copy{
+  max-width:760px;
+  font-size:16px;
+  line-height:1.68;
+  color:rgba(255,255,255,.72);
+}
+
+.profile-list{
+  display:grid;
+  gap:14px;
+  margin-top:auto;
+  padding-top:22px;
+}
+
+.profile-list-item{
+  display:grid;
+  grid-template-columns:120px minmax(0,1fr);
+  gap:18px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+
+.profile-list-item strong{
+  font-size:13px;
+  color:rgba(255,255,255,.52);
+}
+
+.profile-list-item span{
+  font-size:15px;
+  line-height:1.55;
+  color:rgba(255,255,255,.78);
+}
+
+.profile-side{
+  display:grid;
+  grid-template-rows:repeat(3,1fr);
+  gap:18px;
+}
+
+.profile-mini{
+  min-height:0;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.profile-mini strong{
+  font-size:34px;
+  line-height:1;
+}
+
+.profile-mini span{
+  margin-top:18px;
+  font-size:15px;
+  line-height:1.55;
+  color:rgba(255,255,255,.72);
+}
+
+.workflow-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+  min-height:clamp(180px, 28svh, 250px);
+  align-items:stretch;
+}
+
+.workflow-card{
+  padding:20px;
+  min-height:0;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.workflow-card h3{
+  font-size:20px;
+  margin-bottom:10px;
+  letter-spacing:-.4px;
+}
+
+.workflow-card p{
+  margin-top:auto;
+  font-size:14px;
+  line-height:1.55;
+  color:rgba(255,255,255,.68);
+}
+
+.quality-layout{
+  display:grid;
+  grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+  gap:24px;
+  align-items:stretch;
+  min-height:clamp(400px, 56svh, 540px);
+}
+
+.quality-panel{
+  padding:32px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.quality-panel h3{
+  font-size:clamp(30px,3.6vw,50px);
+  line-height:1.08;
+  letter-spacing:-2px;
+  margin-bottom:18px;
+}
+
+.quality-panel p{
+  font-size:16px;
+  line-height:1.7;
+  color:rgba(255,255,255,.7);
+}
+
+.quality-list{
+  display:grid;
+  grid-template-rows:repeat(4,1fr);
+  gap:14px;
+}
+
+.quality-card{
+  padding:20px;
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr);
+  gap:16px;
+  align-items:center;
+  min-height:0;
+}
+
+.quality-check{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(34,211,238,.16);
+  border:1px solid rgba(125,211,252,.28);
+  color:#7dd3fc;
+  font-weight:900;
+}
+
+.quality-card strong{
+  display:block;
+  margin-bottom:6px;
+  font-size:17px;
+}
+
+.quality-card span{
+  display:block;
+  font-size:14px;
+  line-height:1.55;
+  color:rgba(255,255,255,.66);
+}
+
+body.light-mode .profile-kicker,
+body.light-mode .workflow-step,
+body.light-mode .quality-kicker{
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(14,165,233,.16);
+  color:rgba(17,24,39,.58);
+}
+
+body.light-mode .profile-copy,
+body.light-mode .profile-list-item span,
+body.light-mode .profile-mini span,
+body.light-mode .workflow-card p,
+body.light-mode .quality-panel p,
+body.light-mode .quality-card span{
+  color:rgba(17,24,39,.7);
+}
+
+body.light-mode .profile-list-item{
+  border-top:1px solid rgba(17,24,39,.1);
+}
+
+body.light-mode .profile-list-item strong{
+  color:rgba(17,24,39,.48);
+}
+
+body.light-mode .name-accent{
+  background:var(--hero-accent-light);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:none;
+}
+
+.campaign-section{
+  width:100%;
+  height:auto;
+  padding-top:64px;
+  padding-bottom:64px;
+  scroll-margin-top:0;
+  overflow:hidden;
+}
+
+.campaign-filter{
+  width:92%;
+  margin:0 auto 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.campaign-filter-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:38px;
+  padding:0 16px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.76);
+  font-size:14px;
+  font-weight:700;
+  cursor:none;
+  transition:.25s ease;
+}
+
+.campaign-filter-button:hover,
+.campaign-filter-button.active{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.14);
+  border-color:rgba(125,211,252,.34);
+  color:white;
+}
+
+body.light-mode .campaign-filter-button{
+  background:rgba(255,255,255,.54);
+  border:1px solid rgba(14,165,233,.18);
+  color:rgba(17,24,39,.72);
+}
+
+body.light-mode .campaign-filter-button:hover,
+body.light-mode .campaign-filter-button.active{
+  background:rgba(255,255,255,.78);
+  color:#111827;
+}
+
+.projects{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:repeat(2,1fr);
+
+  gap:24px;
+
+  padding-bottom:0;
+  min-height:0;
+}
+
+.project-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:26px;
+  min-height:0;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  transition:.5s;
+  cursor:none;
+}
+
+.project-card:hover{
+  transform:translateY(-10px);
+}
+
+.project-card.hidden-by-filter{
+  display:none;
+}
+
+.project-card img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  transition:1s ease;
+}
+
+.project-card:hover img{
+  transform:scale(1.05);
+}
+
+.project-info{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  padding:16px;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.72) 0%,
+    rgba(0,0,0,.46) 58%,
+    rgba(0,0,0,0) 100%
+  );
+  backdrop-filter:none;
+  border-top:none;
+}
+
+.project-title{
+  font-size:20px;
+  font-weight:700;
+  line-height:1.2;
+  margin-bottom:0;
+}
+
+.project-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.project-labels{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.project-label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.78);
+  font-size:11px;
+  font-weight:800;
+}
+
+.project-desc{
+  display:none;
+}
+
+.project-view-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 12px;
+  min-width:78px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.1);
+  color:white;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0;
+  cursor:none;
+  transition:.25s ease;
+}
+
+.project-view-button:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.17);
+}
+
+.project-view-button.pdf{
+  background:rgba(96,165,250,.18);
+  border-color:rgba(125,211,252,.32);
+}
+
+body.light-mode .project-view-button{
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(14,165,233,.2);
+  color:#111827;
+}
+
+body.light-mode .project-label{
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(14,165,233,.18);
+  color:rgba(17,24,39,.68);
+}
+
+.project-modal{
+  position:fixed;
+  inset:0;
+  z-index:9997;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:32px;
+
+  background:rgba(5,8,18,.64);
+  backdrop-filter:blur(18px);
+
+  opacity:0;
+  pointer-events:none;
+  transition:.35s ease;
+}
+
+.project-modal.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.project-modal-box{
+  position:relative;
+  width:min(1120px,92vw);
+  max-height:88vh;
+  overflow:hidden;
+
+  border-radius:28px;
+  background:rgba(18,24,46,.92);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 28px 80px rgba(0,0,0,.42);
+
+  transform:translateY(28px) scale(.96);
+  transition:.42s cubic-bezier(.22,1,.36,1);
+}
+
+.project-modal.active .project-modal-box{
+  transform:translateY(0) scale(1);
+}
+
+.project-modal-image{
+  width:100%;
+  max-height:88vh;
+  object-fit:contain;
+  display:block;
+  background:rgba(0,0,0,.28);
+}
+
+.project-modal-close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  z-index:2;
+
+  width:46px;
+  height:46px;
+  border-radius:50%;
+
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.34);
+  backdrop-filter:blur(14px);
+
+  color:white;
+  font-size:24px;
+  line-height:1;
+
+  cursor:none;
+  transition:.25s ease;
+}
+
+.project-modal-close:hover{
+  transform:scale(1.08);
+  background:rgba(255,255,255,.14);
+}
+
+body.light-mode .project-modal{
+  background:rgba(243,245,251,.68);
+}
+
+body.light-mode .project-modal-box{
+  background:rgba(255,255,255,.94);
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 28px 80px rgba(80,40,80,.18);
+}
+
+body.light-mode .project-modal-close{
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(0,0,0,.08);
+  color:#111827;
+}
+
+.reveal-item{
+  opacity:0;
+  transform:translateY(34px);
+  transition:
+    opacity .72s ease,
+    transform .72s cubic-bezier(.22,1,.36,1);
+  transition-delay:var(--reveal-delay,0ms);
+}
+
+.reveal-item.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.skill-tab.reveal-item.is-visible.active,
+.skill-tab.reveal-item.is-visible:hover{
+  transform:scale(1.07) !important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal-item{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+  .background,
+  .background::before,
+  .background::after{
+    animation:none;
+  }
+  .keyword-cloud{
+    display:none;
+  }
+}
+
+@media(max-width:1100px){
+
+  .skills-layout{
+    --skill-sidebar-width:100%;
+    --skill-sidebar-safe-padding:18px;
+    --skill-panel-height:auto;
+    grid-template-columns:1fr;
+    height:auto;
+    align-items:stretch;
+  }
+
+  .skills-sidebar{
+    width:100%;
+    height:auto;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-rows:auto;
+    padding:var(--skill-sidebar-safe-padding);
+    margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .portfolio-nav{
+    left:16px;
+    right:16px;
+    top:auto;
+    bottom:16px;
+    justify-content:center;
+    overflow-x:auto;
+    border-radius:18px;
+  }
+
+  .portfolio-nav a{
+    flex:0 0 auto;
+  }
+
+  .hero-copy{
+    --hero-cell:92px;
+    --hero-gap:14px;
+    grid-template-columns:repeat(3, var(--hero-cell));
+    grid-template-rows:repeat(3, var(--hero-cell));
+    column-gap:0;
+    row-gap:var(--hero-gap);
+    width:calc(var(--hero-cell) * 3);
+  }
+
+  .hero-cell{
+    font-size:56px;
+    letter-spacing:.04em;
+  }
+
+  .experience-grid{
+    grid-template-columns:1fr;
+    height:auto;
+  }
+
+  .skills-layout{
+    --skill-sidebar-width:100%;
+    --skill-sidebar-safe-padding:18px;
+    --skill-panel-height:auto;
+    grid-template-columns:1fr;
+    height:auto;
+    align-items:stretch;
+  }
+
+  .skills-sidebar{
+    width:100%;
+    height:auto;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:auto;
+    padding:var(--skill-sidebar-safe-padding);
+    margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
+  }
+
+  .skill-tab{
+    aspect-ratio:1/1;
+  }
+
+  .skill-detail{
+    height:auto;
+  }
+
+  .skill-detail-top{
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+    padding-top:24px;
+  }
+
+  .skill-barometer{
+    position:static;
+    transform:none;
+    width:100%;
+    min-width:0;
+    margin:28px 0 0;
+  }
+
+
+  .skill-detail-grid{
+    grid-template-columns:1fr;
+    margin-top:48px;
+  }
+
+}
+
+/* RESTORE: 최종 레이아웃/글라스모피즘/라이트 배경 */
+body{
+  transition:
+    background .55s ease,
+    background-color .55s ease,
+    color .55s ease;
+}
+
+body.light-mode{
+  background:var(--section-bg-light);
+}
+
+.hero{
+  min-height:100svh;
+  height:auto;
+  overflow:visible;
+}
+
+.hero::after{
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  height:220px;
+  pointer-events:none;
+  z-index:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(10,15,29,0) 0%,
+    rgba(10,15,29,.22) 36%,
+    rgba(10,15,29,.78) 78%,
+    var(--section-bg-dark) 100%
+  );
+}
+
+body.light-mode .hero::after{
+  background:linear-gradient(
+    to bottom,
+    rgba(238,244,255,0) 0%,
+    rgba(238,244,255,.3) 36%,
+    rgba(238,244,255,.82) 78%,
+    var(--section-bg-light) 100%
+  );
+}
+
+.hero-copy,
+.scroll-indicator{
+  z-index:2;
+}
+
+.profile-section,
+.skills-section,
+.experience-section,
+.workflow-section,
+.campaign-section,
+.quality-section{
+  width:100%;
+  min-height:auto;
+  height:auto;
+  margin:0;
+  overflow:visible;
+  background:var(--section-bg-dark);
+}
+
+body.light-mode .profile-section,
+body.light-mode .skills-section,
+body.light-mode .experience-section,
+body.light-mode .workflow-section,
+body.light-mode .campaign-section,
+body.light-mode .quality-section{
+  background:var(--section-bg-light);
+}
+
+.skills-section{
+  position:relative;
+  padding-top:64px;
+  padding-bottom:64px;
+}
+
+.skills-section::before{
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  top:-260px;
+  height:260px;
+  pointer-events:none;
+  z-index:4;
+  background:linear-gradient(
+    to bottom,
+    rgba(10,15,29,0) 0%,
+    rgba(10,15,29,.18) 32%,
+    rgba(10,15,29,.62) 68%,
+    var(--section-bg-dark) 100%
+  );
+}
+
+body.light-mode .skills-section::before{
+  background:linear-gradient(
+    to bottom,
+    rgba(238,244,255,0) 0%,
+    rgba(238,244,255,.34) 34%,
+    rgba(238,244,255,.78) 70%,
+    var(--section-bg-light) 100%
+  );
+}
+
+.skills-layout,
+.experience-grid,
+.projects,
+.profile-layout,
+.workflow-grid,
+.quality-layout{
+  width:92%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.projects{
+  min-height:420px;
+  height:clamp(420px, 58svh, 560px);
+  grid-auto-rows:minmax(200px, 1fr);
+}
+
+.skill-barometer-track{
+  height:24px;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.skill-barometer-fill{
+  inset:0 auto 0 0;
+  width:0;
+  height:100%;
+  transition:width .45s ease, background .55s ease, box-shadow .55s ease;
+}
+
+.skill-boundary{
+  top:0;
+  bottom:0;
+  width:1px;
+}
+
+.skill-boundary:nth-child(2){ left:20%; }
+.skill-boundary:nth-child(3){ left:40%; }
+.skill-boundary:nth-child(4){ left:60%; }
+.skill-boundary:nth-child(5){ left:80%; }
+
+.skill-boundary::after{
+  content:'';
+  position:absolute;
+  inset:0 -1px;
+  background:rgba(0,0,0,.18);
+}
+
+.skill-scale-labels{
+  position:static;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  width:100%;
+  margin-top:10px;
+  align-items:start;
+  text-align:center;
+}
+
+.skill-scale-labels span:nth-child(1){ grid-column:1; }
+.skill-scale-labels span:nth-child(2){ grid-column:3; }
+.skill-scale-labels span:nth-child(3){ grid-column:5; }
+
+.skill-tab,
+.skill-detail,
+.skill-detail-card,
+.experience-card,
+.project-card,
+.profile-card,
+.workflow-card,
+.quality-card,
+.quality-panel{
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.055) 42%, rgba(255,255,255,.025) 100%);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.28),
+    inset 0 -1px 0 rgba(255,255,255,.06),
+    0 28px 80px rgba(0,0,0,.28);
+  backdrop-filter:blur(26px) saturate(145%);
+  -webkit-backdrop-filter:blur(26px) saturate(145%);
+}
+
+.skill-detail,
+.experience-card,
+.project-card{
+  background:
+    radial-gradient(circle at 10% 8%, rgba(255,255,255,.24), transparent 26%),
+    radial-gradient(circle at 88% 12%, rgba(96,165,250,.16), transparent 32%),
+    linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.045) 52%, rgba(255,255,255,.024));
+}
+
+.skill-detail-card{
+  background:linear-gradient(135deg, rgba(255,255,255,.13), rgba(255,255,255,.04));
+}
+
+body.light-mode .skill-tab,
+body.light-mode .skill-detail,
+body.light-mode .skill-detail-card,
+body.light-mode .experience-card,
+body.light-mode .project-card,
+body.light-mode .profile-card,
+body.light-mode .workflow-card,
+body.light-mode .quality-card,
+body.light-mode .quality-panel{
+  background:
+    radial-gradient(circle at 12% 10%, rgba(56,189,248,.22), transparent 34%),
+    radial-gradient(circle at 88% 14%, rgba(139,92,246,.18), transparent 36%),
+    radial-gradient(circle at 46% 92%, rgba(45,212,191,.16), transparent 40%),
+    linear-gradient(135deg, rgba(224,242,254,.58), rgba(237,233,254,.42) 48%, rgba(204,251,241,.3));
+  border:1px solid rgba(14,165,233,.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.62),
+    inset 0 -1px 0 rgba(255,255,255,.22),
+    0 24px 68px rgba(79,70,229,.11);
+}
+
+.skill-tab:hover,
+.skill-tab.active,
+.experience-card:hover,
+.project-card:hover{
+  border-color:rgba(125,211,252,.38);
+}
+
+body.light-mode .cursor-light{
+  mix-blend-mode:multiply;
+  opacity:.9;
+}
+
+@media(max-width:1100px){
+  .profile-layout,
+  .quality-layout{
+    grid-template-columns:1fr;
+    min-height:auto;
+  }
+
+  .profile-side{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-rows:none;
+  }
+
+  .workflow-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    min-height:auto;
+  }
+
+  .experience-grid,
+  .projects{
+    height:auto;
+  }
+
+  .projects{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:768px){
+  .profile-section,
+  .workflow-section,
+  .quality-section,
+  .campaign-section{
+    padding-top:52px;
+    padding-bottom:76px;
+  }
+
+  .profile-side,
+  .workflow-grid,
+  .experience-grid,
+  .projects{
+    grid-template-columns:1fr;
+  }
+
+  .profile-card,
+  .quality-panel{
+    padding:28px;
+  }
+
+  .profile-list-item{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  .quality-layout,
+  .quality-list{
+    min-height:auto;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="cursor-light"></div>
+<div class="custom-cursor"></div>
+<div class="scroll-progress-bar"></div>
+<nav class="portfolio-nav" aria-label="섹션 이동">
+  <a href="#profile">PROFILE</a>
+  <a href="#skills">SKILL</a>
+  <a href="#experience">EXPERIENCE</a>
+  <a href="#workflow">WORKFLOW</a>
+  <a href="#campaign">CAMPAIGN</a>
+  <a href="#check">AGENCY FIT</a>
+</nav>
+<button class="mode-toggle" aria-label="테마 전환">⟡</button>
+<button class="contact-toggle">CONTACT</button>
+<div class="contact-panel">
+  <div class="contact-inner">
+    <!-- EDIT: 연락처 / 이메일, 전화번호, SNS만 본인 정보로 수정 -->
+    <h2>CONTACT</h2>
+    <p>Email : guswkd725@naver.com</p>
+    <p>Phone : 010-7168-2504</p>
+    <p>SNS : @jjnowfield</p>
+  </div>
+</div>
+
+<section class="hero">
+
+    <!-- EDIT: 첫 화면 배경 키워드 / 실제 단어는 아래 script의 talentKeywords 배열에서 수정 -->
+    <div class="keyword-cloud" aria-hidden="true"></div>
+
+    <!-- EDIT: 첫 화면 메인 문구 / 글자를 바꾸려면 아래 9개 div 텍스트를 순서대로 수정 -->
+    <!-- NOTE: hero-outline=라인 글자, hero-accent=색 채워진 강조 글자 -->
+    <div class="hero-copy" aria-label="언제나 현장이 답이다">
+    <div class="hero-cell hero-outline">언</div>
+    <div class="hero-cell hero-outline">제</div>
+    <div class="hero-cell hero-outline">나</div>
+
+    <div class="hero-cell hero-accent">현</div>
+    <div class="hero-cell hero-accent">장</div>
+    <div class="hero-cell hero-accent">이</div>
+
+    <div class="hero-cell hero-outline">답</div>
+    <div class="hero-cell hero-outline">이</div>
+    <div class="hero-cell hero-outline">다</div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-arrow">↓</div>
+    <div class="scroll-line"></div>
+  </div>
+
+<div class="project-modal" aria-hidden="true">
+  <div class="project-modal-box" role="dialog" aria-modal="true" aria-label="캠페인 상세 팝업">
+    <button class="project-modal-close" type="button">×</button>
+    <img class="project-modal-image" src="" alt="">
+  </div>
+</div>
+
+</section>
+
+<!-- PROFILE: 포지셔닝/업무 성향 요약 영역 -->
+<section class="profile-section" id="profile">
+
+  <h2 class="section-heading">
+    PROFILE
+  </h2>
+
+  <div class="profile-layout">
+
+    <article class="profile-card">
+      <div class="profile-kicker">POSITIONING</div>
+      <h2 class="profile-title">
+        브리프를 <span class="name-accent">현장</span>의 언어로 읽고,<br>
+        실행까지 이어지게 정리합니다.
+      </h2>
+      <p class="profile-copy">
+        광고대행사 캠페인 AE 공고에서 반복되는 브리프 이해, 캠페인 기획,
+        제안서 구성, 제작 진행, 운영 관리, 리포팅/커뮤니케이션 역량에 맞춰 경험을 정리했습니다.
+        화려한 주장보다 <span class="name-accent">현장</span>에서 바로 확인하고 실행할 수 있는 자료를 만드는 데 집중합니다.
+      </p>
+
+      <div class="profile-list">
+        <div class="profile-list-item">
+          <strong>Target</strong>
+          <span>캠페인 AE · 디지털 광고 AE · 콘텐츠/브랜드 캠페인 운영 주니어 포지션</span>
+        </div>
+        <div class="profile-list-item">
+          <strong>Fit</strong>
+          <span>브랜드/타깃/캠페인 목적을 확인하고 제안서, 제작 리스트, 운영표로 구조화하는 역량</span>
+        </div>
+        <div class="profile-list-item">
+          <strong>Proof</strong>
+          <span>NMG 인턴, KODA 교육, 브랜드 캠페인/AI/제안서 작업을 통해 운영 흐름을 경험</span>
+        </div>
+      </div>
+    </article>
+
+    <div class="profile-side">
+      <article class="profile-card profile-mini">
+        <strong>01</strong>
+        <span>광고주 과제와 브랜드 맥락을 먼저 읽고 필요한 자료를 수집합니다.</span>
+      </article>
+      <article class="profile-card profile-mini">
+        <strong>02</strong>
+        <span>일정, 제작물, 수정사항을 함께 보며 실행 가능한 캠페인 흐름을 잡습니다.</span>
+      </article>
+      <article class="profile-card profile-mini">
+        <strong>03</strong>
+        <span>운영 결과와 피드백을 팀이 다시 확인하기 쉬운 리포트로 남깁니다.</span>
+      </article>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SKILLS: 사용 툴/매체 숙련도 영역 -->
+
+<section class="skills-section" id="skills">
+
+  <h2 class="section-heading">
+    SKILL
+  </h2>
+
+  <div class="skills-layout">
+
+    <!-- EDIT: 스킬 카드 / data-name=스킬명, data-percent=그래프 길이, data-level=강조 라벨, data-period=사용기간, data-range=활용범위, img src=로고 -->
+    <!-- NOTE: 네이버/구글/메타/카카오는 data-percent를 비워두면 그래프가 숨겨집니다. -->
+    <div class="skills-sidebar">
+
+      <div class="skill-tab" data-name="Illustrator" data-percent="85%" data-level="중상" data-period="약 4년" data-range="광고 비주얼 · SNS 소재 · 프로모션 디자인">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/일러스트레이터.svg">
+        <span>Illustrator</span>
+      </div>
+
+      <div class="skill-tab" data-name="Photoshop" data-percent="80%" data-level="중상" data-period="약 4년" data-range="이미지 보정 · 합성 · 광고 소재 제작">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/포토샵.svg">
+        <span>Photoshop</span>
+      </div>
+
+      <div class="skill-tab" data-name="Premiere Pro" data-percent="75%" data-level="중하" data-period="약 3년" data-range="영상 편집 · 숏폼 콘텐츠 · 모션 컷 편집">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/프리미어프로.svg">
+        <span>Premiere</span>
+      </div>
+
+      <div class="skill-tab" data-name="Excel" data-percent="75%" data-level="중" data-period="약 3년" data-range="로우데이터 정리 · 리포팅 · 성과 분석 보조">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/엑셀.svg">
+        <span>Excel</span>
+      </div>
+
+      <div class="skill-tab" data-name="PowerPoint" data-percent="85%" data-level="상" data-period="약 4년" data-range="제안서 구성 · 발표자료 · 캠페인 문서화">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/파워포인트.svg">
+        <span>PowerPoint</span>
+      </div>
+
+      <div class="skill-tab" data-name="Word" data-percent="80%" data-level="중상" data-period="약 4년" data-range="문서 작성 · 보고서 정리 · 제안서 텍스트 구성">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/워드.svg">
+        <span>Word</span>
+      </div>
+
+      <div class="skill-tab" data-name="Midjourney" data-percent="70%" data-level="중" data-period="약 1년" data-range="이미지 레퍼런스 생성 · 비주얼 콘셉트 확장 · 무드보드 제작">
+        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_다크.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_라이트.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_다크.svg">
+        <span>Midjourney</span>
+      </div>
+
+      <div class="skill-tab" data-name="Runway" data-percent="65%" data-level="중하" data-period="약 1년" data-range="AI 영상 소스 제작 · 비주얼 실험 · 영상 레퍼런스 확장">
+        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_다크.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_라이트.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_다크.svg">
+        <span>Runway</span>
+      </div>
+
+      <div class="skill-tab" data-name="Naver" data-percent="" data-level="" data-period="실무 경험" data-range="검색광고 · 성과 리포팅 · 소재/키워드 관리">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/네이버.svg">
+        <span>Naver</span>
+      </div>
+
+      <div class="skill-tab" data-name="Google" data-percent="" data-level="" data-period="실무 경험" data-range="Google Ads · 캠페인 세팅 보조 · 성과 확인">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/구글.svg">
+        <span>Google</span>
+      </div>
+
+      <div class="skill-tab" data-name="Meta" data-percent="" data-level="" data-period="실무 경험" data-range="Meta Ads · 소재 관리 · 캠페인 운영 보조">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/메타.svg">
+        <span>Meta</span>
+      </div>
+
+      <div class="skill-tab" data-name="Kakao" data-percent="" data-level="" data-period="실무 경험" data-range="카카오 광고 · 매체 세팅 보조 · 리포팅">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/카카오.svg">
+        <span>Kakao</span>
+      </div>
+
+    </div>
+
+    <!-- EDIT: 스킬 상세 기본값 / 스킬 선택 전 안내 문구와 카드 내용 -->
+    <div class="skill-detail">
+
+      <div class="skill-detail-top">
+
+        <div>
+
+          <div class="skill-detail-title">
+            TOOL STACK
+          </div>
+
+          <div class="skill-detail-sub">
+            디자인 툴, 오피스 툴, 광고 매체를 함께 다루며
+            기획부터 제작·운영 보조까지 이어지는 작업 흐름을 구성합니다.
+          </div>
+
+          <div class="skill-barometer" style="display:none;">
+            <div class="skill-barometer-track">
+              <div class="skill-barometer-fill"></div>
+              <span class="skill-boundary"></span>
+              <span class="skill-boundary"></span>
+              <span class="skill-boundary"></span>
+              <span class="skill-boundary"></span>
+            </div>
+            <div class="skill-scale-labels">
+              <span>하</span>
+              <span>중</span>
+              <span class="active">상</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="skill-detail-grid">
+
+        <div class="skill-detail-card">
+          <h4>구성</h4>
+          <p>디자인 · 영상 · 문서 · 광고 매체 운영 도구를 한 화면에서 비교</p>
+        </div>
+
+        <div class="skill-detail-card">
+          <h4>사용 방법</h4>
+          <p>왼쪽 아이콘을 클릭하면 숙련도와 활용 방식이 표시됩니다</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- EXPERIENCE: 실무/프로젝트 경험 영역 -->
+
+<section class="experience-section" id="experience">
+
+  <h2 class="section-heading">
+    EXPERIENCE
+  </h2>
+
+  <div class="experience-grid">
+
+    <!-- EDIT: 교육 경험 카드 / 라벨, 기관명, 기간, 교육명, 하단 태그 수정 -->
+    <!-- NOTE: exp-meta 안의 span이 하단 태그입니다. 필요 없으면 span 한 줄을 삭제해도 됩니다. -->
+    <div class="experience-card">
+
+      <div class="exp-label">
+        Education
+      </div>
+
+      <div class="exp-main">
+
+        <img class="exp-logo theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/KODA_Dark.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/KODA_Light.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/KODA_Dark.svg" alt="KODA">
+
+        <div class="exp-text">
+          <div class="exp-company">
+            <span class="exp-org">KODA 디지털 광고 협회</span>
+            <span class="exp-period">2025.07 ~ 2025.09</span>
+          </div>
+
+          <div class="exp-role">
+            KODA ACADEMY 디지털 광고 마케터 양성 교육생 조장
+          </div>
+        </div>
+
+      </div>
+
+      <div class="exp-meta">
+        <span>광고 전략 및 실습</span>
+        <span>데이터 분석 및 리포트 작성</span>
+        <span>브랜딩 및 PR</span>
+        <span>생성형 AI</span>
+        <span>크리에이티브 실습</span>
+        <span>오피스 프로그램 실습</span>
+        <span>광고 제안 발표</span>
+      </div>
+
+    </div>
+
+    <!-- EDIT: 인턴 경험 카드 / 라벨, 회사명, 기간, 직무, 하단 업무 태그 수정 -->
+    <!-- NOTE: 회사 로고는 img src, 라이트/다크 로고는 data-light-src와 data-dark-src에서 수정 -->
+    <div class="experience-card">
+
+      <div class="exp-label">
+        Intern
+      </div>
+
+      <div class="exp-main">
+        <img class="exp-logo theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/NMG_Dark.png" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/NMG_Light.png" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/NMG_Dark.png" alt="NMG">
+
+        <div class="exp-text">
+          <div class="exp-company">
+            <span class="exp-org">Next Media Group</span>
+            <span class="exp-period">2025.10 ~ 2026.1</span>
+          </div>
+
+          <div class="exp-role">
+            Media Planner
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-meta">
+        <span>리포팅 폼 제작</span>
+        <span>미디어 믹스 작성</span>
+        <span>일일/주간 리포팅</span>
+        <span>로우데이터 정리</span>
+        <span>매체 제작 가이드 제작</span>
+        <span>매체 세팅 보조</span>
+        <span>게재 보고</span>
+        <span>캠페인 운영 보조</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- WORKFLOW: 캠페인 업무 접근 방식 -->
+<section class="workflow-section" id="workflow">
+
+  <h2 class="section-heading">
+    WORKFLOW
+  </h2>
+
+  <div class="workflow-grid">
+    <article class="workflow-card">
+      <div class="workflow-step">01</div>
+      <h3>Brief Reading</h3>
+      <p>광고주 과제, 브랜드 톤, 타깃, 경쟁/시장 자료를 확인해 캠페인 방향을 잡습니다.</p>
+    </article>
+
+    <article class="workflow-card">
+      <div class="workflow-step">02</div>
+      <h3>Campaign Planning</h3>
+      <p>캠페인 메시지, 콘텐츠 아이디어, 실행안을 제안서와 발표 흐름으로 정리합니다.</p>
+    </article>
+
+    <article class="workflow-card">
+      <div class="workflow-step">03</div>
+      <h3>Production Follow-up</h3>
+      <p>제작 리스트, 일정, 수정사항, 업로드 링크를 확인하며 캠페인 진행을 보조합니다.</p>
+    </article>
+
+    <article class="workflow-card">
+      <div class="workflow-step">04</div>
+      <h3>Report & Feedback</h3>
+      <p>성과 수치와 피드백을 리포트로 정리하고 다음 제안/운영에 참고할 포인트를 남깁니다.</p>
+    </article>
+  </div>
+
+</section>
+
+<!-- EDIT: 캠페인 수정 영역 / img src=썸네일, project-title=제목, project-desc=설명 -->
+<section class="campaign-section" id="campaign">
+
+<h2 class="section-heading">
+  CAMPAIGN
+</h2>
+
+<div class="campaign-filter" aria-label="캠페인 필터">
+  <button class="campaign-filter-button active" type="button" data-filter="all">전체</button>
+  <button class="campaign-filter-button" type="button" data-filter="브랜드 캠페인">브랜드 캠페인</button>
+  <button class="campaign-filter-button" type="button" data-filter="AI">AI</button>
+  <button class="campaign-filter-button" type="button" data-filter="리뷰">리뷰</button>
+  <button class="campaign-filter-button" type="button" data-filter="제안서">제안서</button>
+</div>
+
+<section class="projects">
+
+  <!-- EDIT: 캠페인 카드 1 -->
+  <div class="project-card">
+    <img src="https://picsum.photos/800/500?1">
+
+    <div class="project-info">
+      <div class="project-title">
+        Campaign Design
+      </div>
+
+      <div class="project-desc">
+        참여형 캠페인 기획 프로젝트
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT: 캠페인 카드 2 -->
+  <div class="project-card">
+    <img src="https://picsum.photos/800/500?2">
+
+    <div class="project-info">
+      <div class="project-title">
+        Motion Graphic
+      </div>
+
+      <div class="project-desc">
+        영상 기반 비주얼 프로젝트
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT: 캠페인 카드 3 -->
+  <div class="project-card">
+    <img src="https://picsum.photos/800/500?3">
+
+    <div class="project-info">
+      <div class="project-title">
+        Branding
+      </div>
+
+      <div class="project-desc">
+        브랜딩 및 디자인 시스템 구축
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT: 캠페인 카드 4 -->
+  <div class="project-card">
+    <img src="https://picsum.photos/800/500?4">
+
+    <div class="project-info">
+      <div class="project-title">
+        Editorial
+      </div>
+
+      <div class="project-desc">
+        편집 및 타이포그래피 디자인
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT: 캠페인 카드 5 -->
+  <div class="project-card">
+    <img src="https://picsum.photos/800/500?5">
+
+    <div class="project-info">
+      <div class="project-title">
+        Visual Planning
+      </div>
+
+      <div class="project-desc">
+        현장 기반 시각 기획 프로젝트
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT: 캠페인 카드 6 -->
+  <div class="project-card">
+    <img src="https://picsum.photos/800/500?6">
+
+    <div class="project-info">
+      <div class="project-title">
+        Promotion
+      </div>
+
+      <div class="project-desc">
+        프로모션 중심 그래픽 디자인
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT: 캠페인 카드 7 -->
+  <div class="project-card">
+    <img src="https://picsum.photos/800/500?7">
+
+    <div class="project-info">
+      <div class="project-title">
+        Campaign Archive
+      </div>
+
+      <div class="project-desc">
+        캠페인 이미지 아카이브
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT: 캠페인 카드 8 -->
+  <div class="project-card">
+    <img src="https://picsum.photos/800/500?8">
+
+    <div class="project-info">
+      <div class="project-title">
+        Campaign Visual
+      </div>
+
+      <div class="project-desc">
+        캠페인 비주얼 썸네일
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</section>
+
+<!-- CHECK POINT: 대행사 실무 적합도 확인 기준 -->
+<section class="quality-section" id="check">
+
+  <h2 class="section-heading">
+    AGENCY FIT
+  </h2>
+
+  <div class="quality-layout">
+    <article class="quality-panel">
+      <div class="quality-kicker">FOR AGENCY WORK</div>
+      <h3>
+        아이디어와 운영 사이를<br>
+        놓치지 않는 주니어.
+      </h3>
+      <p>
+        주요 대행사 공고와 회사 소개에서 공통으로 보이는 요구는
+        기획 감각만이 아니라 브리프 해석, 제안서 구성, 제작 진행, 일정 관리, 리포팅, 협업입니다.
+        이 포트폴리오는 그 흐름을 바로 확인할 수 있게 구성했습니다.
+      </p>
+    </article>
+
+    <div class="quality-list">
+      <article class="quality-card">
+        <div class="quality-check">✓</div>
+        <div>
+          <strong>Client Brief Understanding</strong>
+          <span>광고주 요청사항, 브랜드 상황, 캠페인 목적을 정리해 제안 방향의 기준을 세웁니다.</span>
+        </div>
+      </article>
+
+      <article class="quality-card">
+        <div class="quality-check">✓</div>
+        <div>
+          <strong>Campaign Coordination</strong>
+          <span>제작물, 일정, 수정사항, 공유 링크를 관리해 캠페인 진행 흐름을 놓치지 않습니다.</span>
+        </div>
+      </article>
+
+      <article class="quality-card">
+        <div class="quality-check">✓</div>
+        <div>
+          <strong>Proposal & Creative Support</strong>
+          <span>캠페인 메시지, SNS/숏폼 아이디어, AI 비주얼, 제안서 페이지 흐름을 정리합니다.</span>
+        </div>
+      </article>
+
+      <article class="quality-card">
+        <div class="quality-check">✓</div>
+        <div>
+          <strong>Reporting & Follow-up</strong>
+          <span>캠페인명, 기간, 주요 수치, 피드백, 후속 액션을 확인해 다시 쓰기 쉬운 결과물을 남깁니다.</span>
+        </div>
+      </article>
+    </div>
+  </div>
+
+</section>
+
+<script>
+
+const light = document.querySelector('.cursor-light');
+const cursor = document.querySelector('.custom-cursor');
+const keywordCloud = document.querySelector('.keyword-cloud');
+const heroCopy = document.querySelector('.hero-copy');
+
+// EDIT: 첫 화면 배경 키워드 / 문구를 추가·삭제하려면 아래 따옴표 안 단어를 수정
+const talentKeywords = [
+  '커뮤니케이션',
+  '기획 보조',
+  '실행력',
+  '데이터 정리',
+  '꼼꼼함',
+  '빠른 학습',
+  '책임감',
+  '콘텐츠 감각',
+  '리포트 작성',
+  '광고주 이해',
+  '트렌드 캐치',
+  '협업',
+  '제안서',
+  '프레젠테이션',
+  '일정 관리',
+  '문제 해결',
+  '디지털 이해도',
+  '성과 리포팅',
+  '자료 조사',
+  '캠페인 운영 보조',
+  '소재 관리',
+  '문서 정리'
+];
+const activeTalentKeywords = new Set();
+
+// EDIT: 키워드 등장 위치 / 숫자를 바꾸면 키워드가 뜨는 구역이 달라집니다.
+// x1/x2는 좌우 위치, y1/y2는 상하 위치이며 0은 시작점, 1은 끝점입니다.
+const keywordZones = [
+  { x1:.06, x2:.3, y1:.1, y2:.28 },
+  { x1:.35, x2:.65, y1:.06, y2:.2 },
+  { x1:.7, x2:.94, y1:.1, y2:.28 },
+  { x1:.06, x2:.28, y1:.34, y2:.66 },
+  { x1:.72, x2:.94, y1:.34, y2:.66 },
+  { x1:.06, x2:.3, y1:.72, y2:.9 },
+  { x1:.35, x2:.65, y1:.8, y2:.94 },
+  { x1:.7, x2:.94, y1:.72, y2:.9 }
+];
+let keywordZoneQueue = [];
+
+window.addEventListener('mousemove',(e)=>{
+
+  light.style.left = e.clientX + 'px';
+  light.style.top = e.clientY + 'px';
+
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+const modeToggle = document.querySelector('.mode-toggle');
+const contactToggle = document.querySelector('.contact-toggle');
+const contactPanel = document.querySelector('.contact-panel');
+const progressBar = document.querySelector('.scroll-progress-bar');
+const themeSwapLogos = document.querySelectorAll('.theme-swap-logo');
+
+const skillTabs = document.querySelectorAll('.skill-tab');
+const skillDetailTitle = document.querySelector('.skill-detail-title');
+const skillBarometerFill = document.querySelector('.skill-barometer-fill');
+const skillBarometer = document.querySelector('.skill-barometer');
+const skillScaleLabels = document.querySelectorAll('.skill-scale-labels span');
+const skillDetailCards = document.querySelectorAll('.skill-detail-card');
+const skillDetailSub = document.querySelector('.skill-detail-sub');
+const projectCards = document.querySelectorAll('.project-card');
+const campaignFilterButtons = document.querySelectorAll('.campaign-filter-button');
+const projectModal = document.querySelector('.project-modal');
+const projectModalBox = document.querySelector('.project-modal-box');
+const projectModalClose = document.querySelector('.project-modal-close');
+const projectModalImage = document.querySelector('.project-modal-image');
+const campaignAssetsApi = 'https://api.github.com/repos/guswkd/portfolio-assets/contents';
+
+function formatCampaignAssetName(name){
+  return name
+    .normalize('NFC')
+    .replace(/\.(jpe?g)$/i,'')
+    .replace(/[_-]+/g,' ')
+    .trim() || 'Campaign Visual';
+}
+
+function getCampaignViewType(text){
+  return /코삭|kosac|cosac|코다|koda/i.test(text.normalize('NFC')) ? 'pdf' : 'video';
+}
+
+function getCampaignLabels(text){
+  const normalizedText = text.normalize('NFC').toLowerCase();
+
+  if(/코삭|kosac|cosac|코다|koda/i.test(normalizedText)){
+    return ['제안서'];
+  }
+
+  if(/알바몬\s*(2026|26)|(2026|26)\s*알바몬|albamon\s*(2026|26)|(2026|26)\s*albamon/.test(normalizedText)){
+    return ['브랜드 캠페인','AI'];
+  }
+
+  if(/클리오|clio/.test(normalizedText)) return ['AI'];
+  if(/lvmh/.test(normalizedText)) return ['리뷰'];
+  if(/알바몬|albamon|카누|kanu/.test(normalizedText)) return ['브랜드 캠페인'];
+
+  const labels = ['브랜드 캠페인'];
+  return [...new Set(labels)];
+}
+
+function setCampaignLabel(card, sourceText){
+  const info = card.querySelector('.project-info');
+  if(!info) return;
+
+  const actions = getProjectActions(card);
+  let labelGroup = card.querySelector('.project-labels');
+  if(!labelGroup){
+    labelGroup = document.createElement('div');
+    labelGroup.className = 'project-labels';
+    actions.appendChild(labelGroup);
+  }
+
+  const campaignLabels = getCampaignLabels(sourceText);
+  labelGroup.innerHTML = '';
+
+  campaignLabels.forEach((campaignLabel)=>{
+    const label = document.createElement('span');
+    label.className = 'project-label';
+    label.innerText = campaignLabel;
+    labelGroup.appendChild(label);
+  });
+
+  card.dataset.labels = campaignLabels.join('|');
+}
+
+function setCampaignViewButton(card, sourceText){
+  const actions = getProjectActions(card);
+
+  let button = card.querySelector('.project-view-button');
+  if(!button){
+    button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'project-view-button';
+    actions.insertBefore(button, actions.firstChild);
+  }
+
+  const viewType = getCampaignViewType(sourceText);
+  button.innerText = viewType === 'pdf' ? 'PDF 보기' : '영상 보기';
+  button.classList.toggle('pdf', viewType === 'pdf');
+  button.dataset.viewType = viewType;
+}
+
+function getProjectActions(card){
+  const info = card.querySelector('.project-info');
+  let actions = card.querySelector('.project-actions');
+
+  if(!actions && info){
+    actions = document.createElement('div');
+    actions.className = 'project-actions';
+    info.appendChild(actions);
+  }
+
+  return actions;
+}
+
+function setupCampaignViewButtons(){
+  projectCards.forEach((card)=>{
+    const title = card.querySelector('.project-title')?.innerText || '';
+    const image = card.querySelector('img')?.alt || '';
+    const sourceText = `${title} ${image}`;
+    setCampaignLabel(card, sourceText);
+    setCampaignViewButton(card, sourceText);
+  });
+}
+
+function filterCampaignCards(filter){
+  projectCards.forEach((card)=>{
+    const labels = (card.dataset.labels || '').split('|');
+    const isVisible = filter === 'all' || labels.includes(filter);
+    card.classList.toggle('hidden-by-filter', !isVisible);
+  });
+}
+
+async function loadCampaignJpgThumbnails(){
+  try{
+    const response = await fetch(campaignAssetsApi,{
+      headers:{ Accept:'application/vnd.github+json' }
+    });
+
+    if(!response.ok) return;
+
+    const assets = await response.json();
+    const jpgAssets = assets
+      .filter(asset => asset.type === 'file' && /\.(jpe?g)$/i.test(asset.name))
+      .sort((a,b)=>a.name.localeCompare(b.name,'ko'));
+
+    jpgAssets.slice(0,projectCards.length).forEach((asset,index)=>{
+      const card = projectCards[index];
+      const image = card.querySelector('img');
+      const title = card.querySelector('.project-title');
+      const desc = card.querySelector('.project-desc');
+
+      if(image){
+        image.src = asset.download_url;
+        image.alt = formatCampaignAssetName(asset.name);
+      }
+
+      const assetTitle = formatCampaignAssetName(asset.name);
+
+      if(title) title.innerText = assetTitle;
+      if(desc) desc.innerText = 'GitHub 업로드 캠페인 이미지';
+
+      setCampaignLabel(card, `${asset.name} ${assetTitle}`);
+      setCampaignViewButton(card, `${asset.name} ${assetTitle}`);
+    });
+
+    const activeFilter = document.querySelector('.campaign-filter-button.active')?.dataset.filter || 'all';
+    filterCampaignCards(activeFilter);
+  }catch(error){
+    console.info('Campaign jpg thumbnails could not be loaded.', error);
+  }
+}
+
+setupCampaignViewButtons();
+loadCampaignJpgThumbnails();
+
+campaignFilterButtons.forEach((button)=>{
+  button.addEventListener('click',()=>{
+    campaignFilterButtons.forEach((item)=>item.classList.remove('active'));
+    button.classList.add('active');
+    filterCampaignCards(button.dataset.filter);
+  });
+});
+
+// EDIT TEXT: 스킬 설명박스 문구 / title=상단 설명, cards=하단 카드 2개
+const skillCopy = {
+  Illustrator:{
+    title:'광고 소재와 프로모션 비주얼을 빠르게 구체화하는 디자인 툴로 활용합니다.',
+    cards:[
+      { label:'핵심 활용', value:'SNS 배너 · 광고 키비주얼 · 프로모션 그래픽 제작' },
+      { label:'강점', value:'브랜드 톤을 유지하면서 레이아웃과 아이콘을 안정적으로 정리' }
+    ]
+  },
+  Photoshop:{
+    title:'이미지 보정, 합성, 톤 조정을 통해 광고 소재의 완성도를 높입니다.',
+    cards:[
+      { label:'핵심 활용', value:'제품/인물 보정 · 썸네일 제작 · 합성 이미지 구성' },
+      { label:'강점', value:'소재 목적에 맞춰 시선이 가는 컬러와 명암을 조정' }
+    ]
+  },
+  'Premiere Pro':{
+    title:'숏폼과 캠페인 영상의 흐름을 정리하고 전달력을 높이는 편집에 활용합니다.',
+    cards:[
+      { label:'핵심 활용', value:'컷 편집 · 자막 정리 · 숏폼 콘텐츠 구성' },
+      { label:'강점', value:'메시지가 빠르게 읽히도록 장면 순서와 호흡을 조절' }
+    ]
+  },
+  Excel:{
+    title:'캠페인 로우데이터를 정리하고 리포팅에 필요한 기준을 잡는 데 활용합니다.',
+    cards:[
+      { label:'핵심 활용', value:'데이터 정리 · 성과표 작성 · 간단한 비교 분석' },
+      { label:'강점', value:'흩어진 수치를 보기 쉬운 표와 리포트 형태로 정돈' }
+    ]
+  },
+  PowerPoint:{
+    title:'제안서와 발표자료의 구조를 잡고 설득 흐름을 시각적으로 정리합니다.',
+    cards:[
+      { label:'핵심 활용', value:'캠페인 제안서 · 발표자료 · 기획안 문서화' },
+      { label:'강점', value:'문제, 전략, 실행안이 자연스럽게 이어지는 장표 구성' }
+    ]
+  },
+  Word:{
+    title:'보고서와 제안서 텍스트를 정리해 읽기 쉬운 문서 형태로 다듬습니다.',
+    cards:[
+      { label:'핵심 활용', value:'보고서 작성 · 문서 구조화 · 제안서 원고 정리' },
+      { label:'강점', value:'복잡한 내용을 문단과 제목 단위로 깔끔하게 정리' }
+    ]
+  },
+  Midjourney:{
+    title:'초기 비주얼 방향과 무드보드를 빠르게 확장하는 레퍼런스 도구로 활용합니다.',
+    cards:[
+      { label:'핵심 활용', value:'이미지 레퍼런스 생성 · 콘셉트 시안 · 무드보드 제작' },
+      { label:'강점', value:'추상적인 아이디어를 빠르게 시각 자료로 변환' }
+    ]
+  },
+  Runway:{
+    title:'AI 기반 영상 소스와 실험적 비주얼을 제작해 영상 레퍼런스를 확장합니다.',
+    cards:[
+      { label:'핵심 활용', value:'AI 영상 소스 · 모션 레퍼런스 · 분위기 샘플 제작' },
+      { label:'강점', value:'기획 단계에서 영상 톤앤무드를 빠르게 테스트' }
+    ]
+  },
+  Naver:{
+    title:'국내 검색광고 운영 흐름과 키워드 관리 구조를 이해하고 있습니다.',
+    cards:[
+      { label:'경험 범위', value:'검색광고 · 키워드/소재 관리 · 성과 리포팅' },
+      { label:'활용 포인트', value:'국내 이용자 검색 의도에 맞춘 캠페인 운영 보조' }
+    ]
+  },
+  Google:{
+    title:'Google Ads 기반 캠페인 세팅과 성과 확인 흐름을 실무 관점에서 다룹니다.',
+    cards:[
+      { label:'경험 범위', value:'캠페인 세팅 보조 · 성과 확인 · 리포트 참고' },
+      { label:'활용 포인트', value:'검색/디스플레이 매체별 성과 흐름을 비교하며 이해' }
+    ]
+  },
+  Meta:{
+    title:'Meta 광고의 소재 관리와 캠페인 운영 보조 경험을 바탕으로 구조를 이해합니다.',
+    cards:[
+      { label:'경험 범위', value:'소재 관리 · 캠페인 운영 보조 · 성과 확인' },
+      { label:'활용 포인트', value:'타깃과 크리에이티브에 따른 반응 차이를 살피며 운영' }
+    ]
+  },
+  Kakao:{
+    title:'카카오 광고 상품의 운영 흐름과 리포팅 방식에 대한 실무 이해가 있습니다.',
+    cards:[
+      { label:'경험 범위', value:'매체 세팅 보조 · 광고 운영 · 리포팅' },
+      { label:'활용 포인트', value:'국내 플랫폼 환경에 맞춘 소재와 성과 흐름 파악' }
+    ]
+  }
+};
+const revealTargets = [
+  ...document.querySelectorAll('.profile-card'),
+  ...document.querySelectorAll('.skill-tab'),
+  document.querySelector('.skill-detail'),
+  ...document.querySelectorAll('.experience-card'),
+  ...document.querySelectorAll('.workflow-card'),
+  ...document.querySelectorAll('.project-card'),
+  document.querySelector('.quality-panel'),
+  ...document.querySelectorAll('.quality-card')
+].filter(Boolean);
+
+revealTargets.forEach((item,index)=>{
+  item.classList.add('reveal-item');
+  item.style.setProperty('--reveal-delay', `${(index % 6) * 70}ms`);
+});
+
+function spawnTalentKeyword(){
+  if(!keywordCloud || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    return;
+  }
+
+  if(window.scrollY > window.innerHeight * .85){
+    return;
+  }
+
+  const availableKeywords = talentKeywords.filter(keyword=>!activeTalentKeywords.has(keyword));
+
+  if(!availableKeywords.length){
+    return;
+  }
+
+  const keyword = document.createElement('span');
+  const selectedKeyword = availableKeywords[Math.floor(Math.random() * availableKeywords.length)];
+  const duration = 4800 + Math.random() * 2200;
+  const keywordSize = window.innerWidth < 768
+    ? 9 + Math.random() * 6
+    : 10 + Math.random() * 12;
+  const keywordWeights = [300,400,500,600,700];
+  const keywordColors = [
+    'rgba(255,255,255,.34)',
+    'rgba(125,211,252,.42)',
+    'rgba(196,181,253,.4)',
+    'rgba(94,234,212,.36)',
+    'rgba(251,207,232,.34)'
+  ];
+  const keywordPoint = getKeywordPoint();
+
+  keyword.className = 'talent-keyword';
+  keyword.innerText = selectedKeyword;
+  keyword.style.setProperty('--keyword-x', `${keywordPoint.x}px`);
+  keyword.style.setProperty('--keyword-y', `${keywordPoint.y}px`);
+  keyword.style.setProperty('--keyword-duration', `${duration}ms`);
+  keyword.style.setProperty('--keyword-size', `${keywordSize}px`);
+  keyword.style.setProperty('--keyword-weight', keywordWeights[Math.floor(Math.random() * keywordWeights.length)]);
+  keyword.style.setProperty('--keyword-color', keywordColors[Math.floor(Math.random() * keywordColors.length)]);
+
+  activeTalentKeywords.add(selectedKeyword);
+  keywordCloud.appendChild(keyword);
+
+  window.setTimeout(()=>{
+    activeTalentKeywords.delete(selectedKeyword);
+    keyword.remove();
+  }, duration + 300);
+}
+
+function getKeywordPoint(){
+  const cloudRect = keywordCloud.getBoundingClientRect();
+  const heroRect = heroCopy?.getBoundingClientRect();
+  const fallbackPoint = {
+    x:cloudRect.width * (.08 + Math.random() * .84),
+    y:cloudRect.height * (.1 + Math.random() * .78)
+  };
+
+  if(!heroRect){
+    return fallbackPoint;
+  }
+
+  const avoidPadding = window.innerWidth < 768 ? 36 : 82;
+  const avoidRect = {
+    left:heroRect.left - cloudRect.left - avoidPadding,
+    right:heroRect.right - cloudRect.left + avoidPadding,
+    top:heroRect.top - cloudRect.top - avoidPadding,
+    bottom:heroRect.bottom - cloudRect.top + avoidPadding
+  };
+
+  for(let i = 0; i < 34; i++){
+    const zone = getNextKeywordZone();
+    const point = {
+      x:cloudRect.width * (zone.x1 + Math.random() * (zone.x2 - zone.x1)),
+      y:cloudRect.height * (zone.y1 + Math.random() * (zone.y2 - zone.y1))
+    };
+
+    const isInsideHeroText =
+      point.x > avoidRect.left &&
+      point.x < avoidRect.right &&
+      point.y > avoidRect.top &&
+      point.y < avoidRect.bottom;
+
+    if(!isInsideHeroText){
+      return point;
+    }
+  }
+
+  return fallbackPoint;
+}
+
+function getNextKeywordZone(){
+  if(!keywordZoneQueue.length){
+    keywordZoneQueue = shuffleKeywordZones(keywordZones);
+  }
+
+  return keywordZoneQueue.shift();
+}
+
+function shuffleKeywordZones(zones){
+  const shuffledZones = [...zones];
+
+  for(let i = shuffledZones.length - 1; i > 0; i--){
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    [shuffledZones[i], shuffledZones[randomIndex]] = [shuffledZones[randomIndex], shuffledZones[i]];
+  }
+
+  return shuffledZones;
+}
+
+function startTalentKeywords(){
+  if(!keywordCloud || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    return;
+  }
+
+  const initialCount = window.innerWidth < 768 ? 7 : 13;
+
+  for(let i = 0; i < initialCount; i++){
+    window.setTimeout(spawnTalentKeyword, 240 + (i * 360));
+  }
+
+  window.setInterval(spawnTalentKeyword, window.innerWidth < 768 ? 1100 : 760);
+}
+
+startTalentKeywords();
+
+
+// EDIT NOTE: 스킬 탭 data값과 skillCopy 문구를 상세 패널에 자동 반영하는 영역.
+function renderSkillDetail(tab){
+  const skillName = tab.dataset.name;
+  const percent = tab.dataset.percent;
+  const level = tab.dataset.level;
+  const period = tab.dataset.period;
+  const range = tab.dataset.range;
+  const copy = skillCopy[skillName];
+
+  skillDetailTitle.innerText = skillName;
+  skillDetailSub.innerText = copy?.title || `${range} 기반 작업`;
+
+  skillScaleLabels.forEach(label=>label.classList.remove('active'));
+
+  if(percent){
+    skillBarometer.style.display = 'block';
+    const activeSegmentCount = Math.max(1, Math.min(5, Math.ceil(parseInt(percent, 10) / 20)));
+    skillBarometerFill.style.width = `${activeSegmentCount * 20}%`;
+
+    if(level === '상' || level === '중상'){
+      skillScaleLabels[2]?.classList.add('active');
+    }else if(level === '중' || level === '중하'){
+      skillScaleLabels[1]?.classList.add('active');
+    }else{
+      skillScaleLabels[0]?.classList.add('active');
+    }
+  }else{
+    skillBarometer.style.display = 'none';
+    skillBarometerFill.style.width = '0%';
+  }
+
+  if(skillDetailCards[0]){
+    skillDetailCards[0].querySelector('h4').innerText = copy?.cards?.[0]?.label || '사용 기간';
+    skillDetailCards[0].querySelector('p').innerText = copy?.cards?.[0]?.value || period;
+  }
+
+  if(skillDetailCards[1]){
+    skillDetailCards[1].querySelector('h4').innerText = copy?.cards?.[1]?.label || '활용 범위';
+    skillDetailCards[1].querySelector('p').innerText = copy?.cards?.[1]?.value || range;
+  }
+}
+
+function activateSkillTab(tab){
+  if(tab.classList.contains('active')) return;
+
+  skillTabs.forEach(item=>item.classList.remove('active'));
+  tab.classList.add('active');
+  renderSkillDetail(tab);
+}
+
+skillTabs.forEach(tab=>{
+  tab.addEventListener('focus',()=>activateSkillTab(tab));
+  tab.addEventListener('click',()=>activateSkillTab(tab));
+});
+
+// PROJECT MODAL: 캠페인 카드 클릭 시 팝업 열기/닫기
+function openProjectModal(card){
+
+  const image = card.querySelector('img');
+  const title = card.querySelector('.project-title');
+
+  projectModalImage.src = image ? image.src : '';
+  projectModalImage.alt = title ? title.innerText : '캠페인 이미지';
+
+  projectModal.classList.add('active');
+  projectModal.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProjectModal(){
+  projectModal.classList.remove('active');
+  projectModal.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+
+projectCards.forEach(card=>{
+  card.addEventListener('click',()=>{
+    openProjectModal(card);
+  });
+});
+
+document.querySelectorAll('.project-view-button').forEach(button=>{
+  button.addEventListener('click',(e)=>{
+    e.stopPropagation();
+  });
+});
+
+projectModalClose.addEventListener('click', closeProjectModal);
+
+projectModal.addEventListener('click',(e)=>{
+  if(!projectModalBox.contains(e.target)){
+    closeProjectModal();
+  }
+});
+
+window.addEventListener('keydown',(e)=>{
+  if(e.key === 'Escape' && projectModal.classList.contains('active')){
+    e.preventDefault();
+    e.stopPropagation();
+    closeProjectModal();
+  }
+},{ capture:true });
+
+const revealObserver = new IntersectionObserver((entries)=>{
+
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('is-visible');
+    }
+  });
+
+},{
+  threshold:.18,
+  rootMargin:'0px 0px -10% 0px'
+});
+
+revealTargets.forEach(item=>revealObserver.observe(item));
+
+function updateProgressBar(){
+
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+  const progress = Math.max(0, Math.min((scrollTop / docHeight) * 100, 100));
+
+  progressBar.style.width = progress + '%';
+}
+
+window.addEventListener('scroll', updateProgressBar);
+window.addEventListener('resize', updateProgressBar);
+updateProgressBar();
+
+function updateThemeLogos(){
+  const isLightMode = document.body.classList.contains('light-mode');
+
+  themeSwapLogos.forEach((logo)=>{
+    logo.src = isLightMode
+      ? logo.dataset.lightSrc
+      : logo.dataset.darkSrc;
+  });
+}
+
+updateThemeLogos();
+
+modeToggle.addEventListener('click',()=>{
+
+  document.body.classList.toggle('light-mode');
+
+  if(document.body.classList.contains('light-mode')){
+    modeToggle.innerHTML = '✦';
+  }else{ 
+    modeToggle.innerHTML = '⟡';
+  }
+
+  updateThemeLogos();
+});
+
+contactToggle.addEventListener('click', ()=>{
+  contactPanel.classList.add('active');
+});
+
+contactPanel.addEventListener('click',(e)=>{
+  e.stopPropagation();
+});
+
+window.addEventListener('click',(e)=>{
+  if(
+    contactPanel.classList.contains('active') &&
+    !contactPanel.contains(e.target) &&
+    !contactToggle.contains(e.target)
+  ){
+    contactPanel.classList.remove('active');
+  }
+});
+
+</script>
+
+</body>
+</html>
