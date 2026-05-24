@@ -1766,8 +1766,8 @@ body.light-mode .campaign-filter-button.active{
   padding:8px 12px;
   min-width:78px;
   border-radius:999px;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(255,255,255,.1);
+  border:1px solid rgba(125,211,252,.28);
+  background:linear-gradient(135deg, rgba(34,211,238,.2), rgba(167,139,250,.16));
   color:white;
   font-size:12px;
   font-weight:700;
@@ -1778,18 +1778,29 @@ body.light-mode .campaign-filter-button.active{
 
 .project-view-button:hover{
   transform:translateY(-2px);
-  background:rgba(255,255,255,.17);
+  background:linear-gradient(135deg, rgba(34,211,238,.28), rgba(167,139,250,.24));
+  border-color:rgba(125,211,252,.44);
 }
 
 .project-view-button.pdf{
-  background:rgba(96,165,250,.18);
-  border-color:rgba(125,211,252,.32);
+  background:linear-gradient(135deg, rgba(167,139,250,.22), rgba(96,165,250,.18));
+  border-color:rgba(196,181,253,.36);
 }
 
 body.light-mode .project-view-button{
-  background:rgba(255,255,255,.58);
-  border:1px solid rgba(14,165,233,.2);
-  color:#111827;
+  background:linear-gradient(135deg, rgba(14,165,233,.16), rgba(139,92,246,.14));
+  border:1px solid rgba(14,165,233,.24);
+  color:rgba(17,24,39,.82);
+}
+
+body.light-mode .project-view-button:hover{
+  background:linear-gradient(135deg, rgba(14,165,233,.22), rgba(139,92,246,.18));
+  border-color:rgba(14,165,233,.34);
+}
+
+body.light-mode .project-view-button.pdf{
+  background:linear-gradient(135deg, rgba(139,92,246,.16), rgba(14,165,233,.14));
+  border-color:rgba(139,92,246,.24);
 }
 
 body.light-mode .project-label{
