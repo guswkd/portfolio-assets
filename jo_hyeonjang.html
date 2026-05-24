@@ -460,9 +460,11 @@ body.light-mode .background::after{
 }
 
 body.light-mode .talent-keyword{
-  color:rgba(17,24,39,.24);
-  text-shadow:0 0 14px rgba(14,165,233,.12);
-  filter:none;
+  color:rgba(17,24,39,.66);
+  text-shadow:
+    0 0 6px rgba(14,165,233,.16),
+    0 0 14px rgba(139,92,246,.1);
+  filter:drop-shadow(0 0 4px rgba(14,165,233,.12));
 }
 
 body.light-mode .background::before{
@@ -3365,11 +3367,11 @@ function spawnTalentKeyword(){
     'rgba(186,230,253,.22)'
   ];
   const keywordOpacities = [
-    '.36',
-    '.42',
-    '.5',
-    '.46',
-    '.58'
+    '.52',
+    '.58',
+    '.66',
+    '.62',
+    '.72'
   ];
   const keywordPoint = getKeywordPoint();
 
@@ -3454,14 +3456,14 @@ function startTalentKeywords(){
     return;
   }
 
-  const initialCount = window.innerWidth < 768 ? 5 : 9;
-  const spawnGap = window.innerWidth < 768 ? 900 : 720;
+  const initialCount = window.innerWidth < 768 ? 3 : 5;
+  const spawnGap = window.innerWidth < 768 ? 1400 : 1200;
 
   for(let i = 0; i < initialCount; i++){
     window.setTimeout(spawnTalentKeyword, 180 + (i * spawnGap));
   }
 
-  window.setInterval(spawnTalentKeyword, window.innerWidth < 768 ? 1700 : 1320);
+  window.setInterval(spawnTalentKeyword, window.innerWidth < 768 ? 3400 : 2640);
 }
 
 startTalentKeywords();
