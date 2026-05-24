@@ -900,8 +900,11 @@ body.light-mode .scroll-line{
   height:58px;
   display:block;
   object-fit:contain;
-  position:relative;
-  z-index:1;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  z-index:2;
 }
 
 .skill-tab img.is-broken{
@@ -935,7 +938,7 @@ body.light-mode .skill-logo-fallback{
   color:#111827;
 }
 
-.skill-tab span{
+.skill-tab span:not(.skill-logo-fallback){
   display:none;
 }
 
@@ -2462,62 +2465,62 @@ body.light-mode .quality-panel{
     <div class="skills-sidebar">
 
       <div class="skill-tab" data-name="Illustrator" data-percent="85%" data-level="중상" data-period="약 4년" data-range="광고 비주얼 · SNS 소재 · 프로모션 디자인">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/일러스트레이터.svg" onerror="this.classList.add('is-broken')">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%B5%E1%86%AF%E1%84%85%E1%85%A5%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">Ai</span>
       </div>
 
       <div class="skill-tab" data-name="Photoshop" data-percent="80%" data-level="중상" data-period="약 4년" data-range="이미지 보정 · 합성 · 광고 소재 제작">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/포토샵.svg" onerror="this.classList.add('is-broken')">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%A9%E1%84%90%E1%85%A9%E1%84%89%E1%85%A3%E1%86%B8.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">Ps</span>
       </div>
 
       <div class="skill-tab" data-name="Premiere Pro" data-percent="75%" data-level="중하" data-period="약 3년" data-range="영상 편집 · 숏폼 콘텐츠 · 모션 컷 편집">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/프리미어프로.svg" onerror="this.classList.add('is-broken')">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%B3%E1%84%85%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8B%E1%85%A5%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">Pr</span>
       </div>
 
       <div class="skill-tab" data-name="Excel" data-percent="75%" data-level="중" data-period="약 3년" data-range="로우데이터 정리 · 리포팅 · 성과 분석 보조">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/엑셀.svg" onerror="this.classList.add('is-broken')">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%A6%E1%86%A8%E1%84%89%E1%85%A6%E1%86%AF.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">X</span>
       </div>
 
       <div class="skill-tab" data-name="PowerPoint" data-percent="85%" data-level="상" data-period="약 4년" data-range="제안서 구성 · 발표자료 · 캠페인 문서화">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/파워포인트.svg" onerror="this.classList.add('is-broken')">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%A1%E1%84%8B%E1%85%AF%E1%84%91%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%90%E1%85%B3.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">P</span>
       </div>
 
       <div class="skill-tab" data-name="Word" data-percent="80%" data-level="중상" data-period="약 4년" data-range="문서 작성 · 보고서 정리 · 제안서 텍스트 구성">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/워드.svg" onerror="this.classList.add('is-broken')">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%AF%E1%84%83%E1%85%B3.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">W</span>
       </div>
 
       <div class="skill-tab" data-name="Midjourney" data-percent="70%" data-level="중" data-period="약 1년" data-range="이미지 레퍼런스 생성 · 비주얼 콘셉트 확장 · 무드보드 제작">
-        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_다크.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_라이트.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_다크.svg" onerror="this.classList.add('is-broken')">
+        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">MJ</span>
       </div>
 
       <div class="skill-tab" data-name="Runway" data-percent="65%" data-level="중하" data-period="약 1년" data-range="AI 영상 소스 제작 · 비주얼 실험 · 영상 레퍼런스 확장">
-        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_다크.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_라이트.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_다크.svg" onerror="this.classList.add('is-broken')">
+        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">RW</span>
       </div>
 
       <div class="skill-tab" data-name="Naver" data-percent="" data-level="" data-period="실무 경험" data-range="검색광고 · 성과 리포팅 · 소재/키워드 관리">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/네이버.svg" onerror="this.classList.add('is-broken')">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%87%E1%85%A5.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">N</span>
       </div>
 
       <div class="skill-tab" data-name="Google" data-percent="" data-level="" data-period="실무 경험" data-range="Google Ads · 캠페인 세팅 보조 · 성과 확인">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/구글.svg" onerror="this.classList.add('is-broken')">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%80%E1%85%AE%E1%84%80%E1%85%B3%E1%86%AF.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">G</span>
       </div>
 
       <div class="skill-tab" data-name="Meta" data-percent="" data-level="" data-period="실무 경험" data-range="Meta Ads · 소재 관리 · 캠페인 운영 보조">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/메타.svg" onerror="this.classList.add('is-broken')">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%A6%E1%84%90%E1%85%A1.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">M</span>
       </div>
 
       <div class="skill-tab" data-name="Kakao" data-percent="" data-level="" data-period="실무 경험" data-range="카카오 광고 · 매체 세팅 보조 · 리포팅">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/카카오.svg" onerror="this.classList.add('is-broken')">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8F%E1%85%A1%E1%84%8F%E1%85%A1%E1%84%8B%E1%85%A9.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">K</span>
       </div>
 
@@ -2719,120 +2722,120 @@ body.light-mode .quality-panel{
 
   <!-- EDIT: 캠페인 카드 1 -->
   <div class="project-card">
-    <img src="https://picsum.photos/800/500?1">
+    <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2021_albamon.jpg" alt="2021 albamon">
 
     <div class="project-info">
       <div class="project-title">
-        Campaign Design
+        알바몬 브랜드 캠페인
       </div>
 
       <div class="project-desc">
-        참여형 캠페인 기획 프로젝트
+        브랜드 캠페인 기획/소재 아카이브
       </div>
     </div>
   </div>
 
   <!-- EDIT: 캠페인 카드 2 -->
   <div class="project-card">
-    <img src="https://picsum.photos/800/500?2">
+    <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2026_albamon.jpg" alt="2026 albamon">
 
     <div class="project-info">
       <div class="project-title">
-        Motion Graphic
+        알바몬 2026 캠페인
       </div>
 
       <div class="project-desc">
-        영상 기반 비주얼 프로젝트
+        브랜드 캠페인 및 AI 활용 프로젝트
       </div>
     </div>
   </div>
 
   <!-- EDIT: 캠페인 카드 3 -->
   <div class="project-card">
-    <img src="https://picsum.photos/800/500?3">
+    <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2021_KANU.jpg" alt="2021 KANU">
 
     <div class="project-info">
       <div class="project-title">
-        Branding
+        카누 브랜드 캠페인
       </div>
 
       <div class="project-desc">
-        브랜딩 및 디자인 시스템 구축
+        브랜드 캠페인 기획/소재 아카이브
       </div>
     </div>
   </div>
 
   <!-- EDIT: 캠페인 카드 4 -->
   <div class="project-card">
-    <img src="https://picsum.photos/800/500?4">
+    <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2024_CLIO_AI_1.jpg" alt="2024 CLIO AI 1">
 
     <div class="project-info">
       <div class="project-title">
-        Editorial
+        클리오 AI 캠페인 1
       </div>
 
       <div class="project-desc">
-        편집 및 타이포그래피 디자인
+        AI 기반 캠페인 기획/소재 아카이브
       </div>
     </div>
   </div>
 
   <!-- EDIT: 캠페인 카드 5 -->
   <div class="project-card">
-    <img src="https://picsum.photos/800/500?5">
+    <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2024_CLIO_AI_2.jpg" alt="2024 CLIO AI 2">
 
     <div class="project-info">
       <div class="project-title">
-        Visual Planning
+        클리오 AI 캠페인 2
       </div>
 
       <div class="project-desc">
-        현장 기반 시각 기획 프로젝트
+        AI 기반 캠페인 기획/소재 아카이브
       </div>
     </div>
   </div>
 
   <!-- EDIT: 캠페인 카드 6 -->
   <div class="project-card">
-    <img src="https://picsum.photos/800/500?6">
+    <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2021_LVMH.jpg" alt="2021 LVMH">
 
     <div class="project-info">
       <div class="project-title">
-        Promotion
+        LVMH 리뷰 캠페인
       </div>
 
       <div class="project-desc">
-        프로모션 중심 그래픽 디자인
+        리뷰형 캠페인 기획/소재 아카이브
       </div>
     </div>
   </div>
 
   <!-- EDIT: 캠페인 카드 7 -->
   <div class="project-card">
-    <img src="https://picsum.photos/800/500?7">
+    <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2025_KODA.jpg" alt="2025 KODA">
 
     <div class="project-info">
       <div class="project-title">
-        Campaign Archive
+        KODA 제안서
       </div>
 
       <div class="project-desc">
-        캠페인 이미지 아카이브
+        제안서 프로젝트 아카이브
       </div>
     </div>
   </div>
 
   <!-- EDIT: 캠페인 카드 8 -->
   <div class="project-card">
-    <img src="https://picsum.photos/800/500?8">
+    <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2024_KOSAC.jpg" alt="2024 KOSAC">
 
     <div class="project-info">
       <div class="project-title">
-        Campaign Visual
+        KOSAC 제안서
       </div>
 
       <div class="project-desc">
-        캠페인 비주얼 썸네일
+        제안서 프로젝트 아카이브
       </div>
     </div>
   </div>
@@ -2975,7 +2978,56 @@ const projectModal = document.querySelector('.project-modal');
 const projectModalBox = document.querySelector('.project-modal-box');
 const projectModalClose = document.querySelector('.project-modal-close');
 const projectModalImage = document.querySelector('.project-modal-image');
-const campaignAssetsApi = 'https://api.github.com/repos/guswkd/portfolio-assets/contents';
+const campaignAssets = [
+  {
+    name:'2021_albamon.jpg',
+    title:'알바몬 브랜드 캠페인',
+    desc:'브랜드 캠페인 기획/소재 아카이브',
+    src:'https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2021_albamon.jpg'
+  },
+  {
+    name:'2026_albamon.jpg',
+    title:'알바몬 2026 캠페인',
+    desc:'브랜드 캠페인 및 AI 활용 프로젝트',
+    src:'https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2026_albamon.jpg'
+  },
+  {
+    name:'2021_KANU.jpg',
+    title:'카누 브랜드 캠페인',
+    desc:'브랜드 캠페인 기획/소재 아카이브',
+    src:'https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2021_KANU.jpg'
+  },
+  {
+    name:'2024_CLIO_AI_1.jpg',
+    title:'클리오 AI 캠페인 1',
+    desc:'AI 기반 캠페인 기획/소재 아카이브',
+    src:'https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2024_CLIO_AI_1.jpg'
+  },
+  {
+    name:'2024_CLIO_AI_2.jpg',
+    title:'클리오 AI 캠페인 2',
+    desc:'AI 기반 캠페인 기획/소재 아카이브',
+    src:'https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2024_CLIO_AI_2.jpg'
+  },
+  {
+    name:'2021_LVMH.jpg',
+    title:'LVMH 리뷰 캠페인',
+    desc:'리뷰형 캠페인 기획/소재 아카이브',
+    src:'https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2021_LVMH.jpg'
+  },
+  {
+    name:'2025_KODA.jpg',
+    title:'KODA 제안서',
+    desc:'제안서 프로젝트 아카이브',
+    src:'https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2025_KODA.jpg'
+  },
+  {
+    name:'2024_KOSAC.jpg',
+    title:'KOSAC 제안서',
+    desc:'제안서 프로젝트 아카이브',
+    src:'https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2024_KOSAC.jpg'
+  }
+];
 
 const skillLogoFallbacks = {
   Illustrator:'Ai',
@@ -3005,6 +3057,10 @@ function setupSkillLogoFallbacks(){
       fallback.className = 'skill-logo-fallback';
       fallback.innerText = skillLogoFallbacks[tab.dataset.name] || tab.dataset.name?.slice(0,2) || 'SK';
       image.insertAdjacentElement('afterend', fallback);
+    }
+
+    if(image.complete && image.naturalWidth === 0){
+      image.classList.add('is-broken');
     }
 
     image.addEventListener('error',()=>{
@@ -3123,44 +3179,27 @@ function filterCampaignCards(filter){
   });
 }
 
-async function loadCampaignJpgThumbnails(){
-  try{
-    const response = await fetch(campaignAssetsApi,{
-      headers:{ Accept:'application/vnd.github+json' }
-    });
+function loadCampaignJpgThumbnails(){
+  campaignAssets.slice(0,projectCards.length).forEach((asset,index)=>{
+    const card = projectCards[index];
+    const image = card.querySelector('img');
+    const title = card.querySelector('.project-title');
+    const desc = card.querySelector('.project-desc');
 
-    if(!response.ok) return;
+    if(image){
+      image.src = asset.src;
+      image.alt = asset.title;
+    }
 
-    const assets = await response.json();
-    const jpgAssets = assets
-      .filter(asset => asset.type === 'file' && /\.(jpe?g)$/i.test(asset.name))
-      .sort((a,b)=>a.name.localeCompare(b.name,'ko'));
+    if(title) title.innerText = asset.title;
+    if(desc) desc.innerText = asset.desc;
 
-    jpgAssets.slice(0,projectCards.length).forEach((asset,index)=>{
-      const card = projectCards[index];
-      const image = card.querySelector('img');
-      const title = card.querySelector('.project-title');
-      const desc = card.querySelector('.project-desc');
+    setCampaignLabel(card, `${asset.name} ${asset.title}`);
+    setCampaignViewButton(card, `${asset.name} ${asset.title}`);
+  });
 
-      if(image){
-        image.src = asset.download_url;
-        image.alt = formatCampaignAssetName(asset.name);
-      }
-
-      const assetTitle = formatCampaignAssetName(asset.name);
-
-      if(title) title.innerText = assetTitle;
-      if(desc) desc.innerText = 'GitHub 업로드 캠페인 이미지';
-
-      setCampaignLabel(card, `${asset.name} ${assetTitle}`);
-      setCampaignViewButton(card, `${asset.name} ${assetTitle}`);
-    });
-
-    const activeFilter = document.querySelector('.campaign-filter-button.active')?.dataset.filter || 'all';
-    filterCampaignCards(activeFilter);
-  }catch{
-    return;
-  }
+  const activeFilter = document.querySelector('.campaign-filter-button.active')?.dataset.filter || 'all';
+  filterCampaignCards(activeFilter);
 }
 
 setupSkillLogoFallbacks();
