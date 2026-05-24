@@ -201,16 +201,20 @@ body.light-mode .hero-cell.hero-outline{
 
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
   padding:8px;
   border-radius:999px;
 
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.12);
   backdrop-filter:blur(20px);
+  overflow:hidden;
+  max-width:74px;
+  transition:max-width .32s ease, background .25s ease, border-color .25s ease;
 }
 
-.portfolio-nav a{
+.portfolio-nav::before{
+  content:'MENU';
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -220,10 +224,40 @@ body.light-mode .hero-cell.hero-outline{
   color:rgba(255,255,255,.78);
   font-size:12px;
   font-weight:800;
+  letter-spacing:0;
+  flex:0 0 auto;
+}
+
+.portfolio-nav:hover,
+.portfolio-nav:focus-within{
+  max-width:720px;
+}
+
+.portfolio-nav a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  max-width:0;
+  padding:0;
+  border-radius:999px;
+  color:rgba(255,255,255,.78);
+  font-size:12px;
+  font-weight:800;
   text-decoration:none;
   letter-spacing:0;
   cursor:none;
-  transition:.25s ease;
+  white-space:nowrap;
+  opacity:0;
+  overflow:hidden;
+  transition:max-width .28s ease, padding .28s ease, opacity .2s ease, background .25s ease, color .25s ease;
+}
+
+.portfolio-nav:hover a,
+.portfolio-nav:focus-within a{
+  max-width:120px;
+  padding:0 12px;
+  opacity:1;
 }
 
 .portfolio-nav a:hover{
@@ -237,6 +271,10 @@ body.light-mode .portfolio-nav{
 }
 
 body.light-mode .portfolio-nav a{
+  color:rgba(17,24,39,.68);
+}
+
+body.light-mode .portfolio-nav::before{
   color:rgba(17,24,39,.68);
 }
 
@@ -892,18 +930,10 @@ body.light-mode .scroll-line{
 .skill-tab.active::after,
 .skill-tab:hover::before,
 .skill-tab:hover::after{
-  width:30px;
-  height:30px;
-  opacity:1;
-  border-color:rgba(96,165,250,.72);
-}
-
-.skill-tab.active::before,
-.skill-tab.active::after,
-.skill-tab:hover::before,
-.skill-tab:hover::after{
   width:38px;
   height:38px;
+  opacity:1;
+  border-color:rgba(96,165,250,.72);
 }
 
 .skill-detail{
@@ -1001,14 +1031,6 @@ body.light-mode .scroll-line{
   z-index:2;
 }
 
-.skill-boundary.low{
-  left:33.333%;
-}
-
-.skill-boundary.mid{
-  left:66.666%;
-}
-
 .skill-scale-labels{
   position:absolute;
   inset:0;
@@ -1085,7 +1107,7 @@ body.light-mode .skill-scale-labels span.active{
 }
 
 .experience-section{
-  width:92%;
+  width:min(1240px,90%);
   height:auto;
   margin:0 auto;
   padding-top:64px;
@@ -1107,8 +1129,10 @@ body.light-mode .skill-scale-labels span.active{
 .experience-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:18px;
-  height:clamp(300px, 42svh, 390px);
+  gap:28px;
+  width:100%;
+  max-width:1240px;
+  height:clamp(280px, 36svh, 360px);
   min-height:0;
   margin-top:18px;
   align-items:stretch;
@@ -1116,8 +1140,8 @@ body.light-mode .skill-scale-labels span.active{
 
 .experience-card{
   position:relative;
-  padding:24px;
-  border-radius:22px;
+  padding:24px 26px;
+  border-radius:24px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
   backdrop-filter:blur(20px);
@@ -1141,17 +1165,17 @@ body.light-mode .experience-card{
 
 .exp-main{
   display:grid;
-  grid-template-columns:148px minmax(0,1fr);
+  grid-template-columns:144px minmax(0,1fr);
   align-items:center;
-  gap:20px;
+  gap:22px;
   width:100%;
-  margin:14px 0 18px;
+  margin:10px 0 16px;
 }
 
 
 .exp-logo{
-  width:140px;
-  height:58px;
+  width:136px;
+  height:54px;
   display:block;
   object-fit:contain;
   object-position:center center;
@@ -1159,13 +1183,13 @@ body.light-mode .experience-card{
 }
 
 .exp-logo[alt="KODA"]{
-  width:140px;
-  height:56px;
+  width:136px;
+  height:52px;
 }
 
 .exp-logo[alt="NMG"]{
-  width:140px;
-  height:54px;
+  width:136px;
+  height:50px;
 }
 
 .exp-text{
@@ -1188,14 +1212,14 @@ body.light-mode .exp-logo{
   align-items:center;
   justify-content:center;
   flex-shrink:0;
-  padding:8px 14px;
+  padding:7px 12px;
   border-radius:999px;
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.08);
   font-size:12px;
   letter-spacing:.08em;
   text-transform:uppercase;
-  margin-bottom:14px;
+  margin-bottom:8px;
 }
 
 body.light-mode .exp-label{
@@ -1225,7 +1249,7 @@ body.light-mode .exp-org{
 .exp-period{
   display:block;
   margin-top:0;
-  font-size:15px;
+  font-size:14px;
   font-weight:300;
   letter-spacing:0;
   color:rgba(255,255,255,.56);
@@ -1294,6 +1318,12 @@ body.light-mode .exp-meta span{
   gap:24px;
   align-items:stretch;
   min-height:clamp(430px, 58svh, 560px);
+  width:calc(92% + 36px);
+  max-width:calc(100% - 32px);
+  padding:18px;
+  margin-top:-18px;
+  margin-bottom:-18px;
+  overflow:visible;
 }
 
 .profile-card,
@@ -1388,6 +1418,8 @@ body.light-mode .exp-meta span{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.07));
 }
 
 .profile-mini strong{
@@ -1400,6 +1432,11 @@ body.light-mode .exp-meta span{
   font-size:15px;
   line-height:1.55;
   color:rgba(255,255,255,.72);
+}
+
+body.light-mode .profile-mini{
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.68), rgba(237,233,254,.44));
 }
 
 .workflow-grid{
@@ -1592,6 +1629,7 @@ body.light-mode .campaign-filter-button.active{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   grid-template-rows:repeat(2,1fr);
+  grid-auto-rows:minmax(210px,1fr);
 
   gap:24px;
 
@@ -1603,7 +1641,8 @@ body.light-mode .campaign-filter-button.active{
   position:relative;
   overflow:hidden;
   border-radius:26px;
-  min-height:0;
+  min-height:210px;
+  aspect-ratio:4/3;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
   backdrop-filter:blur(20px);
@@ -1887,10 +1926,18 @@ body.light-mode .project-modal-close{
     justify-content:center;
     overflow-x:auto;
     border-radius:18px;
+    max-width:none;
+  }
+
+  .portfolio-nav::before{
+    display:none;
   }
 
   .portfolio-nav a{
     flex:0 0 auto;
+    max-width:none;
+    padding:0 12px;
+    opacity:1;
   }
 
   .hero-copy{
@@ -1962,7 +2009,6 @@ body.light-mode .project-modal-close{
 
 }
 
-/* RESTORE: 최종 레이아웃/글라스모피즘/라이트 배경 */
 body{
   transition:
     background .55s ease,
@@ -2193,11 +2239,6 @@ body.light-mode .quality-panel{
   border-color:rgba(125,211,252,.38);
 }
 
-body.light-mode .cursor-light{
-  mix-blend-mode:multiply;
-  opacity:.9;
-}
-
 @media(max-width:1100px){
   .profile-layout,
   .quality-layout{
@@ -2332,27 +2373,27 @@ body.light-mode .cursor-light{
     <article class="profile-card">
       <div class="profile-kicker">POSITIONING</div>
       <h2 class="profile-title">
-        브리프를 <span class="name-accent">현장</span>의 언어로 읽고,<br>
-        실행까지 이어지게 정리합니다.
+        낯선 과제도 <span class="name-accent">현장</span>에서 빠르게 읽고,<br>
+        팀이 움직일 수 있게 정리합니다.
       </h2>
       <p class="profile-copy">
-        광고대행사 캠페인 AE 공고에서 반복되는 브리프 이해, 캠페인 기획,
-        제안서 구성, 제작 진행, 운영 관리, 리포팅/커뮤니케이션 역량에 맞춰 경험을 정리했습니다.
-        화려한 주장보다 <span class="name-accent">현장</span>에서 바로 확인하고 실행할 수 있는 자료를 만드는 데 집중합니다.
+        교육 프로젝트와 인턴 경험을 통해 캠페인이 어떤 순서로 움직이는지 익혔습니다.
+        제안서를 작성하고, 자료를 모으고, 숫자와 피드백을 정리하며
+        <span class="name-accent">현장</span>에서 바로 보탤 수 있는 기본기를 갖춰가고 있습니다.
       </p>
 
       <div class="profile-list">
         <div class="profile-list-item">
-          <strong>Target</strong>
-          <span>캠페인 AE · 디지털 광고 AE · 콘텐츠/브랜드 캠페인 운영 주니어 포지션</span>
+          <strong>Interest</strong>
+          <span>캠페인 AE · 브랜드/콘텐츠 캠페인 · 디지털 광고 기획/운영 보조</span>
         </div>
         <div class="profile-list-item">
-          <strong>Fit</strong>
-          <span>브랜드/타깃/캠페인 목적을 확인하고 제안서, 제작 리스트, 운영표로 구조화하는 역량</span>
+          <strong>Practice</strong>
+          <span>브랜드와 타깃을 조사해 제안서, 발표자료, 리포트 형태로 끝까지 정리한 경험</span>
         </div>
         <div class="profile-list-item">
-          <strong>Proof</strong>
-          <span>NMG 인턴, KODA 교육, 브랜드 캠페인/AI/제안서 작업을 통해 운영 흐름을 경험</span>
+          <strong>Attitude</strong>
+          <span>모르는 것은 빠르게 확인하고, 팀이 다시 볼 수 있게 남기는 책임감 있는 정리 습관</span>
         </div>
       </div>
     </article>
@@ -2360,15 +2401,15 @@ body.light-mode .cursor-light{
     <div class="profile-side">
       <article class="profile-card profile-mini">
         <strong>01</strong>
-        <span>광고주 과제와 브랜드 맥락을 먼저 읽고 필요한 자료를 수집합니다.</span>
+        <span>브랜드와 캠페인 배경을 먼저 찾아보고 핵심을 빠르게 정리합니다.</span>
       </article>
       <article class="profile-card profile-mini">
         <strong>02</strong>
-        <span>일정, 제작물, 수정사항을 함께 보며 실행 가능한 캠페인 흐름을 잡습니다.</span>
+        <span>제안서와 발표자료를 만들며 아이디어를 실행 흐름으로 구조화합니다.</span>
       </article>
       <article class="profile-card profile-mini">
         <strong>03</strong>
-        <span>운영 결과와 피드백을 팀이 다시 확인하기 쉬운 리포트로 남깁니다.</span>
+        <span>데이터와 피드백을 표와 문서로 남겨 다음 액션에 연결합니다.</span>
       </article>
     </div>
 
@@ -2536,7 +2577,7 @@ body.light-mode .cursor-light{
           </div>
 
           <div class="exp-role">
-            KODA ACADEMY 디지털 광고 마케터 양성 교육생 조장
+            KODA ACADEMY 디지털 광고 마케터 양성 교육생 [조장]
           </div>
         </div>
 
@@ -2898,6 +2939,7 @@ const skillScaleLabels = document.querySelectorAll('.skill-scale-labels span');
 const skillDetailCards = document.querySelectorAll('.skill-detail-card');
 const skillDetailSub = document.querySelector('.skill-detail-sub');
 const projectCards = document.querySelectorAll('.project-card');
+const portfolioNavLinks = document.querySelectorAll('.portfolio-nav a');
 const campaignFilterButtons = document.querySelectorAll('.campaign-filter-button');
 const projectModal = document.querySelector('.project-modal');
 const projectModalBox = document.querySelector('.project-modal-box');
@@ -3002,9 +3044,15 @@ function setupCampaignViewButtons(){
 }
 
 function filterCampaignCards(filter){
+  const activeFilter = filter || 'all';
+  const hasVisibleCards = Array.from(projectCards).some((card)=>{
+    const labels = (card.dataset.labels || '').split('|').filter(Boolean);
+    return activeFilter === 'all' || labels.includes(activeFilter);
+  });
+
   projectCards.forEach((card)=>{
-    const labels = (card.dataset.labels || '').split('|');
-    const isVisible = filter === 'all' || labels.includes(filter);
+    const labels = (card.dataset.labels || '').split('|').filter(Boolean);
+    const isVisible = activeFilter === 'all' || !hasVisibleCards || labels.includes(activeFilter);
     card.classList.toggle('hidden-by-filter', !isVisible);
   });
 }
@@ -3044,8 +3092,8 @@ async function loadCampaignJpgThumbnails(){
 
     const activeFilter = document.querySelector('.campaign-filter-button.active')?.dataset.filter || 'all';
     filterCampaignCards(activeFilter);
-  }catch(error){
-    console.info('Campaign jpg thumbnails could not be loaded.', error);
+  }catch{
+    return;
   }
 }
 
@@ -3342,6 +3390,19 @@ function activateSkillTab(tab){
 skillTabs.forEach(tab=>{
   tab.addEventListener('focus',()=>activateSkillTab(tab));
   tab.addEventListener('click',()=>activateSkillTab(tab));
+});
+
+portfolioNavLinks.forEach((link)=>{
+  link.addEventListener('click',(e)=>{
+    const target = document.querySelector(link.getAttribute('href'));
+    if(!target) return;
+
+    e.preventDefault();
+    target.scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
+  });
 });
 
 // PROJECT MODAL: 캠페인 카드 클릭 시 팝업 열기/닫기
