@@ -904,6 +904,36 @@ body.light-mode .scroll-line{
   z-index:1;
 }
 
+.skill-tab img.is-broken{
+  display:none;
+}
+
+.skill-logo-fallback{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  width:58px;
+  height:58px;
+  border-radius:16px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.16);
+  color:white;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:0;
+  position:relative;
+  z-index:1;
+}
+
+.skill-tab img.is-broken + .skill-logo-fallback{
+  display:flex;
+}
+
+body.light-mode .skill-logo-fallback{
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(14,165,233,.18);
+  color:#111827;
+}
 
 .skill-tab span{
   display:none;
@@ -2432,63 +2462,63 @@ body.light-mode .quality-panel{
     <div class="skills-sidebar">
 
       <div class="skill-tab" data-name="Illustrator" data-percent="85%" data-level="중상" data-period="약 4년" data-range="광고 비주얼 · SNS 소재 · 프로모션 디자인">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/일러스트레이터.svg">
-        <span>Illustrator</span>
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/일러스트레이터.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">Ai</span>
       </div>
 
       <div class="skill-tab" data-name="Photoshop" data-percent="80%" data-level="중상" data-period="약 4년" data-range="이미지 보정 · 합성 · 광고 소재 제작">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/포토샵.svg">
-        <span>Photoshop</span>
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/포토샵.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">Ps</span>
       </div>
 
       <div class="skill-tab" data-name="Premiere Pro" data-percent="75%" data-level="중하" data-period="약 3년" data-range="영상 편집 · 숏폼 콘텐츠 · 모션 컷 편집">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/프리미어프로.svg">
-        <span>Premiere</span>
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/프리미어프로.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">Pr</span>
       </div>
 
       <div class="skill-tab" data-name="Excel" data-percent="75%" data-level="중" data-period="약 3년" data-range="로우데이터 정리 · 리포팅 · 성과 분석 보조">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/엑셀.svg">
-        <span>Excel</span>
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/엑셀.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">X</span>
       </div>
 
       <div class="skill-tab" data-name="PowerPoint" data-percent="85%" data-level="상" data-period="약 4년" data-range="제안서 구성 · 발표자료 · 캠페인 문서화">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/파워포인트.svg">
-        <span>PowerPoint</span>
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/파워포인트.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">P</span>
       </div>
 
       <div class="skill-tab" data-name="Word" data-percent="80%" data-level="중상" data-period="약 4년" data-range="문서 작성 · 보고서 정리 · 제안서 텍스트 구성">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/워드.svg">
-        <span>Word</span>
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/워드.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">W</span>
       </div>
 
       <div class="skill-tab" data-name="Midjourney" data-percent="70%" data-level="중" data-period="약 1년" data-range="이미지 레퍼런스 생성 · 비주얼 콘셉트 확장 · 무드보드 제작">
-        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_다크.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_라이트.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_다크.svg">
-        <span>Midjourney</span>
+        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_다크.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_라이트.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/미드저니_다크.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">MJ</span>
       </div>
 
       <div class="skill-tab" data-name="Runway" data-percent="65%" data-level="중하" data-period="약 1년" data-range="AI 영상 소스 제작 · 비주얼 실험 · 영상 레퍼런스 확장">
-        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_다크.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_라이트.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_다크.svg">
-        <span>Runway</span>
+        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_다크.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_라이트.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/런웨이_다크.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">RW</span>
       </div>
 
       <div class="skill-tab" data-name="Naver" data-percent="" data-level="" data-period="실무 경험" data-range="검색광고 · 성과 리포팅 · 소재/키워드 관리">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/네이버.svg">
-        <span>Naver</span>
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/네이버.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">N</span>
       </div>
 
       <div class="skill-tab" data-name="Google" data-percent="" data-level="" data-period="실무 경험" data-range="Google Ads · 캠페인 세팅 보조 · 성과 확인">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/구글.svg">
-        <span>Google</span>
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/구글.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">G</span>
       </div>
 
       <div class="skill-tab" data-name="Meta" data-percent="" data-level="" data-period="실무 경험" data-range="Meta Ads · 소재 관리 · 캠페인 운영 보조">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/메타.svg">
-        <span>Meta</span>
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/메타.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">M</span>
       </div>
 
       <div class="skill-tab" data-name="Kakao" data-percent="" data-level="" data-period="실무 경험" data-range="카카오 광고 · 매체 세팅 보조 · 리포팅">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/카카오.svg">
-        <span>Kakao</span>
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/카카오.svg" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">K</span>
       </div>
 
     </div>
@@ -2947,6 +2977,42 @@ const projectModalClose = document.querySelector('.project-modal-close');
 const projectModalImage = document.querySelector('.project-modal-image');
 const campaignAssetsApi = 'https://api.github.com/repos/guswkd/portfolio-assets/contents';
 
+const skillLogoFallbacks = {
+  Illustrator:'Ai',
+  Photoshop:'Ps',
+  'Premiere Pro':'Pr',
+  Excel:'X',
+  PowerPoint:'P',
+  Word:'W',
+  Midjourney:'MJ',
+  Runway:'RW',
+  Naver:'N',
+  Google:'G',
+  Meta:'M',
+  Kakao:'K'
+};
+
+function setupSkillLogoFallbacks(){
+  skillTabs.forEach((tab)=>{
+    const image = tab.querySelector('img');
+    if(!image) return;
+
+    image.alt = tab.dataset.name || 'Skill logo';
+
+    let fallback = tab.querySelector('.skill-logo-fallback');
+    if(!fallback){
+      fallback = document.createElement('span');
+      fallback.className = 'skill-logo-fallback';
+      fallback.innerText = skillLogoFallbacks[tab.dataset.name] || tab.dataset.name?.slice(0,2) || 'SK';
+      image.insertAdjacentElement('afterend', fallback);
+    }
+
+    image.addEventListener('error',()=>{
+      image.classList.add('is-broken');
+    });
+  });
+}
+
 function formatCampaignAssetName(name){
   return name
     .normalize('NFC')
@@ -3097,6 +3163,7 @@ async function loadCampaignJpgThumbnails(){
   }
 }
 
+setupSkillLogoFallbacks();
 setupCampaignViewButtons();
 loadCampaignJpgThumbnails();
 
