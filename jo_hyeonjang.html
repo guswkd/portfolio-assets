@@ -452,13 +452,17 @@ body.light-mode .background::after{
   letter-spacing:0;
   white-space:nowrap;
   opacity:0;
-  text-shadow:0 0 18px rgba(34,211,238,.18);
-  animation:keywordFloat var(--keyword-duration,6s) ease-in-out forwards;
+  text-shadow:
+    0 0 8px var(--keyword-glow,rgba(125,211,252,.28)),
+    0 0 22px var(--keyword-glow,rgba(125,211,252,.16));
+  filter:drop-shadow(0 0 6px var(--keyword-glow,rgba(125,211,252,.18)));
+  animation:keywordFloat var(--keyword-duration,9s) ease-in-out forwards;
 }
 
 body.light-mode .talent-keyword{
-  color:rgba(17,24,39,.28);
-  text-shadow:none;
+  color:rgba(17,24,39,.24);
+  text-shadow:0 0 14px rgba(14,165,233,.12);
+  filter:none;
 }
 
 body.light-mode .background::before{
@@ -500,17 +504,23 @@ body.light-mode .background::before{
 @keyframes keywordFloat{
   0%{
     opacity:0;
-    transform:translate(-50%, calc(-50% + 12px)) scale(.9);
+    transform:translate(-50%, calc(-50% + 10px)) scale(.88);
   }
-  18%{
-    opacity:.72;
+  16%{
+    opacity:var(--keyword-opacity,.56);
   }
-  72%{
-    opacity:.72;
+  42%{
+    opacity:calc(var(--keyword-opacity,.56) * .62);
+  }
+  58%{
+    opacity:var(--keyword-opacity,.56);
+  }
+  80%{
+    opacity:calc(var(--keyword-opacity,.56) * .72);
   }
   100%{
     opacity:0;
-    transform:translate(-50%, calc(-50% - 18px)) scale(1.05);
+    transform:translate(-50%, calc(-50% - 28px)) scale(1.02);
   }
 }
 
@@ -2947,19 +2957,8 @@ const talentKeywords = [
 ];
 const activeTalentKeywords = new Set();
 
-// EDIT: 키워드 등장 위치 / 숫자를 바꾸면 키워드가 뜨는 구역이 달라집니다.
-// x1/x2는 좌우 위치, y1/y2는 상하 위치이며 0은 시작점, 1은 끝점입니다.
-const keywordZones = [
-  { x1:.06, x2:.3, y1:.1, y2:.28 },
-  { x1:.35, x2:.65, y1:.06, y2:.2 },
-  { x1:.7, x2:.94, y1:.1, y2:.28 },
-  { x1:.06, x2:.28, y1:.34, y2:.66 },
-  { x1:.72, x2:.94, y1:.34, y2:.66 },
-  { x1:.06, x2:.3, y1:.72, y2:.9 },
-  { x1:.35, x2:.65, y1:.8, y2:.94 },
-  { x1:.7, x2:.94, y1:.72, y2:.9 }
-];
-let keywordZoneQueue = [];
+let keywordIndex = 0;
+const recentKeywordPoints = [];
 
 window.addEventListener('mousemove',(e)=>{
 
@@ -3344,18 +3343,33 @@ function spawnTalentKeyword(){
   }
 
   const keyword = document.createElement('span');
-  const selectedKeyword = availableKeywords[Math.floor(Math.random() * availableKeywords.length)];
-  const duration = 4800 + Math.random() * 2200;
-  const keywordSize = window.innerWidth < 768
-    ? 9 + Math.random() * 6
-    : 10 + Math.random() * 12;
-  const keywordWeights = [300,400,500,600,700];
+  const selectedKeyword = availableKeywords[keywordIndex % availableKeywords.length];
+  const duration = window.innerWidth < 768 ? 9200 : 10800;
+  const keywordSizeSteps = window.innerWidth < 768
+    ? [9,10,10,11,12]
+    : [10,11,12,13,14,15];
+  const keywordSize = keywordSizeSteps[keywordIndex % keywordSizeSteps.length];
+  const keywordWeights = [300,400,500,400];
   const keywordColors = [
-    'rgba(255,255,255,.34)',
-    'rgba(125,211,252,.42)',
-    'rgba(196,181,253,.4)',
-    'rgba(94,234,212,.36)',
-    'rgba(251,207,232,.34)'
+    'rgba(255,255,255,.42)',
+    'rgba(191,219,254,.4)',
+    'rgba(196,181,253,.36)',
+    'rgba(165,243,252,.34)',
+    'rgba(226,232,240,.38)'
+  ];
+  const keywordGlows = [
+    'rgba(255,255,255,.24)',
+    'rgba(125,211,252,.24)',
+    'rgba(167,139,250,.22)',
+    'rgba(94,234,212,.2)',
+    'rgba(186,230,253,.22)'
+  ];
+  const keywordOpacities = [
+    '.36',
+    '.42',
+    '.5',
+    '.46',
+    '.58'
   ];
   const keywordPoint = getKeywordPoint();
 
@@ -3365,10 +3379,13 @@ function spawnTalentKeyword(){
   keyword.style.setProperty('--keyword-y', `${keywordPoint.y}px`);
   keyword.style.setProperty('--keyword-duration', `${duration}ms`);
   keyword.style.setProperty('--keyword-size', `${keywordSize}px`);
-  keyword.style.setProperty('--keyword-weight', keywordWeights[Math.floor(Math.random() * keywordWeights.length)]);
-  keyword.style.setProperty('--keyword-color', keywordColors[Math.floor(Math.random() * keywordColors.length)]);
+  keyword.style.setProperty('--keyword-weight', keywordWeights[keywordIndex % keywordWeights.length]);
+  keyword.style.setProperty('--keyword-color', keywordColors[keywordIndex % keywordColors.length]);
+  keyword.style.setProperty('--keyword-glow', keywordGlows[keywordIndex % keywordGlows.length]);
+  keyword.style.setProperty('--keyword-opacity', keywordOpacities[keywordIndex % keywordOpacities.length]);
 
   activeTalentKeywords.add(selectedKeyword);
+  keywordIndex += 1;
   keywordCloud.appendChild(keyword);
 
   window.setTimeout(()=>{
@@ -3398,10 +3415,9 @@ function getKeywordPoint(){
   };
 
   for(let i = 0; i < 34; i++){
-    const zone = getNextKeywordZone();
     const point = {
-      x:cloudRect.width * (zone.x1 + Math.random() * (zone.x2 - zone.x1)),
-      y:cloudRect.height * (zone.y1 + Math.random() * (zone.y2 - zone.y1))
+      x:cloudRect.width * (.08 + Math.random() * .84),
+      y:cloudRect.height * (.1 + Math.random() * .8)
     };
 
     const isInsideHeroText =
@@ -3410,31 +3426,27 @@ function getKeywordPoint(){
       point.y > avoidRect.top &&
       point.y < avoidRect.bottom;
 
-    if(!isInsideHeroText){
+    const isNearRecentPoint = recentKeywordPoints.some((recentPoint)=>{
+      const distanceX = Math.abs(point.x - recentPoint.x);
+      const distanceY = Math.abs(point.y - recentPoint.y);
+      return distanceX < cloudRect.width * .16 && distanceY < cloudRect.height * .14;
+    });
+
+    if(!isInsideHeroText && !isNearRecentPoint){
+      rememberKeywordPoint(point);
       return point;
     }
   }
 
+  rememberKeywordPoint(fallbackPoint);
   return fallbackPoint;
 }
 
-function getNextKeywordZone(){
-  if(!keywordZoneQueue.length){
-    keywordZoneQueue = shuffleKeywordZones(keywordZones);
+function rememberKeywordPoint(point){
+  recentKeywordPoints.push(point);
+  if(recentKeywordPoints.length > 5){
+    recentKeywordPoints.shift();
   }
-
-  return keywordZoneQueue.shift();
-}
-
-function shuffleKeywordZones(zones){
-  const shuffledZones = [...zones];
-
-  for(let i = shuffledZones.length - 1; i > 0; i--){
-    const randomIndex = Math.floor(Math.random() * (i + 1));
-    [shuffledZones[i], shuffledZones[randomIndex]] = [shuffledZones[randomIndex], shuffledZones[i]];
-  }
-
-  return shuffledZones;
 }
 
 function startTalentKeywords(){
@@ -3442,13 +3454,14 @@ function startTalentKeywords(){
     return;
   }
 
-  const initialCount = window.innerWidth < 768 ? 7 : 13;
+  const initialCount = window.innerWidth < 768 ? 5 : 9;
+  const spawnGap = window.innerWidth < 768 ? 900 : 720;
 
   for(let i = 0; i < initialCount; i++){
-    window.setTimeout(spawnTalentKeyword, 240 + (i * 360));
+    window.setTimeout(spawnTalentKeyword, 180 + (i * spawnGap));
   }
 
-  window.setInterval(spawnTalentKeyword, window.innerWidth < 768 ? 1100 : 760);
+  window.setInterval(spawnTalentKeyword, window.innerWidth < 768 ? 1700 : 1320);
 }
 
 startTalentKeywords();
