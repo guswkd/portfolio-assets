@@ -48,7 +48,7 @@ body{
   color:white;
   overflow-x:hidden;
   scroll-behavior:smooth;
-  cursor:none;
+  cursor:auto;
 }
 body.light-mode{
   background:#f6f8ff;
@@ -57,8 +57,8 @@ body.light-mode{
 
 body.light-mode .background{
   background:
-  linear-gradient(rgba(79,70,229,.24) 1.2px, transparent 1.2px),
-  linear-gradient(90deg, rgba(79,70,229,.24) 1.2px, transparent 1.2px),
+  linear-gradient(rgba(79,70,229,.08) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(79,70,229,.08) 1px, transparent 1px),
   radial-gradient(circle at 14% 18%, rgba(56,189,248,.26), transparent 28%),
   radial-gradient(circle at 82% 22%, rgba(168,85,247,.22), transparent 32%),
   radial-gradient(circle at 52% 84%, rgba(45,212,191,.18), transparent 34%),
@@ -70,8 +70,8 @@ body.light-mode .background{
     var(--light-bg-5) 100%);
 
   background-size:
-    56px 56px,
-    56px 56px,
+    34px 34px,
+    34px 34px,
     auto,
     auto,
     auto,
@@ -161,7 +161,7 @@ body.light-mode .hero-cell.hero-outline{
   font-size:34px;
   line-height:0;
   font-family:Georgia,'Times New Roman',serif;
-  cursor:none;
+  cursor:pointer;
 
   transition:.3s;
 }
@@ -188,7 +188,7 @@ body.light-mode .hero-cell.hero-outline{
   font-weight:700;
   letter-spacing:.04em;
 
-  cursor:none;
+  cursor:pointer;
 
   transition:.3s;
 }
@@ -246,7 +246,7 @@ body.light-mode .hero-cell.hero-outline{
   font-weight:800;
   text-decoration:none;
   letter-spacing:0;
-  cursor:none;
+  cursor:pointer;
   white-space:nowrap;
   opacity:0;
   overflow:hidden;
@@ -527,101 +527,6 @@ body.light-mode .background::before{
 }
 
 
-.cursor-light{
-  position:fixed;
-  width:122px;
-  height:122px;
-  border-radius:50%;
-
-  background:
-  radial-gradient(circle,
-  rgba(34,211,238,.9) 0%,
-  rgba(124,58,237,.52) 26%,
-  rgba(96,165,250,.24) 48%,
-  rgba(255,255,255,0) 74%);
-
-  filter:blur(14px);
-
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-
-  z-index:9996;
-
-  transition:
-  background .25s ease,
-  filter .25s ease;
-
-  mix-blend-mode:screen;
-
-  opacity:1;
-}
-
-body.light-mode .cursor-light{
-
-  width:122px;
-  height:122px;
-
-  background:
-  radial-gradient(circle,
-  rgba(109,40,217,.92) 0%,
-  rgba(147,51,234,.56) 26%,
-  rgba(192,132,252,.22) 48%,
-  rgba(255,255,255,0) 74%);
-
-  filter:blur(14px);
-
-  mix-blend-mode:multiply;
-
-  opacity:.9;
-}
-
-.custom-cursor{
-  position:fixed;
-
-  width:30px;
-  height:30px;
-
-  border-radius:50%;
-
-  border:3px solid rgba(255,255,255,.72);
-
-  background:rgba(255,255,255,.02);
-
-  backdrop-filter:blur(8px);
-
-  transform:translate(-50%,-50%);
-
-  pointer-events:none;
-
-  z-index:9999;
-
-  transition:
-    border-color .18s ease,
-    background .18s ease,
-    box-shadow .18s ease,
-    transform .12s ease;
-
-  mix-blend-mode:screen;
-  box-shadow:
-    0 0 0 1px rgba(125,211,252,.08),
-    0 0 22px rgba(125,211,252,.18);
-}
-
-.custom-cursor::before,
-.custom-cursor::after{
-  display:none;
-}
-
-body.light-mode .custom-cursor{
-  background:rgba(255,255,255,.06);
-  border-color:rgba(109,40,217,.58);
-  mix-blend-mode:multiply;
-  box-shadow:
-    0 0 0 1px rgba(109,40,217,.08),
-    0 0 18px rgba(109,40,217,.18);
-}
-
-
 .hero{
   height:100vh;
   display:flex;
@@ -888,7 +793,7 @@ body.light-mode .scroll-line{
   justify-content:center;
   padding:12px;
   transition:.28s ease;
-  cursor:none;
+  cursor:pointer;
 }
 
 .skill-tab::before,
@@ -1164,7 +1069,7 @@ body.light-mode .skill-scale-labels span.active{
 }
 
 .experience-section{
-  width:min(1240px,90%);
+  width:min(1320px,90%);
   height:auto;
   margin:0 auto;
   padding-top:64px;
@@ -1185,11 +1090,11 @@ body.light-mode .skill-scale-labels span.active{
 
 .experience-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:28px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
   width:100%;
-  max-width:1240px;
-  height:clamp(280px, 36svh, 360px);
+  max-width:1320px;
+  height:clamp(300px, 38svh, 380px);
   min-height:0;
   margin-top:18px;
   align-items:stretch;
@@ -1197,7 +1102,7 @@ body.light-mode .skill-scale-labels span.active{
 
 .experience-card{
   position:relative;
-  padding:24px 26px;
+  padding:22px;
   border-radius:24px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
@@ -1222,17 +1127,17 @@ body.light-mode .experience-card{
 
 .exp-main{
   display:grid;
-  grid-template-columns:144px minmax(0,1fr);
+  grid-template-columns:112px minmax(0,1fr);
   align-items:center;
-  gap:22px;
+  gap:16px;
   width:100%;
   margin:10px 0 16px;
 }
 
 
 .exp-logo{
-  width:136px;
-  height:54px;
+  width:104px;
+  height:48px;
   display:block;
   object-fit:contain;
   object-position:center center;
@@ -1240,13 +1145,29 @@ body.light-mode .experience-card{
 }
 
 .exp-logo[alt="KODA"]{
-  width:136px;
-  height:52px;
+  width:104px;
+  height:48px;
 }
 
 .exp-logo[alt="NMG"]{
-  width:136px;
-  height:50px;
+  width:104px;
+  height:46px;
+}
+
+.exp-logo-text{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:104px;
+  height:48px;
+  margin:0 auto;
+  border-radius:14px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.78);
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.08em;
 }
 
 .exp-text{
@@ -1261,6 +1182,12 @@ body.light-mode .experience-card{
 
 body.light-mode .exp-logo{
   opacity:.95;
+}
+
+body.light-mode .exp-logo-text{
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(14,165,233,.16);
+  color:rgba(17,24,39,.68);
 }
 
 
@@ -1294,7 +1221,7 @@ body.light-mode .exp-label{
 .exp-org{
   display:block;
   margin-bottom:7px;
-  font-size:20px;
+  font-size:18px;
   font-weight:700;
   letter-spacing:-.4px;
   color:rgba(255,255,255,.9);
@@ -1317,7 +1244,7 @@ body.light-mode .exp-period{
 }
 
 .exp-role{
-  font-size:15px;
+  font-size:14px;
   line-height:1.45;
   color:rgba(255,255,255,.7);
   margin-bottom:0;
@@ -1334,11 +1261,11 @@ body.light-mode .exp-role{
 }
 
 .exp-meta span{
-  padding:8px 12px;
+  padding:7px 10px;
   border-radius:999px;
   background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.08);
-  font-size:12px;
+  font-size:11px;
   color:rgba(255,255,255,.72);
 }
 
@@ -1349,7 +1276,6 @@ body.light-mode .exp-meta span{
 }
 
 .profile-section,
-.workflow-section,
 .quality-section{
   width:100%;
   min-height:auto;
@@ -1363,7 +1289,6 @@ body.light-mode .exp-meta span{
 }
 
 .profile-layout,
-.workflow-grid,
 .quality-layout{
   width:92%;
   margin:0 auto;
@@ -1371,33 +1296,30 @@ body.light-mode .exp-meta span{
 
 .profile-layout{
   display:grid;
-  grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);
-  gap:24px;
-  align-items:stretch;
-  min-height:clamp(430px, 58svh, 560px);
-  width:calc(92% + 36px);
-  max-width:calc(100% - 32px);
-  padding:18px;
-  margin-top:-18px;
-  margin-bottom:-18px;
+  grid-template-columns:minmax(0,1fr);
+  gap:0;
+  align-items:start;
+  min-height:auto;
+  max-width:1080px;
+  padding:0;
+  margin-top:0;
+  margin-bottom:0;
   overflow:visible;
 }
 
 .profile-card,
-.workflow-card,
 .quality-card,
 .quality-panel{
   border-radius:28px;
 }
 
 .profile-card{
-  padding:32px;
+  padding:30px 32px;
   display:flex;
   flex-direction:column;
 }
 
 .profile-kicker,
-.workflow-step,
 .quality-kicker{
   display:inline-flex;
   align-items:center;
@@ -1414,11 +1336,11 @@ body.light-mode .exp-meta span{
 }
 
 .profile-title{
-  font-size:clamp(32px,3.6vw,52px);
-  line-height:1.05;
-  letter-spacing:-2px;
+  font-size:clamp(28px,3vw,42px);
+  line-height:1.16;
+  letter-spacing:-1.2px;
   font-weight:800;
-  margin-bottom:22px;
+  margin-bottom:18px;
 }
 
 .name-accent{
@@ -1431,7 +1353,7 @@ body.light-mode .exp-meta span{
 }
 
 .profile-copy{
-  max-width:760px;
+  max-width:860px;
   font-size:16px;
   line-height:1.68;
   color:rgba(255,255,255,.72);
@@ -1440,8 +1362,8 @@ body.light-mode .exp-meta span{
 .profile-list{
   display:grid;
   gap:14px;
-  margin-top:auto;
-  padding-top:22px;
+  margin-top:24px;
+  padding-top:0;
 }
 
 .profile-list-item{
@@ -1461,68 +1383,6 @@ body.light-mode .exp-meta span{
   font-size:15px;
   line-height:1.55;
   color:rgba(255,255,255,.78);
-}
-
-.profile-side{
-  display:grid;
-  grid-template-rows:repeat(3,1fr);
-  gap:18px;
-}
-
-.profile-mini{
-  min-height:0;
-  padding:22px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.07));
-}
-
-.profile-mini strong{
-  font-size:34px;
-  line-height:1;
-}
-
-.profile-mini span{
-  margin-top:18px;
-  font-size:15px;
-  line-height:1.55;
-  color:rgba(255,255,255,.72);
-}
-
-body.light-mode .profile-mini{
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.68), rgba(237,233,254,.44));
-}
-
-.workflow-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:14px;
-  min-height:clamp(180px, 28svh, 250px);
-  align-items:stretch;
-}
-
-.workflow-card{
-  padding:20px;
-  min-height:0;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-}
-
-.workflow-card h3{
-  font-size:20px;
-  margin-bottom:10px;
-  letter-spacing:-.4px;
-}
-
-.workflow-card p{
-  margin-top:auto;
-  font-size:14px;
-  line-height:1.55;
-  color:rgba(255,255,255,.68);
 }
 
 .quality-layout{
@@ -1595,7 +1455,6 @@ body.light-mode .profile-mini{
 }
 
 body.light-mode .profile-kicker,
-body.light-mode .workflow-step,
 body.light-mode .quality-kicker{
   background:rgba(255,255,255,.58);
   border:1px solid rgba(14,165,233,.16);
@@ -1604,8 +1463,6 @@ body.light-mode .quality-kicker{
 
 body.light-mode .profile-copy,
 body.light-mode .profile-list-item span,
-body.light-mode .profile-mini span,
-body.light-mode .workflow-card p,
 body.light-mode .quality-panel p,
 body.light-mode .quality-card span{
   color:rgba(17,24,39,.7);
@@ -1658,7 +1515,7 @@ body.light-mode .name-accent{
   color:rgba(255,255,255,.76);
   font-size:14px;
   font-weight:700;
-  cursor:none;
+  cursor:pointer;
   transition:.25s ease;
 }
 
@@ -1704,7 +1561,7 @@ body.light-mode .campaign-filter-button.active{
   border:1px solid rgba(255,255,255,.08);
   backdrop-filter:blur(20px);
   transition:.5s;
-  cursor:none;
+  cursor:pointer;
 }
 
 .project-card:hover{
@@ -1796,7 +1653,7 @@ body.light-mode .campaign-filter-button.active{
   font-size:12px;
   font-weight:700;
   letter-spacing:0;
-  cursor:none;
+  cursor:pointer;
   transition:.25s ease;
 }
 
@@ -1902,7 +1759,7 @@ body.light-mode .project-label{
   font-size:24px;
   line-height:1;
 
-  cursor:none;
+  cursor:pointer;
   transition:.25s ease;
 }
 
@@ -2130,7 +1987,6 @@ body.light-mode .hero::after{
 .profile-section,
 .skills-section,
 .experience-section,
-.workflow-section,
 .campaign-section,
 .quality-section{
   width:100%;
@@ -2144,7 +2000,6 @@ body.light-mode .hero::after{
 body.light-mode .profile-section,
 body.light-mode .skills-section,
 body.light-mode .experience-section,
-body.light-mode .workflow-section,
 body.light-mode .campaign-section,
 body.light-mode .quality-section{
   background:var(--section-bg-light);
@@ -2157,38 +2012,13 @@ body.light-mode .quality-section{
 }
 
 .skills-section::before{
-  content:'';
-  position:absolute;
-  left:0;
-  right:0;
-  top:-260px;
-  height:260px;
-  pointer-events:none;
-  z-index:4;
-  background:linear-gradient(
-    to bottom,
-    rgba(10,15,29,0) 0%,
-    rgba(10,15,29,.18) 32%,
-    rgba(10,15,29,.62) 68%,
-    var(--section-bg-dark) 100%
-  );
-}
-
-body.light-mode .skills-section::before{
-  background:linear-gradient(
-    to bottom,
-    rgba(238,244,255,0) 0%,
-    rgba(238,244,255,.34) 34%,
-    rgba(238,244,255,.78) 70%,
-    var(--section-bg-light) 100%
-  );
+  display:none;
 }
 
 .skills-layout,
 .experience-grid,
 .projects,
 .profile-layout,
-.workflow-grid,
 .quality-layout{
   width:92%;
   margin-left:auto;
@@ -2252,7 +2082,6 @@ body.light-mode .skills-section::before{
 .experience-card,
 .project-card,
 .profile-card,
-.workflow-card,
 .quality-card,
 .quality-panel{
   background:
@@ -2285,7 +2114,6 @@ body.light-mode .skill-detail-card,
 body.light-mode .experience-card,
 body.light-mode .project-card,
 body.light-mode .profile-card,
-body.light-mode .workflow-card,
 body.light-mode .quality-card,
 body.light-mode .quality-panel{
   background:
@@ -2314,16 +2142,6 @@ body.light-mode .quality-panel{
     min-height:auto;
   }
 
-  .profile-side{
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    grid-template-rows:none;
-  }
-
-  .workflow-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    min-height:auto;
-  }
-
   .experience-grid,
   .projects{
     height:auto;
@@ -2336,15 +2154,12 @@ body.light-mode .quality-panel{
 
 @media(max-width:768px){
   .profile-section,
-  .workflow-section,
   .quality-section,
   .campaign-section{
     padding-top:52px;
     padding-bottom:76px;
   }
 
-  .profile-side,
-  .workflow-grid,
   .experience-grid,
   .projects{
     grid-template-columns:1fr;
@@ -2372,14 +2187,11 @@ body.light-mode .quality-panel{
 <body>
 
 <div class="background"></div>
-<div class="cursor-light"></div>
-<div class="custom-cursor"></div>
 <div class="scroll-progress-bar"></div>
 <nav class="portfolio-nav" aria-label="섹션 이동">
   <a href="#profile">PROFILE</a>
   <a href="#skills">SKILL</a>
   <a href="#experience">EXPERIENCE</a>
-  <a href="#workflow">WORKFLOW</a>
   <a href="#campaign">CAMPAIGN</a>
   <a href="#check">AGENCY FIT</a>
 </nav>
@@ -2441,13 +2253,13 @@ body.light-mode .quality-panel{
     <article class="profile-card">
       <div class="profile-kicker">POSITIONING</div>
       <h2 class="profile-title">
-        낯선 과제도 <span class="name-accent">현장</span>에서 빠르게 읽고,<br>
-        팀이 움직일 수 있게 정리합니다.
+        캠페인 흐름을 빠르게 익히고,<br>
+        필요한 자료를 차분하게 정리합니다.
       </h2>
       <p class="profile-copy">
-        교육 프로젝트와 인턴 경험을 통해 캠페인이 어떤 순서로 움직이는지 익혔습니다.
-        제안서를 작성하고, 자료를 모으고, 숫자와 피드백을 정리하며
-        <span class="name-accent">현장</span>에서 바로 보탤 수 있는 기본기를 갖춰가고 있습니다.
+        광고 교육 프로젝트와 인턴 경험을 통해 브리프 이해, 자료 조사, 제안서 구성,
+        캠페인 운영 보조, 리포트 정리까지 이어지는 흐름을 경험했습니다.
+        아직 배워가는 단계이지만, 맡은 내용을 정확히 확인하고 팀이 다시 보기 쉬운 형태로 남기는 데 강점이 있습니다.
       </p>
 
       <div class="profile-list">
@@ -2465,21 +2277,6 @@ body.light-mode .quality-panel{
         </div>
       </div>
     </article>
-
-    <div class="profile-side">
-      <article class="profile-card profile-mini">
-        <strong>01</strong>
-        <span>브랜드와 캠페인 배경을 먼저 찾아보고 핵심을 빠르게 정리합니다.</span>
-      </article>
-      <article class="profile-card profile-mini">
-        <strong>02</strong>
-        <span>제안서와 발표자료를 만들며 아이디어를 실행 흐름으로 구조화합니다.</span>
-      </article>
-      <article class="profile-card profile-mini">
-        <strong>03</strong>
-        <span>데이터와 피드백을 표와 문서로 남겨 다음 액션에 연결합니다.</span>
-      </article>
-    </div>
 
   </div>
 
@@ -2699,41 +2496,38 @@ body.light-mode .quality-panel{
 
     </div>
 
-  </div>
+    <!-- EDIT: 현재 재직 경험 카드 / 회사명, 기간, 직무, 하단 업무 태그 수정 -->
+    <div class="experience-card">
 
-</section>
+      <div class="exp-label">
+        Current Role
+      </div>
 
-<!-- WORKFLOW: 캠페인 업무 접근 방식 -->
-<section class="workflow-section" id="workflow">
+      <div class="exp-main">
+        <div class="exp-logo exp-logo-text">GB</div>
 
-  <h2 class="section-heading">
-    WORKFLOW
-  </h2>
+        <div class="exp-text">
+          <div class="exp-company">
+            <span class="exp-org">Growth B</span>
+            <span class="exp-period">2026.06 ~ 재직중</span>
+          </div>
 
-  <div class="workflow-grid">
-    <article class="workflow-card">
-      <div class="workflow-step">01</div>
-      <h3>Brief Reading</h3>
-      <p>광고주 과제, 브랜드 톤, 타깃, 경쟁/시장 자료를 확인해 캠페인 방향을 잡습니다.</p>
-    </article>
+          <div class="exp-role">
+            Performance AE
+          </div>
+        </div>
+      </div>
 
-    <article class="workflow-card">
-      <div class="workflow-step">02</div>
-      <h3>Campaign Planning</h3>
-      <p>캠페인 메시지, 콘텐츠 아이디어, 실행안을 제안서와 발표 흐름으로 정리합니다.</p>
-    </article>
+      <div class="exp-meta">
+        <span>퍼포먼스 캠페인 운영</span>
+        <span>매체 세팅 보조</span>
+        <span>성과 모니터링</span>
+        <span>데이터 리포팅</span>
+        <span>광고주 커뮤니케이션</span>
+      </div>
 
-    <article class="workflow-card">
-      <div class="workflow-step">03</div>
-      <h3>Production Follow-up</h3>
-      <p>제작 리스트, 일정, 수정사항, 업로드 링크를 확인하며 캠페인 진행을 보조합니다.</p>
-    </article>
+    </div>
 
-    <article class="workflow-card">
-      <div class="workflow-step">04</div>
-      <h3>Report & Feedback</h3>
-      <p>성과 수치와 피드백을 리포트로 정리하고 다음 제안/운영에 참고할 포인트를 남깁니다.</p>
-    </article>
   </div>
 
 </section>
@@ -2939,8 +2733,6 @@ body.light-mode .quality-panel{
 
 <script>
 
-const light = document.querySelector('.cursor-light');
-const cursor = document.querySelector('.custom-cursor');
 const keywordCloud = document.querySelector('.keyword-cloud');
 const heroCopy = document.querySelector('.hero-copy');
 
@@ -2974,14 +2766,6 @@ const activeTalentKeywords = new Set();
 let keywordIndex = 0;
 const recentKeywordPoints = [];
 
-window.addEventListener('mousemove',(e)=>{
-
-  light.style.left = e.clientX + 'px';
-  light.style.top = e.clientY + 'px';
-
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-});
 const modeToggle = document.querySelector('.mode-toggle');
 const contactToggle = document.querySelector('.contact-toggle');
 const contactPanel = document.querySelector('.contact-panel');
@@ -3330,7 +3114,6 @@ const revealTargets = [
   ...document.querySelectorAll('.skill-tab'),
   document.querySelector('.skill-detail'),
   ...document.querySelectorAll('.experience-card'),
-  ...document.querySelectorAll('.workflow-card'),
   ...document.querySelectorAll('.project-card'),
   document.querySelector('.quality-panel'),
   ...document.querySelectorAll('.quality-card')
