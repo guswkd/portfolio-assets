@@ -57,8 +57,8 @@ body.light-mode{
 
 body.light-mode .background{
   background:
-  linear-gradient(rgba(79,70,229,.08) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(79,70,229,.08) 1px, transparent 1px),
+  linear-gradient(rgba(79,70,229,.045) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(79,70,229,.045) 1px, transparent 1px),
   radial-gradient(circle at 14% 18%, rgba(56,189,248,.26), transparent 28%),
   radial-gradient(circle at 82% 22%, rgba(168,85,247,.22), transparent 32%),
   radial-gradient(circle at 52% 84%, rgba(45,212,191,.18), transparent 34%),
@@ -70,8 +70,8 @@ body.light-mode .background{
     var(--light-bg-5) 100%);
 
   background-size:
-    34px 34px,
-    34px 34px,
+    28px 28px,
+    28px 28px,
     auto,
     auto,
     auto,
@@ -541,8 +541,8 @@ body.light-mode .background::before{
 .hero-copy{
   --hero-cell:clamp(96px, 10vw, 154px);
   --hero-gap:20px;
-  --hero-line-dark:rgba(255,255,255,.58);
-  --hero-line-light:rgba(0,0,0,.72);
+  --hero-border:2px;
+  --hero-line:rgba(255,255,255,.58);
 
   position:relative;
   display:grid;
@@ -552,6 +552,7 @@ body.light-mode .background::before{
   row-gap:var(--hero-gap);
 
   width:calc(var(--hero-cell) * 3);
+  isolation:isolate;
 
   background:none;
   backdrop-filter:none;
@@ -562,11 +563,11 @@ body.light-mode .background::before{
 .hero-copy::after{
   content:'';
   position:absolute;
-  width:2px;
+  width:var(--hero-border);
   height:var(--hero-gap);
   top:var(--hero-cell);
-  background:var(--hero-line-dark);
-  box-shadow:0 calc(var(--hero-cell) + var(--hero-gap)) 0 var(--hero-line-dark);
+  background:var(--hero-line);
+  box-shadow:0 calc(var(--hero-cell) + var(--hero-gap)) 0 var(--hero-line);
   pointer-events:none;
   z-index:10;
 }
@@ -586,9 +587,9 @@ body.light-mode .background::before{
   align-items:center;
   justify-content:center;
 
-  border-top:2px solid rgba(255,255,255,.58);
-  border-bottom:2px solid rgba(255,255,255,.58);
-  border-left:2px solid rgba(255,255,255,.58);
+  border-top:var(--hero-border) solid var(--hero-line);
+  border-bottom:var(--hero-border) solid var(--hero-line);
+  border-left:var(--hero-border) solid var(--hero-line);
   border-right:none;
 
   font-size:clamp(54px,6.2vw,104px);
@@ -600,16 +601,8 @@ body.light-mode .background::before{
 }
 
 .hero-cell:nth-child(3n){
-  border-right:2px solid rgba(255,255,255,.58);
+  border-right:var(--hero-border) solid var(--hero-line);
 }
-
-.hero-cell:nth-child(-n+3),
-.hero-cell:nth-child(n+4):nth-child(-n+6),
-.hero-cell:nth-child(n+7){
-  border-top:2px solid rgba(255,255,255,.58);
-  border-bottom:2px solid rgba(255,255,255,.58);
-}
-
 
 body.light-mode .hero-cell{
   outline:none;
@@ -638,28 +631,25 @@ body.light-mode .hero-cell{
 .hero-cell:nth-child(9){ grid-column:3; grid-row:3; }
 
 
-body.light-mode .hero-copy,
-body.light-mode .hero-cell{
-  border-color:rgba(0,0,0,.32);
-}
-
 body.light-mode .hero-copy{
-  background:none;
+  --hero-line:rgba(17,24,39,.58);
   box-shadow:none;
 }
 
 body.light-mode .hero-copy::before,
 body.light-mode .hero-copy::after{
-  background:var(--hero-line-light);
-  box-shadow:0 calc(var(--hero-cell) + var(--hero-gap)) 0 var(--hero-line-light);
+  background:var(--hero-line);
+  box-shadow:0 calc(var(--hero-cell) + var(--hero-gap)) 0 var(--hero-line);
 }
 
 
 body.light-mode .hero-cell{
-  border-top-color:rgba(0,0,0,.72);
-  border-bottom-color:rgba(0,0,0,.72);
-  border-left-color:rgba(0,0,0,.72);
-  border-right-color:transparent;
+  border-color:var(--hero-line);
+  border-right:none;
+}
+
+body.light-mode .hero-cell:nth-child(3n){
+  border-right:var(--hero-border) solid var(--hero-line);
 }
 
 body.light-mode .hero-accent{
@@ -671,18 +661,6 @@ body.light-mode .hero-accent{
   -webkit-text-fill-color:transparent;
   text-shadow:none;
 }
-
-body.light-mode .hero-cell:nth-child(3n){
-  border-right-color:rgba(0,0,0,.72);
-}
-
-body.light-mode .hero-cell:nth-child(-n+3),
-body.light-mode .hero-cell:nth-child(n+4):nth-child(-n+6),
-body.light-mode .hero-cell:nth-child(n+7){
-  border-top-color:rgba(0,0,0,.72);
-  border-bottom-color:rgba(0,0,0,.72);
-}
-
 
 .hero-outline{
   color:transparent;
@@ -1127,9 +1105,9 @@ body.light-mode .experience-card{
 
 .exp-main{
   display:grid;
-  grid-template-columns:112px minmax(0,1fr);
+  grid-template-columns:124px minmax(0,1fr);
   align-items:center;
-  gap:16px;
+  gap:18px;
   width:100%;
   margin:10px 0 16px;
 }
@@ -1152,6 +1130,11 @@ body.light-mode .experience-card{
 .exp-logo[alt="NMG"]{
   width:104px;
   height:46px;
+}
+
+.exp-logo[alt="GB"]{
+  width:136px;
+  height:62px;
 }
 
 .exp-logo-text{
@@ -2442,7 +2425,7 @@ body.light-mode .quality-panel{
           </div>
 
           <div class="exp-role">
-            KODA ACADEMY 디지털 광고 마케터 양성 교육생 [조장]
+            2026 KODA ACADEMY 교육생 [조장]
           </div>
         </div>
 
@@ -2504,7 +2487,7 @@ body.light-mode .quality-panel{
       </div>
 
       <div class="exp-main">
-        <div class="exp-logo exp-logo-text">GB</div>
+        <img class="exp-logo theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/GB_Dark.png" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/GB_Dark.png" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/GB_Dark.png" alt="GB">
 
         <div class="exp-text">
           <div class="exp-company">
