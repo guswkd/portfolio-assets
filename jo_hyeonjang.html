@@ -131,7 +131,8 @@ body.light-mode .skill-tab:hover::after{
 }
 
 body.light-mode .hero-cell.hero-outline{
-  color:transparent;
+  color:rgba(17,24,39,.06);
+  -webkit-text-fill-color:rgba(17,24,39,.035);
   -webkit-text-stroke:1px rgba(17,24,39,.82);
 }
 
@@ -594,7 +595,7 @@ body.light-mode .background::before{
 
   font-size:clamp(54px,6.2vw,104px);
   line-height:1;
-  letter-spacing:.06em;
+  letter-spacing:0;
   font-weight:800;
 
   background:transparent;
@@ -663,8 +664,16 @@ body.light-mode .hero-accent{
 }
 
 .hero-outline{
-  color:transparent;
+  color:rgba(255,255,255,.08);
+  -webkit-text-fill-color:rgba(255,255,255,.035);
   -webkit-text-stroke:1px rgba(255,255,255,.8);
+  text-shadow:0 0 1px rgba(255,255,255,.16);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+}
+
+body.light-mode .hero-outline{
+  text-shadow:0 0 1px rgba(17,24,39,.12);
 }
 
 .scroll-indicator{
@@ -1072,7 +1081,7 @@ body.light-mode .skill-scale-labels span.active{
   gap:20px;
   width:100%;
   max-width:1320px;
-  height:clamp(300px, 38svh, 380px);
+  height:clamp(340px, 42svh, 430px);
   min-height:0;
   margin-top:18px;
   align-items:stretch;
@@ -1089,7 +1098,7 @@ body.light-mode .skill-scale-labels span.active{
   transition:.35s ease;
   display:flex;
   flex-direction:column;
-  justify-content:space-between;
+  justify-content:flex-start;
   height:100%;
 }
 
@@ -1106,10 +1115,11 @@ body.light-mode .experience-card{
 .exp-main{
   display:grid;
   grid-template-columns:124px minmax(0,1fr);
-  align-items:center;
+  align-items:start;
   gap:18px;
   width:100%;
-  margin:10px 0 16px;
+  height:112px;
+  margin:46px 0 18px;
 }
 
 
@@ -1118,8 +1128,10 @@ body.light-mode .experience-card{
   height:48px;
   display:block;
   object-fit:contain;
-  object-position:center center;
+  object-position:center top;
   margin:0 auto;
+  align-self:start;
+  transform:translateY(11px);
 }
 
 .exp-logo[alt="KODA"]{
@@ -1133,8 +1145,8 @@ body.light-mode .experience-card{
 }
 
 .exp-logo[alt="GB"]{
-  width:136px;
-  height:62px;
+  width:112px;
+  height:54px;
 }
 
 .exp-logo-text{
@@ -1156,11 +1168,12 @@ body.light-mode .experience-card{
 .exp-text{
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  justify-content:flex-start;
+  align-self:start;
   gap:7px;
   text-align:left;
   min-width:0;
-  padding-top:2px;
+  padding-top:0;
 }
 
 body.light-mode .exp-logo{
@@ -1241,14 +1254,17 @@ body.light-mode .exp-role{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
+  margin-top:0;
+  align-content:flex-start;
 }
 
 .exp-meta span{
-  padding:7px 10px;
+  padding:6px 10px;
   border-radius:999px;
   background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.08);
   font-size:11px;
+  line-height:1.2;
   color:rgba(255,255,255,.72);
 }
 
@@ -1860,7 +1876,7 @@ body.light-mode .project-modal-close{
 
   .hero-cell{
     font-size:56px;
-    letter-spacing:.04em;
+    letter-spacing:0;
   }
 
   .experience-grid{
@@ -2722,7 +2738,7 @@ const heroCopy = document.querySelector('.hero-copy');
 // EDIT: 첫 화면 배경 키워드 / 문구를 추가·삭제하려면 아래 따옴표 안 단어를 수정
 const talentKeywords = [
   '커뮤니케이션',
-  '기획 보조',
+  '소재 기획',
   '실행력',
   '데이터 정리',
   '꼼꼼함',
@@ -3126,8 +3142,8 @@ function spawnTalentKeyword(){
   const selectedKeyword = availableKeywords[keywordIndex % availableKeywords.length];
   const duration = window.innerWidth < 768 ? 9200 : 10800;
   const keywordSizeSteps = window.innerWidth < 768
-    ? [9,10,10,11,12]
-    : [10,11,12,13,14,15];
+    ? [9.9,11,11,12.1,13.2]
+    : [11,12.1,13.2,14.3,15.4,16.5];
   const keywordSize = keywordSizeSteps[keywordIndex % keywordSizeSteps.length];
   const keywordWeights = [300,400,500,400];
   const keywordColors = [
