@@ -4773,10 +4773,85 @@ portfolioNavLinks.forEach((link)=>{
 });
 
 // PROJECT MODAL: 캠페인 카드 클릭 시 팝업 열기/닫기
+let themeFadeFrame = null;
+let resumeThemeAfterPortfolioMedia = false;
+let themeVolumeBeforePortfolioMedia = .65;
+
+function pauseThemeForPortfolioMedia(){
+  if(!themeAudio || themeAudio.paused) return;
+
+  resumeThemeAfterPortfolioMedia = true;
+  themeVolumeBeforePortfolioMedia = themeAudio.volume;
+
+  if(themeFadeFrame){
+    cancelAnimationFrame(themeFadeFrame);
+  }
+
+  const startVolume = themeAudio.volume;
+  const fadeDuration = 650;
+  const fadeStartedAt = performance.now();
+
+  function fadeOutTheme(now){
+    const progress = Math.min((now - fadeStartedAt) / fadeDuration, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    themeAudio.volume = Math.max(0, startVolume * (1 - easedProgress));
+
+    if(progress < 1 && !themeAudio.paused){
+      themeFadeFrame = requestAnimationFrame(fadeOutTheme);
+      return;
+    }
+
+    themeAudio.pause();
+    themeAudio.volume = startVolume;
+    themeFadeFrame = null;
+  }
+
+  themeFadeFrame = requestAnimationFrame(fadeOutTheme);
+}
+
+function resumeThemeAfterClosingPortfolioMedia(){
+  if(!themeAudio || !resumeThemeAfterPortfolioMedia) return;
+
+  resumeThemeAfterPortfolioMedia = false;
+
+  if(themeFadeFrame){
+    cancelAnimationFrame(themeFadeFrame);
+    themeFadeFrame = null;
+  }
+
+  const targetVolume = themeVolumeBeforePortfolioMedia;
+  const fadeDuration = 650;
+  const fadeStartedAt = performance.now();
+  themeAudio.volume = 0;
+
+  themeAudio.play().then(()=>{
+    function fadeInTheme(now){
+      const progress = Math.min((now - fadeStartedAt) / fadeDuration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      themeAudio.volume = targetVolume * easedProgress;
+
+      if(progress < 1 && !themeAudio.paused){
+        themeFadeFrame = requestAnimationFrame(fadeInTheme);
+        return;
+      }
+
+      themeAudio.volume = targetVolume;
+      themeFadeFrame = null;
+    }
+
+    themeFadeFrame = requestAnimationFrame(fadeInTheme);
+  }).catch(()=>{
+    themeAudio.volume = targetVolume;
+    musicToggle.classList.add('needs-interaction');
+  });
+}
+
 function openProjectModal(card){
 
   const image = card.querySelector('img');
   const title = card.querySelector('.project-title');
+
+  pauseThemeForPortfolioMedia();
 
   projectModalImage.src = image ? image.src : '';
   projectModalImage.alt = title ? title.innerText : '캠페인 이미지';
@@ -4790,6 +4865,7 @@ function closeProjectModal(){
   projectModal.classList.remove('active');
   projectModal.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
+  resumeThemeAfterClosingPortfolioMedia();
 }
 
 projectCards.forEach(card=>{
@@ -4801,6 +4877,7 @@ projectCards.forEach(card=>{
 document.querySelectorAll('.project-view-button').forEach(button=>{
   button.addEventListener('click',(e)=>{
     e.stopPropagation();
+    pauseThemeForPortfolioMedia();
   });
 });
 
@@ -4956,16 +5033,24 @@ musicPanel.addEventListener('click',(event)=>{
   event.stopPropagation();
 });
 
-function startThemeOnFirstInteraction(){
+let themeAutoplayStarted = false;
+
+function startThemeOnFirstInteraction(event){
+  if(themeAutoplayStarted) return;
+
+  const mediaTarget = event.target.closest?.('.project-card, .project-modal');
+  if(mediaTarget) return;
+
+  themeAutoplayStarted = true;
   themeAudio.volume = .65;
   themeAudio.play().catch(()=>{
+    themeAutoplayStarted = false;
     musicToggle.classList.add('needs-interaction');
   });
 }
 
 document.addEventListener('pointerdown',startThemeOnFirstInteraction,{
-  capture:true,
-  once:true
+  capture:true
 });
 
 themeAudio.addEventListener('play',()=>{
