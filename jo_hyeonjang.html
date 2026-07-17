@@ -29,8 +29,8 @@
   --light-bg-4:#f3edff;
   --light-bg-5:#eefcf7;
 
-  --hero-accent-dark:linear-gradient(135deg,#22d3ee 0%,#a78bfa 48%,#f472b6 100%);
-  --hero-accent-light:linear-gradient(135deg,#0284c7 0%,#38bdf8 34%,#8b5cf6 66%,#14b8a6 100%);
+  --hero-accent-dark:linear-gradient(135deg,#5fb9f4 0%,#839cf7 38%,#a78bfa 68%,#c4a1ff 100%);
+  --hero-accent-light:linear-gradient(135deg,#168ac5 0%,#5574dc 38%,#806ee6 68%,#a765df 100%);
   --skill-graph-dark:linear-gradient(90deg,#22d3ee,#60a5fa,#7c3aed);
   --skill-graph-light:linear-gradient(90deg,#38bdf8,#8b5cf6,#2dd4bf);
   --section-bg-dark:#0a0f1d;
@@ -105,7 +105,6 @@ body.light-mode .skill-tab.active,
 body.light-mode .skill-tab:hover{
   background:rgba(255,255,255,.68);
   border:1px solid rgba(0,0,0,.14);
-  transform:translateY(-3px);
 }
 
 body.light-mode .skill-tab.active{
@@ -131,9 +130,9 @@ body.light-mode .skill-tab:hover::after{
 }
 
 body.light-mode .hero-cell.hero-outline{
-  color:rgba(17,24,39,.06);
-  -webkit-text-fill-color:rgba(17,24,39,.035);
-  -webkit-text-stroke:1px rgba(17,24,39,.82);
+  color:rgba(17,24,39,.72);
+  -webkit-text-fill-color:currentColor;
+  -webkit-text-stroke:0 transparent;
 }
 
 .mode-toggle{
@@ -159,12 +158,45 @@ body.light-mode .hero-cell.hero-outline{
   padding:0 0 2px;
 
   color:white;
-  font-size:34px;
-  line-height:0;
-  font-family:Georgia,'Times New Roman',serif;
   cursor:pointer;
 
   transition:.3s;
+}
+
+.theme-icon{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:25px;
+  height:25px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:
+    opacity .35s ease,
+    transform .45s cubic-bezier(.22,1,.36,1);
+}
+
+.theme-icon-sun{
+  opacity:0;
+  transform:translate(-50%,-50%) rotate(-70deg) scale(.55);
+}
+
+.theme-icon-moon{
+  opacity:1;
+  transform:translate(-50%,-50%) rotate(0deg) scale(1);
+}
+
+body.light-mode .theme-icon-sun{
+  opacity:1;
+  transform:translate(-50%,-50%) rotate(0deg) scale(1);
+}
+
+body.light-mode .theme-icon-moon{
+  opacity:0;
+  transform:translate(-50%,-50%) rotate(70deg) scale(.55);
 }
 
 .contact-toggle{
@@ -192,6 +224,160 @@ body.light-mode .hero-cell.hero-outline{
   cursor:pointer;
 
   transition:.3s;
+}
+
+.music-toggle{
+  position:fixed;
+  top:24px;
+  right:240px;
+  z-index:1000;
+  width:54px;
+  height:54px;
+  padding:0;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.08);
+  color:white;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:transform .3s ease, background .3s ease, border-color .3s ease;
+}
+
+.music-toggle:hover,
+.music-toggle[aria-expanded="true"]{
+  transform:scale(1.06);
+  border-color:rgba(167,139,250,.46);
+  background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(167,139,250,.22));
+}
+
+.music-toggle.needs-interaction{
+  animation:musicAttention 1.8s ease-in-out infinite;
+}
+
+@keyframes musicAttention{
+  0%,100%{ box-shadow:0 0 0 rgba(167,139,250,0); }
+  50%{ box-shadow:0 0 28px rgba(167,139,250,.42); }
+}
+
+.music-wave{
+  width:24px;
+  height:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+}
+
+.music-wave i{
+  width:2px;
+  height:7px;
+  border-radius:999px;
+  background:linear-gradient(to top,#67e8f9,#c4b5fd);
+  box-shadow:0 0 9px rgba(167,139,250,.56);
+  transition:height .28s ease;
+}
+
+.music-wave i:nth-child(2),
+.music-wave i:nth-child(4){
+  height:14px;
+}
+
+.music-wave i:nth-child(3){
+  height:20px;
+}
+
+.music-toggle.is-playing .music-wave i{
+  animation:musicPulse .9s ease-in-out infinite alternate;
+}
+
+.music-toggle.is-playing .music-wave i:nth-child(2){ animation-delay:-.35s; }
+.music-toggle.is-playing .music-wave i:nth-child(3){ animation-delay:-.65s; }
+.music-toggle.is-playing .music-wave i:nth-child(4){ animation-delay:-.2s; }
+.music-toggle.is-playing .music-wave i:nth-child(5){ animation-delay:-.5s; }
+
+@keyframes musicPulse{
+  from{ height:5px; opacity:.62; }
+  to{ height:20px; opacity:1; }
+}
+
+.music-panel{
+  position:fixed;
+  top:88px;
+  right:24px;
+  z-index:9996;
+  width:min(390px,calc(100vw - 32px));
+  padding:12px;
+  border-radius:24px;
+  background:rgba(10,15,29,.86);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 24px 70px rgba(0,0,0,.34),0 0 36px rgba(139,92,246,.16);
+  backdrop-filter:blur(24px) saturate(140%);
+  -webkit-backdrop-filter:blur(24px) saturate(140%);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-10px) scale(.97);
+  transform-origin:top right;
+  transition:opacity .28s ease,transform .28s ease,visibility .28s ease;
+}
+
+.music-panel.active{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
+}
+
+.music-track-meta{
+  padding:8px 8px 14px;
+}
+
+.music-track-meta span{
+  display:block;
+  margin-bottom:5px;
+  color:#a78bfa;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+
+.music-track-meta strong{
+  display:block;
+  font-size:17px;
+}
+
+.music-panel audio{
+  width:100%;
+  height:54px;
+  display:block;
+  border-radius:999px;
+  accent-color:#a78bfa;
+}
+
+.music-panel iframe{
+  width:100%;
+  height:196px;
+  display:block;
+  border:0;
+  border-radius:16px;
+  background:#050712;
+}
+
+.music-panel [hidden]{
+  display:none !important;
+}
+
+body.light-mode .music-toggle{
+  background:rgba(255,255,255,.7);
+  border-color:rgba(0,0,0,.08);
+}
+
+body.light-mode .music-panel{
+  background:rgba(255,255,255,.88);
+  border-color:rgba(79,70,229,.16);
+  box-shadow:0 24px 68px rgba(79,70,229,.16);
 }
 
 .portfolio-nav{
@@ -352,20 +538,53 @@ body.light-mode .mode-toggle{
   top:0;
   left:0;
 
-  width:0%;
-  height:4px;
+  width:100%;
+  height:3px;
+  transform:scaleX(0);
+  transform-origin:left center;
+  will-change:transform;
+  contain:layout paint;
+  pointer-events:none;
 
-  background:linear-gradient(90deg,#22d3ee,#60a5fa,#7c3aed);
+  background:linear-gradient(
+    90deg,
+    #2dd4bf 0%,
+    #22d3ee 22%,
+    #60a5fa 44%,
+    #a78bfa 68%,
+    #f472b6 86%,
+    #5eead4 100%
+  );
+  background-size:220% 100%;
+  border-radius:0 999px 999px 0;
 
   z-index:10000;
 
-  transition:width .08s linear;
-  box-shadow:0 0 22px rgba(96,165,250,.44);
+  box-shadow:
+    0 0 8px rgba(34,211,238,.7),
+    0 0 18px rgba(167,139,250,.42),
+    0 1px 6px rgba(244,114,182,.28);
+  animation:progressAurora 4.8s ease-in-out infinite alternate;
 }
 
 body.light-mode .scroll-progress-bar{
-  background:linear-gradient(90deg,#38bdf8,#8b5cf6,#2dd4bf);
-  box-shadow:0 0 24px rgba(139,92,246,.34);
+  background:linear-gradient(
+    90deg,
+    #0d9488 0%,
+    #0284c7 28%,
+    #6366f1 56%,
+    #a855f7 78%,
+    #ec4899 100%
+  );
+  background-size:220% 100%;
+  box-shadow:
+    0 0 7px rgba(14,165,233,.46),
+    0 0 16px rgba(139,92,246,.28);
+}
+
+@keyframes progressAurora{
+  from{ background-position:0% 50%; }
+  to{ background-position:100% 50%; }
 }
 
 .background{
@@ -509,7 +728,7 @@ body.light-mode .background::before{
     opacity:0;
     transform:translate(-50%, calc(-50% + 10px)) scale(.88);
   }
-  16%{
+  6%{
     opacity:var(--keyword-opacity,.56);
   }
   42%{
@@ -597,6 +816,7 @@ body.light-mode .background::before{
   line-height:1;
   letter-spacing:0;
   font-weight:800;
+  padding-top:.08em;
 
   background:transparent;
 }
@@ -615,10 +835,43 @@ body.light-mode .hero-cell{
   color:#67e8f9;
   /* EDIT: 메인 문구 '현장이' 다크모드 색 / :root의 --hero-accent-dark 수정 */
   background:var(--hero-accent-dark);
+  background-size:100% 100%;
+  background-position:center;
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
-  text-shadow:0 0 34px rgba(34,211,238,.34);
+  paint-order:stroke fill;
+  text-shadow:
+    0 0 2px rgba(255,255,255,.08),
+    0 0 18px rgba(99,153,246,.18);
+  isolation:isolate;
+}
+
+.hero-accent::before{
+  content:'';
+  position:absolute;
+  inset:13% 8%;
+  z-index:-1;
+  pointer-events:none;
+  border-radius:36%;
+  background:
+    radial-gradient(circle at 34% 44%, rgba(36,184,238,.34), transparent 48%),
+    radial-gradient(circle at 72% 58%, rgba(196,160,255,.44), transparent 56%);
+  filter:blur(18px);
+  opacity:.62;
+  transform:scale(1.08);
+  animation:heroAuraPulse 4.2s ease-in-out infinite;
+}
+
+@keyframes heroAuraPulse{
+  0%,100%{
+    opacity:.5;
+    transform:scale(1.02);
+  }
+  50%{
+    opacity:.72;
+    transform:scale(1.12);
+  }
 }
 
 .hero-cell:nth-child(1){ grid-column:1; grid-row:1; }
@@ -657,68 +910,158 @@ body.light-mode .hero-accent{
   color:#0ea5e9;
   /* EDIT: 메인 문구 '현장이' 라이트모드 색 / :root의 --hero-accent-light 수정 */
   background:var(--hero-accent-light);
+  background-size:100% 100%;
+  background-position:center;
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
-  text-shadow:none;
+  paint-order:stroke fill;
+  text-shadow:0 0 14px rgba(79,70,229,.1);
+}
+
+body.light-mode .hero-accent::before{
+  background:
+    radial-gradient(circle at 34% 44%, rgba(14,165,233,.2), transparent 48%),
+    radial-gradient(circle at 72% 58%, rgba(139,92,246,.26), transparent 56%);
+  opacity:.42;
+}
+
+.field-keyword{
+  display:inline-block;
+  color:#67e8f9;
+  background:var(--hero-accent-dark);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:
+    0 0 12px rgba(34,211,238,.3),
+    0 0 24px rgba(167,139,250,.22);
+}
+
+body.light-mode .field-keyword{
+  color:#0ea5e9;
+  background:var(--hero-accent-light);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:
+    0 0 10px rgba(14,165,233,.16),
+    0 0 20px rgba(139,92,246,.12);
 }
 
 .hero-outline{
-  color:rgba(255,255,255,.08);
-  -webkit-text-fill-color:rgba(255,255,255,.035);
-  -webkit-text-stroke:1px rgba(255,255,255,.8);
-  text-shadow:0 0 1px rgba(255,255,255,.16);
+  color:rgba(255,255,255,.72);
+  -webkit-text-fill-color:currentColor;
+  -webkit-text-stroke:0 transparent;
+  text-shadow:none;
   -webkit-font-smoothing:antialiased;
   text-rendering:geometricPrecision;
 }
 
 body.light-mode .hero-outline{
-  text-shadow:0 0 1px rgba(17,24,39,.12);
+  color:rgba(17,24,39,.72);
+  text-shadow:none;
 }
 
 .scroll-indicator{
   position:absolute;
-  bottom:34px;
+  bottom:28px;
   left:50%;
   transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:auto;
+  z-index:3;
+}
 
+.cta-arrow-option{
+  width:58px;
+  min-width:0;
+  height:54px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:8px;
-
-  opacity:1;
-
-  pointer-events:none;
+  justify-content:center;
+  gap:3px;
+  border-radius:16px;
+  color:rgba(226,232,240,.76);
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 0 14px rgba(96,165,250,.05);
+  animation:ctaOptionFloat 2.8s ease-in-out infinite;
+  animation-delay:calc(var(--option-index) * -110ms);
 }
 
-.scroll-arrow{
-  font-size:24px;
-  color:rgba(255,255,255,.85);
-  animation:bounce 2.4s cubic-bezier(.4,0,.2,1) infinite;
+.cta-arrow-option:nth-child(3n+1){ color:#67e8f9; }
+.cta-arrow-option:nth-child(3n+2){ color:#a5b4fc; }
+.cta-arrow-option:nth-child(3n){ color:#c4a1ff; }
+
+.cta-arrow-option svg{
+  width:25px;
+  height:25px;
+  overflow:visible;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 6px currentColor);
 }
 
-.scroll-line{
-  width:1px;
-  height:34px;
-  background:rgba(255,255,255,.3);
+.cta-arrow-option span{
+  color:rgba(255,255,255,.42);
+  font-size:8px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.06em;
 }
 
-body.light-mode .scroll-arrow{
-  color:rgba(0,0,0,.6);
+body.light-mode .cta-arrow-option{
+  background:rgba(255,255,255,.38);
+  border-color:rgba(99,102,241,.1);
+  box-shadow:
+    0 0 14px rgba(56,189,248,.09),
+    0 0 22px rgba(167,139,250,.07);
 }
 
-body.light-mode .scroll-line{
-  background:rgba(0,0,0,.2);
+body.light-mode .cta-arrow-option span{
+  color:rgba(17,24,39,.4);
 }
 
-@keyframes bounce{
+.cta-arrow-option.is-selected{
+  width:46px;
+  height:58px;
+  padding:0;
+  color:#a5b4fc;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
+
+.cta-arrow-option.is-selected svg{
+  width:34px;
+  height:42px;
+  stroke-width:1.45;
+  filter:
+    drop-shadow(0 0 5px rgba(103,232,249,.55))
+    drop-shadow(0 0 10px rgba(196,161,255,.42));
+}
+
+body.light-mode .cta-arrow-option.is-selected{
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  color:#6366f1;
+}
+
+@keyframes ctaOptionFloat{
   0%,100%{
     transform:translateY(0);
   }
-
   50%{
-    transform:translateY(8px);
+    transform:translateY(4px);
   }
 }
 
@@ -737,31 +1080,27 @@ body.light-mode .scroll-line{
 
 
 .skills-layout{
-  --skill-sidebar-width:396px;
-  --skill-sidebar-safe-padding:18px;
-  --skill-gap:12px;
-  --skill-tab-size:calc((var(--skill-sidebar-width) - (var(--skill-sidebar-safe-padding) * 2) - (var(--skill-gap) * 2)) / 3);
-  --skill-panel-height:calc((var(--skill-tab-size) * 4) + (var(--skill-gap) * 3));
+  --skill-sidebar-width:min(50vw, 520px);
+  --skill-panel-height:620px;
+  --skill-tab-size:94px;
 
   display:grid;
   grid-template-columns:var(--skill-sidebar-width) minmax(0,1fr);
-  gap:32px;
+  gap:34px;
   height:var(--skill-panel-height);
+  margin-top:72px;
   min-height:0;
   align-items:stretch;
   overflow:visible;
+  border-radius:36px;
 }
 
 .skills-sidebar{
   width:var(--skill-sidebar-width);
-  height:calc(var(--skill-panel-height) + (var(--skill-sidebar-safe-padding) * 2));
-  display:grid;
-  grid-template-columns:repeat(3,var(--skill-tab-size));
-  grid-template-rows:repeat(4,var(--skill-tab-size));
-  gap:var(--skill-gap);
-  padding:var(--skill-sidebar-safe-padding);
-  margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
+  height:100%;
+  position:relative;
   overflow:visible;
+  isolation:isolate;
 }
 
 .skill-tab{
@@ -781,34 +1120,13 @@ body.light-mode .scroll-line{
   padding:12px;
   transition:.28s ease;
   cursor:pointer;
+  z-index:3;
 }
 
+/* 턴테이블 좌표가 계산되기 전 중앙에 로고가 모여 보이는 현상 방지 */
 .skill-tab::before,
 .skill-tab::after{
-  content:'';
-  position:absolute;
-  width:30px;
-  height:30px;
-  pointer-events:none;
-  opacity:.58;
-  transition:.28s ease;
-  z-index:2;
-}
-
-.skill-tab::before{
-  top:9px;
-  left:9px;
-  border-top:4px solid rgba(255,255,255,.5);
-  border-left:4px solid rgba(255,255,255,.5);
-  border-radius:12px 0 0 0;
-}
-
-.skill-tab::after{
-  right:9px;
-  bottom:9px;
-  border-right:4px solid rgba(255,255,255,.5);
-  border-bottom:4px solid rgba(255,255,255,.5);
-  border-radius:0 0 12px 0;
+  display:none;
 }
 
 .skill-tab img{
@@ -860,7 +1178,6 @@ body.light-mode .skill-logo-fallback{
 
 .skill-tab.active,
 .skill-tab:hover{
-  transform:scale(1.07) !important;
   border:1px solid rgba(255,255,255,.18);
   background:rgba(255,255,255,.07);
 }
@@ -873,6 +1190,7 @@ body.light-mode .skill-logo-fallback{
   box-shadow:
     0 0 34px rgba(96,165,250,.28),
     inset 0 0 0 1px rgba(255,255,255,.08);
+  z-index:5;
 }
 
 .skill-tab.active::before,
@@ -1797,12 +2115,26 @@ body.light-mode .project-modal-close{
   transform:translateY(0);
 }
 
+.skill-tab.reveal-item,
+.skill-tab.reveal-item.is-visible{
+  transform:translate(-50%,-50%);
+}
+
 .skill-tab.reveal-item.is-visible.active,
 .skill-tab.reveal-item.is-visible:hover{
-  transform:scale(1.07) !important;
+  filter:brightness(1.12);
 }
 
 @media(prefers-reduced-motion:reduce){
+  .theme-icon{
+    transition:none;
+  }
+  .scroll-progress-bar{
+    animation:none;
+  }
+  .hero-accent::before{
+    animation:none;
+  }
   .reveal-item{
     opacity:1;
     transform:none;
@@ -1822,25 +2154,34 @@ body.light-mode .project-modal-close{
 
   .skills-layout{
     --skill-sidebar-width:100%;
-    --skill-sidebar-safe-padding:18px;
     --skill-panel-height:auto;
+    --skill-tab-size:78px;
     grid-template-columns:1fr;
     height:auto;
     align-items:stretch;
+    overflow:visible;
   }
 
   .skills-sidebar{
     width:100%;
-    height:auto;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    grid-template-rows:auto;
-    padding:var(--skill-sidebar-safe-padding);
-    margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
+    height:560px;
   }
 
 }
 
 @media(max-width:768px){
+
+  .music-toggle{
+    top:84px;
+    right:16px;
+    width:48px;
+    height:48px;
+  }
+
+  .music-panel{
+    top:140px;
+    right:16px;
+  }
 
   .portfolio-nav{
     left:16px;
@@ -1886,8 +2227,8 @@ body.light-mode .project-modal-close{
 
   .skills-layout{
     --skill-sidebar-width:100%;
-    --skill-sidebar-safe-padding:18px;
     --skill-panel-height:auto;
+    --skill-tab-size:60px;
     grid-template-columns:1fr;
     height:auto;
     align-items:stretch;
@@ -1895,11 +2236,7 @@ body.light-mode .project-modal-close{
 
   .skills-sidebar{
     width:100%;
-    height:auto;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    grid-template-rows:auto;
-    padding:var(--skill-sidebar-safe-padding);
-    margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
+    height:440px;
   }
 
   .skill-tab{
@@ -2134,49 +2471,1024 @@ body.light-mode .quality-panel{
   border-color:rgba(125,211,252,.38);
 }
 
+.skills-sidebar .skill-tab{
+  border-radius:50%;
+  background:rgba(8,13,28,.68);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.24),
+    inset 0 -10px 22px rgba(0,0,0,.18),
+    0 18px 40px rgba(0,0,0,.26);
+}
+
+.skills-sidebar .skill-tab.active{
+  background:
+    radial-gradient(circle at 32% 22%, rgba(255,255,255,.24), transparent 42%),
+    linear-gradient(135deg, rgba(34,211,238,.26), rgba(124,58,237,.22));
+  border-color:rgba(125,211,252,.56);
+}
+
+body.light-mode .skills-sidebar .skill-tab{
+  background:rgba(255,255,255,.78);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.8),
+    inset 0 -10px 22px rgba(14,23,42,.08),
+    0 18px 42px rgba(79,70,229,.12);
+}
+
+/* ATTACHMENT RESTORE: original skill-tab layout */
+.skills-layout{
+  --skill-sidebar-width:396px;
+  --skill-sidebar-safe-padding:18px;
+  --skill-gap:12px;
+  --skill-tab-size:calc((var(--skill-sidebar-width) - (var(--skill-sidebar-safe-padding) * 2) - (var(--skill-gap) * 2)) / 3);
+  --skill-panel-height:calc((var(--skill-tab-size) * 4) + (var(--skill-gap) * 3));
+  display:grid;
+  grid-template-columns:var(--skill-sidebar-width) minmax(0,1fr);
+  gap:32px;
+  height:var(--skill-panel-height);
+  margin-top:0;
+  min-height:0;
+  align-items:stretch;
+  overflow:visible;
+}
+
+.skills-sidebar,
+body.light-mode .skills-sidebar{
+  width:var(--skill-sidebar-width);
+  height:calc(var(--skill-panel-height) + (var(--skill-sidebar-safe-padding) * 2));
+  display:grid;
+  grid-template-columns:repeat(3,var(--skill-tab-size));
+  grid-template-rows:repeat(4,var(--skill-tab-size));
+  gap:var(--skill-gap);
+  padding:var(--skill-sidebar-safe-padding);
+  margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
+  overflow:visible;
+  border:0;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
+  backdrop-filter:none;
+}
+
+.skills-sidebar::before,
+.skills-sidebar::after{
+  display:none;
+}
+
+.skills-sidebar .skill-tab{
+  width:100%;
+  height:100%;
+  aspect-ratio:1/1;
+  min-height:auto;
+  position:relative;
+  left:auto;
+  top:auto;
+  overflow:visible;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+  transform:none;
+  opacity:1;
+  visibility:visible;
+  transition:.28s ease;
+  cursor:pointer;
+  z-index:auto;
+}
+
+.skill-tab::before,
+.skill-tab::after{
+  content:'';
+  display:block;
+  position:absolute;
+  width:30px;
+  height:30px;
+  pointer-events:none;
+  opacity:.58;
+  transition:.28s ease;
+  z-index:2;
+}
+
+.skill-tab::before{
+  top:9px;
+  left:9px;
+  border-top:4px solid rgba(255,255,255,.5);
+  border-left:4px solid rgba(255,255,255,.5);
+  border-right:0;
+  border-bottom:0;
+  border-radius:12px 0 0 0;
+}
+
+.skill-tab::after{
+  right:9px;
+  bottom:9px;
+  border-right:4px solid rgba(255,255,255,.5);
+  border-bottom:4px solid rgba(255,255,255,.5);
+  border-left:0;
+  border-top:0;
+  border-radius:0 0 12px 0;
+}
+
+.skills-sidebar .skill-tab img{
+  width:58px;
+  height:58px;
+}
+
+.skill-tab.active,
+.skill-tab:hover,
+.skills-sidebar .skill-tab.active,
+.skills-sidebar .skill-tab:hover{
+  transform:scale(1.07) !important;
+}
+
+.skill-tab.active::before,
+.skill-tab.active::after,
+.skill-tab:hover::before,
+.skill-tab:hover::after{
+  width:38px;
+  height:38px;
+  opacity:1;
+  border-color:rgba(96,165,250,.72);
+}
+
+.skill-tab.reveal-item{
+  transform:translateY(34px) !important;
+}
+
+.skill-tab.reveal-item.is-visible{
+  transform:translateY(0) !important;
+}
+
+.skill-tab.reveal-item.is-visible.active,
+.skill-tab.reveal-item.is-visible:hover{
+  transform:scale(1.07) !important;
+}
+
 @media(max-width:1100px){
-  .profile-layout,
-  .quality-layout{
+  .skills-layout{
+    --skill-sidebar-width:100%;
+    --skill-sidebar-safe-padding:18px;
+    --skill-panel-height:auto;
     grid-template-columns:1fr;
-    min-height:auto;
-  }
-
-  .experience-grid,
-  .projects{
     height:auto;
+    align-items:stretch;
   }
 
-  .projects{
-    grid-template-columns:repeat(2,1fr);
+  .skills-sidebar,
+  body.light-mode .skills-sidebar{
+    width:100%;
+    height:auto;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-rows:auto;
+    padding:var(--skill-sidebar-safe-padding);
+    margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
   }
 }
 
 @media(max-width:768px){
-  .profile-section,
-  .quality-section,
-  .campaign-section{
-    padding-top:52px;
-    padding-bottom:76px;
+  .skills-sidebar,
+  body.light-mode .skills-sidebar{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
-  .experience-grid,
-  .projects{
-    grid-template-columns:1fr;
+  .skills-sidebar .skill-tab{
+    min-height:auto;
+    padding:12px;
+  }
+}
+
+/* ALIGNMENT PASS: section and text grid normalization */
+.section-heading,
+.skills-layout,
+.experience-grid,
+.projects,
+.profile-layout,
+.quality-layout,
+.campaign-filter{
+  width:min(1320px,92%);
+}
+
+.section-heading{
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:28px;
+  line-height:.94;
+}
+
+.profile-layout{
+  max-width:1080px;
+}
+
+.profile-card{
+  padding:36px;
+}
+
+.profile-kicker,
+.quality-kicker,
+.exp-label{
+  width:max-content;
+  max-width:100%;
+  min-height:30px;
+  margin-left:0;
+  margin-right:0;
+  text-align:center;
+}
+
+.profile-title,
+.profile-copy,
+.profile-list-item strong,
+.profile-list-item span,
+.skill-detail-title,
+.skill-detail-sub,
+.skill-detail-card h4,
+.skill-detail-card p,
+.exp-org,
+.exp-period,
+.exp-role,
+.project-title,
+.quality-panel h3,
+.quality-panel p,
+.quality-card strong,
+.quality-card span{
+  text-align:left;
+}
+
+.profile-list{
+  gap:0;
+}
+
+.profile-list-item{
+  grid-template-columns:120px minmax(0,1fr);
+  align-items:start;
+  min-height:58px;
+  padding:16px 0 14px;
+}
+
+.profile-list-item strong{
+  line-height:1.55;
+}
+
+.skills-layout{
+  align-items:stretch;
+}
+
+.skill-detail-top{
+  padding-top:28px;
+}
+
+.skill-detail-title{
+  line-height:1.05;
+}
+
+.skill-detail-sub{
+  max-width:760px;
+  min-height:50px;
+}
+
+.skill-detail-grid{
+  align-items:stretch;
+}
+
+.skill-detail-card{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  min-height:112px;
+}
+
+.skill-detail-card h4{
+  min-height:19px;
+  line-height:1.5;
+}
+
+.experience-grid{
+  align-items:stretch;
+}
+
+.experience-card{
+  display:grid;
+  grid-template-rows:auto 138px minmax(0,1fr);
+  align-content:stretch;
+  padding:24px;
+}
+
+.experience-card .exp-label{
+  align-self:start;
+  margin-bottom:0;
+}
+
+.exp-main{
+  grid-template-columns:116px minmax(0,1fr);
+  align-items:center;
+  gap:18px;
+  width:100%;
+  height:auto;
+  margin:0;
+}
+
+.exp-logo,
+.exp-logo[alt="KODA"],
+.exp-logo[alt="NMG"],
+.exp-logo[alt="GB"]{
+  width:104px;
+  height:54px;
+  margin:0 auto;
+  align-self:center;
+  object-position:center;
+  transform:none;
+}
+
+.exp-text{
+  align-self:center;
+  display:grid;
+  grid-template-rows:72px 22px;
+  justify-content:stretch;
+  gap:6px;
+  padding:0;
+}
+
+.exp-company{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:flex-start;
+  width:100%;
+  min-height:72px;
+}
+
+.exp-org{
+  display:flex;
+  align-items:flex-end;
+  width:100%;
+  height:48px;
+  flex:0 0 48px;
+  margin-bottom:0;
+  line-height:1.25;
+}
+
+.exp-period{
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  align-self:flex-start;
+  width:100%;
+  min-height:20px;
+  margin:0;
+  line-height:1.4;
+  text-align:left;
+}
+
+.exp-role{
+  display:block;
+  width:auto;
+  min-height:22px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:none;
+  color:rgba(255,255,255,.7);
+  font-size:14px;
+  font-weight:400;
+  line-height:1.45;
+}
+
+.exp-meta{
+  display:flex;
+  flex-wrap:wrap;
+  align-self:start;
+  align-content:flex-start;
+  width:100%;
+  gap:8px;
+  margin-top:0;
+}
+
+.exp-meta span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-start;
+  width:auto;
+  min-height:28px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:11px;
+  line-height:1.2;
+  text-align:left;
+}
+
+body.light-mode .exp-role{
+  background:none;
+  border:0;
+  color:rgba(0,0,0,.6);
+}
+
+body.light-mode .exp-meta span{
+  background:rgba(0,0,0,.04);
+  border-color:rgba(0,0,0,.06);
+}
+
+.projects{
+  align-items:stretch;
+}
+
+.project-info{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  min-height:124px;
+}
+
+.project-title{
+  display:flex;
+  align-items:flex-end;
+  min-height:48px;
+  line-height:1.2;
+}
+
+.project-actions{
+  min-height:34px;
+  align-items:center;
+}
+
+.project-view-button,
+.project-label{
+  white-space:nowrap;
+}
+
+.quality-layout{
+  align-items:stretch;
+}
+
+.quality-panel{
+  padding:36px;
+}
+
+.quality-list{
+  grid-template-rows:repeat(4,minmax(0,1fr));
+}
+
+.quality-card{
+  grid-template-columns:34px minmax(0,1fr);
+  align-items:center;
+  padding:20px 22px;
+}
+
+.quality-card strong{
+  line-height:1.35;
+}
+
+@media(max-width:1100px){
+  .experience-card{
+    grid-template-rows:auto 128px minmax(0,1fr);
+  }
+
+  .project-title{
+    min-height:24px;
+  }
+}
+
+@media(max-width:768px){
+  .section-heading{
+    margin-bottom:22px;
+    line-height:1;
   }
 
   .profile-card,
+  .skill-detail,
   .quality-panel{
-    padding:28px;
+    padding:26px;
   }
 
   .profile-list-item{
     grid-template-columns:1fr;
-    gap:8px;
+    min-height:0;
+    gap:6px;
   }
 
-  .quality-layout,
-  .quality-list{
-    min-height:auto;
+  .skill-detail-sub{
+    min-height:0;
+  }
+
+  .experience-card{
+    grid-template-rows:auto auto auto;
+  }
+
+  .exp-main{
+    grid-template-columns:92px minmax(0,1fr);
+    min-height:128px;
+  }
+
+  .exp-logo,
+  .exp-logo[alt="KODA"],
+  .exp-logo[alt="NMG"],
+  .exp-logo[alt="GB"]{
+    width:82px;
+    height:48px;
+  }
+
+  .exp-company{
+    min-height:72px;
+  }
+
+  .project-info{
+    min-height:116px;
+  }
+}
+
+/* IMC NARRATIVE: portfolio-wide structure */
+.hero-imc-line{
+  position:absolute;
+  left:50%;
+  bottom:96px;
+  z-index:2;
+  width:min(620px,82%);
+  transform:translateX(-50%);
+  color:rgba(255,255,255,.66);
+  font-size:14px;
+  font-weight:500;
+  line-height:1.6;
+  letter-spacing:.02em;
+  text-align:center;
+}
+
+body.light-mode .hero-imc-line{
+  color:rgba(17,24,39,.62);
+}
+
+.imc-section{
+  position:relative;
+  width:100%;
+  padding:86px 0 92px;
+  scroll-margin-top:0;
+  overflow:hidden;
+  background:var(--section-bg-dark);
+}
+
+body.light-mode .imc-section{
+  background:var(--section-bg-light);
+}
+
+.imc-heading,
+.imc-flow{
+  width:min(1320px,92%);
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.imc-heading{
+  display:grid;
+  width:92%;
+  max-width:1680px;
+  grid-template-columns:minmax(0,1fr) 220px;
+  column-gap:24px;
+  align-items:end;
+}
+
+.imc-kicker{
+  grid-column:1 / -1;
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  min-height:30px;
+  margin-bottom:20px;
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid rgba(125,211,252,.2);
+  background:rgba(255,255,255,.055);
+  color:#7dd3fc;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+
+.imc-heading h2{
+  font-size:clamp(28px,4.15vw,60px);
+  line-height:1.02;
+  letter-spacing:-4px;
+}
+
+.imc-heading > p{
+  max-width:520px;
+  padding-bottom:6px;
+  color:rgba(255,255,255,.66);
+  font-size:16px;
+  line-height:1.75;
+}
+
+.imc-flow{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:12px;
+  margin-top:54px;
+}
+
+.imc-flow::before{
+  content:'';
+  position:absolute;
+  top:29px;
+  left:4%;
+  right:4%;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    rgba(34,211,238,.2),
+    rgba(96,165,250,.62),
+    rgba(167,139,250,.62),
+    rgba(244,114,182,.28)
+  );
+  box-shadow:0 0 18px rgba(96,165,250,.24);
+}
+
+.imc-step{
+  position:relative;
+  z-index:1;
+  min-height:232px;
+  padding:20px 15px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.1);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(96,165,250,.12), transparent 42%),
+    rgba(255,255,255,.035);
+  backdrop-filter:blur(18px);
+  transition:transform .3s ease, border-color .3s ease, background .3s ease;
+}
+
+.imc-step:first-child,
+.imc-step:last-child{
+  border-color:rgba(125,211,252,.26);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(34,211,238,.2), transparent 48%),
+    rgba(255,255,255,.045);
+}
+
+.imc-step:hover{
+  transform:translateY(-6px);
+  border-color:rgba(125,211,252,.3);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(167,139,250,.18), transparent 48%),
+    rgba(255,255,255,.055);
+}
+
+.imc-step-number{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:20px;
+  margin:0 auto 28px;
+  border-radius:999px;
+  background:var(--section-bg-dark);
+  color:rgba(125,211,252,.7);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.imc-step strong{
+  display:block;
+  margin-bottom:12px;
+  font-size:15px;
+  letter-spacing:.06em;
+  text-align:center;
+}
+
+.imc-step p{
+  color:rgba(255,255,255,.58);
+  font-size:12px;
+  line-height:1.65;
+  text-align:center;
+}
+
+.imc-title-line{
+  display:block;
+  white-space:nowrap;
+}
+
+.section-intro{
+  width:min(1320px,92%);
+  margin:-12px auto 30px;
+  color:rgba(255,255,255,.58);
+  font-size:15px;
+  line-height:1.7;
+}
+
+.imc-signal{
+  position:fixed;
+  top:50%;
+  right:14px;
+  z-index:900;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:9px;
+  transform:translateY(-50%);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .35s ease;
+}
+
+.imc-signal.visible{
+  opacity:.82;
+}
+
+.imc-signal-label{
+  color:rgba(255,255,255,.44);
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.16em;
+  writing-mode:vertical-rl;
+}
+
+.imc-signal-track{
+  position:relative;
+  width:2px;
+  height:126px;
+  overflow:hidden;
+  border-radius:999px;
+  background:rgba(255,255,255,.1);
+}
+
+.imc-signal-track i{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:var(--imc-progress,0%);
+  border-radius:inherit;
+  background:linear-gradient(to bottom,#22d3ee,#818cf8,#c4a1ff);
+  box-shadow:0 0 12px rgba(129,140,248,.7);
+  transition:height .35s ease;
+}
+
+.imc-signal-stage{
+  max-width:62px;
+  color:#a5b4fc;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.08em;
+  writing-mode:vertical-rl;
+}
+
+body.light-mode .imc-kicker,
+body.light-mode .imc-step{
+  border-color:rgba(14,165,233,.16);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(56,189,248,.14), transparent 44%),
+    rgba(255,255,255,.4);
+}
+
+body.light-mode .imc-heading > p,
+body.light-mode .imc-step p,
+body.light-mode .section-intro{
+  color:rgba(17,24,39,.62);
+}
+
+body.light-mode .imc-step-number{
+  background:var(--section-bg-light);
+  color:#2563eb;
+}
+
+body.light-mode .imc-signal-label{
+  color:rgba(17,24,39,.4);
+}
+
+@media(max-width:1100px){
+  .imc-heading{
+    grid-template-columns:1fr;
+    gap:22px;
+  }
+
+  .imc-heading > p{
+    max-width:720px;
+  }
+
+  .imc-flow{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+  .imc-flow::before{
+    display:none;
+  }
+
+  .imc-step{
+    min-height:180px;
+  }
+}
+
+@media(max-width:768px){
+  .hero-imc-line{
+    bottom:90px;
+    font-size:12px;
+  }
+
+  .imc-section{
+    padding:64px 0 72px;
+  }
+
+  .imc-heading h2{
+    letter-spacing:-2px;
+  }
+
+  .imc-flow{
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:36px;
+  }
+
+  .imc-step{
+    display:grid;
+    grid-template-columns:42px minmax(0,1fr);
+    min-height:0;
+    padding:18px;
+  }
+
+  .imc-step-number{
+    grid-row:1 / 3;
+    margin:0;
+  }
+
+  .imc-step strong,
+  .imc-step p{
+    text-align:left;
+  }
+
+  .imc-step strong{
+    margin-bottom:5px;
+  }
+
+  .imc-signal{
+    display:none;
+  }
+
+  .section-intro{
+    margin-top:-8px;
+    margin-bottom:24px;
+    font-size:13px;
+  }
+}
+
+[data-chapter]{
+  position:relative;
+}
+
+.hero-copy.hero-grid-sequence .hero-cell > span{
+  display:block;
+}
+
+.hero-copy.hero-grid-sequence .hero-cell:nth-child(-n+3) > span,
+.hero-copy.hero-grid-sequence .hero-cell:nth-child(n+7) > span{
+  opacity:0;
+  transform:translateY(30px);
+  filter:blur(8px);
+  animation:heroRowReveal 1.8s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.hero-copy.hero-grid-sequence .hero-cell:nth-child(-n+3) > span{
+  animation-delay:1s;
+}
+
+.hero-copy.hero-grid-sequence .hero-cell:nth-child(n+7) > span{
+  animation-delay:1.75s;
+}
+
+@keyframes heroRowReveal{
+  0%{
+    opacity:0;
+    transform:translateY(30px);
+    filter:blur(8px);
+  }
+  62%{
+    opacity:1;
+    filter:blur(0);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-copy.hero-grid-sequence .hero-cell > span{
+    opacity:1;
+    transform:none;
+    filter:none;
+    animation:none;
+  }
+}
+
+[data-chapter] > .section-heading::before{
+  display:block;
+  margin-bottom:12px;
+  color:#7dd3fc;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+
+.profile-section > .section-heading::before{ content:'01 · BRIEF'; }
+.campaign-section > .section-heading::before{ content:'03 · EXECUTION'; }
+.experience-section > .section-heading::before{ content:'04 · TRACK RECORD'; }
+.skills-section > .section-heading::before{ content:'05 · TOOLKIT'; }
+.quality-section > .section-heading::before{ content:'06 · SUMMARY'; }
+
+body.light-mode [data-chapter] > .section-heading::before{
+  color:#6366f1;
+}
+
+.imc-section[data-chapter] .imc-heading::before{
+  content:'02 · STRATEGY';
+  display:block;
+  margin-bottom:18px;
+  color:#7dd3fc;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+
+body.light-mode .imc-section[data-chapter] .imc-heading::before{
+  color:#6366f1;
+}
+
+/* 라이트 모드에도 은은한 청록·라벤더 네온 무드를 유지합니다. */
+body.light-mode .profile-section,
+body.light-mode .skills-section,
+body.light-mode .experience-section,
+body.light-mode .campaign-section,
+body.light-mode .quality-section,
+body.light-mode .imc-section{
+  background:
+    radial-gradient(circle at 10% 18%, rgba(34,211,238,.1), transparent 28%),
+    radial-gradient(circle at 88% 20%, rgba(167,139,250,.11), transparent 30%),
+    radial-gradient(circle at 52% 88%, rgba(45,212,191,.07), transparent 32%),
+    var(--section-bg-light);
+}
+
+body.light-mode .section-heading,
+body.light-mode .imc-heading h2{
+  text-shadow:
+    0 0 18px rgba(56,189,248,.14),
+    0 0 30px rgba(167,139,250,.1);
+}
+
+body.light-mode .profile-card,
+body.light-mode .skill-detail,
+body.light-mode .experience-card,
+body.light-mode .project-card,
+body.light-mode .quality-card,
+body.light-mode .quality-panel,
+body.light-mode .imc-step{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 0 22px rgba(56,189,248,.08),
+    0 0 38px rgba(167,139,250,.07),
+    0 22px 54px rgba(79,70,229,.09);
+}
+
+body.light-mode .mode-toggle{
+  box-shadow:
+    0 0 16px rgba(56,189,248,.16),
+    0 0 28px rgba(167,139,250,.12);
+}
+
+/* 한글 단어와 조사가 애매하게 분리되지 않도록 줄바꿈을 정돈합니다. */
+.section-heading,
+.profile-title,
+.imc-heading h2,
+.quality-panel h3,
+.skill-detail-title,
+.project-title,
+.exp-org{
+  word-break:keep-all;
+  overflow-wrap:break-word;
+  text-wrap:balance;
+}
+
+.profile-copy,
+.profile-list-item span,
+.imc-heading > p,
+.imc-step p,
+.section-intro,
+.skill-detail-sub,
+.skill-detail-card p,
+.exp-role,
+.quality-panel p,
+.quality-card span{
+  word-break:keep-all;
+  overflow-wrap:break-word;
+  text-wrap:pretty;
+}
+
+@media(max-width:768px){
+  .profile-title,
+  .quality-panel h3{
+    font-size:clamp(23px,6.4vw,30px);
+    line-height:1.16;
+    text-wrap:initial;
   }
 }
 
@@ -2188,13 +3500,45 @@ body.light-mode .quality-panel{
 <div class="background"></div>
 <div class="scroll-progress-bar"></div>
 <nav class="portfolio-nav" aria-label="섹션 이동">
-  <a href="#profile">PROFILE</a>
-  <a href="#skills">SKILL</a>
-  <a href="#experience">EXPERIENCE</a>
-  <a href="#campaign">CAMPAIGN</a>
-  <a href="#check">AGENCY FIT</a>
+  <a href="#profile">BRIEF</a>
+  <a href="#imc">STRATEGY</a>
+  <a href="#campaign">EXECUTION</a>
+  <a href="#experience">TRACK RECORD</a>
+  <a href="#skills">TOOLKIT</a>
+  <a href="#check">SUMMARY</a>
 </nav>
-<button class="mode-toggle" aria-label="테마 전환">⟡</button>
+<button class="mode-toggle" aria-label="라이트 모드로 전환">
+  <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/>
+  </svg>
+  <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="3.7"/>
+    <path d="M12 2.2v2.1M12 19.7v2.1M2.2 12h2.1M19.7 12h2.1M5.1 5.1l1.5 1.5M17.4 17.4l1.5 1.5M18.9 5.1l-1.5 1.5M6.6 17.4l-1.5 1.5"/>
+  </svg>
+</button>
+<button class="music-toggle" type="button" aria-label="테마곡 플레이어 열기" aria-expanded="false" aria-controls="music-panel">
+  <span class="music-wave" aria-hidden="true">
+    <i></i><i></i><i></i><i></i><i></i>
+  </span>
+</button>
+<div class="music-panel" id="music-panel" aria-hidden="true">
+  <div class="music-track-meta">
+    <span>PORTFOLIO THEME</span>
+    <strong>Theme Track</strong>
+  </div>
+  <iframe
+    id="theme-youtube"
+    title="Portfolio YouTube theme track"
+    data-src="https://www.youtube.com/embed/DNz04FI4uT8?enablejsapi=1&playsinline=1&loop=1&playlist=DNz04FI4uT8&controls=1&rel=0"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    referrerpolicy="strict-origin-when-cross-origin"
+    loading="eager"
+    hidden>
+  </iframe>
+  <audio class="theme-audio" controls loop preload="metadata" src="./media2.wav" hidden>
+    브라우저가 오디오 재생을 지원하지 않습니다.
+  </audio>
+</div>
 <button class="contact-toggle">CONTACT</button>
 <div class="contact-panel">
   <div class="contact-inner">
@@ -2211,24 +3555,26 @@ body.light-mode .quality-panel{
     <!-- EDIT: 첫 화면 배경 키워드 / 실제 단어는 아래 script의 talentKeywords 배열에서 수정 -->
     <div class="keyword-cloud" aria-hidden="true"></div>
 
-    <!-- EDIT: 첫 화면 메인 문구 / 글자를 바꾸려면 아래 9개 div 텍스트를 순서대로 수정 -->
-    <!-- NOTE: hero-outline=라인 글자, hero-accent=색 채워진 강조 글자 -->
-    <div class="hero-copy" aria-label="언제나 현장이 답이다">
-    <div class="hero-cell hero-outline">언</div>
-    <div class="hero-cell hero-outline">제</div>
-    <div class="hero-cell hero-outline">나</div>
+    <!-- EDIT: 첫 화면 메인 문구 / 격자와 '현장이'는 고정, '언제나'와 '답이다'만 순서대로 등장합니다. -->
+    <div class="hero-copy hero-grid-sequence" aria-label="언제나 현장이 답이다">
+      <div class="hero-cell hero-outline"><span>언</span></div>
+      <div class="hero-cell hero-outline"><span>제</span></div>
+      <div class="hero-cell hero-outline"><span>나</span></div>
 
-    <div class="hero-cell hero-accent">현</div>
-    <div class="hero-cell hero-accent">장</div>
-    <div class="hero-cell hero-accent">이</div>
+      <div class="hero-cell hero-accent"><span>현</span></div>
+      <div class="hero-cell hero-accent"><span>장</span></div>
+      <div class="hero-cell hero-accent"><span>이</span></div>
 
-    <div class="hero-cell hero-outline">답</div>
-    <div class="hero-cell hero-outline">이</div>
-    <div class="hero-cell hero-outline">다</div>
+      <div class="hero-cell hero-outline"><span>답</span></div>
+      <div class="hero-cell hero-outline"><span>이</span></div>
+      <div class="hero-cell hero-outline"><span>다</span></div>
   </div>
   <div class="scroll-indicator">
-    <div class="scroll-arrow">↓</div>
-    <div class="scroll-line"></div>
+    <div class="cta-arrow-option is-selected" aria-label="아래로 스크롤">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </div>
   </div>
 
 <div class="project-modal" aria-hidden="true">
@@ -2240,31 +3586,90 @@ body.light-mode .quality-panel{
 
 </section>
 
+<!-- IMC STRATEGY: 제안서형 문제 발견/전략 설계 영역 -->
+<section class="imc-section" id="imc" data-imc-stage="STRATEGY" data-chapter="02 · STRATEGY">
+  <div class="imc-heading">
+    <span class="imc-kicker">FIELD-DRIVEN IMC</span>
+    <h2>
+      <span class="imc-title-line"><span class="field-keyword">현장</span>은 하나의 장소가 아니라,</span>
+      <span class="imc-title-line">브랜드와 소비자가 만나는 모든 접점입니다.</span>
+    </h2>
+    <p>
+      소비자가 브랜드를 보고, 듣고, 검색하고, 반응하는 순간이 모두 현장입니다.
+      그곳에서 발견한 신호를 하나의 아이디어와 경험으로 연결해 성과까지 이어지는 IMC를 설계합니다.
+    </p>
+  </div>
+
+  <div class="imc-flow" aria-label="현장 기반 IMC 전략 제안 흐름">
+    <article class="imc-step" data-stage="FIELD">
+      <span class="imc-step-number">01</span>
+      <strong>FIELD</strong>
+      <p>검색·콘텐츠·매체·브랜드 경험에서 실제 소비자 반응의 신호를 포착합니다.</p>
+    </article>
+    <article class="imc-step" data-stage="CHALLENGE">
+      <span class="imc-step-number">02</span>
+      <strong>CHALLENGE</strong>
+      <p>시장과 브랜드의 상황을 명확한 비즈니스·커뮤니케이션 과제로 정의합니다.</p>
+    </article>
+    <article class="imc-step" data-stage="TARGET">
+      <span class="imc-step-number">03</span>
+      <strong>TARGET</strong>
+      <p>바꿔야 할 사람의 태도와 행동, 미디어 이용 맥락을 구체화합니다.</p>
+    </article>
+    <article class="imc-step" data-stage="INSIGHT">
+      <span class="imc-step-number">04</span>
+      <strong>INSIGHT</strong>
+      <p>데이터와 <span class="field-keyword">현장</span>의 관찰을 연결해 전략을 움직일 한 가지 진실을 찾습니다.</p>
+    </article>
+    <article class="imc-step" data-stage="BIG IDEA">
+      <span class="imc-step-number">05</span>
+      <strong>BIG IDEA</strong>
+      <p>과제와 인사이트를 모든 채널을 관통하는 하나의 아이디어로 전환합니다.</p>
+    </article>
+    <article class="imc-step" data-stage="INTEGRATION">
+      <span class="imc-step-number">06</span>
+      <strong>INTEGRATION</strong>
+      <p>콘텐츠·미디어·경험·운영을 타깃의 여정 안에서 유기적으로 연결합니다.</p>
+    </article>
+    <article class="imc-step" data-stage="RESULT">
+      <span class="imc-step-number">07</span>
+      <strong>RESULT</strong>
+      <p>목표에 맞는 지표로 반응을 확인하고 다음 실행을 위한 학습으로 남깁니다.</p>
+    </article>
+  </div>
+</section>
+
+<aside class="imc-signal" aria-hidden="true">
+  <span class="imc-signal-label">IMC SIGNAL</span>
+  <div class="imc-signal-track"><i></i></div>
+  <span class="imc-signal-stage">INSIGHT</span>
+</aside>
+
 <!-- PROFILE: 포지셔닝/업무 성향 요약 영역 -->
-<section class="profile-section" id="profile">
+<section class="profile-section" id="profile" data-imc-stage="BRIEF" data-chapter="01 · BRIEF">
 
   <h2 class="section-heading">
-    PROFILE
+    CAMPAIGN BRIEF
   </h2>
 
   <div class="profile-layout">
 
     <article class="profile-card">
-      <div class="profile-kicker">POSITIONING</div>
+      <div class="profile-kicker">WHO I AM · WHAT I SOLVE</div>
       <h2 class="profile-title">
         캠페인 흐름을 빠르게 익히고,<br>
         필요한 자료를 차분하게 정리합니다.
       </h2>
       <p class="profile-copy">
         광고 교육 프로젝트와 인턴 경험을 통해 브리프 이해, 자료 조사, 제안서 구성,
-        캠페인 운영 보조, 리포트 정리까지 이어지는 흐름을 경험했습니다.
+        캠페인 운영, 리포트 정리까지 이어지는 흐름을 경험했습니다.
         아직 배워가는 단계이지만, 맡은 내용을 정확히 확인하고 팀이 다시 보기 쉬운 형태로 남기는 데 강점이 있습니다.
       </p>
 
       <div class="profile-list">
         <div class="profile-list-item">
           <strong>Interest</strong>
-          <span>캠페인 AE · 브랜드/콘텐츠 캠페인 · 디지털 광고 기획/운영 보조</span>
+          <span>캠페인 AE · 브랜드/콘텐츠 캠페인 · 디지털 광고 기획/운영</span>
         </div>
         <div class="profile-list-item">
           <strong>Practice</strong>
@@ -2283,12 +3688,14 @@ body.light-mode .quality-panel{
 
 <!-- SKILLS: 사용 툴/매체 숙련도 영역 -->
 
-<section class="skills-section" id="skills">
+<section class="skills-section" id="skills" data-imc-stage="TOOLKIT" data-chapter="05 · TOOLKIT">
 
   <h2 class="section-heading">
-    SKILL
+    EXECUTION TOOLKIT
   </h2>
-
+  <p class="section-intro">
+    전략을 제안서·소재·영상·매체 운영·리포트까지 실제 결과물로 옮기는 도구입니다.
+  </p>
   <div class="skills-layout">
 
     <!-- EDIT: 스킬 카드 / data-name=스킬명, data-percent=그래프 길이, data-level=강조 라벨, data-period=사용기간, data-range=활용범위, img src=로고 -->
@@ -2310,7 +3717,7 @@ body.light-mode .quality-panel{
         <span class="skill-logo-fallback">Pr</span>
       </div>
 
-      <div class="skill-tab" data-name="Excel" data-percent="75%" data-level="중" data-period="약 3년" data-range="로우데이터 정리 · 리포팅 · 성과 분석 보조">
+      <div class="skill-tab" data-name="Excel" data-percent="75%" data-level="중" data-period="약 3년" data-range="로우데이터 정리 · 리포팅 · 성과 분석">
         <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%A6%E1%86%A8%E1%84%89%E1%85%A6%E1%86%AF.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">X</span>
       </div>
@@ -2340,17 +3747,17 @@ body.light-mode .quality-panel{
         <span class="skill-logo-fallback">N</span>
       </div>
 
-      <div class="skill-tab" data-name="Google" data-percent="" data-level="" data-period="실무 경험" data-range="Google Ads · 캠페인 세팅 보조 · 성과 확인">
+      <div class="skill-tab" data-name="Google" data-percent="" data-level="" data-period="실무 경험" data-range="Google Ads · 성과 확인">
         <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%80%E1%85%AE%E1%84%80%E1%85%B3%E1%86%AF.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">G</span>
       </div>
 
-      <div class="skill-tab" data-name="Meta" data-percent="" data-level="" data-period="실무 경험" data-range="Meta Ads · 소재 관리 · 캠페인 운영 보조">
+      <div class="skill-tab" data-name="Meta" data-percent="" data-level="" data-period="실무 경험" data-range="Meta Ads · 소재 관리 · 캠페인 운영">
         <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%A6%E1%84%90%E1%85%A1.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">M</span>
       </div>
 
-      <div class="skill-tab" data-name="Kakao" data-percent="" data-level="" data-period="실무 경험" data-range="카카오 광고 · 매체 세팅 보조 · 리포팅">
+      <div class="skill-tab" data-name="Kakao" data-percent="" data-level="" data-period="실무 경험" data-range="카카오 광고 · 매체 세팅 · 리포팅">
         <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8F%E1%85%A1%E1%84%8F%E1%85%A1%E1%84%8B%E1%85%A9.svg" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">K</span>
       </div>
@@ -2365,12 +3772,11 @@ body.light-mode .quality-panel{
         <div>
 
           <div class="skill-detail-title">
-            TOOL STACK
+            SELECT TOOL
           </div>
 
           <div class="skill-detail-sub">
-            디자인 툴, 오피스 툴, 광고 매체를 함께 다루며
-            기획부터 제작·운영 보조까지 이어지는 작업 흐름을 구성합니다.
+            턴테이블 위의 로고를 선택하면 상세 내용이 표시됩니다.
           </div>
 
           <div class="skill-barometer" style="display:none;">
@@ -2395,13 +3801,13 @@ body.light-mode .quality-panel{
       <div class="skill-detail-grid">
 
         <div class="skill-detail-card">
-          <h4>구성</h4>
-          <p>디자인 · 영상 · 문서 · 광고 매체 운영 도구를 한 화면에서 비교</p>
+          <h4>대기</h4>
+          <p>아직 선택된 스킬이 없습니다</p>
         </div>
 
         <div class="skill-detail-card">
-          <h4>사용 방법</h4>
-          <p>왼쪽 아이콘을 클릭하면 숙련도와 활용 방식이 표시됩니다</p>
+          <h4>선택</h4>
+          <p>로고를 클릭해 사용 기간과 활용 범위를 확인하세요</p>
         </div>
 
       </div>
@@ -2414,12 +3820,14 @@ body.light-mode .quality-panel{
 
 <!-- EXPERIENCE: 실무/프로젝트 경험 영역 -->
 
-<section class="experience-section" id="experience">
+<section class="experience-section" id="experience" data-imc-stage="TRACK RECORD" data-chapter="04 · TRACK RECORD">
 
   <h2 class="section-heading">
-    EXPERIENCE
+    TRACK RECORD
   </h2>
-
+  <p class="section-intro">
+    교육에서 전략을, 인턴에서 매체 운영을, 현업에서 성과 관리를 익혀온 과정입니다.
+  </p>
   <div class="experience-grid">
 
     <!-- EDIT: 교육 경험 카드 / 라벨, 기관명, 기간, 교육명, 하단 태그 수정 -->
@@ -2473,7 +3881,7 @@ body.light-mode .quality-panel{
         <div class="exp-text">
           <div class="exp-company">
             <span class="exp-org">Next Media Group</span>
-            <span class="exp-period">2025.10 ~ 2026.1</span>
+            <span class="exp-period">2025.10 ~ 2026.01</span>
           </div>
 
           <div class="exp-role">
@@ -2488,9 +3896,9 @@ body.light-mode .quality-panel{
         <span>일일/주간 리포팅</span>
         <span>로우데이터 정리</span>
         <span>매체 제작 가이드 제작</span>
-        <span>매체 세팅 보조</span>
+        <span>매체 세팅</span>
         <span>게재 보고</span>
-        <span>캠페인 운영 보조</span>
+        <span>캠페인 운영</span>
       </div>
 
     </div>
@@ -2508,7 +3916,7 @@ body.light-mode .quality-panel{
         <div class="exp-text">
           <div class="exp-company">
             <span class="exp-org">Growth B</span>
-            <span class="exp-period">2026.06 ~ 재직중</span>
+            <span class="exp-period">2026.06 ~ 재직 중</span>
           </div>
 
           <div class="exp-role">
@@ -2519,7 +3927,7 @@ body.light-mode .quality-panel{
 
       <div class="exp-meta">
         <span>퍼포먼스 캠페인 운영</span>
-        <span>매체 세팅 보조</span>
+        <span>매체 세팅</span>
         <span>성과 모니터링</span>
         <span>데이터 리포팅</span>
         <span>광고주 커뮤니케이션</span>
@@ -2532,12 +3940,14 @@ body.light-mode .quality-panel{
 </section>
 
 <!-- EDIT: 캠페인 수정 영역 / img src=썸네일, project-title=제목, project-desc=설명 -->
-<section class="campaign-section" id="campaign">
+<section class="campaign-section" id="campaign" data-imc-stage="EXECUTION" data-chapter="03 · EXECUTION">
 
 <h2 class="section-heading">
-  CAMPAIGN
+  IMC EXECUTION
 </h2>
-
+<p class="section-intro">
+  전략과 메시지가 브랜드 캠페인·AI·리뷰·제안서로 어떻게 확장되는지 보여주는 실행 사례입니다.
+</p>
 <div class="campaign-filter" aria-label="캠페인 필터">
   <button class="campaign-filter-button active" type="button" data-filter="all">전체</button>
   <button class="campaign-filter-button" type="button" data-filter="브랜드 캠페인">브랜드 캠페인</button>
@@ -2673,15 +4083,15 @@ body.light-mode .quality-panel{
 </section>
 
 <!-- CHECK POINT: 대행사 실무 적합도 확인 기준 -->
-<section class="quality-section" id="check">
+<section class="quality-section" id="check" data-imc-stage="SUMMARY" data-chapter="06 · SUMMARY">
 
   <h2 class="section-heading">
-    AGENCY FIT
+    STRATEGY SUMMARY
   </h2>
 
   <div class="quality-layout">
     <article class="quality-panel">
-      <div class="quality-kicker">FOR AGENCY WORK</div>
+      <div class="quality-kicker">WHY ME · FINAL CHECK</div>
       <h3>
         아이디어와 운영 사이를<br>
         놓치지 않는 주니어.
@@ -2732,6 +4142,18 @@ body.light-mode .quality-panel{
 
 <script>
 
+// 제안서 흐름: Brief → Strategy → Execution → Result → Capability → Summary
+const heroSection = document.querySelector('.hero');
+const proposalFlow = ['profile','imc','campaign','experience','skills','check']
+  .map((id)=>document.getElementById(id))
+  .filter(Boolean);
+
+let proposalAnchor = heroSection;
+proposalFlow.forEach((section)=>{
+  proposalAnchor.insertAdjacentElement('afterend', section);
+  proposalAnchor = section;
+});
+
 const keywordCloud = document.querySelector('.keyword-cloud');
 const heroCopy = document.querySelector('.hero-copy');
 
@@ -2756,7 +4178,7 @@ const talentKeywords = [
   '디지털 이해도',
   '성과 리포팅',
   '자료 조사',
-  '캠페인 운영 보조',
+  '캠페인 운영',
   '소재 관리',
   '문서 정리'
 ];
@@ -2766,6 +4188,14 @@ let keywordIndex = 0;
 const recentKeywordPoints = [];
 
 const modeToggle = document.querySelector('.mode-toggle');
+const musicToggle = document.querySelector('.music-toggle');
+const musicPanel = document.querySelector('.music-panel');
+let themePlayer = null;
+let themePlayerReady = false;
+let themePlayRequested = false;
+let useYouTubeTheme = window.location.protocol !== 'file:';
+const themeYouTubeFrame = document.querySelector('#theme-youtube');
+const themeAudio = document.querySelector('.theme-audio');
 const contactToggle = document.querySelector('.contact-toggle');
 const contactPanel = document.querySelector('.contact-panel');
 const progressBar = document.querySelector('.scroll-progress-bar');
@@ -2876,14 +4306,6 @@ function setupSkillLogoFallbacks(){
   });
 }
 
-function formatCampaignAssetName(name){
-  return name
-    .normalize('NFC')
-    .replace(/\.(jpe?g)$/i,'')
-    .replace(/[_-]+/g,' ')
-    .trim() || 'Campaign Visual';
-}
-
 function getCampaignViewType(text){
   return /코삭|kosac|cosac|코다|koda/i.test(text.normalize('NFC')) ? 'pdf' : 'video';
 }
@@ -2962,16 +4384,6 @@ function getProjectActions(card){
   return actions;
 }
 
-function setupCampaignViewButtons(){
-  projectCards.forEach((card)=>{
-    const title = card.querySelector('.project-title')?.innerText || '';
-    const image = card.querySelector('img')?.alt || '';
-    const sourceText = `${title} ${image}`;
-    setCampaignLabel(card, sourceText);
-    setCampaignViewButton(card, sourceText);
-  });
-}
-
 function filterCampaignCards(filter){
   const activeFilter = filter || 'all';
   const hasVisibleCards = Array.from(projectCards).some((card)=>{
@@ -3010,7 +4422,6 @@ function loadCampaignJpgThumbnails(){
 }
 
 setupSkillLogoFallbacks();
-setupCampaignViewButtons();
 loadCampaignJpgThumbnails();
 
 campaignFilterButtons.forEach((button)=>{
@@ -3020,6 +4431,28 @@ campaignFilterButtons.forEach((button)=>{
     filterCampaignCards(button.dataset.filter);
   });
 });
+
+function reorderPortfolioSections(){
+  const heroSection = document.querySelector('.hero');
+  const sequence = [
+    document.querySelector('.profile-section'),
+    document.querySelector('.imc-section'),
+    document.querySelector('.campaign-section'),
+    document.querySelector('.experience-section'),
+    document.querySelector('.skills-section'),
+    document.querySelector('.quality-section')
+  ].filter(Boolean);
+
+  if(!heroSection) return;
+
+  let anchor = heroSection;
+  sequence.forEach((section)=>{
+    anchor.insertAdjacentElement('afterend', section);
+    anchor = section;
+  });
+}
+
+reorderPortfolioSections();
 
 // EDIT TEXT: 스킬 설명박스 문구 / title=상단 설명, cards=하단 카드 2개
 const skillCopy = {
@@ -3083,32 +4516,34 @@ const skillCopy = {
     title:'국내 검색광고 운영 흐름과 키워드 관리 구조를 이해하고 있습니다.',
     cards:[
       { label:'경험 범위', value:'검색광고 · 키워드/소재 관리 · 성과 리포팅' },
-      { label:'활용 포인트', value:'국내 이용자 검색 의도에 맞춘 캠페인 운영 보조' }
+      { label:'활용 포인트', value:'국내 이용자 검색 의도에 맞춘 캠페인 운영' }
     ]
   },
   Google:{
-    title:'Google Ads 기반 캠페인 세팅과 성과 확인 흐름을 실무 관점에서 다룹니다.',
+    title:'Google Ads의 성과 확인 흐름을 실무 관점에서 다룹니다.',
     cards:[
-      { label:'경험 범위', value:'캠페인 세팅 보조 · 성과 확인 · 리포트 참고' },
+      { label:'경험 범위', value:'성과 확인 · 리포트 참고' },
       { label:'활용 포인트', value:'검색/디스플레이 매체별 성과 흐름을 비교하며 이해' }
     ]
   },
   Meta:{
-    title:'Meta 광고의 소재 관리와 캠페인 운영 보조 경험을 바탕으로 구조를 이해합니다.',
+    title:'Meta 광고의 소재 관리와 캠페인 운영 경험을 바탕으로 구조를 이해합니다.',
     cards:[
-      { label:'경험 범위', value:'소재 관리 · 캠페인 운영 보조 · 성과 확인' },
+      { label:'경험 범위', value:'소재 관리 · 캠페인 운영 · 성과 확인' },
       { label:'활용 포인트', value:'타깃과 크리에이티브에 따른 반응 차이를 살피며 운영' }
     ]
   },
   Kakao:{
     title:'카카오 광고 상품의 운영 흐름과 리포팅 방식에 대한 실무 이해가 있습니다.',
     cards:[
-      { label:'경험 범위', value:'매체 세팅 보조 · 광고 운영 · 리포팅' },
+      { label:'경험 범위', value:'매체 세팅 · 광고 운영 · 리포팅' },
       { label:'활용 포인트', value:'국내 플랫폼 환경에 맞춘 소재와 성과 흐름 파악' }
     ]
   }
 };
 const revealTargets = [
+  document.querySelector('.imc-heading'),
+  ...document.querySelectorAll('.imc-step'),
   ...document.querySelectorAll('.profile-card'),
   ...document.querySelectorAll('.skill-tab'),
   document.querySelector('.skill-detail'),
@@ -3140,7 +4575,7 @@ function spawnTalentKeyword(){
 
   const keyword = document.createElement('span');
   const selectedKeyword = availableKeywords[keywordIndex % availableKeywords.length];
-  const duration = window.innerWidth < 768 ? 9200 : 10800;
+  const duration = window.innerWidth < 768 ? 6500 : 7200;
   const keywordSizeSteps = window.innerWidth < 768
     ? [9.9,11,11,12.1,13.2]
     : [11,12.1,13.2,14.3,15.4,16.5];
@@ -3167,7 +4602,11 @@ function spawnTalentKeyword(){
     '.62',
     '.72'
   ];
-  const keywordPoint = getKeywordPoint();
+  const keywordPoint = getKeywordPoint(selectedKeyword, keywordSize);
+
+  if(!keywordPoint){
+    return;
+  }
 
   keyword.className = 'talent-keyword';
   keyword.innerText = selectedKeyword;
@@ -3190,52 +4629,75 @@ function spawnTalentKeyword(){
   }, duration + 300);
 }
 
-function getKeywordPoint(){
+function getKeywordPoint(keywordText = '', keywordSize = 13){
   const cloudRect = keywordCloud.getBoundingClientRect();
   const heroRect = heroCopy?.getBoundingClientRect();
-  const fallbackPoint = {
-    x:cloudRect.width * (.08 + Math.random() * .84),
-    y:cloudRect.height * (.1 + Math.random() * .78)
+  const collisionGap = window.innerWidth < 768 ? 12 : 20;
+  const estimatedWidth = Math.max(54, keywordText.length * keywordSize * .95 + 24);
+  const estimatedHeight = keywordSize * 2.2;
+  const activeKeywordRects = Array.from(keywordCloud.querySelectorAll('.talent-keyword'))
+    .map((item)=>{
+      const rect = item.getBoundingClientRect();
+      return {
+        left:rect.left - cloudRect.left,
+        right:rect.right - cloudRect.left,
+        top:rect.top - cloudRect.top,
+        bottom:rect.bottom - cloudRect.top
+      };
+    });
+  const placeOnLeft = keywordIndex % 2 === 0;
+  const getBalancedX = ()=>{
+    const edgeStart = window.innerWidth < 768 ? .05 : .07;
+    const sideWidth = window.innerWidth < 768 ? .22 : .25;
+    return cloudRect.width * (
+      placeOnLeft
+        ? edgeStart + (Math.random() * sideWidth)
+        : 1 - edgeStart - sideWidth + (Math.random() * sideWidth)
+    );
   };
-
-  if(!heroRect){
-    return fallbackPoint;
-  }
-
   const avoidPadding = window.innerWidth < 768 ? 36 : 82;
-  const avoidRect = {
+  const avoidRect = heroRect ? {
     left:heroRect.left - cloudRect.left - avoidPadding,
     right:heroRect.right - cloudRect.left + avoidPadding,
     top:heroRect.top - cloudRect.top - avoidPadding,
     bottom:heroRect.bottom - cloudRect.top + avoidPadding
-  };
+  } : null;
 
-  for(let i = 0; i < 34; i++){
+  for(let i = 0; i < 64; i++){
     const point = {
-      x:cloudRect.width * (.08 + Math.random() * .84),
+      x:getBalancedX(),
       y:cloudRect.height * (.1 + Math.random() * .8)
+    };
+    const candidateRect = {
+      left:point.x - estimatedWidth / 2,
+      right:point.x + estimatedWidth / 2,
+      top:point.y - estimatedHeight / 2,
+      bottom:point.y + estimatedHeight / 2
     };
 
     const isInsideHeroText =
-      point.x > avoidRect.left &&
-      point.x < avoidRect.right &&
-      point.y > avoidRect.top &&
-      point.y < avoidRect.bottom;
+      avoidRect &&
+      candidateRect.right > avoidRect.left &&
+      candidateRect.left < avoidRect.right &&
+      candidateRect.bottom > avoidRect.top &&
+      candidateRect.top < avoidRect.bottom;
 
-    const isNearRecentPoint = recentKeywordPoints.some((recentPoint)=>{
-      const distanceX = Math.abs(point.x - recentPoint.x);
-      const distanceY = Math.abs(point.y - recentPoint.y);
-      return distanceX < cloudRect.width * .16 && distanceY < cloudRect.height * .14;
+    const overlapsActiveKeyword = activeKeywordRects.some((activeRect)=>{
+      return (
+        candidateRect.right + collisionGap > activeRect.left &&
+        candidateRect.left - collisionGap < activeRect.right &&
+        candidateRect.bottom + collisionGap > activeRect.top &&
+        candidateRect.top - collisionGap < activeRect.bottom
+      );
     });
 
-    if(!isInsideHeroText && !isNearRecentPoint){
+    if(!isInsideHeroText && !overlapsActiveKeyword){
       rememberKeywordPoint(point);
       return point;
     }
   }
 
-  rememberKeywordPoint(fallbackPoint);
-  return fallbackPoint;
+  return null;
 }
 
 function rememberKeywordPoint(point){
@@ -3250,14 +4712,14 @@ function startTalentKeywords(){
     return;
   }
 
-  const initialCount = window.innerWidth < 768 ? 3 : 5;
-  const spawnGap = window.innerWidth < 768 ? 1400 : 1200;
+  const initialCount = window.innerWidth < 768 ? 5 : 7;
+  const spawnGap = window.innerWidth < 768 ? 380 : 320;
 
   for(let i = 0; i < initialCount; i++){
-    window.setTimeout(spawnTalentKeyword, 180 + (i * spawnGap));
+    window.setTimeout(spawnTalentKeyword, 40 + (i * spawnGap));
   }
 
-  window.setInterval(spawnTalentKeyword, window.innerWidth < 768 ? 3400 : 2640);
+  window.setInterval(spawnTalentKeyword, window.innerWidth < 768 ? 1700 : 1400);
 }
 
 startTalentKeywords();
@@ -3377,6 +4839,11 @@ window.addEventListener('keydown',(e)=>{
     e.stopPropagation();
     closeProjectModal();
   }
+
+  if(e.key === 'Escape' && musicPanel.classList.contains('active')){
+    setMusicPanel(false);
+    musicToggle.focus();
+  }
 },{ capture:true });
 
 const revealObserver = new IntersectionObserver((entries)=>{
@@ -3394,22 +4861,80 @@ const revealObserver = new IntersectionObserver((entries)=>{
 
 revealTargets.forEach(item=>revealObserver.observe(item));
 
-function updateProgressBar(){
+const imcSignal = document.querySelector('.imc-signal');
+const imcSignalStage = document.querySelector('.imc-signal-stage');
+const imcSignalStages = Array.from(document.querySelectorAll('[data-imc-stage]'));
 
-  const scrollTop = window.pageYOffset;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+function updateImcSignal(section){
+  const index = imcSignalStages.indexOf(section);
+  if(index < 0 || !imcSignal) return;
 
-  const progress = Math.max(0, Math.min((scrollTop / docHeight) * 100, 100));
+  const progress = imcSignalStages.length > 1
+    ? (index / (imcSignalStages.length - 1)) * 100
+    : 0;
 
-  progressBar.style.width = progress + '%';
+  imcSignal.style.setProperty('--imc-progress', `${progress}%`);
+  if(imcSignalStage){
+    imcSignalStage.innerText = section.dataset.imcStage || 'IMC';
+  }
 }
 
-window.addEventListener('scroll', updateProgressBar);
-window.addEventListener('resize', updateProgressBar);
-updateProgressBar();
+const imcStageObserver = new IntersectionObserver((entries)=>{
+  const visibleEntry = entries
+    .filter(entry=>entry.isIntersecting)
+    .sort((a,b)=>Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top))[0];
 
-function updateThemeLogos(){
+  if(visibleEntry){
+    updateImcSignal(visibleEntry.target);
+  }
+},{
+  threshold:0,
+  rootMargin:'-38% 0px -52% 0px'
+});
+
+imcSignalStages.forEach(section=>imcStageObserver.observe(section));
+
+let progressUpdateFrame = 0;
+
+function updateProgressBar(){
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0
+    ? Math.max(0, Math.min(scrollTop / docHeight, 1))
+    : 0;
+
+  progressBar.style.transform = `scaleX(${progress})`;
+
+  if(imcSignal){
+    const showSignal =
+      scrollTop > window.innerHeight * .72 &&
+      scrollTop < document.documentElement.scrollHeight - window.innerHeight * .7;
+    imcSignal.classList.toggle('visible', showSignal);
+  }
+}
+
+function scheduleProgressUpdate(){
+  if(progressUpdateFrame) return;
+
+  progressUpdateFrame = window.requestAnimationFrame(()=>{
+    progressUpdateFrame = 0;
+    updateProgressBar();
+  });
+}
+
+window.addEventListener('scroll', scheduleProgressUpdate, { passive:true });
+window.addEventListener('resize', scheduleProgressUpdate, { passive:true });
+scheduleProgressUpdate();
+
+let manualThemeOverride = false;
+
+function syncThemeControl(){
   const isLightMode = document.body.classList.contains('light-mode');
+
+  modeToggle.setAttribute(
+    'aria-label',
+    isLightMode ? '다크 모드로 전환' : '라이트 모드로 전환'
+  );
 
   themeSwapLogos.forEach((logo)=>{
     logo.src = isLightMode
@@ -3418,20 +4943,129 @@ function updateThemeLogos(){
   });
 }
 
-updateThemeLogos();
+function applyTimeBasedTheme(){
+  if(manualThemeOverride) return;
+
+  const currentHour = new Date().getHours();
+  const useLightMode = currentHour >= 7 && currentHour < 19;
+  document.body.classList.toggle('light-mode', useLightMode);
+  syncThemeControl();
+}
+
+applyTimeBasedTheme();
+window.setInterval(applyTimeBasedTheme, 60 * 1000);
 
 modeToggle.addEventListener('click',()=>{
-
+  manualThemeOverride = true;
   document.body.classList.toggle('light-mode');
-
-  if(document.body.classList.contains('light-mode')){
-    modeToggle.innerHTML = '✦';
-  }else{ 
-    modeToggle.innerHTML = '⟡';
-  }
-
-  updateThemeLogos();
+  syncThemeControl();
 });
+
+function setMusicPanel(open){
+  musicPanel.classList.toggle('active', open);
+  musicPanel.setAttribute('aria-hidden', String(!open));
+  musicToggle.setAttribute('aria-expanded', String(open));
+  musicToggle.setAttribute('aria-label', open ? '테마곡 플레이어 닫기' : '테마곡 플레이어 열기');
+}
+
+musicToggle.addEventListener('click',(event)=>{
+  event.stopPropagation();
+  setMusicPanel(!musicPanel.classList.contains('active'));
+});
+
+musicPanel.addEventListener('click',(event)=>{
+  event.stopPropagation();
+});
+
+function startThemeOnFirstInteraction(){
+  themePlayRequested = true;
+
+  if(useYouTubeTheme && themePlayerReady && themePlayer){
+    themePlayer.setVolume(65);
+    themePlayer.playVideo();
+  }else if(!useYouTubeTheme){
+    themeAudio.volume = .65;
+    themeAudio.play().catch(()=>{
+      musicToggle.classList.add('needs-interaction');
+    });
+  }else{
+    musicToggle.classList.add('needs-interaction');
+  }
+}
+
+document.addEventListener('pointerdown',startThemeOnFirstInteraction,{
+  capture:true,
+  once:true
+});
+
+window.onYouTubeIframeAPIReady = ()=>{
+  themePlayer = new YT.Player('theme-youtube',{
+    events:{
+      onReady:()=>{
+        themePlayerReady = true;
+        themePlayer.setVolume(65);
+
+        if(themePlayRequested){
+          themePlayer.playVideo();
+        }
+      },
+      onStateChange:(event)=>{
+        const isPlaying = event.data === YT.PlayerState.PLAYING;
+        musicToggle.classList.toggle('is-playing',isPlaying);
+
+        if(isPlaying){
+          musicToggle.classList.remove('needs-interaction');
+          musicToggle.setAttribute('aria-label','재생 중인 테마곡 플레이어 열기');
+        }else{
+          musicToggle.setAttribute('aria-label','테마곡 플레이어 열기');
+        }
+      },
+      onError:()=>{
+        musicToggle.classList.remove('is-playing');
+        musicToggle.classList.add('needs-interaction');
+        useYouTubeTheme = false;
+        themeYouTubeFrame.hidden = true;
+        themeAudio.hidden = false;
+
+        if(themePlayRequested){
+          themeAudio.volume = .65;
+          themeAudio.play().catch(()=>{});
+        }
+      }
+    }
+  });
+};
+
+themeAudio.addEventListener('play',()=>{
+  musicToggle.classList.remove('needs-interaction');
+  musicToggle.classList.add('is-playing');
+});
+
+themeAudio.addEventListener('pause',()=>{
+  musicToggle.classList.remove('is-playing');
+});
+
+function initializeThemeSource(){
+  if(useYouTubeTheme){
+    themeYouTubeFrame.hidden = false;
+    themeYouTubeFrame.src = themeYouTubeFrame.dataset.src;
+
+    const youtubeApiScript = document.createElement('script');
+    youtubeApiScript.src = 'https://www.youtube.com/iframe_api';
+    youtubeApiScript.async = true;
+    youtubeApiScript.onerror = ()=>{
+      useYouTubeTheme = false;
+      themeYouTubeFrame.hidden = true;
+      themeAudio.hidden = false;
+      musicToggle.classList.add('needs-interaction');
+    };
+    document.head.appendChild(youtubeApiScript);
+  }else{
+    themeAudio.hidden = false;
+  }
+}
+
+initializeThemeSource();
 
 contactToggle.addEventListener('click', ()=>{
   contactPanel.classList.add('active');
@@ -3442,6 +5076,14 @@ contactPanel.addEventListener('click',(e)=>{
 });
 
 window.addEventListener('click',(e)=>{
+  if(
+    musicPanel.classList.contains('active') &&
+    !musicPanel.contains(e.target) &&
+    !musicToggle.contains(e.target)
+  ){
+    setMusicPanel(false);
+  }
+
   if(
     contactPanel.classList.contains('active') &&
     !contactPanel.contains(e.target) &&
