@@ -3406,14 +3406,29 @@ body.light-mode .imc-section[data-chapter] .imc-heading::before{
   color:#6366f1;
 }
 
-/* 라이트 모드에도 은은한 청록·라벤더 네온 무드를 유지합니다. */
+/* 섹션별 배경 반복 없이 페이지 전체에 하나의 연속 배경을 사용합니다. */
+body.light-mode{
+  background:
+    radial-gradient(circle at 12% 18%, rgba(34,211,238,.1), transparent 32%),
+    radial-gradient(circle at 88% 26%, rgba(167,139,250,.11), transparent 34%),
+    radial-gradient(circle at 52% 82%, rgba(45,212,191,.07), transparent 38%),
+    var(--section-bg-light);
+  background-attachment:fixed;
+}
+
+.profile-section,
+.skills-section,
+.experience-section,
+.campaign-section,
+.quality-section,
+.imc-section,
 body.light-mode .profile-section,
 body.light-mode .skills-section,
 body.light-mode .experience-section,
 body.light-mode .campaign-section,
 body.light-mode .quality-section,
 body.light-mode .imc-section{
-  background:rgba(238,244,255,.82);
+  background:transparent;
 }
 
 body.light-mode .section-heading,
