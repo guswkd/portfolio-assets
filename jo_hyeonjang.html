@@ -226,151 +226,6 @@ body.light-mode .theme-icon-moon{
   transition:.3s;
 }
 
-.music-toggle{
-  position:fixed;
-  top:24px;
-  right:240px;
-  z-index:1000;
-  width:54px;
-  height:54px;
-  padding:0;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.08);
-  color:white;
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  transition:transform .3s ease, background .3s ease, border-color .3s ease;
-}
-
-.music-toggle:hover,
-.music-toggle[aria-expanded="true"]{
-  transform:scale(1.06);
-  border-color:rgba(167,139,250,.46);
-  background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(167,139,250,.22));
-}
-
-.music-toggle.needs-interaction{
-  animation:musicAttention 1.8s ease-in-out infinite;
-}
-
-@keyframes musicAttention{
-  0%,100%{ box-shadow:0 0 0 rgba(167,139,250,0); }
-  50%{ box-shadow:0 0 28px rgba(167,139,250,.42); }
-}
-
-.music-wave{
-  width:24px;
-  height:20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:3px;
-}
-
-.music-wave i{
-  width:2px;
-  height:7px;
-  border-radius:999px;
-  background:linear-gradient(to top,#67e8f9,#c4b5fd);
-  box-shadow:0 0 9px rgba(167,139,250,.56);
-  transition:height .28s ease;
-}
-
-.music-wave i:nth-child(2),
-.music-wave i:nth-child(4){
-  height:14px;
-}
-
-.music-wave i:nth-child(3){
-  height:20px;
-}
-
-.music-toggle.is-playing .music-wave i{
-  animation:musicPulse .9s ease-in-out infinite alternate;
-}
-
-.music-toggle.is-playing .music-wave i:nth-child(2){ animation-delay:-.35s; }
-.music-toggle.is-playing .music-wave i:nth-child(3){ animation-delay:-.65s; }
-.music-toggle.is-playing .music-wave i:nth-child(4){ animation-delay:-.2s; }
-.music-toggle.is-playing .music-wave i:nth-child(5){ animation-delay:-.5s; }
-
-@keyframes musicPulse{
-  from{ height:5px; opacity:.62; }
-  to{ height:20px; opacity:1; }
-}
-
-.music-panel{
-  position:fixed;
-  top:88px;
-  right:24px;
-  z-index:9996;
-  width:min(390px,calc(100vw - 32px));
-  padding:12px;
-  border-radius:24px;
-  background:rgba(10,15,29,.86);
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 24px 70px rgba(0,0,0,.34),0 0 36px rgba(139,92,246,.16);
-  backdrop-filter:blur(24px) saturate(140%);
-  -webkit-backdrop-filter:blur(24px) saturate(140%);
-  opacity:0;
-  visibility:hidden;
-  transform:translateY(-10px) scale(.97);
-  transform-origin:top right;
-  transition:opacity .28s ease,transform .28s ease,visibility .28s ease;
-}
-
-.music-panel.active{
-  opacity:1;
-  visibility:visible;
-  transform:translateY(0) scale(1);
-}
-
-.music-track-meta{
-  padding:8px 8px 14px;
-}
-
-.music-track-meta span{
-  display:block;
-  margin-bottom:5px;
-  color:#a78bfa;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.14em;
-}
-
-.music-track-meta strong{
-  display:block;
-  font-size:17px;
-}
-
-.music-panel audio{
-  width:100%;
-  height:54px;
-  display:block;
-  border-radius:999px;
-  accent-color:#a78bfa;
-}
-
-.music-panel [hidden]{
-  display:none !important;
-}
-
-body.light-mode .music-toggle{
-  background:rgba(255,255,255,.7);
-  border-color:rgba(0,0,0,.08);
-}
-
-body.light-mode .music-panel{
-  background:rgba(255,255,255,.88);
-  border-color:rgba(79,70,229,.16);
-  box-shadow:0 24px 68px rgba(79,70,229,.16);
-}
-
 .portfolio-nav{
   position:fixed;
   top:24px;
@@ -2163,18 +2018,6 @@ body.light-mode .project-modal-close{
 
 @media(max-width:768px){
 
-  .music-toggle{
-    top:84px;
-    right:16px;
-    width:48px;
-    height:48px;
-  }
-
-  .music-panel{
-    top:140px;
-    right:16px;
-  }
-
   .portfolio-nav{
     left:16px;
     right:16px;
@@ -3513,22 +3356,6 @@ body.light-mode .mode-toggle{
     <path d="M12 2.2v2.1M12 19.7v2.1M2.2 12h2.1M19.7 12h2.1M5.1 5.1l1.5 1.5M17.4 17.4l1.5 1.5M18.9 5.1l-1.5 1.5M6.6 17.4l-1.5 1.5"/>
   </svg>
 </button>
-<button class="music-toggle" type="button" aria-label="테마곡 플레이어 열기" aria-expanded="false" aria-controls="music-panel">
-  <span class="music-wave" aria-hidden="true">
-    <i></i><i></i><i></i><i></i><i></i>
-  </span>
-</button>
-<div class="music-panel" id="music-panel" aria-hidden="true">
-  <div class="music-track-meta">
-    <span>PORTFOLIO THEME</span>
-    <strong>Theme Track</strong>
-  </div>
-  <audio class="theme-audio" controls loop preload="metadata">
-    <source src="./media2.wav" type="audio/wav">
-    <source src="./media1.mp3" type="audio/mpeg">
-    브라우저가 오디오 재생을 지원하지 않습니다.
-  </audio>
-</div>
 <button class="contact-toggle">CONTACT</button>
 <div class="contact-panel">
   <div class="contact-inner">
@@ -4178,9 +4005,6 @@ let keywordIndex = 0;
 const recentKeywordPoints = [];
 
 const modeToggle = document.querySelector('.mode-toggle');
-const musicToggle = document.querySelector('.music-toggle');
-const musicPanel = document.querySelector('.music-panel');
-const themeAudio = document.querySelector('.theme-audio');
 const contactToggle = document.querySelector('.contact-toggle');
 const contactPanel = document.querySelector('.contact-panel');
 const progressBar = document.querySelector('.scroll-progress-bar');
@@ -4779,85 +4603,10 @@ portfolioNavLinks.forEach((link)=>{
 });
 
 // PROJECT MODAL: 캠페인 카드 클릭 시 팝업 열기/닫기
-let themeFadeFrame = null;
-let resumeThemeAfterPortfolioMedia = false;
-let themeVolumeBeforePortfolioMedia = .65;
-
-function pauseThemeForPortfolioMedia(){
-  if(!themeAudio || themeAudio.paused) return;
-
-  resumeThemeAfterPortfolioMedia = true;
-  themeVolumeBeforePortfolioMedia = themeAudio.volume;
-
-  if(themeFadeFrame){
-    cancelAnimationFrame(themeFadeFrame);
-  }
-
-  const startVolume = themeAudio.volume;
-  const fadeDuration = 650;
-  const fadeStartedAt = performance.now();
-
-  function fadeOutTheme(now){
-    const progress = Math.min((now - fadeStartedAt) / fadeDuration, 1);
-    const easedProgress = 1 - Math.pow(1 - progress, 3);
-    themeAudio.volume = Math.max(0, startVolume * (1 - easedProgress));
-
-    if(progress < 1 && !themeAudio.paused){
-      themeFadeFrame = requestAnimationFrame(fadeOutTheme);
-      return;
-    }
-
-    themeAudio.pause();
-    themeAudio.volume = startVolume;
-    themeFadeFrame = null;
-  }
-
-  themeFadeFrame = requestAnimationFrame(fadeOutTheme);
-}
-
-function resumeThemeAfterClosingPortfolioMedia(){
-  if(!themeAudio || !resumeThemeAfterPortfolioMedia) return;
-
-  resumeThemeAfterPortfolioMedia = false;
-
-  if(themeFadeFrame){
-    cancelAnimationFrame(themeFadeFrame);
-    themeFadeFrame = null;
-  }
-
-  const targetVolume = themeVolumeBeforePortfolioMedia;
-  const fadeDuration = 650;
-  const fadeStartedAt = performance.now();
-  themeAudio.volume = 0;
-
-  themeAudio.play().then(()=>{
-    function fadeInTheme(now){
-      const progress = Math.min((now - fadeStartedAt) / fadeDuration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-      themeAudio.volume = targetVolume * easedProgress;
-
-      if(progress < 1 && !themeAudio.paused){
-        themeFadeFrame = requestAnimationFrame(fadeInTheme);
-        return;
-      }
-
-      themeAudio.volume = targetVolume;
-      themeFadeFrame = null;
-    }
-
-    themeFadeFrame = requestAnimationFrame(fadeInTheme);
-  }).catch(()=>{
-    themeAudio.volume = targetVolume;
-    musicToggle.classList.add('needs-interaction');
-  });
-}
-
 function openProjectModal(card){
 
   const image = card.querySelector('img');
   const title = card.querySelector('.project-title');
-
-  pauseThemeForPortfolioMedia();
 
   projectModalImage.src = image ? image.src : '';
   projectModalImage.alt = title ? title.innerText : '캠페인 이미지';
@@ -4871,7 +4620,6 @@ function closeProjectModal(){
   projectModal.classList.remove('active');
   projectModal.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
-  resumeThemeAfterClosingPortfolioMedia();
 }
 
 projectCards.forEach(card=>{
@@ -4883,7 +4631,6 @@ projectCards.forEach(card=>{
 document.querySelectorAll('.project-view-button').forEach(button=>{
   button.addEventListener('click',(e)=>{
     e.stopPropagation();
-    pauseThemeForPortfolioMedia();
   });
 });
 
@@ -4902,10 +4649,6 @@ window.addEventListener('keydown',(e)=>{
     closeProjectModal();
   }
 
-  if(e.key === 'Escape' && musicPanel.classList.contains('active')){
-    setMusicPanel(false);
-    musicToggle.focus();
-  }
 },{ capture:true });
 
 const revealObserver = new IntersectionObserver((entries)=>{
@@ -5023,53 +4766,6 @@ modeToggle.addEventListener('click',()=>{
   syncThemeControl();
 });
 
-function setMusicPanel(open){
-  musicPanel.classList.toggle('active', open);
-  musicPanel.setAttribute('aria-hidden', String(!open));
-  musicToggle.setAttribute('aria-expanded', String(open));
-  musicToggle.setAttribute('aria-label', open ? '테마곡 플레이어 닫기' : '테마곡 플레이어 열기');
-}
-
-musicToggle.addEventListener('click',(event)=>{
-  event.stopPropagation();
-  setMusicPanel(!musicPanel.classList.contains('active'));
-});
-
-musicPanel.addEventListener('click',(event)=>{
-  event.stopPropagation();
-});
-
-let themeAutoplayStarted = false;
-
-function startThemeOnFirstInteraction(event){
-  if(themeAutoplayStarted) return;
-
-  const mediaTarget = event.target.closest?.('.project-card, .project-modal');
-  if(mediaTarget) return;
-
-  themeAutoplayStarted = true;
-  themeAudio.volume = .65;
-  themeAudio.play().catch(()=>{
-    themeAutoplayStarted = false;
-    musicToggle.classList.add('needs-interaction');
-  });
-}
-
-document.addEventListener('pointerdown',startThemeOnFirstInteraction,{
-  capture:true
-});
-
-themeAudio.addEventListener('play',()=>{
-  musicToggle.classList.remove('needs-interaction');
-  musicToggle.classList.add('is-playing');
-  musicToggle.setAttribute('aria-label','재생 중인 테마곡 플레이어 열기');
-});
-
-themeAudio.addEventListener('pause',()=>{
-  musicToggle.classList.remove('is-playing');
-  musicToggle.setAttribute('aria-label','테마곡 플레이어 열기');
-});
-
 contactToggle.addEventListener('click', ()=>{
   contactPanel.classList.add('active');
 });
@@ -5079,14 +4775,6 @@ contactPanel.addEventListener('click',(e)=>{
 });
 
 window.addEventListener('click',(e)=>{
-  if(
-    musicPanel.classList.contains('active') &&
-    !musicPanel.contains(e.target) &&
-    !musicToggle.contains(e.target)
-  ){
-    setMusicPanel(false);
-  }
-
   if(
     contactPanel.classList.contains('active') &&
     !contactPanel.contains(e.target) &&
