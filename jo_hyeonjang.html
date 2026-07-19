@@ -4234,6 +4234,131 @@ body.light-mode .portfolio-map-leaf{
   color:rgba(17,24,39,.66) !important;
 }
 
+/* MIND MAP DEPTH SYSTEM
+   1뎁스 원고지 → 2뎁스 영역명 → 3뎁스 실제 콘텐츠 */
+.portfolio-map-canvas,
+body.light-mode .portfolio-map-canvas{
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+}
+
+.portfolio-map-core::after{
+  content:'DEPTH 01 · KEYWORD';
+  position:absolute;
+  left:50%;
+  bottom:-30px;
+  transform:translateX(-50%);
+  color:rgba(125,211,252,.7);
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.14em;
+  white-space:nowrap;
+}
+
+.portfolio-map-node,
+body.light-mode .portfolio-map-node{
+  width:236px;
+  min-height:96px;
+  padding:14px 8px 14px 22px;
+  overflow:visible;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+}
+
+.portfolio-map-node::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:20px;
+  width:9px;
+  height:9px;
+  border:2px solid #7dd3fc;
+  border-radius:50%;
+  background:var(--section-bg-dark);
+  box-shadow:0 0 14px rgba(125,211,252,.48);
+}
+
+.portfolio-map-node::after{
+  content:'DEPTH 02';
+  position:absolute;
+  left:22px;
+  bottom:0;
+  color:rgba(125,211,252,.46);
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+
+.portfolio-map-node:hover,
+.portfolio-map-node:focus-visible,
+.portfolio-map-branch:hover .portfolio-map-node,
+body.light-mode .portfolio-map-branch:hover .portfolio-map-node{
+  border:0;
+  background:transparent;
+  box-shadow:none;
+}
+
+.portfolio-map-node strong{
+  font-size:17px;
+}
+
+.portfolio-map-leaves{
+  border-top:1px solid rgba(125,211,252,.42);
+}
+
+.portfolio-map-leaves::after{
+  content:'DEPTH 03 · CONTENT';
+  position:absolute;
+  left:0;
+  top:-22px;
+  color:rgba(125,211,252,.48);
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+
+.portfolio-map-leaf,
+.portfolio-map-branch:hover .portfolio-map-leaf,
+body.light-mode .portfolio-map-leaf,
+body.light-mode .portfolio-map-branch:hover .portfolio-map-leaf,
+body.light-mode .portfolio-map-leaf:hover{
+  min-height:0;
+  padding:8px 4px 4px 12px;
+  overflow:visible;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+
+.portfolio-map-leaf:hover{
+  transform:translateY(-5px);
+}
+
+.portfolio-map-leaf::before{
+  left:0;
+  top:13px;
+  width:5px;
+  height:5px;
+  transform:none;
+}
+
+.portfolio-map-leaf-entry{
+  position:relative;
+}
+
+.portfolio-map-leaf-entry + .portfolio-map-leaf-entry{
+  border-top-color:rgba(125,211,252,.16);
+}
+
+body.light-mode .portfolio-map-node::before{
+  background:var(--section-bg-light);
+}
+
 @media(max-width:1100px){
   .portfolio-view-switch{
     top:86px;
