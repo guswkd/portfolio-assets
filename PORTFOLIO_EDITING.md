@@ -18,20 +18,20 @@
    - `<script>` 시작 부분의 `PORTFOLIO_CONFIG`
    - `sectionOrder`, `lightModeHours`
 
-4. IMC 전략 보기
-   - `#imc` 안의 `.imc-flow`: 순차형 업무 흐름
-   - `#imc` 안의 `.imc-mindmap`: `현장` 중심 마인드맵
-   - `.mind-node`의 제목과 설명을 수정하면 마인드맵 문구가 바뀝니다.
-   - 가지 위치는 각 `.mind-branch`의 `--branch-angle` 값으로 조정합니다.
+4. 전체 포트폴리오 마인드맵
+   - `.portfolio-mindmap`: `현장` 중심의 전체 포트폴리오 지도
+   - `.portfolio-map-node`의 제목과 설명을 수정하면 각 큰 노드의 문구가 바뀝니다.
+   - `data-map-target`은 이동할 섹션 ID와 정확히 같아야 합니다.
+   - 가지 위치는 각 `.portfolio-map-branch`의 `--map-angle` 값으로 조정합니다.
 
-4. 첫 화면 키워드
+5. 첫 화면 키워드
    - `<script>`의 `talentKeywords`
 
-5. 스킬 상세 설명
+6. 스킬 상세 설명
    - `<script>`의 `skillCopy`
    - 스킬명은 HTML의 `data-name`과 정확히 같아야 합니다.
 
-6. 캠페인 카드
+7. 캠페인 카드
    - 제목, 설명, 썸네일은 각 `.project-card` 안에서 직접 수정합니다.
    - 영상이나 PDF 원본이 준비되면 `data-asset-url=""` 안에 URL을 입력합니다.
    - URL이 비어 있으면 `영상 보기` 또는 `PDF 보기` 버튼은 자동으로 숨겨집니다.

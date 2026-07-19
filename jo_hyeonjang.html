@@ -2832,9 +2832,7 @@ body.light-mode .imc-section{
 }
 
 .imc-heading,
-.imc-flow,
-.imc-mindmap,
-.imc-view-controls{
+.imc-flow{
   width:min(1320px,92%);
   margin-left:auto;
   margin-right:auto;
@@ -2881,226 +2879,12 @@ body.light-mode .imc-section{
   line-height:1.75;
 }
 
-.imc-view-controls{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:max-content;
-  max-width:92%;
-  gap:4px;
-  margin-top:38px;
-  padding:5px;
-  border:1px solid rgba(125,211,252,.2);
-  border-radius:999px;
-  background:rgba(7,12,27,.78);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.1),
-    0 12px 34px rgba(0,0,0,.2),
-    0 0 24px rgba(96,165,250,.08);
-  backdrop-filter:blur(20px);
-}
-
-.imc-view-button{
-  min-width:132px;
-  min-height:44px;
-  padding:0 20px;
-  border:1px solid transparent;
-  border-radius:999px;
-  background:transparent;
-  color:rgba(255,255,255,.62);
-  font-family:inherit;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.1em;
-  cursor:pointer;
-  transition:
-    transform .25s ease,
-    color .25s ease,
-    border-color .25s ease,
-    background .25s ease,
-    box-shadow .25s ease;
-}
-
-.imc-view-button:hover{
-  transform:translateY(-2px);
-  color:white;
-  border-color:rgba(125,211,252,.34);
-}
-
-.imc-view-button.active{
-  color:white;
-  border-color:rgba(125,211,252,.44);
-  background:
-    radial-gradient(circle at 22% 18%, rgba(34,211,238,.2), transparent 42%),
-    linear-gradient(135deg, rgba(96,165,250,.15), rgba(167,139,250,.16));
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.18),
-    0 0 22px rgba(96,165,250,.24);
-}
-
-.imc-view-panel[hidden]{
-  display:none;
-}
-
 .imc-flow{
   position:relative;
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
   gap:12px;
   margin-top:54px;
-}
-
-.imc-mindmap{
-  position:relative;
-  min-height:660px;
-  margin-top:24px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:32px;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(34,211,238,.1), transparent 15%),
-    radial-gradient(circle at 50% 50%, rgba(167,139,250,.08), transparent 42%),
-    rgba(255,255,255,.018);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    inset 0 0 90px rgba(0,0,0,.16);
-}
-
-.imc-mindmap::before,
-.imc-mindmap::after{
-  content:'';
-  position:absolute;
-  left:50%;
-  top:50%;
-  border-radius:50%;
-  transform:translate(-50%,-50%);
-  pointer-events:none;
-}
-
-.imc-mindmap::before{
-  width:390px;
-  height:390px;
-  border:1px solid rgba(125,211,252,.08);
-}
-
-.imc-mindmap::after{
-  width:560px;
-  height:560px;
-  border:1px dashed rgba(167,139,250,.07);
-}
-
-.mindmap-center{
-  position:absolute;
-  left:50%;
-  top:50%;
-  z-index:4;
-  width:152px;
-  height:152px;
-  transform:translate(-50%,-50%);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  border:1px solid rgba(125,211,252,.48);
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 34% 24%, rgba(255,255,255,.2), transparent 36%),
-    linear-gradient(135deg, rgba(34,211,238,.28), rgba(96,165,250,.2) 44%, rgba(167,139,250,.28));
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.24),
-    0 0 28px rgba(34,211,238,.22),
-    0 0 62px rgba(167,139,250,.18);
-}
-
-.mindmap-center span{
-  color:rgba(255,255,255,.56);
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:.16em;
-}
-
-.mindmap-center strong{
-  margin-top:5px;
-  font-size:34px;
-  letter-spacing:-2px;
-}
-
-.mind-branch{
-  --branch-distance:270px;
-  position:absolute;
-  left:50%;
-  top:50%;
-  z-index:2;
-  width:var(--branch-distance);
-  height:1px;
-  transform:rotate(var(--branch-angle));
-  transform-origin:left center;
-  background:linear-gradient(90deg, rgba(125,211,252,.58), rgba(167,139,250,.2));
-  box-shadow:0 0 12px rgba(96,165,250,.22);
-}
-
-.mind-branch::before{
-  content:'';
-  position:absolute;
-  left:34%;
-  top:50%;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  transform:translate(-50%,-50%);
-  background:#7dd3fc;
-  box-shadow:0 0 13px rgba(125,211,252,.72);
-}
-
-.mind-node{
-  position:absolute;
-  right:0;
-  top:50%;
-  width:214px;
-  min-height:138px;
-  padding:17px 18px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:19px;
-  transform:translate(50%,-50%) rotate(var(--branch-counter-angle));
-  background:
-    radial-gradient(circle at 14% 8%, rgba(96,165,250,.16), transparent 38%),
-    rgba(12,18,36,.88);
-  backdrop-filter:blur(22px);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.12),
-    0 18px 42px rgba(0,0,0,.24);
-  transition:transform .28s ease, border-color .28s ease, box-shadow .28s ease;
-}
-
-.mind-node:hover{
-  border-color:rgba(125,211,252,.34);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.16),
-    0 0 28px rgba(96,165,250,.14),
-    0 20px 44px rgba(0,0,0,.26);
-}
-
-.mind-node-number{
-  display:block;
-  margin-bottom:9px;
-  color:#7dd3fc;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:.14em;
-}
-
-.mind-node strong{
-  display:block;
-  margin-bottom:7px;
-  font-size:15px;
-  letter-spacing:.04em;
-}
-
-.mind-node p{
-  color:rgba(255,255,255,.58);
-  font-size:11px;
-  line-height:1.55;
-  word-break:keep-all;
 }
 
 .imc-flow::before{
@@ -3258,70 +3042,6 @@ body.light-mode .imc-step{
     rgba(255,255,255,.4);
 }
 
-body.light-mode .imc-view-button{
-  border-color:transparent;
-  background:transparent;
-  color:rgba(17,24,39,.52);
-}
-
-body.light-mode .imc-view-controls{
-  border-color:rgba(14,165,233,.2);
-  background:rgba(255,255,255,.72);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.82),
-    0 12px 32px rgba(79,70,229,.09),
-    0 0 24px rgba(56,189,248,.08);
-}
-
-body.light-mode .imc-view-button:hover,
-body.light-mode .imc-view-button.active{
-  color:#111827;
-  border-color:rgba(14,165,233,.28);
-}
-
-body.light-mode .imc-view-button.active{
-  background:
-    radial-gradient(circle at 22% 18%, rgba(56,189,248,.2), transparent 42%),
-    linear-gradient(135deg, rgba(255,255,255,.76), rgba(237,233,254,.6));
-}
-
-body.light-mode .imc-mindmap{
-  border-color:rgba(14,165,233,.14);
-  background:
-    radial-gradient(circle at 50% 50%, rgba(56,189,248,.14), transparent 17%),
-    radial-gradient(circle at 50% 50%, rgba(167,139,250,.1), transparent 44%),
-    rgba(255,255,255,.22);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.7),
-    inset 0 0 90px rgba(79,70,229,.04);
-}
-
-body.light-mode .mindmap-center{
-  border-color:rgba(14,165,233,.34);
-  color:#111827;
-  background:
-    radial-gradient(circle at 34% 24%, rgba(255,255,255,.68), transparent 38%),
-    linear-gradient(135deg, rgba(56,189,248,.42), rgba(139,92,246,.28), rgba(45,212,191,.34));
-}
-
-body.light-mode .mindmap-center span{
-  color:rgba(17,24,39,.52);
-}
-
-body.light-mode .mind-node{
-  border-color:rgba(14,165,233,.16);
-  background:
-    radial-gradient(circle at 14% 8%, rgba(56,189,248,.16), transparent 38%),
-    rgba(255,255,255,.78);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.78),
-    0 16px 38px rgba(79,70,229,.1);
-}
-
-body.light-mode .mind-node p{
-  color:rgba(17,24,39,.62);
-}
-
 body.light-mode .imc-heading > p,
 body.light-mode .imc-step p,
 body.light-mode .section-intro{
@@ -3358,20 +3078,6 @@ body.light-mode .imc-signal-label{
   .imc-step{
     min-height:180px;
   }
-
-  .imc-mindmap{
-    min-height:620px;
-  }
-
-  .mind-branch{
-    --branch-distance:220px;
-  }
-
-  .mind-node{
-    width:188px;
-    min-height:132px;
-    padding:15px;
-  }
 }
 
 @media(max-width:768px){
@@ -3387,18 +3093,6 @@ body.light-mode .imc-signal-label{
     grid-template-columns:1fr;
     gap:10px;
     margin-top:36px;
-  }
-
-  .imc-view-controls{
-    justify-content:stretch;
-    width:92%;
-    max-width:none;
-    margin-top:28px;
-  }
-
-  .imc-view-button{
-    flex:1;
-    min-width:0;
   }
 
   .imc-step{
@@ -3424,81 +3118,6 @@ body.light-mode .imc-signal-label{
 
   .imc-signal{
     display:none;
-  }
-
-  .imc-mindmap{
-    display:flex;
-    min-height:0;
-    flex-direction:column;
-    gap:12px;
-    margin-top:24px;
-    padding:24px 18px;
-    overflow:visible;
-    border-radius:24px;
-  }
-
-  .imc-mindmap::before,
-  .imc-mindmap::after{
-    display:none;
-  }
-
-  .mindmap-center{
-    position:relative;
-    left:auto;
-    top:auto;
-    width:112px;
-    height:112px;
-    margin:0 auto 18px;
-    transform:none;
-    flex:0 0 auto;
-  }
-
-  .mindmap-center strong{
-    font-size:28px;
-  }
-
-  .mind-branch{
-    position:relative;
-    left:auto;
-    top:auto;
-    width:100%;
-    height:auto;
-    transform:none;
-    background:none;
-    box-shadow:none;
-  }
-
-  .mind-branch::before{
-    left:13px;
-    top:-18px;
-    width:1px;
-    height:24px;
-    border-radius:0;
-    transform:none;
-    background:linear-gradient(to bottom, rgba(125,211,252,.2), rgba(125,211,252,.72));
-    box-shadow:none;
-  }
-
-  .mind-node{
-    position:relative;
-    right:auto;
-    top:auto;
-    width:100%;
-    min-height:0;
-    padding:16px 17px 16px 38px;
-    transform:none;
-  }
-
-  .mind-node::before{
-    content:'';
-    position:absolute;
-    left:10px;
-    top:22px;
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#7dd3fc;
-    box-shadow:0 0 12px rgba(125,211,252,.65);
   }
 
   .section-intro{
@@ -3715,6 +3334,456 @@ body.light-mode .mode-toggle{
   }
 }
 
+/* PORTFOLIO MIND MAP: 전체 포트폴리오 보기 전환 */
+.portfolio-view-switch{
+  position:fixed;
+  top:24px;
+  right:240px;
+  z-index:1001;
+  display:flex;
+  gap:4px;
+  padding:5px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(8,13,28,.72);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.1),
+    0 12px 32px rgba(0,0,0,.2);
+  backdrop-filter:blur(20px);
+}
+
+.portfolio-view-button{
+  min-height:34px;
+  padding:0 13px;
+  border:1px solid transparent;
+  border-radius:999px;
+  background:transparent;
+  color:rgba(255,255,255,.5);
+  font-family:inherit;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
+  cursor:pointer;
+  transition:.25s ease;
+}
+
+.portfolio-view-button:hover{
+  color:white;
+}
+
+.portfolio-view-button.active{
+  border-color:rgba(125,211,252,.34);
+  color:white;
+  background:
+    radial-gradient(circle at 24% 18%, rgba(34,211,238,.22), transparent 44%),
+    linear-gradient(135deg, rgba(96,165,250,.18), rgba(167,139,250,.2));
+  box-shadow:0 0 18px rgba(96,165,250,.16);
+}
+
+.portfolio-mindmap{
+  position:relative;
+  z-index:3;
+  display:none;
+  width:100%;
+  min-height:100svh;
+  padding:104px 24px 42px;
+}
+
+body.mindmap-mode{
+  min-height:100svh;
+  overflow:auto;
+}
+
+body.mindmap-mode .hero,
+body.mindmap-mode .profile-section,
+body.mindmap-mode .imc-section,
+body.mindmap-mode .campaign-section,
+body.mindmap-mode .experience-section,
+body.mindmap-mode .skills-section,
+body.mindmap-mode .quality-section,
+body.mindmap-mode .imc-signal,
+body.mindmap-mode .portfolio-nav,
+body.mindmap-mode .contact-toggle{
+  display:none !important;
+}
+
+body.mindmap-mode .portfolio-mindmap{
+  display:block;
+}
+
+.portfolio-map-header{
+  width:min(1320px,92%);
+  margin:0 auto 18px;
+  text-align:center;
+}
+
+.portfolio-map-kicker{
+  display:inline-block;
+  margin-bottom:10px;
+  color:#7dd3fc;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.16em;
+}
+
+.portfolio-map-header h1{
+  font-size:clamp(30px,4vw,58px);
+  line-height:1;
+  letter-spacing:-3px;
+}
+
+.portfolio-map-header p{
+  margin-top:12px;
+  color:rgba(255,255,255,.56);
+  font-size:13px;
+}
+
+.portfolio-map-canvas{
+  position:relative;
+  width:min(1320px,96%);
+  min-height:720px;
+  margin:0 auto;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:36px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(34,211,238,.12), transparent 16%),
+    radial-gradient(circle at 50% 50%, rgba(167,139,250,.1), transparent 44%),
+    rgba(255,255,255,.018);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 0 110px rgba(0,0,0,.18),
+    0 30px 90px rgba(0,0,0,.18);
+}
+
+.portfolio-map-canvas::before,
+.portfolio-map-canvas::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:50%;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+
+.portfolio-map-canvas::before{
+  width:430px;
+  height:430px;
+  border:1px solid rgba(125,211,252,.08);
+}
+
+.portfolio-map-canvas::after{
+  width:640px;
+  height:640px;
+  border:1px dashed rgba(167,139,250,.08);
+}
+
+.portfolio-map-core{
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:5;
+  display:flex;
+  width:172px;
+  height:172px;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transform:translate(-50%,-50%);
+  border:1px solid rgba(125,211,252,.5);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 32% 22%, rgba(255,255,255,.23), transparent 38%),
+    linear-gradient(135deg, rgba(34,211,238,.3), rgba(96,165,250,.22) 44%, rgba(167,139,250,.3));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.24),
+    0 0 34px rgba(34,211,238,.24),
+    0 0 76px rgba(167,139,250,.2);
+}
+
+.portfolio-map-core small{
+  color:rgba(255,255,255,.56);
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.16em;
+}
+
+.portfolio-map-core strong{
+  margin-top:5px;
+  font-size:40px;
+  letter-spacing:-2px;
+}
+
+.portfolio-map-core span{
+  margin-top:5px;
+  color:rgba(255,255,255,.52);
+  font-size:9px;
+}
+
+.portfolio-map-branch{
+  --map-distance:292px;
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:2;
+  width:var(--map-distance);
+  height:1px;
+  transform:rotate(var(--map-angle));
+  transform-origin:left center;
+  background:linear-gradient(90deg, rgba(125,211,252,.62), rgba(167,139,250,.24));
+  box-shadow:0 0 14px rgba(96,165,250,.2);
+}
+
+.portfolio-map-branch::before{
+  content:'';
+  position:absolute;
+  left:35%;
+  top:50%;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:#7dd3fc;
+  box-shadow:0 0 13px rgba(125,211,252,.72);
+}
+
+.portfolio-map-node{
+  position:absolute;
+  right:0;
+  top:50%;
+  width:224px;
+  min-height:146px;
+  padding:17px 18px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  transform:translate(50%,-50%) rotate(var(--map-counter-angle));
+  background:
+    radial-gradient(circle at 12% 8%, rgba(96,165,250,.18), transparent 40%),
+    rgba(11,17,34,.9);
+  color:white;
+  font-family:inherit;
+  text-align:left;
+  cursor:pointer;
+  backdrop-filter:blur(22px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 18px 44px rgba(0,0,0,.26);
+  transition:border-color .25s ease, box-shadow .25s ease;
+}
+
+.portfolio-map-node:hover,
+.portfolio-map-node:focus-visible{
+  outline:none;
+  border-color:rgba(125,211,252,.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 0 30px rgba(96,165,250,.16),
+    0 20px 46px rgba(0,0,0,.28);
+}
+
+.portfolio-map-node small{
+  display:block;
+  margin-bottom:7px;
+  color:#7dd3fc;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+
+.portfolio-map-node strong{
+  display:block;
+  margin-bottom:9px;
+  font-size:16px;
+  letter-spacing:.03em;
+}
+
+.portfolio-map-node span{
+  display:block;
+  color:rgba(255,255,255,.56);
+  font-size:11px;
+  line-height:1.55;
+  word-break:keep-all;
+}
+
+body.light-mode .portfolio-view-switch{
+  border-color:rgba(14,165,233,.18);
+  background:rgba(255,255,255,.76);
+}
+
+body.light-mode .portfolio-view-button{
+  color:rgba(17,24,39,.48);
+}
+
+body.light-mode .portfolio-view-button:hover,
+body.light-mode .portfolio-view-button.active{
+  color:#111827;
+}
+
+body.light-mode .portfolio-map-header p,
+body.light-mode .portfolio-map-core span{
+  color:rgba(17,24,39,.56);
+}
+
+body.light-mode .portfolio-map-canvas{
+  border-color:rgba(14,165,233,.15);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(56,189,248,.16), transparent 17%),
+    radial-gradient(circle at 50% 50%, rgba(167,139,250,.12), transparent 45%),
+    rgba(255,255,255,.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.74),
+    inset 0 0 100px rgba(79,70,229,.04);
+}
+
+body.light-mode .portfolio-map-core{
+  color:#111827;
+  border-color:rgba(14,165,233,.35);
+  background:
+    radial-gradient(circle at 32% 22%, rgba(255,255,255,.7), transparent 38%),
+    linear-gradient(135deg, rgba(56,189,248,.44), rgba(139,92,246,.3), rgba(45,212,191,.36));
+}
+
+body.light-mode .portfolio-map-core small{
+  color:rgba(17,24,39,.52);
+}
+
+body.light-mode .portfolio-map-node{
+  border-color:rgba(14,165,233,.17);
+  color:#111827;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(56,189,248,.16), transparent 40%),
+    rgba(255,255,255,.82);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.8),
+    0 16px 40px rgba(79,70,229,.11);
+}
+
+body.light-mode .portfolio-map-node span{
+  color:rgba(17,24,39,.62);
+}
+
+@media(max-width:1100px){
+  .portfolio-view-switch{
+    top:86px;
+    right:24px;
+  }
+
+  .portfolio-map-canvas{
+    min-height:680px;
+  }
+
+  .portfolio-map-branch{
+    --map-distance:235px;
+  }
+
+  .portfolio-map-node{
+    width:190px;
+    min-height:136px;
+    padding:15px;
+  }
+}
+
+@media(max-width:768px){
+  .portfolio-view-switch{
+    top:82px;
+    right:16px;
+    left:16px;
+    justify-content:center;
+  }
+
+  .portfolio-view-button{
+    flex:1;
+  }
+
+  .portfolio-mindmap{
+    padding:154px 16px 92px;
+  }
+
+  .portfolio-map-header{
+    width:100%;
+  }
+
+  .portfolio-map-header h1{
+    letter-spacing:-2px;
+  }
+
+  .portfolio-map-canvas{
+    display:flex;
+    width:100%;
+    min-height:0;
+    flex-direction:column;
+    gap:12px;
+    padding:24px 18px;
+    overflow:visible;
+    border-radius:26px;
+  }
+
+  .portfolio-map-canvas::before,
+  .portfolio-map-canvas::after{
+    display:none;
+  }
+
+  .portfolio-map-core{
+    position:relative;
+    left:auto;
+    top:auto;
+    width:124px;
+    height:124px;
+    margin:0 auto 18px;
+    transform:none;
+    flex:0 0 auto;
+  }
+
+  .portfolio-map-core strong{
+    font-size:30px;
+  }
+
+  .portfolio-map-branch{
+    position:relative;
+    left:auto;
+    top:auto;
+    width:100%;
+    height:auto;
+    transform:none;
+    background:none;
+    box-shadow:none;
+  }
+
+  .portfolio-map-branch::before{
+    left:14px;
+    top:-18px;
+    width:1px;
+    height:25px;
+    border-radius:0;
+    transform:none;
+    background:linear-gradient(to bottom, rgba(125,211,252,.18), rgba(125,211,252,.7));
+    box-shadow:none;
+  }
+
+  .portfolio-map-node{
+    position:relative;
+    right:auto;
+    top:auto;
+    width:100%;
+    min-height:0;
+    padding:16px 17px 16px 38px;
+    transform:none;
+  }
+
+  .portfolio-map-node::before{
+    content:'';
+    position:absolute;
+    left:11px;
+    top:22px;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#7dd3fc;
+    box-shadow:0 0 12px rgba(125,211,252,.66);
+  }
+}
+
 </style>
 </head>
 
@@ -3740,6 +3809,14 @@ body.light-mode .mode-toggle{
   </svg>
 </button>
 <button class="contact-toggle" type="button">CONTACT</button>
+<div class="portfolio-view-switch" role="group" aria-label="포트폴리오 보기 방식">
+  <button class="portfolio-view-button active" type="button" data-portfolio-view="portfolio" aria-pressed="true">
+    PORTFOLIO
+  </button>
+  <button class="portfolio-view-button" type="button" data-portfolio-view="mindmap" aria-pressed="false">
+    MIND MAP
+  </button>
+</div>
 <div class="contact-panel">
   <div class="contact-inner">
     <!-- EDIT: 연락처 / 이메일, 전화번호, SNS만 본인 정보로 수정 -->
@@ -3749,6 +3826,70 @@ body.light-mode .mode-toggle{
     <p>SNS : @jjnowfield</p>
   </div>
 </div>
+
+<section class="portfolio-mindmap" aria-label="현장 중심 포트폴리오 마인드맵" aria-hidden="true">
+  <header class="portfolio-map-header">
+    <span class="portfolio-map-kicker">ONE KEYWORD · EVERY EXPERIENCE</span>
+    <h1><span class="field-keyword">현장</span>으로 연결된 포트폴리오</h1>
+    <p>각 노드를 선택하면 연결된 포트폴리오 섹션으로 이동합니다.</p>
+  </header>
+
+  <div class="portfolio-map-canvas">
+    <div class="portfolio-map-core">
+      <small>EVERY TOUCHPOINT</small>
+      <strong>현장</strong>
+      <span>BRAND × PEOPLE</span>
+    </div>
+
+    <div class="portfolio-map-branch" style="--map-angle:-90deg; --map-counter-angle:90deg;">
+      <button class="portfolio-map-node" type="button" data-map-target="profile">
+        <small>01 · FOUNDATION</small>
+        <strong>BRIEF</strong>
+        <span>캠페인 AE로서의 관심, 실무 경험, 업무 태도</span>
+      </button>
+    </div>
+
+    <div class="portfolio-map-branch" style="--map-angle:-30deg; --map-counter-angle:30deg;">
+      <button class="portfolio-map-node" type="button" data-map-target="imc">
+        <small>02 · CONNECTION</small>
+        <strong>STRATEGY</strong>
+        <span>기획 → 운영 → 데이터 → 리포팅 → 인사이트</span>
+      </button>
+    </div>
+
+    <div class="portfolio-map-branch" style="--map-angle:30deg; --map-counter-angle:-30deg;">
+      <button class="portfolio-map-node" type="button" data-map-target="campaign">
+        <small>03 · OUTPUT</small>
+        <strong>EXECUTION</strong>
+        <span>브랜드, AI, 리뷰, 제안서로 남은 캠페인 결과물</span>
+      </button>
+    </div>
+
+    <div class="portfolio-map-branch" style="--map-angle:90deg; --map-counter-angle:-90deg;">
+      <button class="portfolio-map-node" type="button" data-map-target="experience">
+        <small>04 · EVIDENCE</small>
+        <strong>TRACK RECORD</strong>
+        <span>KODA · Next Media Group · Growth B 경험</span>
+      </button>
+    </div>
+
+    <div class="portfolio-map-branch" style="--map-angle:150deg; --map-counter-angle:-150deg;">
+      <button class="portfolio-map-node" type="button" data-map-target="skills">
+        <small>05 · CAPABILITY</small>
+        <strong>TOOLKIT</strong>
+        <span>제작, 문서, 데이터, 매체 운영을 위한 실무 도구</span>
+      </button>
+    </div>
+
+    <div class="portfolio-map-branch" style="--map-angle:210deg; --map-counter-angle:-210deg;">
+      <button class="portfolio-map-node" type="button" data-map-target="check">
+        <small>06 · DIRECTION</small>
+        <strong>SUMMARY</strong>
+        <span>브리프 이해부터 실행과 후속 정리까지 이어지는 강점</span>
+      </button>
+    </div>
+  </div>
+</section>
 
 <section class="hero">
 
@@ -3800,16 +3941,7 @@ body.light-mode .mode-toggle{
     </p>
   </div>
 
-  <div class="imc-view-controls" role="group" aria-label="전략 구조 보기 방식">
-    <button class="imc-view-button active" type="button" data-imc-view="flow" aria-pressed="true" aria-controls="imc-flow-view">
-      FLOW
-    </button>
-    <button class="imc-view-button" type="button" data-imc-view="mindmap" aria-pressed="false" aria-controls="imc-mindmap-view">
-      MIND MAP
-    </button>
-  </div>
-
-  <div class="imc-flow imc-view-panel" id="imc-flow-view" data-imc-panel="flow" aria-label="캠페인 AE 실무 흐름">
+  <div class="imc-flow" aria-label="캠페인 AE 실무 흐름">
     <article class="imc-step" data-stage="PLANNING">
       <span class="imc-step-number">01</span>
       <strong>PLANNING</strong>
@@ -3837,52 +3969,6 @@ body.light-mode .mode-toggle{
     </article>
   </div>
 
-  <div class="imc-mindmap imc-view-panel" id="imc-mindmap-view" data-imc-panel="mindmap" aria-label="현장을 중심으로 연결된 캠페인 AE 마인드맵" hidden>
-    <div class="mindmap-center">
-      <span>EVERY TOUCHPOINT</span>
-      <strong>현장</strong>
-    </div>
-
-    <div class="mind-branch" style="--branch-angle:-90deg; --branch-counter-angle:90deg;">
-      <article class="mind-node">
-        <span class="mind-node-number">01 · DEFINE</span>
-        <strong>기획 PLANNING</strong>
-        <p>브리프와 리서치를 바탕으로 브랜드가 만나야 할 현장과 실행 기준을 정의합니다.</p>
-      </article>
-    </div>
-
-    <div class="mind-branch" style="--branch-angle:-160deg; --branch-counter-angle:160deg;">
-      <article class="mind-node">
-        <span class="mind-node-number">02 · CONNECT</span>
-        <strong>운영 OPERATION</strong>
-        <p>매체·소재·일정·담당자를 연결해 기획이 실제 접점에서 작동하도록 관리합니다.</p>
-      </article>
-    </div>
-
-    <div class="mind-branch" style="--branch-angle:-20deg; --branch-counter-angle:20deg;">
-      <article class="mind-node">
-        <span class="mind-node-number">03 · CAPTURE</span>
-        <strong>데이터 DATA</strong>
-        <p>각 현장에서 발생한 반응을 같은 기준으로 모아 성과와 변동을 확인합니다.</p>
-      </article>
-    </div>
-
-    <div class="mind-branch" style="--branch-angle:145deg; --branch-counter-angle:-145deg;">
-      <article class="mind-node">
-        <span class="mind-node-number">04 · SHARE</span>
-        <strong>리포팅 REPORTING</strong>
-        <p>성과·진행 이슈·피드백을 팀과 광고주가 바로 읽을 수 있는 구조로 공유합니다.</p>
-      </article>
-    </div>
-
-    <div class="mind-branch" style="--branch-angle:35deg; --branch-counter-angle:-35deg;">
-      <article class="mind-node">
-        <span class="mind-node-number">05 · EVOLVE</span>
-        <strong>인사이트 INSIGHT</strong>
-        <p>데이터와 현장 피드백을 다음 기획과 운영의 개선 포인트로 다시 연결합니다.</p>
-      </article>
-    </div>
-  </div>
 </section>
 
 <aside class="imc-signal" aria-hidden="true">
@@ -4457,29 +4543,52 @@ const projectModal = document.querySelector('.project-modal');
 const projectModalBox = document.querySelector('.project-modal-box');
 const projectModalClose = document.querySelector('.project-modal-close');
 const projectModalImage = document.querySelector('.project-modal-image');
-const imcViewButtons = document.querySelectorAll('.imc-view-button');
-const imcViewPanels = document.querySelectorAll('.imc-view-panel');
+const portfolioViewButtons = document.querySelectorAll('.portfolio-view-button');
+const portfolioMindmap = document.querySelector('.portfolio-mindmap');
+const portfolioMapNodes = document.querySelectorAll('.portfolio-map-node');
+let portfolioScrollPosition = 0;
 
-function setImcView(viewName){
-  imcViewButtons.forEach((button)=>{
-    const isActive = button.dataset.imcView === viewName;
+function setPortfolioView(viewName, options = {}){
+  const useMindmap = viewName === 'mindmap';
+
+  if(useMindmap){
+    portfolioScrollPosition = window.scrollY;
+  }
+
+  document.body.classList.toggle('mindmap-mode', useMindmap);
+  portfolioMindmap?.setAttribute('aria-hidden', String(!useMindmap));
+
+  portfolioViewButtons.forEach((button)=>{
+    const isActive = button.dataset.portfolioView === viewName;
     button.classList.toggle('active', isActive);
     button.setAttribute('aria-pressed', String(isActive));
   });
 
-  imcViewPanels.forEach((panel)=>{
-    const isActive = panel.dataset.imcPanel === viewName;
-    panel.hidden = !isActive;
-    panel.setAttribute('aria-hidden', String(!isActive));
+  if(options.keepScroll) return;
+
+  window.requestAnimationFrame(()=>{
+    window.scrollTo({
+      top:useMindmap ? 0 : portfolioScrollPosition,
+      behavior:options.instant ? 'auto' : 'smooth'
+    });
   });
 }
 
-imcViewButtons.forEach((button)=>{
+portfolioViewButtons.forEach((button)=>{
   button.addEventListener('click',()=>{
-    setImcView(button.dataset.imcView || 'flow');
+    setPortfolioView(button.dataset.portfolioView || 'portfolio');
   });
 });
-setImcView('flow');
+
+portfolioMapNodes.forEach((node)=>{
+  node.addEventListener('click',()=>{
+    const target = document.getElementById(node.dataset.mapTarget || '');
+    setPortfolioView('portfolio', { keepScroll:true });
+    window.requestAnimationFrame(()=>{
+      target?.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+});
 
 const skillLogoFallbacks = {
   Illustrator:'Ai',
@@ -5055,6 +5164,9 @@ window.addEventListener('keydown',(e)=>{
     e.preventDefault();
     e.stopPropagation();
     closeProjectModal();
+  }else if(e.key === 'Escape' && document.body.classList.contains('mindmap-mode')){
+    e.preventDefault();
+    setPortfolioView('portfolio');
   }
 
 },{ capture:true });
