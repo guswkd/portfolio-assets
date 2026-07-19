@@ -18,6 +18,12 @@
    - `<script>` 시작 부분의 `PORTFOLIO_CONFIG`
    - `sectionOrder`, `lightModeHours`
 
+4. IMC 전략 보기
+   - `#imc` 안의 `.imc-flow`: 순차형 업무 흐름
+   - `#imc` 안의 `.imc-mindmap`: `현장` 중심 마인드맵
+   - `.mind-node`의 제목과 설명을 수정하면 마인드맵 문구가 바뀝니다.
+   - 가지 위치는 각 `.mind-branch`의 `--branch-angle` 값으로 조정합니다.
+
 4. 첫 화면 키워드
    - `<script>`의 `talentKeywords`
 

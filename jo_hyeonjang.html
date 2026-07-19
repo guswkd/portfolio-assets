@@ -2832,7 +2832,9 @@ body.light-mode .imc-section{
 }
 
 .imc-heading,
-.imc-flow{
+.imc-flow,
+.imc-mindmap,
+.imc-view-controls{
   width:min(1320px,92%);
   margin-left:auto;
   margin-right:auto;
@@ -2879,12 +2881,214 @@ body.light-mode .imc-section{
   line-height:1.75;
 }
 
+.imc-view-controls{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:34px;
+}
+
+.imc-view-button{
+  min-width:112px;
+  min-height:42px;
+  padding:0 17px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(255,255,255,.045);
+  color:rgba(255,255,255,.58);
+  font-family:inherit;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.1em;
+  cursor:pointer;
+  transition:
+    transform .25s ease,
+    color .25s ease,
+    border-color .25s ease,
+    background .25s ease,
+    box-shadow .25s ease;
+}
+
+.imc-view-button:hover{
+  transform:translateY(-2px);
+  color:white;
+  border-color:rgba(125,211,252,.34);
+}
+
+.imc-view-button.active{
+  color:white;
+  border-color:rgba(125,211,252,.44);
+  background:
+    radial-gradient(circle at 22% 18%, rgba(34,211,238,.2), transparent 42%),
+    linear-gradient(135deg, rgba(96,165,250,.15), rgba(167,139,250,.16));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 0 22px rgba(96,165,250,.16);
+}
+
+.imc-view-panel[hidden]{
+  display:none;
+}
+
 .imc-flow{
   position:relative;
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
   gap:12px;
   margin-top:54px;
+}
+
+.imc-mindmap{
+  position:relative;
+  min-height:660px;
+  margin-top:24px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:32px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(34,211,238,.1), transparent 15%),
+    radial-gradient(circle at 50% 50%, rgba(167,139,250,.08), transparent 42%),
+    rgba(255,255,255,.018);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 0 90px rgba(0,0,0,.16);
+}
+
+.imc-mindmap::before,
+.imc-mindmap::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:50%;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+
+.imc-mindmap::before{
+  width:390px;
+  height:390px;
+  border:1px solid rgba(125,211,252,.08);
+}
+
+.imc-mindmap::after{
+  width:560px;
+  height:560px;
+  border:1px dashed rgba(167,139,250,.07);
+}
+
+.mindmap-center{
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:4;
+  width:152px;
+  height:152px;
+  transform:translate(-50%,-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(125,211,252,.48);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255,255,255,.2), transparent 36%),
+    linear-gradient(135deg, rgba(34,211,238,.28), rgba(96,165,250,.2) 44%, rgba(167,139,250,.28));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.24),
+    0 0 28px rgba(34,211,238,.22),
+    0 0 62px rgba(167,139,250,.18);
+}
+
+.mindmap-center span{
+  color:rgba(255,255,255,.56);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.16em;
+}
+
+.mindmap-center strong{
+  margin-top:5px;
+  font-size:34px;
+  letter-spacing:-2px;
+}
+
+.mind-branch{
+  --branch-distance:270px;
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:2;
+  width:var(--branch-distance);
+  height:1px;
+  transform:rotate(var(--branch-angle));
+  transform-origin:left center;
+  background:linear-gradient(90deg, rgba(125,211,252,.58), rgba(167,139,250,.2));
+  box-shadow:0 0 12px rgba(96,165,250,.22);
+}
+
+.mind-branch::before{
+  content:'';
+  position:absolute;
+  left:34%;
+  top:50%;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:#7dd3fc;
+  box-shadow:0 0 13px rgba(125,211,252,.72);
+}
+
+.mind-node{
+  position:absolute;
+  right:0;
+  top:50%;
+  width:214px;
+  min-height:138px;
+  padding:17px 18px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:19px;
+  transform:translate(50%,-50%) rotate(var(--branch-counter-angle));
+  background:
+    radial-gradient(circle at 14% 8%, rgba(96,165,250,.16), transparent 38%),
+    rgba(12,18,36,.88);
+  backdrop-filter:blur(22px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 18px 42px rgba(0,0,0,.24);
+  transition:transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+
+.mind-node:hover{
+  border-color:rgba(125,211,252,.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 0 28px rgba(96,165,250,.14),
+    0 20px 44px rgba(0,0,0,.26);
+}
+
+.mind-node-number{
+  display:block;
+  margin-bottom:9px;
+  color:#7dd3fc;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+
+.mind-node strong{
+  display:block;
+  margin-bottom:7px;
+  font-size:15px;
+  letter-spacing:.04em;
+}
+
+.mind-node p{
+  color:rgba(255,255,255,.58);
+  font-size:11px;
+  line-height:1.55;
+  word-break:keep-all;
 }
 
 .imc-flow::before{
@@ -3042,6 +3246,61 @@ body.light-mode .imc-step{
     rgba(255,255,255,.4);
 }
 
+body.light-mode .imc-view-button{
+  border-color:rgba(17,24,39,.12);
+  background:rgba(255,255,255,.36);
+  color:rgba(17,24,39,.52);
+}
+
+body.light-mode .imc-view-button:hover,
+body.light-mode .imc-view-button.active{
+  color:#111827;
+  border-color:rgba(14,165,233,.28);
+}
+
+body.light-mode .imc-view-button.active{
+  background:
+    radial-gradient(circle at 22% 18%, rgba(56,189,248,.2), transparent 42%),
+    linear-gradient(135deg, rgba(255,255,255,.76), rgba(237,233,254,.6));
+}
+
+body.light-mode .imc-mindmap{
+  border-color:rgba(14,165,233,.14);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(56,189,248,.14), transparent 17%),
+    radial-gradient(circle at 50% 50%, rgba(167,139,250,.1), transparent 44%),
+    rgba(255,255,255,.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.7),
+    inset 0 0 90px rgba(79,70,229,.04);
+}
+
+body.light-mode .mindmap-center{
+  border-color:rgba(14,165,233,.34);
+  color:#111827;
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255,255,255,.68), transparent 38%),
+    linear-gradient(135deg, rgba(56,189,248,.42), rgba(139,92,246,.28), rgba(45,212,191,.34));
+}
+
+body.light-mode .mindmap-center span{
+  color:rgba(17,24,39,.52);
+}
+
+body.light-mode .mind-node{
+  border-color:rgba(14,165,233,.16);
+  background:
+    radial-gradient(circle at 14% 8%, rgba(56,189,248,.16), transparent 38%),
+    rgba(255,255,255,.78);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.78),
+    0 16px 38px rgba(79,70,229,.1);
+}
+
+body.light-mode .mind-node p{
+  color:rgba(17,24,39,.62);
+}
+
 body.light-mode .imc-heading > p,
 body.light-mode .imc-step p,
 body.light-mode .section-intro{
@@ -3078,6 +3337,20 @@ body.light-mode .imc-signal-label{
   .imc-step{
     min-height:180px;
   }
+
+  .imc-mindmap{
+    min-height:620px;
+  }
+
+  .mind-branch{
+    --branch-distance:220px;
+  }
+
+  .mind-node{
+    width:188px;
+    min-height:132px;
+    padding:15px;
+  }
 }
 
 @media(max-width:768px){
@@ -3093,6 +3366,16 @@ body.light-mode .imc-signal-label{
     grid-template-columns:1fr;
     gap:10px;
     margin-top:36px;
+  }
+
+  .imc-view-controls{
+    justify-content:stretch;
+    margin-top:28px;
+  }
+
+  .imc-view-button{
+    flex:1;
+    min-width:0;
   }
 
   .imc-step{
@@ -3118,6 +3401,81 @@ body.light-mode .imc-signal-label{
 
   .imc-signal{
     display:none;
+  }
+
+  .imc-mindmap{
+    display:flex;
+    min-height:0;
+    flex-direction:column;
+    gap:12px;
+    margin-top:24px;
+    padding:24px 18px;
+    overflow:visible;
+    border-radius:24px;
+  }
+
+  .imc-mindmap::before,
+  .imc-mindmap::after{
+    display:none;
+  }
+
+  .mindmap-center{
+    position:relative;
+    left:auto;
+    top:auto;
+    width:112px;
+    height:112px;
+    margin:0 auto 18px;
+    transform:none;
+    flex:0 0 auto;
+  }
+
+  .mindmap-center strong{
+    font-size:28px;
+  }
+
+  .mind-branch{
+    position:relative;
+    left:auto;
+    top:auto;
+    width:100%;
+    height:auto;
+    transform:none;
+    background:none;
+    box-shadow:none;
+  }
+
+  .mind-branch::before{
+    left:13px;
+    top:-18px;
+    width:1px;
+    height:24px;
+    border-radius:0;
+    transform:none;
+    background:linear-gradient(to bottom, rgba(125,211,252,.2), rgba(125,211,252,.72));
+    box-shadow:none;
+  }
+
+  .mind-node{
+    position:relative;
+    right:auto;
+    top:auto;
+    width:100%;
+    min-height:0;
+    padding:16px 17px 16px 38px;
+    transform:none;
+  }
+
+  .mind-node::before{
+    content:'';
+    position:absolute;
+    left:10px;
+    top:22px;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#7dd3fc;
+    box-shadow:0 0 12px rgba(125,211,252,.65);
   }
 
   .section-intro{
@@ -3419,7 +3777,16 @@ body.light-mode .mode-toggle{
     </p>
   </div>
 
-  <div class="imc-flow" aria-label="캠페인 AE 실무 흐름">
+  <div class="imc-view-controls" role="group" aria-label="전략 구조 보기 방식">
+    <button class="imc-view-button active" type="button" data-imc-view="flow" aria-pressed="true" aria-controls="imc-flow-view">
+      FLOW
+    </button>
+    <button class="imc-view-button" type="button" data-imc-view="mindmap" aria-pressed="false" aria-controls="imc-mindmap-view">
+      MIND MAP
+    </button>
+  </div>
+
+  <div class="imc-flow imc-view-panel" id="imc-flow-view" data-imc-panel="flow" aria-label="캠페인 AE 실무 흐름">
     <article class="imc-step" data-stage="PLANNING">
       <span class="imc-step-number">01</span>
       <strong>PLANNING</strong>
@@ -3445,6 +3812,53 @@ body.light-mode .mode-toggle{
       <strong>INSIGHT</strong>
       <p>데이터와 현장 피드백을 함께 살펴 다음 운영에서 확인할 개선 포인트를 정리합니다.</p>
     </article>
+  </div>
+
+  <div class="imc-mindmap imc-view-panel" id="imc-mindmap-view" data-imc-panel="mindmap" aria-label="현장을 중심으로 연결된 캠페인 AE 마인드맵" hidden>
+    <div class="mindmap-center">
+      <span>EVERY TOUCHPOINT</span>
+      <strong>현장</strong>
+    </div>
+
+    <div class="mind-branch" style="--branch-angle:-90deg; --branch-counter-angle:90deg;">
+      <article class="mind-node">
+        <span class="mind-node-number">01 · DEFINE</span>
+        <strong>기획 PLANNING</strong>
+        <p>브리프와 리서치를 바탕으로 브랜드가 만나야 할 현장과 실행 기준을 정의합니다.</p>
+      </article>
+    </div>
+
+    <div class="mind-branch" style="--branch-angle:-160deg; --branch-counter-angle:160deg;">
+      <article class="mind-node">
+        <span class="mind-node-number">02 · CONNECT</span>
+        <strong>운영 OPERATION</strong>
+        <p>매체·소재·일정·담당자를 연결해 기획이 실제 접점에서 작동하도록 관리합니다.</p>
+      </article>
+    </div>
+
+    <div class="mind-branch" style="--branch-angle:-20deg; --branch-counter-angle:20deg;">
+      <article class="mind-node">
+        <span class="mind-node-number">03 · CAPTURE</span>
+        <strong>데이터 DATA</strong>
+        <p>각 현장에서 발생한 반응을 같은 기준으로 모아 성과와 변동을 확인합니다.</p>
+      </article>
+    </div>
+
+    <div class="mind-branch" style="--branch-angle:145deg; --branch-counter-angle:-145deg;">
+      <article class="mind-node">
+        <span class="mind-node-number">04 · SHARE</span>
+        <strong>리포팅 REPORTING</strong>
+        <p>성과·진행 이슈·피드백을 팀과 광고주가 바로 읽을 수 있는 구조로 공유합니다.</p>
+      </article>
+    </div>
+
+    <div class="mind-branch" style="--branch-angle:35deg; --branch-counter-angle:-35deg;">
+      <article class="mind-node">
+        <span class="mind-node-number">05 · EVOLVE</span>
+        <strong>인사이트 INSIGHT</strong>
+        <p>데이터와 현장 피드백을 다음 기획과 운영의 개선 포인트로 다시 연결합니다.</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -4020,6 +4434,29 @@ const projectModal = document.querySelector('.project-modal');
 const projectModalBox = document.querySelector('.project-modal-box');
 const projectModalClose = document.querySelector('.project-modal-close');
 const projectModalImage = document.querySelector('.project-modal-image');
+const imcViewButtons = document.querySelectorAll('.imc-view-button');
+const imcViewPanels = document.querySelectorAll('.imc-view-panel');
+
+function setImcView(viewName){
+  imcViewButtons.forEach((button)=>{
+    const isActive = button.dataset.imcView === viewName;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
+
+  imcViewPanels.forEach((panel)=>{
+    const isActive = panel.dataset.imcPanel === viewName;
+    panel.hidden = !isActive;
+    panel.setAttribute('aria-hidden', String(!isActive));
+  });
+}
+
+imcViewButtons.forEach((button)=>{
+  button.addEventListener('click',()=>{
+    setImcView(button.dataset.imcView || 'flow');
+  });
+});
+setImcView('flow');
 
 const skillLogoFallbacks = {
   Illustrator:'Ai',
