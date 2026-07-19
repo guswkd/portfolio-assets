@@ -3686,6 +3686,11 @@ body.light-mode .portfolio-map-detail-close{
   animation:mapBranchGlow 4.2s ease-in-out infinite alternate;
 }
 
+.portfolio-map-branch:hover,
+.portfolio-map-branch:focus-within{
+  z-index:20;
+}
+
 .portfolio-map-branch:nth-child(3n){
   animation-delay:-1.4s;
 }
@@ -3725,6 +3730,12 @@ body.light-mode .portfolio-map-detail-close{
   width:270px;
   min-height:240px;
   transform:translate(50%,-50%) rotate(var(--map-counter-angle));
+  transition:filter .25s ease;
+}
+
+.portfolio-map-branch:hover .portfolio-map-cluster,
+.portfolio-map-branch:focus-within .portfolio-map-cluster{
+  filter:drop-shadow(0 20px 32px rgba(0,0,0,.22));
 }
 
 .portfolio-map-node{
@@ -3783,6 +3794,10 @@ body.light-mode .portfolio-map-detail-close{
   font-size:11px;
   line-height:1.55;
   word-break:keep-all;
+  display:-webkit-box;
+  overflow:hidden;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
 }
 
 .portfolio-map-leaves{
@@ -3826,6 +3841,25 @@ body.light-mode .portfolio-map-detail-close{
   line-height:1.2 !important;
   text-align:center;
   white-space:normal;
+  overflow:hidden;
+  cursor:default;
+  transform:translateY(0);
+  transition:
+    transform .24s ease,
+    border-color .24s ease,
+    background .24s ease,
+    box-shadow .24s ease;
+}
+
+.portfolio-map-leaf:hover{
+  z-index:5;
+  overflow:visible;
+  transform:translateY(-5px) scale(1.04);
+  border-color:rgba(125,211,252,.42);
+  background:rgba(17,28,52,.98);
+  box-shadow:
+    0 0 26px rgba(96,165,250,.18),
+    0 18px 34px rgba(0,0,0,.28);
 }
 
 .portfolio-map-leaf::before{
@@ -3847,6 +3881,7 @@ body.light-mode .portfolio-map-detail-close{
   gap:6px;
   align-items:center;
   min-width:0;
+  transition:opacity .22s ease;
 }
 
 .portfolio-map-leaf-entry + .portfolio-map-leaf-entry{
@@ -3860,6 +3895,12 @@ body.light-mode .portfolio-map-detail-close{
   border-radius:7px;
   object-fit:contain;
   background:rgba(255,255,255,.08);
+  transition:transform .22s ease, background .22s ease;
+}
+
+.portfolio-map-leaf:hover .portfolio-map-leaf-entry img{
+  transform:scale(1.08);
+  background:rgba(255,255,255,.13);
 }
 
 .portfolio-map-leaf-entry-copy{
@@ -3867,33 +3908,66 @@ body.light-mode .portfolio-map-detail-close{
   min-width:0;
 }
 
-.portfolio-map-leaf-entry strong,
-.portfolio-map-leaf-entry span{
+.portfolio-map-leaf-entry-copy > strong,
+.portfolio-map-leaf-entry-copy > span{
   display:block;
   text-align:left;
   word-break:keep-all;
 }
 
-.portfolio-map-leaf-entry strong{
+.portfolio-map-leaf-entry-copy > strong{
   color:rgba(255,255,255,.88);
   font-size:9px;
   line-height:1.25;
 }
 
-.portfolio-map-leaf-entry span{
+.portfolio-map-leaf-entry-copy > span{
   margin-top:2px;
   color:rgba(255,255,255,.5);
   font-size:8px;
   font-weight:500;
   line-height:1.3;
+  display:-webkit-box;
+  overflow:hidden;
+  max-height:2.6em;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  transition:max-height .28s ease, color .22s ease;
 }
 
-body.light-mode .portfolio-map-leaf-entry strong{
+.portfolio-map-leaf:hover .portfolio-map-leaf-entry-copy > span{
+  display:block;
+  max-height:12em;
+  overflow:visible;
+  color:rgba(255,255,255,.72);
+}
+
+body.light-mode .portfolio-map-leaf-entry-copy > strong{
   color:rgba(17,24,39,.82);
 }
 
-body.light-mode .portfolio-map-leaf-entry span{
+body.light-mode .portfolio-map-leaf-entry-copy > span{
   color:rgba(17,24,39,.52);
+}
+
+body.light-mode .portfolio-map-leaf:hover{
+  background:rgba(255,255,255,.98);
+  border-color:rgba(14,165,233,.38);
+  box-shadow:
+    0 0 24px rgba(56,189,248,.16),
+    0 18px 34px rgba(79,70,229,.12);
+}
+
+body.light-mode .portfolio-map-leaf:hover .portfolio-map-leaf-entry-copy > span{
+  color:rgba(17,24,39,.72);
+}
+
+@media(hover:none){
+  .portfolio-map-leaf:hover{
+    transform:none;
+    overflow:hidden;
+    box-shadow:none;
+  }
 }
 
 body.light-mode .portfolio-view-switch{
