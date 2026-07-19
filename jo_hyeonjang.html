@@ -3448,20 +3448,17 @@ body.mindmap-mode .portfolio-mindmap{
   --map-tilt-x:0deg;
   --map-tilt-y:0deg;
   position:relative;
-  width:min(1320px,96%);
-  min-height:820px;
+  width:min(1480px,100%);
+  min-height:980px;
   margin:0 auto;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:36px;
+  overflow:visible;
+  border:0;
+  border-radius:0;
   background:
     radial-gradient(circle at 50% 50%, rgba(34,211,238,.12), transparent 16%),
     radial-gradient(circle at 50% 50%, rgba(167,139,250,.1), transparent 44%),
-    rgba(255,255,255,.018);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    inset 0 0 110px rgba(0,0,0,.18),
-    0 30px 90px rgba(0,0,0,.18);
+    transparent;
+  box-shadow:none;
   perspective:1100px;
   transform-style:preserve-3d;
   background-position:
@@ -3554,7 +3551,7 @@ body.mindmap-mode .portfolio-mindmap{
 }
 
 .portfolio-map-branch{
-  --map-distance:320px;
+  --map-distance:300px;
   --branch-x:0px;
   --branch-y:0px;
   position:absolute;
@@ -3607,16 +3604,24 @@ body.mindmap-mode .portfolio-mindmap{
   box-shadow:0 0 13px rgba(125,211,252,.72);
 }
 
-.portfolio-map-node{
+.portfolio-map-cluster{
   position:absolute;
   right:0;
   top:50%;
-  width:252px;
-  min-height:188px;
+  width:270px;
+  min-height:240px;
+  transform:translate(50%,-50%) rotate(var(--map-counter-angle));
+}
+
+.portfolio-map-node{
+  position:relative;
+  width:220px;
+  min-height:112px;
+  margin:0 auto;
   padding:17px 18px;
   border:1px solid rgba(255,255,255,.12);
   border-radius:20px;
-  transform:translate(50%,-50%) rotate(var(--map-counter-angle));
+  transform:none;
   background:
     radial-gradient(circle at 12% 8%, rgba(96,165,250,.18), transparent 40%),
     rgba(11,17,34,.9);
@@ -3639,10 +3644,7 @@ body.mindmap-mode .portfolio-mindmap{
     inset 0 1px 0 rgba(255,255,255,.16),
     0 0 30px rgba(96,165,250,.16),
     0 20px 46px rgba(0,0,0,.28);
-  transform:
-    translate(50%,-50%)
-    rotate(var(--map-counter-angle))
-    scale(1.035);
+  transform:translateY(-5px) scale(1.025);
 }
 
 .portfolio-map-node small{
@@ -3670,20 +3672,36 @@ body.mindmap-mode .portfolio-mindmap{
 }
 
 .portfolio-map-leaves{
-  display:flex !important;
-  gap:6px;
-  flex-wrap:wrap;
-  margin-top:12px;
-  padding-top:11px;
-  border-top:1px solid rgba(255,255,255,.09);
+  position:relative;
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:7px;
+  width:360px;
+  margin:26px 0 0 50%;
+  padding-top:13px;
+  transform:translateX(-50%);
+  border-top:1px solid rgba(125,211,252,.22);
+}
+
+.portfolio-map-leaves::before{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:-27px;
+  width:1px;
+  height:27px;
+  background:linear-gradient(to bottom, rgba(125,211,252,.64), rgba(125,211,252,.2));
+  box-shadow:0 0 9px rgba(125,211,252,.22);
 }
 
 .portfolio-map-leaf{
-  display:inline-flex !important;
+  position:relative;
+  display:flex !important;
   align-items:center;
-  width:auto;
-  min-height:24px;
-  padding:4px 8px;
+  justify-content:center;
+  width:100%;
+  min-height:38px;
+  padding:7px 8px;
   border:1px solid rgba(125,211,252,.15);
   border-radius:999px;
   background:rgba(125,211,252,.055);
@@ -3692,14 +3710,18 @@ body.mindmap-mode .portfolio-mindmap{
   font-style:normal;
   font-weight:700;
   line-height:1.2 !important;
-  white-space:nowrap;
+  text-align:center;
+  white-space:normal;
 }
 
 .portfolio-map-leaf::before{
   content:'';
+  position:absolute;
+  left:50%;
+  top:-14px;
   width:4px;
   height:4px;
-  margin-right:5px;
+  transform:translateX(-50%);
   border-radius:50%;
   background:#7dd3fc;
   box-shadow:0 0 7px rgba(125,211,252,.62);
@@ -3725,14 +3747,11 @@ body.light-mode .portfolio-map-core span{
 }
 
 body.light-mode .portfolio-map-canvas{
-  border-color:rgba(14,165,233,.15);
   background:
     radial-gradient(circle at 50% 50%, rgba(56,189,248,.16), transparent 17%),
     radial-gradient(circle at 50% 50%, rgba(167,139,250,.12), transparent 45%),
-    rgba(255,255,255,.24);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.74),
-    inset 0 0 100px rgba(79,70,229,.04);
+    transparent;
+  box-shadow:none;
 }
 
 body.light-mode .portfolio-map-core{
@@ -3779,17 +3798,25 @@ body.light-mode .portfolio-map-leaf{
   }
 
   .portfolio-map-canvas{
-    min-height:760px;
+    min-height:880px;
   }
 
   .portfolio-map-branch{
-    --map-distance:250px;
+    --map-distance:235px;
+  }
+
+  .portfolio-map-cluster{
+    width:230px;
   }
 
   .portfolio-map-node{
-    width:210px;
-    min-height:176px;
+    width:190px;
+    min-height:108px;
     padding:15px;
+  }
+
+  .portfolio-map-leaves{
+    width:300px;
   }
 }
 
@@ -3870,6 +3897,15 @@ body.light-mode .portfolio-map-leaf{
     box-shadow:none;
   }
 
+  .portfolio-map-cluster{
+    position:relative;
+    right:auto;
+    top:auto;
+    width:100%;
+    min-height:0;
+    transform:none;
+  }
+
   .portfolio-map-node{
     position:relative;
     right:auto;
@@ -3895,6 +3931,19 @@ body.light-mode .portfolio-map-leaf{
     border-radius:50%;
     background:#7dd3fc;
     box-shadow:0 0 12px rgba(125,211,252,.66);
+  }
+
+  .portfolio-map-leaves{
+    width:100%;
+    margin:18px 0 0;
+    padding:12px 0 0 30px;
+    transform:none;
+  }
+
+  .portfolio-map-leaves::before{
+    left:14px;
+    top:-19px;
+    height:31px;
   }
 }
 
@@ -3968,86 +4017,93 @@ body.light-mode .portfolio-map-leaf{
     </div>
 
     <div class="portfolio-map-branch" style="--map-angle:-90deg; --map-counter-angle:90deg;">
-      <button class="portfolio-map-node" type="button" data-map-target="profile">
-        <small>01 · FOUNDATION</small>
-        <strong>BRIEF</strong>
-        <span>캠페인 AE로서의 관심, 실무 경험, 업무 태도</span>
+      <div class="portfolio-map-cluster">
+        <button class="portfolio-map-node" type="button" data-map-target="profile">
+          <small>01 · FOUNDATION</small>
+          <strong>BRIEF</strong>
+          <span>캠페인 AE로서의 출발점</span>
+        </button>
         <span class="portfolio-map-leaves">
           <span class="portfolio-map-leaf">Interest</span>
           <span class="portfolio-map-leaf">Practice</span>
           <span class="portfolio-map-leaf">Attitude</span>
         </span>
-      </button>
+      </div>
     </div>
 
     <div class="portfolio-map-branch" style="--map-angle:-30deg; --map-counter-angle:30deg;">
-      <button class="portfolio-map-node" type="button" data-map-target="imc">
-        <small>02 · CONNECTION</small>
-        <strong>STRATEGY</strong>
-        <span>기획 → 운영 → 데이터 → 리포팅 → 인사이트</span>
+      <div class="portfolio-map-cluster">
+        <button class="portfolio-map-node" type="button" data-map-target="imc">
+          <small>02 · CONNECTION</small>
+          <strong>STRATEGY</strong>
+          <span>접점을 설계하고 다음 실행으로 연결</span>
+        </button>
         <span class="portfolio-map-leaves">
-          <span class="portfolio-map-leaf">기획</span>
-          <span class="portfolio-map-leaf">운영</span>
-          <span class="portfolio-map-leaf">데이터</span>
-          <span class="portfolio-map-leaf">리포팅</span>
+          <span class="portfolio-map-leaf">기획 · 운영</span>
+          <span class="portfolio-map-leaf">데이터 · 리포팅</span>
           <span class="portfolio-map-leaf">인사이트</span>
         </span>
-      </button>
+      </div>
     </div>
 
     <div class="portfolio-map-branch" style="--map-angle:30deg; --map-counter-angle:-30deg;">
-      <button class="portfolio-map-node" type="button" data-map-target="campaign">
-        <small>03 · OUTPUT</small>
-        <strong>EXECUTION</strong>
-        <span>브랜드, AI, 리뷰, 제안서로 남은 캠페인 결과물</span>
+      <div class="portfolio-map-cluster">
+        <button class="portfolio-map-node" type="button" data-map-target="campaign">
+          <small>03 · OUTPUT</small>
+          <strong>EXECUTION</strong>
+          <span>아이디어를 실제 결과물로 전환</span>
+        </button>
         <span class="portfolio-map-leaves">
           <span class="portfolio-map-leaf">브랜드 캠페인</span>
-          <span class="portfolio-map-leaf">AI</span>
-          <span class="portfolio-map-leaf">리뷰</span>
+          <span class="portfolio-map-leaf">AI · 리뷰</span>
           <span class="portfolio-map-leaf">제안서</span>
         </span>
-      </button>
+      </div>
     </div>
 
     <div class="portfolio-map-branch" style="--map-angle:90deg; --map-counter-angle:-90deg;">
-      <button class="portfolio-map-node" type="button" data-map-target="experience">
-        <small>04 · EVIDENCE</small>
-        <strong>TRACK RECORD</strong>
-        <span>KODA · Next Media Group · Growth B 경험</span>
+      <div class="portfolio-map-cluster">
+        <button class="portfolio-map-node" type="button" data-map-target="experience">
+          <small>04 · EVIDENCE</small>
+          <strong>TRACK RECORD</strong>
+          <span>교육에서 인턴과 실무까지 확장</span>
+        </button>
         <span class="portfolio-map-leaves">
           <span class="portfolio-map-leaf">KODA</span>
           <span class="portfolio-map-leaf">NMG</span>
           <span class="portfolio-map-leaf">Growth B</span>
         </span>
-      </button>
+      </div>
     </div>
 
     <div class="portfolio-map-branch" style="--map-angle:150deg; --map-counter-angle:-150deg;">
-      <button class="portfolio-map-node" type="button" data-map-target="skills">
-        <small>05 · CAPABILITY</small>
-        <strong>TOOLKIT</strong>
-        <span>제작, 문서, 데이터, 매체 운영을 위한 실무 도구</span>
+      <div class="portfolio-map-cluster">
+        <button class="portfolio-map-node" type="button" data-map-target="skills">
+          <small>05 · CAPABILITY</small>
+          <strong>TOOLKIT</strong>
+          <span>실행 속도와 완성도를 만드는 도구</span>
+        </button>
         <span class="portfolio-map-leaves">
           <span class="portfolio-map-leaf">Creative</span>
           <span class="portfolio-map-leaf">Office</span>
-          <span class="portfolio-map-leaf">AI</span>
-          <span class="portfolio-map-leaf">Media</span>
+          <span class="portfolio-map-leaf">AI · Media</span>
         </span>
-      </button>
+      </div>
     </div>
 
     <div class="portfolio-map-branch" style="--map-angle:210deg; --map-counter-angle:-210deg;">
-      <button class="portfolio-map-node" type="button" data-map-target="check">
-        <small>06 · DIRECTION</small>
-        <strong>SUMMARY</strong>
-        <span>브리프 이해부터 실행과 후속 정리까지 이어지는 강점</span>
+      <div class="portfolio-map-cluster">
+        <button class="portfolio-map-node" type="button" data-map-target="check">
+          <small>06 · DIRECTION</small>
+          <strong>SUMMARY</strong>
+          <span>현장을 놓치지 않는 업무 방향</span>
+        </button>
         <span class="portfolio-map-leaves">
           <span class="portfolio-map-leaf">Brief</span>
-          <span class="portfolio-map-leaf">Coordination</span>
-          <span class="portfolio-map-leaf">Proposal</span>
-          <span class="portfolio-map-leaf">Follow-up</span>
+          <span class="portfolio-map-leaf">Operation</span>
+          <span class="portfolio-map-leaf">Insight</span>
         </span>
-      </button>
+      </div>
     </div>
   </div>
 </section>
