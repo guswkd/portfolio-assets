@@ -3441,7 +3441,7 @@ body.mindmap-mode .portfolio-mindmap{
 .portfolio-map-canvas{
   position:relative;
   width:min(1320px,96%);
-  min-height:720px;
+  min-height:820px;
   margin:0 auto;
   overflow:hidden;
   border:1px solid rgba(255,255,255,.09);
@@ -3522,7 +3522,7 @@ body.mindmap-mode .portfolio-mindmap{
 }
 
 .portfolio-map-branch{
-  --map-distance:292px;
+  --map-distance:320px;
   position:absolute;
   left:50%;
   top:50%;
@@ -3552,8 +3552,8 @@ body.mindmap-mode .portfolio-mindmap{
   position:absolute;
   right:0;
   top:50%;
-  width:224px;
-  min-height:146px;
+  width:252px;
+  min-height:188px;
   padding:17px 18px;
   border:1px solid rgba(255,255,255,.12);
   border-radius:20px;
@@ -3604,6 +3604,42 @@ body.mindmap-mode .portfolio-mindmap{
   font-size:11px;
   line-height:1.55;
   word-break:keep-all;
+}
+
+.portfolio-map-leaves{
+  display:flex !important;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:12px;
+  padding-top:11px;
+  border-top:1px solid rgba(255,255,255,.09);
+}
+
+.portfolio-map-leaf{
+  display:inline-flex !important;
+  align-items:center;
+  width:auto;
+  min-height:24px;
+  padding:4px 8px;
+  border:1px solid rgba(125,211,252,.15);
+  border-radius:999px;
+  background:rgba(125,211,252,.055);
+  color:rgba(255,255,255,.68) !important;
+  font-size:9px !important;
+  font-style:normal;
+  font-weight:700;
+  line-height:1.2 !important;
+  white-space:nowrap;
+}
+
+.portfolio-map-leaf::before{
+  content:'';
+  width:4px;
+  height:4px;
+  margin-right:5px;
+  border-radius:50%;
+  background:#7dd3fc;
+  box-shadow:0 0 7px rgba(125,211,252,.62);
 }
 
 body.light-mode .portfolio-view-switch{
@@ -3663,6 +3699,16 @@ body.light-mode .portfolio-map-node span{
   color:rgba(17,24,39,.62);
 }
 
+body.light-mode .portfolio-map-leaves{
+  border-top-color:rgba(17,24,39,.09);
+}
+
+body.light-mode .portfolio-map-leaf{
+  border-color:rgba(14,165,233,.14);
+  background:rgba(56,189,248,.07);
+  color:rgba(17,24,39,.66) !important;
+}
+
 @media(max-width:1100px){
   .portfolio-view-switch{
     top:86px;
@@ -3670,16 +3716,16 @@ body.light-mode .portfolio-map-node span{
   }
 
   .portfolio-map-canvas{
-    min-height:680px;
+    min-height:760px;
   }
 
   .portfolio-map-branch{
-    --map-distance:235px;
+    --map-distance:250px;
   }
 
   .portfolio-map-node{
-    width:190px;
-    min-height:136px;
+    width:210px;
+    min-height:176px;
     padding:15px;
   }
 }
@@ -3831,7 +3877,7 @@ body.light-mode .portfolio-map-node span{
   <header class="portfolio-map-header">
     <span class="portfolio-map-kicker">ONE KEYWORD · EVERY EXPERIENCE</span>
     <h1><span class="field-keyword">현장</span>으로 연결된 포트폴리오</h1>
-    <p>각 노드를 선택하면 연결된 포트폴리오 섹션으로 이동합니다.</p>
+    <p>현장에서 여섯 영역으로, 다시 실제 업무·경험·도구로 확장됩니다. 큰 노드를 선택하면 해당 섹션으로 이동합니다.</p>
   </header>
 
   <div class="portfolio-map-canvas">
@@ -3846,6 +3892,11 @@ body.light-mode .portfolio-map-node span{
         <small>01 · FOUNDATION</small>
         <strong>BRIEF</strong>
         <span>캠페인 AE로서의 관심, 실무 경험, 업무 태도</span>
+        <span class="portfolio-map-leaves">
+          <span class="portfolio-map-leaf">Interest</span>
+          <span class="portfolio-map-leaf">Practice</span>
+          <span class="portfolio-map-leaf">Attitude</span>
+        </span>
       </button>
     </div>
 
@@ -3854,6 +3905,13 @@ body.light-mode .portfolio-map-node span{
         <small>02 · CONNECTION</small>
         <strong>STRATEGY</strong>
         <span>기획 → 운영 → 데이터 → 리포팅 → 인사이트</span>
+        <span class="portfolio-map-leaves">
+          <span class="portfolio-map-leaf">기획</span>
+          <span class="portfolio-map-leaf">운영</span>
+          <span class="portfolio-map-leaf">데이터</span>
+          <span class="portfolio-map-leaf">리포팅</span>
+          <span class="portfolio-map-leaf">인사이트</span>
+        </span>
       </button>
     </div>
 
@@ -3862,6 +3920,12 @@ body.light-mode .portfolio-map-node span{
         <small>03 · OUTPUT</small>
         <strong>EXECUTION</strong>
         <span>브랜드, AI, 리뷰, 제안서로 남은 캠페인 결과물</span>
+        <span class="portfolio-map-leaves">
+          <span class="portfolio-map-leaf">브랜드 캠페인</span>
+          <span class="portfolio-map-leaf">AI</span>
+          <span class="portfolio-map-leaf">리뷰</span>
+          <span class="portfolio-map-leaf">제안서</span>
+        </span>
       </button>
     </div>
 
@@ -3870,6 +3934,11 @@ body.light-mode .portfolio-map-node span{
         <small>04 · EVIDENCE</small>
         <strong>TRACK RECORD</strong>
         <span>KODA · Next Media Group · Growth B 경험</span>
+        <span class="portfolio-map-leaves">
+          <span class="portfolio-map-leaf">KODA</span>
+          <span class="portfolio-map-leaf">NMG</span>
+          <span class="portfolio-map-leaf">Growth B</span>
+        </span>
       </button>
     </div>
 
@@ -3878,6 +3947,12 @@ body.light-mode .portfolio-map-node span{
         <small>05 · CAPABILITY</small>
         <strong>TOOLKIT</strong>
         <span>제작, 문서, 데이터, 매체 운영을 위한 실무 도구</span>
+        <span class="portfolio-map-leaves">
+          <span class="portfolio-map-leaf">Creative</span>
+          <span class="portfolio-map-leaf">Office</span>
+          <span class="portfolio-map-leaf">AI</span>
+          <span class="portfolio-map-leaf">Media</span>
+        </span>
       </button>
     </div>
 
@@ -3886,6 +3961,12 @@ body.light-mode .portfolio-map-node span{
         <small>06 · DIRECTION</small>
         <strong>SUMMARY</strong>
         <span>브리프 이해부터 실행과 후속 정리까지 이어지는 강점</span>
+        <span class="portfolio-map-leaves">
+          <span class="portfolio-map-leaf">Brief</span>
+          <span class="portfolio-map-leaf">Coordination</span>
+          <span class="portfolio-map-leaf">Proposal</span>
+          <span class="portfolio-map-leaf">Follow-up</span>
+        </span>
       </button>
     </div>
   </div>
