@@ -3389,6 +3389,24 @@ body.light-mode .mode-toggle{
   padding:104px 24px 42px;
   overflow:auto;
   overscroll-behavior:contain;
+  scrollbar-color:rgba(125,211,252,.46) rgba(255,255,255,.04);
+  scrollbar-width:thin;
+}
+
+.portfolio-mindmap::-webkit-scrollbar{
+  width:10px;
+  height:10px;
+}
+
+.portfolio-mindmap::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.035);
+}
+
+.portfolio-mindmap::-webkit-scrollbar-thumb{
+  border:2px solid transparent;
+  border-radius:999px;
+  background:linear-gradient(135deg, rgba(34,211,238,.7), rgba(167,139,250,.7));
+  background-clip:padding-box;
 }
 
 body.mindmap-mode{
@@ -3533,8 +3551,17 @@ body.light-mode .portfolio-map-detail-close{
 }
 
 .portfolio-map-header{
+  position:sticky;
+  top:12px;
+  z-index:40;
   width:min(1320px,92%);
-  margin:0 auto 18px;
+  margin:0 auto 28px;
+  padding:18px 28px 20px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:26px;
+  background:rgba(8,13,28,.72);
+  box-shadow:0 18px 50px rgba(0,0,0,.16);
+  backdrop-filter:blur(24px) saturate(135%);
   text-align:center;
 }
 
@@ -3557,6 +3584,7 @@ body.light-mode .portfolio-map-detail-close{
   margin-top:12px;
   color:rgba(255,255,255,.56);
   font-size:13px;
+  line-height:1.55;
 }
 
 .portfolio-map-canvas{
@@ -3574,13 +3602,18 @@ body.light-mode .portfolio-map-detail-close{
   min-height:1800px;
   margin:0 auto 80px;
   overflow:visible;
-  border:0;
-  border-radius:0;
+  border:1px solid rgba(125,211,252,.1);
+  border-radius:46px;
   background:
     radial-gradient(circle at 50% 50%, rgba(34,211,238,.12), transparent 16%),
     radial-gradient(circle at 50% 50%, rgba(167,139,250,.1), transparent 44%),
-    transparent;
-  box-shadow:none;
+    linear-gradient(rgba(125,211,252,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125,211,252,.025) 1px, transparent 1px),
+    rgba(7,12,26,.3);
+  background-size:auto, auto, 48px 48px, 48px 48px, auto;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 40px 120px rgba(0,0,0,.16);
   perspective:1100px;
   transform-style:preserve-3d;
   background-position:
@@ -4001,8 +4034,20 @@ body.light-mode .portfolio-map-canvas{
   background:
     radial-gradient(circle at 50% 50%, rgba(56,189,248,.16), transparent 17%),
     radial-gradient(circle at 50% 50%, rgba(167,139,250,.12), transparent 45%),
-    transparent;
-  box-shadow:none;
+    linear-gradient(rgba(14,165,233,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,165,233,.035) 1px, transparent 1px),
+    rgba(255,255,255,.2);
+  background-size:auto, auto, 48px 48px, 48px 48px, auto;
+  border-color:rgba(14,165,233,.11);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    0 34px 90px rgba(79,70,229,.08);
+}
+
+body.light-mode .portfolio-map-header{
+  border-color:rgba(14,165,233,.12);
+  background:rgba(244,249,255,.76);
+  box-shadow:0 16px 46px rgba(79,70,229,.08);
 }
 
 body.light-mode .portfolio-map-core{
@@ -4114,6 +4159,13 @@ body.light-mode .portfolio-map-leaf{
 
   .portfolio-map-header{
     width:100%;
+    position:relative;
+    top:auto;
+    padding:0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+    backdrop-filter:none;
   }
 
   .portfolio-map-header h1{
