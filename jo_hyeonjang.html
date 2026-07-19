@@ -3889,6 +3889,16 @@ body.light-mode .portfolio-map-detail-close{
   letter-spacing:.03em;
 }
 
+.portfolio-map-node[data-map-target="skills"]{
+  width:242px;
+}
+
+.portfolio-map-node[data-map-target="skills"] strong{
+  font-size:14px;
+  letter-spacing:.015em;
+  white-space:nowrap;
+}
+
 .portfolio-map-node span{
   display:block;
   color:rgba(255,255,255,.56);
@@ -4083,6 +4093,24 @@ body.light-mode .portfolio-map-detail-close{
   overflow:visible;
   color:rgba(255,255,255,.72);
   opacity:1;
+}
+
+.portfolio-map-branch:has(.portfolio-map-node[data-map-target="skills"]) .portfolio-map-leaves{
+  width:372px;
+}
+
+.portfolio-map-branch:has(.portfolio-map-node[data-map-target="skills"]) .portfolio-map-leaf{
+  gap:5px;
+  padding:8px;
+}
+
+.portfolio-map-branch:has(.portfolio-map-node[data-map-target="skills"]) .portfolio-map-leaf-entry-copy > span{
+  display:none;
+}
+
+.portfolio-map-branch:has(.portfolio-map-node[data-map-target="skills"]) .portfolio-map-leaf-entry img{
+  width:28px;
+  height:28px;
 }
 
 body.light-mode .portfolio-map-leaf-entry-copy > strong{
@@ -4392,6 +4420,10 @@ body.light-mode .portfolio-map-leaf{
     opacity:1;
     visibility:visible;
     pointer-events:auto;
+  }
+
+  .portfolio-map-branch:has(.portfolio-map-node[data-map-target="skills"]) .portfolio-map-leaves{
+    width:100%;
   }
 
   .portfolio-map-leaves::before{
