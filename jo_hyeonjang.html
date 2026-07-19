@@ -3385,13 +3385,20 @@ body.light-mode .mode-toggle{
   z-index:3;
   display:none;
   width:100%;
-  min-height:100svh;
+  height:100svh;
   padding:104px 24px 42px;
+  overflow:auto;
+  overscroll-behavior:contain;
 }
 
 body.mindmap-mode{
-  min-height:100svh;
-  overflow:auto;
+  height:100svh;
+  overflow:hidden;
+}
+
+body.mindmap-mode .scroll-progress-bar{
+  opacity:0;
+  visibility:hidden;
 }
 
 body.mindmap-mode .hero,
@@ -3562,9 +3569,10 @@ body.light-mode .portfolio-map-detail-close{
   --map-tilt-x:0deg;
   --map-tilt-y:0deg;
   position:relative;
-  width:min(1480px,100%);
-  min-height:980px;
-  margin:0 auto;
+  width:2200px;
+  min-width:2200px;
+  min-height:1800px;
+  margin:0 auto 80px;
   overflow:visible;
   border:0;
   border-radius:0;
@@ -3665,7 +3673,7 @@ body.light-mode .portfolio-map-detail-close{
 }
 
 .portfolio-map-branch{
-  --map-distance:300px;
+  --map-distance:600px;
   --branch-x:0px;
   --branch-y:0px;
   position:absolute;
@@ -3727,8 +3735,8 @@ body.light-mode .portfolio-map-detail-close{
   position:absolute;
   right:0;
   top:50%;
-  width:270px;
-  min-height:240px;
+  width:390px;
+  min-height:300px;
   transform:translate(50%,-50%) rotate(var(--map-counter-angle));
   transition:filter .25s ease;
 }
@@ -3740,7 +3748,7 @@ body.light-mode .portfolio-map-detail-close{
 
 .portfolio-map-node{
   position:relative;
-  width:220px;
+  width:260px;
   min-height:126px;
   margin:0 auto;
   padding:17px 18px;
@@ -3805,7 +3813,7 @@ body.light-mode .portfolio-map-detail-close{
   display:grid !important;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:7px;
-  width:360px;
+  width:450px;
   margin:26px 0 0 50%;
   padding-top:13px;
   transform:translateX(-50%);
@@ -3854,7 +3862,7 @@ body.light-mode .portfolio-map-detail-close{
 .portfolio-map-leaf:hover{
   z-index:5;
   overflow:visible;
-  transform:translateY(-5px) scale(1.04);
+  transform:translateY(-4px) scale(1.018);
   border-color:rgba(125,211,252,.42);
   background:rgba(17,28,52,.98);
   box-shadow:
@@ -4041,25 +4049,27 @@ body.light-mode .portfolio-map-leaf{
   }
 
   .portfolio-map-canvas{
-    min-height:880px;
+    width:2000px;
+    min-width:2000px;
+    min-height:1650px;
   }
 
   .portfolio-map-branch{
-    --map-distance:235px;
+    --map-distance:540px;
   }
 
   .portfolio-map-cluster{
-    width:230px;
+    width:360px;
   }
 
   .portfolio-map-node{
-    width:190px;
+    width:240px;
     min-height:120px;
     padding:15px;
   }
 
   .portfolio-map-leaves{
-    width:300px;
+    width:420px;
   }
 }
 
@@ -4076,7 +4086,10 @@ body.light-mode .portfolio-map-leaf{
   }
 
   .portfolio-mindmap{
+    height:auto;
+    min-height:100svh;
     padding:154px 16px 92px;
+    overflow:visible;
   }
 
   .portfolio-map-detail{
@@ -4110,6 +4123,7 @@ body.light-mode .portfolio-map-leaf{
   .portfolio-map-canvas{
     display:flex;
     width:100%;
+    min-width:0;
     min-height:0;
     flex-direction:column;
     gap:12px;
@@ -5226,6 +5240,17 @@ function setPortfolioView(viewName, options = {}){
   if(options.keepScroll) return;
 
   window.requestAnimationFrame(()=>{
+    if(useMindmap && portfolioMindmap && portfolioMapCanvas && portfolioMapCore && window.innerWidth > 768){
+      const coreCenterX = portfolioMapCanvas.offsetLeft + portfolioMapCore.offsetLeft + (portfolioMapCore.offsetWidth / 2);
+      const coreCenterY = portfolioMapCanvas.offsetTop + portfolioMapCore.offsetTop + (portfolioMapCore.offsetHeight / 2);
+      portfolioMindmap.scrollTo({
+        left:Math.max(0, coreCenterX - (portfolioMindmap.clientWidth / 2)),
+        top:Math.max(0, coreCenterY - (portfolioMindmap.clientHeight / 2)),
+        behavior:options.instant ? 'auto' : 'smooth'
+      });
+      return;
+    }
+
     window.scrollTo({
       top:useMindmap ? 0 : portfolioScrollPosition,
       behavior:options.instant ? 'auto' : 'smooth'
