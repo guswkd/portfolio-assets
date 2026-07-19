@@ -3659,12 +3659,8 @@ body.light-mode .portfolio-map-detail-close{
   left:50%;
   top:50%;
   z-index:5;
-  display:flex;
-  width:172px;
-  height:172px;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  width:246px;
+  height:246px;
   transform:
     translate(
       calc(-50% + var(--map-core-x)),
@@ -3672,15 +3668,12 @@ body.light-mode .portfolio-map-detail-close{
     )
     rotateX(var(--map-tilt-x))
     rotateY(var(--map-tilt-y));
-  border:1px solid rgba(125,211,252,.5);
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 32% 22%, rgba(255,255,255,.23), transparent 38%),
-    linear-gradient(135deg, rgba(34,211,238,.3), rgba(96,165,250,.22) 44%, rgba(167,139,250,.3));
+  border:0;
+  border-radius:18px;
+  background:rgba(8,13,28,.78);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.24),
-    0 0 34px rgba(34,211,238,.24),
-    0 0 76px rgba(167,139,250,.2);
+    0 0 38px rgba(34,211,238,.18),
+    0 0 86px rgba(167,139,250,.14);
   transform-style:preserve-3d;
   will-change:transform;
   transition:transform .2s ease-out, box-shadow .3s ease;
@@ -3688,28 +3681,49 @@ body.light-mode .portfolio-map-detail-close{
 
 .portfolio-map-canvas:has(.portfolio-map-branch:hover) .portfolio-map-core{
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.3),
     0 0 46px rgba(34,211,238,.4),
     0 0 104px rgba(167,139,250,.3);
 }
 
-.portfolio-map-core small{
-  color:rgba(255,255,255,.56);
-  font-size:8px;
+.portfolio-map-manuscript{
+  display:grid;
+  width:100%;
+  height:100%;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(3,1fr);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:18px;
+}
+
+.portfolio-map-manuscript span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-right:1px solid rgba(255,255,255,.42);
+  border-bottom:1px solid rgba(255,255,255,.42);
+  color:rgba(255,255,255,.78);
+  font-size:38px;
   font-weight:800;
-  letter-spacing:.16em;
+  line-height:1;
 }
 
-.portfolio-map-core strong{
-  margin-top:5px;
-  font-size:40px;
-  letter-spacing:-2px;
+.portfolio-map-manuscript span:nth-child(3n){
+  border-right:0;
 }
 
-.portfolio-map-core span{
-  margin-top:5px;
-  color:rgba(255,255,255,.52);
-  font-size:9px;
+.portfolio-map-manuscript span:nth-child(n+7){
+  border-bottom:0;
+}
+
+.portfolio-map-manuscript span.accent{
+  color:#8da8ff;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(96,165,250,.25), transparent 46%),
+    linear-gradient(135deg, rgba(34,211,238,.08), rgba(167,139,250,.18));
+  text-shadow:
+    0 0 16px rgba(96,165,250,.4),
+    0 0 32px rgba(167,139,250,.22);
 }
 
 .portfolio-map-branch{
@@ -4110,11 +4124,6 @@ body.light-mode .portfolio-view-button.active{
   color:#111827;
 }
 
-body.light-mode .portfolio-map-header p,
-body.light-mode .portfolio-map-core span{
-  color:rgba(17,24,39,.56);
-}
-
 body.light-mode .portfolio-map-canvas{
   background:
     radial-gradient(circle at 50% 50%, rgba(56,189,248,.16), transparent 17%),
@@ -4136,15 +4145,27 @@ body.light-mode .portfolio-map-header{
 }
 
 body.light-mode .portfolio-map-core{
-  color:#111827;
-  border-color:rgba(14,165,233,.35);
-  background:
-    radial-gradient(circle at 32% 22%, rgba(255,255,255,.7), transparent 38%),
-    linear-gradient(135deg, rgba(56,189,248,.44), rgba(139,92,246,.3), rgba(45,212,191,.36));
+  background:rgba(255,255,255,.78);
+  box-shadow:
+    0 0 38px rgba(56,189,248,.18),
+    0 0 82px rgba(139,92,246,.13);
 }
 
-body.light-mode .portfolio-map-core small{
-  color:rgba(17,24,39,.52);
+body.light-mode .portfolio-map-manuscript{
+  border-color:rgba(17,24,39,.44);
+}
+
+body.light-mode .portfolio-map-manuscript span{
+  border-color:rgba(17,24,39,.38);
+  color:rgba(17,24,39,.78);
+}
+
+body.light-mode .portfolio-map-manuscript span.accent{
+  color:#6366f1;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(56,189,248,.2), transparent 46%),
+    linear-gradient(135deg, rgba(56,189,248,.12), rgba(139,92,246,.16));
+  text-shadow:0 0 22px rgba(99,102,241,.2);
 }
 
 body.light-mode .portfolio-map-node{
@@ -4278,15 +4299,15 @@ body.light-mode .portfolio-map-leaf{
     position:relative;
     left:auto;
     top:auto;
-    width:124px;
-    height:124px;
+    width:180px;
+    height:180px;
     margin:0 auto 18px;
     transform:none;
     flex:0 0 auto;
   }
 
-  .portfolio-map-core strong{
-    font-size:30px;
+  .portfolio-map-manuscript span{
+    font-size:28px;
   }
 
   .portfolio-map-branch{
@@ -4417,17 +4438,13 @@ body.light-mode .portfolio-map-leaf{
 </div>
 
 <section class="portfolio-mindmap" aria-label="현장 중심 포트폴리오 마인드맵" aria-hidden="true">
-  <header class="portfolio-map-header">
-    <span class="portfolio-map-kicker">ONE KEYWORD · EVERY EXPERIENCE</span>
-    <h1><span class="field-keyword">현장</span>으로 연결된 포트폴리오</h1>
-    <p>현장에서 여섯 영역으로, 다시 실제 업무·경험·도구로 확장됩니다. 큰 노드를 선택하면 해당 섹션으로 이동합니다.</p>
-  </header>
-
   <div class="portfolio-map-canvas">
-    <div class="portfolio-map-core">
-      <small>BRAND × CONSUMER</small>
-      <strong>현장</strong>
-      <span>모든 접점</span>
+    <div class="portfolio-map-core" aria-label="언제나 현장이 답이다">
+      <div class="portfolio-map-manuscript" aria-hidden="true">
+        <span>언</span><span>제</span><span>나</span>
+        <span class="accent">현</span><span class="accent">장</span><span class="accent">이</span>
+        <span>답</span><span>이</span><span>다</span>
+      </div>
     </div>
 
     <div class="portfolio-map-branch" style="--map-angle:-90deg; --map-counter-angle:90deg;">
