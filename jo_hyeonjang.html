@@ -3810,14 +3810,14 @@ body.light-mode .portfolio-map-detail-close{
 
 .portfolio-map-leaf{
   position:relative;
-  display:flex !important;
-  align-items:center;
-  justify-content:center;
+  display:grid !important;
+  align-content:start;
+  gap:7px;
   width:100%;
-  min-height:38px;
-  padding:7px 8px;
+  min-height:66px;
+  padding:9px;
   border:1px solid rgba(125,211,252,.15);
-  border-radius:999px;
+  border-radius:14px;
   background:rgba(125,211,252,.055);
   color:rgba(255,255,255,.68) !important;
   font-size:9px !important;
@@ -3839,6 +3839,61 @@ body.light-mode .portfolio-map-detail-close{
   border-radius:50%;
   background:#7dd3fc;
   box-shadow:0 0 7px rgba(125,211,252,.62);
+}
+
+.portfolio-map-leaf-entry{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:6px;
+  align-items:center;
+  min-width:0;
+}
+
+.portfolio-map-leaf-entry + .portfolio-map-leaf-entry{
+  padding-top:7px;
+  border-top:1px solid rgba(125,211,252,.12);
+}
+
+.portfolio-map-leaf-entry img{
+  width:25px;
+  height:25px;
+  border-radius:7px;
+  object-fit:contain;
+  background:rgba(255,255,255,.08);
+}
+
+.portfolio-map-leaf-entry-copy{
+  display:block;
+  min-width:0;
+}
+
+.portfolio-map-leaf-entry strong,
+.portfolio-map-leaf-entry span{
+  display:block;
+  text-align:left;
+  word-break:keep-all;
+}
+
+.portfolio-map-leaf-entry strong{
+  color:rgba(255,255,255,.88);
+  font-size:9px;
+  line-height:1.25;
+}
+
+.portfolio-map-leaf-entry span{
+  margin-top:2px;
+  color:rgba(255,255,255,.5);
+  font-size:8px;
+  font-weight:500;
+  line-height:1.3;
+}
+
+body.light-mode .portfolio-map-leaf-entry strong{
+  color:rgba(17,24,39,.82);
+}
+
+body.light-mode .portfolio-map-leaf-entry span{
+  color:rgba(17,24,39,.52);
 }
 
 body.light-mode .portfolio-view-switch{
@@ -4917,6 +4972,125 @@ let portfolioMapMotionFrame = null;
 let mountedMapSection = null;
 let mountedMapPlaceholder = null;
 
+function compactMapText(value){
+  return (value || '').replace(/\s+/g,' ').trim();
+}
+
+function createMapEntry(item){
+  const entry = document.createElement('span');
+  entry.className = 'portfolio-map-leaf-entry';
+
+  if(item.image){
+    const image = document.createElement('img');
+    image.src = item.image;
+    image.alt = '';
+    entry.appendChild(image);
+  }
+
+  const copy = document.createElement('span');
+  copy.className = 'portfolio-map-leaf-entry-copy';
+  const title = document.createElement('strong');
+  title.innerText = item.title;
+  copy.appendChild(title);
+
+  if(item.detail){
+    const detail = document.createElement('span');
+    detail.innerText = item.detail;
+    copy.appendChild(detail);
+  }
+
+  entry.appendChild(copy);
+  return entry;
+}
+
+function getPortfolioMapItems(section){
+  if(section.id === 'profile'){
+    return Array.from(section.querySelectorAll('.profile-list-item')).map((item)=>({
+      title:compactMapText(item.querySelector('strong')?.innerText),
+      detail:compactMapText(item.querySelector('span')?.innerText)
+    }));
+  }
+
+  if(section.id === 'imc'){
+    return Array.from(section.querySelectorAll('.imc-step')).map((item)=>({
+      title:compactMapText(item.querySelector('h3')?.innerText || item.dataset.stage),
+      detail:compactMapText(item.querySelector('p')?.innerText)
+    }));
+  }
+
+  if(section.id === 'campaign'){
+    return Array.from(section.querySelectorAll('.project-card')).map((item)=>({
+      title:compactMapText(item.querySelector('.project-title')?.innerText),
+      detail:compactMapText(item.querySelector('.project-desc')?.innerText),
+      image:item.querySelector('img')?.src
+    }));
+  }
+
+  if(section.id === 'experience'){
+    return Array.from(section.querySelectorAll('.experience-card')).map((item)=>({
+      title:compactMapText(item.querySelector('.exp-org')?.innerText),
+      detail:[
+        compactMapText(item.querySelector('.exp-period')?.innerText),
+        compactMapText(item.querySelector('.exp-role')?.innerText),
+        Array.from(item.querySelectorAll('.exp-meta span')).map((tag)=>compactMapText(tag.innerText)).join(' · ')
+      ].filter(Boolean).join(' · '),
+      image:item.querySelector('.exp-logo')?.src
+    }));
+  }
+
+  if(section.id === 'skills'){
+    return Array.from(section.querySelectorAll('.skill-tab')).map((item)=>({
+      title:compactMapText(item.dataset.name),
+      detail:[compactMapText(item.dataset.period), compactMapText(item.dataset.range)].filter(Boolean).join(' · '),
+      image:item.querySelector('img')?.src
+    }));
+  }
+
+  if(section.id === 'check'){
+    return Array.from(section.querySelectorAll('.quality-card')).map((item)=>({
+      title:compactMapText(item.querySelector('strong')?.innerText),
+      detail:compactMapText(item.querySelector('span')?.innerText)
+    }));
+  }
+
+  return [];
+}
+
+function syncPortfolioMapContent(){
+  portfolioMapNodes.forEach((node)=>{
+    const section = document.getElementById(node.dataset.mapTarget || '');
+    const leaves = node.closest('.portfolio-map-cluster')?.querySelectorAll('.portfolio-map-leaf');
+    if(!section || !leaves?.length) return;
+
+    const heading = section.querySelector('.section-heading, .imc-heading h2');
+    const intro = section.querySelector('.profile-copy, .imc-heading p, .quality-panel p');
+    const supportingTitle = section.querySelector('.profile-title, .quality-panel h3');
+    const chapter = section.dataset.chapter;
+    const title = node.querySelector('strong');
+    const description = node.querySelector(':scope > span');
+
+    if(chapter && node.querySelector('small')){
+      node.querySelector('small').innerText = chapter;
+    }
+    if(heading && title){
+      title.innerText = compactMapText(heading.innerText);
+    }
+    if(intro && description){
+      description.innerText = [compactMapText(supportingTitle?.innerText), compactMapText(intro.innerText)]
+        .filter(Boolean)
+        .join(' · ');
+    }
+
+    const items = getPortfolioMapItems(section);
+    leaves.forEach((leaf)=>leaf.replaceChildren());
+    items.forEach((item,index)=>{
+      leaves[index % leaves.length].appendChild(createMapEntry(item));
+    });
+  });
+}
+
+syncPortfolioMapContent();
+
 function renderPortfolioMapMotion(x = 0, y = 0){
   if(!portfolioMapCanvas || !portfolioMapCore) return;
 
@@ -5185,6 +5359,7 @@ function setupCampaignCards(){
 
 setupSkillLogoFallbacks();
 setupCampaignCards();
+syncPortfolioMapContent();
 
 campaignFilterButtons.forEach((button)=>{
   button.addEventListener('click',()=>{
@@ -5713,6 +5888,8 @@ function syncThemeControl(){
       ? logo.dataset.lightSrc
       : logo.dataset.darkSrc;
   });
+
+  syncPortfolioMapContent();
 }
 
 function applyTimeBasedTheme(){
