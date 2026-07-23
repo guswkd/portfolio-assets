@@ -12,7 +12,8 @@
 
 2. 화면 문구
    - `<body>` 안의 각 `<section>`
-   - 섹션 ID: `profile`, `imc`, `campaign`, `experience`, `skills`, `check`
+   - 섹션 ID: `manifesto`, `profile`, `imc`, `campaign`, `experience`, `skills`, `check`
+   - 작업 철학 문구는 `.manifesto-section`, 채움 모션은 `.manifesto-outline-fill`과 `manifestoSculptFill`에서 수정합니다.
 
 3. 섹션 순서와 자동 테마 시간
    - `<script>` 시작 부분의 `PORTFOLIO_CONFIG`
