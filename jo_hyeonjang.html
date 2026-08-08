@@ -5783,12 +5783,12 @@ function getPortfolioCameraBounds(){
 }
 
 function normalizePortfolioCameraAxis(value){
-  const deadZone = .12;
+  const deadZone = .18;
   const absoluteValue = Math.abs(value);
   if(absoluteValue <= deadZone) return 0;
 
   const normalizedValue = (absoluteValue - deadZone) / (1 - deadZone);
-  return Math.sign(value) * Math.pow(normalizedValue, 1.35);
+  return Math.sign(value) * Math.pow(normalizedValue, 1.75);
 }
 
 function animatePortfolioCamera(){
@@ -5797,8 +5797,8 @@ function animatePortfolioCamera(){
     return;
   }
 
-  const nextX = portfolioMindmap.scrollLeft + ((portfolioCameraTargetX - portfolioMindmap.scrollLeft) * .085);
-  const nextY = portfolioMindmap.scrollTop + ((portfolioCameraTargetY - portfolioMindmap.scrollTop) * .085);
+  const nextX = portfolioMindmap.scrollLeft + ((portfolioCameraTargetX - portfolioMindmap.scrollLeft) * .028);
+  const nextY = portfolioMindmap.scrollTop + ((portfolioCameraTargetY - portfolioMindmap.scrollTop) * .028);
   const remainingX = Math.abs(portfolioCameraTargetX - nextX);
   const remainingY = Math.abs(portfolioCameraTargetY - nextY);
 
@@ -5839,8 +5839,13 @@ function updatePortfolioCamera(event){
 
   const pointerX = normalizePortfolioCameraAxis(Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - .5) * 2)));
   const pointerY = normalizePortfolioCameraAxis(Math.max(-1, Math.min(1, ((event.clientY - rect.top) / rect.height - .5) * 2)));
-  const targetX = bounds.centerX + (pointerX < 0 ? pointerX * bounds.centerX : pointerX * (bounds.maxX - bounds.centerX));
-  const targetY = bounds.centerY + (pointerY < 0 ? pointerY * bounds.centerY : pointerY * (bounds.maxY - bounds.centerY));
+  const cameraRange = .64;
+  const targetX = bounds.centerX + (pointerX < 0
+    ? pointerX * bounds.centerX * cameraRange
+    : pointerX * (bounds.maxX - bounds.centerX) * cameraRange);
+  const targetY = bounds.centerY + (pointerY < 0
+    ? pointerY * bounds.centerY * cameraRange
+    : pointerY * (bounds.maxY - bounds.centerY) * cameraRange);
 
   setPortfolioCameraTarget(targetX, targetY);
 }
