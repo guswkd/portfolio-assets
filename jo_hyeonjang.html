@@ -3556,6 +3556,12 @@ body.light-mode .manifesto-section::after{
 }
 
 /* PORTFOLIO MIND MAP: 전체 포트폴리오 보기 전환 */
+/* TEMP: 마인드맵을 다시 공개할 때 body의 mindmap-feature-disabled 클래스만 제거하세요. */
+body.mindmap-feature-disabled .portfolio-view-switch,
+body.mindmap-feature-disabled .portfolio-mindmap{
+  display:none !important;
+}
+
 .portfolio-view-switch{
   position:fixed;
   top:24px;
@@ -4805,7 +4811,7 @@ body.light-mode .portfolio-map-node::before{
 </style>
 </head>
 
-<body>
+<body class="mindmap-feature-disabled">
 
 <div class="background"></div>
 <div class="scroll-progress-bar"></div>
@@ -5885,6 +5891,10 @@ if(
 }
 
 function setPortfolioView(viewName, options = {}){
+  if(viewName === 'mindmap' && document.body.classList.contains('mindmap-feature-disabled')){
+    return;
+  }
+
   const useMindmap = viewName === 'mindmap';
 
   if(useMindmap){
