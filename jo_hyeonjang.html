@@ -655,6 +655,37 @@ body.light-mode .background::before{
   right:0;
 }
 
+.hero-identity{
+  position:absolute;
+  left:50%;
+  bottom:88px;
+  z-index:2;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:calc(100% - 32px);
+  color:rgba(255,255,255,.66);
+  font-size:clamp(10px,1.05vw,14px);
+  font-weight:700;
+  letter-spacing:.08em;
+  line-height:1.4;
+  white-space:nowrap;
+  text-shadow:0 0 18px rgba(125,211,252,.2);
+}
+
+.hero-identity strong{
+  color:#fff;
+  font-weight:800;
+}
+
+body.light-mode .hero-identity{
+  color:rgba(17,24,39,.58);
+  text-shadow:0 0 16px rgba(99,102,241,.14);
+}
+
+body.light-mode .hero-identity strong{
+  color:#111827;
+}
+
 
 .hero-cell{
   position:relative;
@@ -4932,6 +4963,7 @@ body.light-mode .portfolio-map-node::before{
       <div class="hero-cell hero-outline"><span>이</span></div>
       <div class="hero-cell hero-outline"><span>다</span></div>
   </div>
+  <p class="hero-identity"><strong>CAMPAIGN AE · 조현장</strong> — 현장을 실행으로.</p>
   <div class="scroll-indicator">
     <div class="cta-arrow-option is-selected" aria-label="아래로 스크롤">
       <svg viewBox="0 0 24 24" aria-hidden="true">
