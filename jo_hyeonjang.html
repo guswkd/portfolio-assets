@@ -3630,6 +3630,16 @@ body.light-mode .manifesto-section::after{
   background-clip:padding-box;
 }
 
+@media(pointer:fine){
+  body.mindmap-mode .portfolio-mindmap{
+    scrollbar-width:none;
+  }
+
+  body.mindmap-mode .portfolio-mindmap::-webkit-scrollbar{
+    display:none;
+  }
+}
+
 body.mindmap-mode{
   height:100svh;
   overflow:hidden;
@@ -3819,9 +3829,9 @@ body.light-mode .portfolio-map-detail-close{
   --map-tilt-x:0deg;
   --map-tilt-y:0deg;
   position:relative;
-  width:1320px;
-  min-width:1320px;
-  min-height:1040px;
+  width:max(1800px,125vw);
+  min-width:1800px;
+  min-height:max(1200px,135vh);
   margin:0 auto 56px;
   overflow:visible;
   border:1px solid rgba(125,211,252,.1);
@@ -4588,9 +4598,9 @@ body.light-mode .portfolio-map-node::before{
   }
 
   .portfolio-map-canvas{
-    width:1200px;
-    min-width:1200px;
-    min-height:1000px;
+    width:1500px;
+    min-width:1500px;
+    min-height:1180px;
   }
 
   .portfolio-map-branch{
@@ -5631,7 +5641,9 @@ const portfolioMapDetailContent = document.querySelector('.portfolio-map-detail-
 const portfolioMapDetailLabel = document.querySelector('.portfolio-map-detail-label');
 const portfolioMapDetailClose = document.querySelector('.portfolio-map-detail-close');
 let portfolioScrollPosition = 0;
-let portfolioMapMotionFrame = null;
+let portfolioCameraFrame = null;
+let portfolioCameraTargetX = 0;
+let portfolioCameraTargetY = 0;
 let mountedMapSection = null;
 let mountedMapPlaceholder = null;
 
@@ -5754,44 +5766,92 @@ function syncPortfolioMapContent(){
 
 syncPortfolioMapContent();
 
-function renderPortfolioMapMotion(x = 0, y = 0){
-  if(!portfolioMapCanvas || !portfolioMapCore) return;
+function getPortfolioCameraBounds(){
+  if(!portfolioMindmap || !portfolioMapCanvas || !portfolioMapCore) return null;
 
-  portfolioMapCanvas.style.setProperty('--map-ring-x', `${x * 9}px`);
-  portfolioMapCanvas.style.setProperty('--map-ring-y', `${y * 9}px`);
-  portfolioMapCanvas.style.setProperty('--map-ring-reverse-x', `${x * -6}px`);
-  portfolioMapCanvas.style.setProperty('--map-ring-reverse-y', `${y * -6}px`);
-  portfolioMapCanvas.style.setProperty('--map-core-x', `${x * 14}px`);
-  portfolioMapCanvas.style.setProperty('--map-core-y', `${y * 12}px`);
-  portfolioMapCanvas.style.setProperty('--map-tilt-x', `${y * -4}deg`);
-  portfolioMapCanvas.style.setProperty('--map-tilt-y', `${x * 5}deg`);
+  const maxX = Math.max(0, portfolioMindmap.scrollWidth - portfolioMindmap.clientWidth);
+  const maxY = Math.max(0, portfolioMindmap.scrollHeight - portfolioMindmap.clientHeight);
+  const coreCenterX = portfolioMapCanvas.offsetLeft + portfolioMapCore.offsetLeft + (portfolioMapCore.offsetWidth / 2);
+  const coreCenterY = portfolioMapCanvas.offsetTop + portfolioMapCore.offsetTop + (portfolioMapCore.offsetHeight / 2);
 
-  portfolioMapBranches.forEach((branch,index)=>{
-    const depth = 5 + ((index % 3) * 3);
-    branch.style.setProperty('--branch-x', `${x * depth}px`);
-    branch.style.setProperty('--branch-y', `${y * depth}px`);
-  });
+  return {
+    maxX,
+    maxY,
+    centerX:Math.max(0, Math.min(maxX, coreCenterX - (portfolioMindmap.clientWidth / 2))),
+    centerY:Math.max(0, Math.min(maxY, coreCenterY - (portfolioMindmap.clientHeight / 2)))
+  };
 }
 
-function schedulePortfolioMapMotion(event){
-  if(portfolioMapMotionFrame || !portfolioMapCanvas) return;
+function normalizePortfolioCameraAxis(value){
+  const deadZone = .12;
+  const absoluteValue = Math.abs(value);
+  if(absoluteValue <= deadZone) return 0;
 
-  portfolioMapMotionFrame = window.requestAnimationFrame(()=>{
-    const rect = portfolioMapCanvas.getBoundingClientRect();
-    const x = Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - .5) * 2));
-    const y = Math.max(-1, Math.min(1, ((event.clientY - rect.top) / rect.height - .5) * 2));
-    renderPortfolioMapMotion(x,y);
-    portfolioMapMotionFrame = null;
-  });
+  const normalizedValue = (absoluteValue - deadZone) / (1 - deadZone);
+  return Math.sign(value) * Math.pow(normalizedValue, 1.35);
+}
+
+function animatePortfolioCamera(){
+  if(!portfolioMindmap || !document.body.classList.contains('mindmap-mode')){
+    portfolioCameraFrame = null;
+    return;
+  }
+
+  const nextX = portfolioMindmap.scrollLeft + ((portfolioCameraTargetX - portfolioMindmap.scrollLeft) * .085);
+  const nextY = portfolioMindmap.scrollTop + ((portfolioCameraTargetY - portfolioMindmap.scrollTop) * .085);
+  const remainingX = Math.abs(portfolioCameraTargetX - nextX);
+  const remainingY = Math.abs(portfolioCameraTargetY - nextY);
+
+  portfolioMindmap.scrollTo({ left:nextX, top:nextY, behavior:'auto' });
+
+  if(remainingX > .35 || remainingY > .35){
+    portfolioCameraFrame = window.requestAnimationFrame(animatePortfolioCamera);
+  }else{
+    portfolioMindmap.scrollTo({ left:portfolioCameraTargetX, top:portfolioCameraTargetY, behavior:'auto' });
+    portfolioCameraFrame = null;
+  }
+}
+
+function setPortfolioCameraTarget(left, top){
+  const bounds = getPortfolioCameraBounds();
+  if(!bounds) return;
+
+  portfolioCameraTargetX = Math.max(0, Math.min(bounds.maxX, left));
+  portfolioCameraTargetY = Math.max(0, Math.min(bounds.maxY, top));
+
+  if(!portfolioCameraFrame){
+    portfolioCameraFrame = window.requestAnimationFrame(animatePortfolioCamera);
+  }
+}
+
+function centerPortfolioCamera(){
+  const bounds = getPortfolioCameraBounds();
+  if(!bounds) return;
+  setPortfolioCameraTarget(bounds.centerX, bounds.centerY);
+}
+
+function updatePortfolioCamera(event){
+  if(!portfolioMindmap || document.body.classList.contains('map-detail-open')) return;
+
+  const bounds = getPortfolioCameraBounds();
+  const rect = portfolioMindmap.getBoundingClientRect();
+  if(!bounds || !rect.width || !rect.height) return;
+
+  const pointerX = normalizePortfolioCameraAxis(Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - .5) * 2)));
+  const pointerY = normalizePortfolioCameraAxis(Math.max(-1, Math.min(1, ((event.clientY - rect.top) / rect.height - .5) * 2)));
+  const targetX = bounds.centerX + (pointerX < 0 ? pointerX * bounds.centerX : pointerX * (bounds.maxX - bounds.centerX));
+  const targetY = bounds.centerY + (pointerY < 0 ? pointerY * bounds.centerY : pointerY * (bounds.maxY - bounds.centerY));
+
+  setPortfolioCameraTarget(targetX, targetY);
 }
 
 if(
-  portfolioMapCanvas &&
+  portfolioMindmap &&
   window.matchMedia('(pointer:fine)').matches &&
   !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 ){
-  portfolioMapCanvas.addEventListener('pointermove', schedulePortfolioMapMotion, { passive:true });
-  portfolioMapCanvas.addEventListener('pointerleave',()=>renderPortfolioMapMotion());
+  portfolioMindmap.addEventListener('pointermove', updatePortfolioCamera, { passive:true });
+  portfolioMindmap.addEventListener('pointerleave', centerPortfolioCamera);
 
   portfolioMapBranches.forEach((branch)=>{
     const resetBranchHover = ()=>{
@@ -5825,6 +5885,10 @@ function setPortfolioView(viewName, options = {}){
   if(useMindmap){
     portfolioScrollPosition = window.scrollY;
   }else{
+    if(portfolioCameraFrame){
+      window.cancelAnimationFrame(portfolioCameraFrame);
+      portfolioCameraFrame = null;
+    }
     closePortfolioMapDetail();
   }
 
@@ -5841,11 +5905,13 @@ function setPortfolioView(viewName, options = {}){
 
   window.requestAnimationFrame(()=>{
     if(useMindmap && portfolioMindmap && portfolioMapCanvas && portfolioMapCore && window.innerWidth > 768){
-      const coreCenterX = portfolioMapCanvas.offsetLeft + portfolioMapCore.offsetLeft + (portfolioMapCore.offsetWidth / 2);
-      const coreCenterY = portfolioMapCanvas.offsetTop + portfolioMapCore.offsetTop + (portfolioMapCore.offsetHeight / 2);
+      const bounds = getPortfolioCameraBounds();
+      if(!bounds) return;
+      portfolioCameraTargetX = bounds.centerX;
+      portfolioCameraTargetY = bounds.centerY;
       portfolioMindmap.scrollTo({
-        left:Math.max(0, coreCenterX - (portfolioMindmap.clientWidth / 2)),
-        top:Math.max(0, coreCenterY - (portfolioMindmap.clientHeight / 2)),
+        left:bounds.centerX,
+        top:bounds.centerY,
         behavior:options.instant ? 'auto' : 'smooth'
       });
       return;
