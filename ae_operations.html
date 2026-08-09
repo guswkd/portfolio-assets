@@ -189,7 +189,7 @@ tbody tr:hover{background:#f5f6f7}.selectable-row.selected{background:#e7f3ff}
 .sidebar nav{display:grid;gap:6px}
 .nav-button{position:relative;width:42px;height:42px;margin:0;padding:0;justify-content:center;font-size:0;border-radius:7px}
 .nav-button::before{display:grid;width:28px;height:28px;place-items:center;border-radius:6px;background:transparent;color:#4b4f56;font-size:18px;font-weight:400}
-.nav-button[data-view="campaigns"]::before{content:'▦'}.nav-button[data-view="experience"]::before{content:'▤'}.nav-button[data-view="toolkit"]::before{content:'⚙'}.nav-button[data-view="summary"]::before{content:'◎'}
+.nav-button[data-view="campaigns"]::before{content:'▦'}.nav-button[data-view="experience"]::before{content:'▤'}.nav-button[data-view="summary"]::before{content:'◎'}
 .nav-button.active::before{background:transparent;color:#1877f2}.nav-button.active{background:#e7f3ff}
 .main{padding:0 8px 26px}
 .topbar{min-height:46px;padding:7px 12px}.account{display:flex;align-items:center;gap:10px}.account small{font-size:11px}.account strong{margin:0;font-size:12px}.status{margin-right:176px;padding:6px 9px;font-size:10px}
@@ -203,6 +203,7 @@ tbody tr:hover{background:#f5f6f7}.selectable-row.selected{background:#e7f3ff}
 .panel{border-radius:0 0 7px 7px;box-shadow:none}
 .panel-toolbar{min-height:48px;padding:7px 10px;background:#fff}
 .table-actions,.table-reports{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.table-action{padding:8px 11px;border:1px solid #ccd0d5;border-radius:5px;background:#fff;color:#4b4f56;font-size:11px;font-weight:600;cursor:pointer}.table-action:hover{background:#f5f6f7}.table-action.create{border-color:#087f5b;background:#087f5b;color:#fff}.table-reports{margin-left:auto}.table-action.compact{padding:8px 9px}
+.toolkit-filter-bar{display:flex;gap:6px;padding:8px 10px;border-bottom:1px solid #ccd0d5;background:#f7f8fa}.toolkit-filter-bar .filter{background:#fff}
 .table-wrap{min-height:440px}
 table{min-width:1450px}th{height:42px}td{height:46px;padding-top:7px;padding-bottom:7px}.campaign-name{min-width:280px}.campaign-name img{width:38px;height:30px}
 .history-list{min-height:440px;background:#fff}
@@ -224,7 +225,6 @@ table{min-width:1450px}th{height:42px}td{height:46px;padding-top:7px;padding-bot
     <nav aria-label="대시보드 화면">
       <button class="nav-button active" data-view="campaigns">캠페인</button>
       <button class="nav-button" data-view="experience">비즈니스 기록</button>
-      <button class="nav-button" data-view="toolkit">광고 도구</button>
       <button class="nav-button" data-view="summary">계정 개요</button>
     </nav>
   </aside>
@@ -247,41 +247,37 @@ table{min-width:1450px}th{height:42px}td{height:46px;padding-top:7px;padding-bot
           <button class="workspace-shortcut primary" type="button">보기 만들기</button>
         </div>
         <div class="manager-search"><input class="search" type="search" placeholder="검색을 위한 필터 기준: 이름, ID 또는 지표" aria-label="현재 화면 검색"></div>
-        <div class="entity-tabs" role="tablist" aria-label="광고 관리 계층">
-          <button class="entity-tab active" data-entity="campaign-list"><b>캠페인</b><span>8개 항목</span></button>
-          <button class="entity-tab" data-entity="adset-list"><b>광고 세트</b><span>타깃·게재 위치</span></button>
-          <button class="entity-tab" data-entity="ad-list"><b>광고 소재</b><span>이미지·영상·제안서</span></button>
+        <div class="entity-tabs" role="tablist" aria-label="포트폴리오 광고 관리 분류">
+          <button class="entity-tab active" data-entity="campaign-list"><b>광고 캠페인 세트</b><span>브랜드·AI·리뷰·제안</span></button>
+          <button class="entity-tab" data-entity="adset-list"><b>사용 툴킷</b><span>디자인·매체·AI</span></button>
+          <button class="entity-tab" data-entity="ad-list"><b>내 작품</b><span>영상·이미지·제안서</span></button>
         </div>
-        <div class="selection-bar"><div class="selection-path"><strong>전체 캠페인</strong><i>›</i><span class="selection-label">항목을 선택하면 하위 구조가 연결됩니다</span></div><button class="clear-selection" type="button">선택 해제</button></div>
+        <div class="selection-bar"><div class="selection-path"><strong>포트폴리오 광고 계정</strong><i>›</i><span class="selection-label">캠페인 경험과 실행 도구, 결과물을 광고관리자 구조로 확인합니다</span></div><button class="clear-selection" type="button">선택 해제</button></div>
         <div class="panel">
           <div class="panel-toolbar">
             <div class="table-actions"><button class="table-action create" type="button">＋ 만들기</button><button class="table-action" type="button">▣ 복제</button><button class="table-action" type="button">✎ 수정</button><button class="table-action" type="button">♙ A/B 테스트</button><button class="table-action" type="button">더 보기⌄</button></div>
             <div class="table-reports"><button class="table-action" type="button">열: 성과와 사분⌄</button><button class="table-action" type="button">분석 데이터⌄</button><button class="table-action compact" type="button">▣</button><button class="table-action compact" type="button">⇩</button><button class="table-action compact" type="button">⌄</button></div>
           </div>
 
-          <div class="entity-view active" id="campaign-list"><div class="table-wrap"><table><thead><tr><th class="check-cell"></th><th>해제/설정</th><th>캠페인 ↕</th><th>게재 ↓</th><th>행동</th><th>예산 ↕</th><th>지출 금액 ↕</th><th>결과 ↕</th><th>결과당 비용 ↕</th><th>구매 ↕</th><th>구매당 비용 ↕</th><th>구매 ROAS ↕</th><th>작품</th></tr></thead><tbody class="campaign-body">
-            <tr class="selectable-row" data-campaign="albamon21" data-label="알바몬 브랜드 캠페인" data-type="brand"><td><input class="row-check" type="checkbox" aria-label="알바몬 브랜드 캠페인 선택"></td><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>알바몬 브랜드 캠페인</strong><small>2021 · Brand</small></div></td><td><span class="delivery">완료됨</span></td><td><span class="tag">추천 3개</span></td><td>광고 세트 예산 사용</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1uEGdk4hleIy7Hf5ma0TfnG3xuVeu23YE/view?usp=sharing">보기 ↗</a></td></tr>
-            <tr class="selectable-row" data-campaign="albamon26" data-label="알바몬 2026 캠페인" data-type="brand ai"><td><input class="row-check" type="checkbox" aria-label="알바몬 2026 캠페인 선택"></td><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>알바몬 2026 캠페인</strong><small>2026 · Brand / AI</small></div></td><td><span class="delivery">활동 중</span></td><td><span class="tag">추천 6개</span></td><td>광고 세트 예산 사용</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1P_-DBRePIUrfonFynojpwPa2WtOnvnNV/view?usp=sharing">보기 ↗</a></td></tr>
-            <tr class="selectable-row" data-campaign="kanu21" data-label="카누 브랜드 캠페인" data-type="brand"><td><input class="row-check" type="checkbox" aria-label="카누 브랜드 캠페인 선택"></td><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>카누 브랜드 캠페인</strong><small>2021 · Brand</small></div></td><td><span class="delivery">완료됨</span></td><td><span class="tag">추천 4개</span></td><td>광고 세트 예산 사용</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1VY1IFYBmNwC99Ok2Wxq06NZoJSm07zyN/view?usp=sharing">보기 ↗</a></td></tr>
-            <tr class="selectable-row" data-campaign="clio1" data-label="클리오 AI 캠페인 1" data-type="ai"><td><input class="row-check" type="checkbox" aria-label="클리오 AI 캠페인 1 선택"></td><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>클리오 AI 캠페인 1</strong><small>2024 · AI Creative</small></div></td><td><span class="delivery">완료됨</span></td><td><span class="tag">추천 9개</span></td><td>광고 세트 예산 사용</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1F4A2J0w_mpXhJiR9MtswDFRHa3CK3qDd/view?usp=sharing">보기 ↗</a></td></tr>
-            <tr class="selectable-row" data-campaign="clio2" data-label="클리오 AI 캠페인 2" data-type="ai"><td><input class="row-check" type="checkbox" aria-label="클리오 AI 캠페인 2 선택"></td><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>클리오 AI 캠페인 2</strong><small>2024 · AI Creative</small></div></td><td><span class="delivery">완료됨</span></td><td><span class="tag">추천 9개</span></td><td>광고 세트 예산 사용</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1eaGXR74ljSw9a-GW62QF1u40cxZJLLUI/view?usp=sharing">보기 ↗</a></td></tr>
-            <tr class="selectable-row" data-campaign="lvmh" data-label="LVMH 리뷰 캠페인" data-type="review"><td><input class="row-check" type="checkbox" aria-label="LVMH 리뷰 캠페인 선택"></td><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>LVMH 리뷰 캠페인</strong><small>2021 · Review</small></div></td><td><span class="delivery">완료됨</span></td><td><span class="tag">추천 2개</span></td><td>광고 세트 예산 사용</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1ok2W4bJ269aMB14SeaGqg0JSeHnbMl9v/view?usp=sharing">보기 ↗</a></td></tr>
-            <tr class="selectable-row" data-campaign="koda" data-label="KODA 제안서" data-type="proposal"><td><input class="row-check" type="checkbox" aria-label="KODA 제안서 선택"></td><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>KODA 제안서</strong><small>2025 · Proposal</small></div></td><td><span class="draft">초안</span></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1FRO18Ho_1-h7oL276lzyADVDMmyFg9sm/preview">PDF ↗</a></td></tr>
-            <tr class="selectable-row" data-campaign="kosac" data-label="KOSAC 제안서" data-type="proposal"><td><input class="row-check" type="checkbox" aria-label="KOSAC 제안서 선택"></td><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>KOSAC 제안서</strong><small>2024 · Proposal</small></div></td><td><span class="draft">초안</span></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/uc?export=download&amp;id=1pRfYhvivCPu6xFSBbrGCqR5mKY5Rf9eh">PDF ↗</a></td></tr>
+          <div class="entity-view active" id="campaign-list"><div class="table-wrap"><table><thead><tr><th class="check-cell"></th><th>해제/설정</th><th>캠페인 세트 ↕</th><th>상태 ↓</th><th>포함 프로젝트</th><th>캠페인 목표</th><th>주요 역할</th><th>운영 흐름</th><th>결과물</th></tr></thead><tbody class="campaign-body">
+            <tr data-type="brand"><td><input class="row-check" type="checkbox" aria-label="브랜드 캠페인 세트 선택"></td><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>B · 브랜드 캠페인 세트</strong><small>Brand communication</small></div></td><td><span class="delivery">정리 완료</span></td><td>알바몬 2021 · 카누</td><td>인지도·브랜드 경험</td><td>브리프 정리·메시지 구조화</td><td>기획 → 제작 → 검토</td><td>영상 2건</td></tr>
+            <tr data-type="ai"><td><input class="row-check" type="checkbox" aria-label="AI 크리에이티브 세트 선택"></td><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>A · AI 크리에이티브 세트</strong><small>AI visual exploration</small></div></td><td><span class="delivery">정리 완료</span></td><td>알바몬 2026 · 클리오 2건</td><td>관심·참여</td><td>콘셉트 확장·AI 시안 제작</td><td>아이데이션 → 생성 → 편집</td><td>영상·이미지 3건</td></tr>
+            <tr data-type="review"><td><input class="row-check" type="checkbox" aria-label="리뷰 콘텐츠 세트 선택"></td><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>R · 리뷰 콘텐츠 세트</strong><small>Review contents</small></div></td><td><span class="delivery">정리 완료</span></td><td>LVMH 리뷰 캠페인</td><td>콘텐츠 조회·참여</td><td>리뷰 구조·소재 흐름 정리</td><td>리서치 → 구성 → 제작</td><td>콘텐츠 1건</td></tr>
+            <tr data-type="proposal"><td><input class="row-check" type="checkbox" aria-label="제안 프로젝트 세트 선택"></td><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>P · 제안 프로젝트 세트</strong><small>Proposal & pitch</small></div></td><td><span class="delivery">정리 완료</span></td><td>KODA · KOSAC</td><td>전략 제안·실행 설계</td><td>조사·전략·장표 구성</td><td>브리프 → 인사이트 → 제안</td><td>제안서 2건</td></tr>
           </tbody></table></div></div>
 
-          <div class="entity-view" id="adset-list"><div class="table-wrap"><table><thead><tr><th>해제/설정</th><th>광고 세트</th><th>연결 캠페인</th><th>전환 위치</th><th>타깃 기준</th><th>게재 위치</th><th>최적화</th></tr></thead><tbody>
-            <tr data-parent="albamon21" data-type="brand"><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>브랜드 인지도 · 핵심 타깃</strong><small>광고 세트 아카이브</small></div></td><td>알바몬 브랜드 캠페인</td><td>웹사이트</td><td>브랜드 핵심 이용자</td><td>자동 게재</td><td>도달</td></tr>
-            <tr data-parent="albamon26" data-type="brand ai"><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>AI 크리에이티브 · 관심 타깃</strong><small>콘셉트 검토 세트</small></div></td><td>알바몬 2026 캠페인</td><td>웹사이트</td><td>구직 관심 사용자</td><td>피드·숏폼</td><td>참여</td></tr>
-            <tr data-parent="kanu21" data-type="brand"><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>브랜드 메시지 · 커피 관심층</strong><small>광고 세트 아카이브</small></div></td><td>카누 브랜드 캠페인</td><td>웹사이트</td><td>커피·라이프스타일</td><td>피드</td><td>도달</td></tr>
-            <tr data-parent="clio1" data-type="ai"><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>AI Visual Test · A</strong><small>크리에이티브 비교</small></div></td><td>클리오 AI 캠페인 1</td><td>웹사이트</td><td>뷰티 관심 사용자</td><td>피드·스토리</td><td>참여</td></tr>
-            <tr data-parent="clio2" data-type="ai"><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>AI Visual Test · B</strong><small>크리에이티브 비교</small></div></td><td>클리오 AI 캠페인 2</td><td>웹사이트</td><td>뷰티 관심 사용자</td><td>피드·스토리</td><td>참여</td></tr>
-            <tr data-parent="lvmh" data-type="review"><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>Review Contents · 관심층</strong><small>리뷰 콘텐츠 세트</small></div></td><td>LVMH 리뷰 캠페인</td><td>웹사이트</td><td>럭셔리·뷰티 관심층</td><td>피드</td><td>콘텐츠 조회</td></tr>
-            <tr data-parent="koda" data-type="proposal"><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>제안 타깃·매체 설계안</strong><small>제안서 내 운영 구조</small></div></td><td>KODA 제안서</td><td>제안 단계</td><td>전략 타깃</td><td>미디어 믹스</td><td>제안</td></tr>
-            <tr data-parent="kosac" data-type="proposal"><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>공모전 실행 설계안</strong><small>제안서 내 운영 구조</small></div></td><td>KOSAC 제안서</td><td>제안 단계</td><td>전략 타깃</td><td>통합 접점</td><td>제안</td></tr>
-          </tbody></table></div><div class="empty-state">선택한 캠페인에 연결된 광고 세트가 없습니다.</div></div>
+          <div class="entity-view" id="adset-list"><div class="toolkit-filter-bar" aria-label="툴킷 분류"><button class="filter active" data-filter="all">전체</button><button class="filter" data-filter="design">디자인</button><button class="filter" data-filter="media">매체</button><button class="filter" data-filter="ai">AI</button></div><div class="table-wrap"><table><thead><tr><th>해제/설정</th><th>툴킷</th><th>분류</th><th>핵심 활용</th><th>업무 단계</th><th>활용 수준</th><th>상태</th></tr></thead><tbody>
+            <tr data-type="design"><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>Illustrator</strong><small>Visual design</small></div></td><td><span class="tag">디자인</span></td><td>키비주얼·광고 소재·도식화</td><td>제안·제작</td><td>중상</td><td><span class="delivery">사용 중</span></td></tr>
+            <tr data-type="design"><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>Photoshop</strong><small>Image editing</small></div></td><td><span class="tag">디자인</span></td><td>이미지 보정·합성·썸네일</td><td>제안·제작</td><td>중상</td><td><span class="delivery">사용 중</span></td></tr>
+            <tr data-type="design"><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>Premiere Pro</strong><small>Video editing</small></div></td><td><span class="tag">디자인</span></td><td>컷 편집·자막·숏폼 시안</td><td>제작</td><td>중</td><td><span class="delivery">사용 중</span></td></tr>
+            <tr data-type="design"><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>PowerPoint</strong><small>Proposal design</small></div></td><td><span class="tag">디자인</span></td><td>제안서·보고자료 구조화</td><td>기획·리포팅</td><td>상</td><td><span class="delivery">사용 중</span></td></tr>
+            <tr data-type="media"><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>Meta · Google · Naver · Kakao Ads</strong><small>Media platforms</small></div></td><td><span class="tag">매체</span></td><td>캠페인 구축·운영·성과 확인</td><td>운영·최적화</td><td>실무 경험</td><td><span class="delivery">사용 중</span></td></tr>
+            <tr data-type="media"><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>Excel</strong><small>Data & reporting</small></div></td><td><span class="tag">매체</span></td><td>로우데이터·피벗·성과표</td><td>데이터·리포팅</td><td>중</td><td><span class="delivery">사용 중</span></td></tr>
+            <tr data-type="ai"><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>Midjourney</strong><small>Generative image</small></div></td><td><span class="tag">AI</span></td><td>콘셉트 시안·무드보드</td><td>아이데이션</td><td>중</td><td><span class="delivery">사용 중</span></td></tr>
+            <tr data-type="ai"><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>Runway</strong><small>Generative video</small></div></td><td><span class="tag">AI</span></td><td>AI 영상 소스·모션 시안</td><td>아이데이션·제작</td><td>중하</td><td><span class="delivery">사용 중</span></td></tr>
+          </tbody></table></div><div class="empty-state">검색 조건과 일치하는 툴킷이 없습니다.</div></div>
 
-          <div class="entity-view" id="ad-list"><div class="table-wrap"><table><thead><tr><th>해제/설정</th><th>광고 소재</th><th>연결 캠페인</th><th>형식</th><th>기본 문구</th><th>CTA</th><th>미리보기</th></tr></thead><tbody>
+          <div class="entity-view" id="ad-list"><div class="table-wrap"><table><thead><tr><th>해제/설정</th><th>내 작품</th><th>프로젝트 세트</th><th>형식</th><th>핵심 내용</th><th>결과물</th><th>미리보기</th></tr></thead><tbody>
             <tr data-parent="albamon21" data-type="brand"><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>알바몬 브랜드 필름</strong><small>Brand master</small></div></td><td>알바몬 브랜드 캠페인</td><td>영상</td><td>브랜드 메시지 중심</td><td>더 알아보기</td><td><a class="asset-link" href="https://drive.google.com/file/d/1uEGdk4hleIy7Hf5ma0TfnG3xuVeu23YE/view?usp=sharing" target="_blank" rel="noopener">보기 ↗</a></td></tr>
             <tr data-parent="albamon26" data-type="brand ai"><td><span class="toggle-state on"></span></td><td><div class="entity-name"><strong>알바몬 AI 비주얼</strong><small>AI concept creative</small></div></td><td>알바몬 2026 캠페인</td><td>영상</td><td>AI 활용 캠페인 메시지</td><td>더 알아보기</td><td><a class="asset-link" href="https://drive.google.com/file/d/1P_-DBRePIUrfonFynojpwPa2WtOnvnNV/view?usp=sharing" target="_blank" rel="noopener">보기 ↗</a></td></tr>
             <tr data-parent="kanu21" data-type="brand"><td><span class="toggle-state"></span></td><td><div class="entity-name"><strong>카누 브랜드 필름</strong><small>Brand creative</small></div></td><td>카누 브랜드 캠페인</td><td>영상</td><td>브랜드 경험 메시지</td><td>더 알아보기</td><td><a class="asset-link" href="https://drive.google.com/file/d/1VY1IFYBmNwC99Ok2Wxq06NZoJSm07zyN/view?usp=sharing" target="_blank" rel="noopener">보기 ↗</a></td></tr>
@@ -311,15 +307,6 @@ table{min-width:1450px}th{height:42px}td{height:46px;padding-top:7px;padding-bot
         </div>
       </section>
 
-      <section class="view" id="toolkit">
-        <div class="heading-row"><div><span class="eyebrow">EXECUTION STACK</span><h1>Toolkit</h1><p class="heading-copy">제안서와 제작 커뮤니케이션, 매체 운영, 데이터 리포팅에 사용하는 도구입니다.</p></div></div>
-        <div class="tool-grid">
-          <article class="tool"><b>PowerPoint</b><span>제안서·보고자료 구조화</span><div class="level"><i style="width:85%"></i></div></article><article class="tool"><b>Excel</b><span>로우데이터·피벗·성과표</span><div class="level"><i style="width:75%"></i></div></article><article class="tool"><b>Illustrator</b><span>제안 시안·광고 소재·도식화</span><div class="level"><i style="width:85%"></i></div></article><article class="tool"><b>Photoshop</b><span>이미지 보정·썸네일·합성</span><div class="level"><i style="width:80%"></i></div></article>
-          <article class="tool"><b>Premiere Pro</b><span>컷 편집·자막·숏폼 시안</span><div class="level"><i style="width:75%"></i></div></article><article class="tool"><b>Word</b><span>회의록·보고서·원고 정리</span><div class="level"><i style="width:80%"></i></div></article><article class="tool"><b>Midjourney</b><span>콘셉트 시안·무드보드</span><div class="level"><i style="width:70%"></i></div></article><article class="tool"><b>Runway</b><span>AI 영상 소스·모션 시안</span><div class="level"><i style="width:65%"></i></div></article>
-          <article class="tool"><b>Naver Ads</b><span>검색광고·키워드·리포팅</span><div class="level-label">PRACTICAL EXPERIENCE</div></article><article class="tool"><b>Google Ads</b><span>운영·지표 모니터링</span><div class="level-label">PRACTICAL EXPERIENCE</div></article><article class="tool"><b>Meta Ads</b><span>소재·성과 확인·운영</span><div class="level-label">PRACTICAL EXPERIENCE</div></article><article class="tool"><b>Kakao Ads</b><span>소재 관리·성과 리포팅</span><div class="level-label">PRACTICAL EXPERIENCE</div></article>
-        </div>
-      </section>
-
       <section class="view" id="summary">
         <div class="heading-row"><div><span class="eyebrow">OPERATOR PROFILE</span><h1>AE Summary</h1></div></div>
         <div class="summary-grid"><article class="summary-card"><h2>현장을 읽고,<br>실행의 다음 수를 정리합니다.</h2><p>브리프의 목적을 실행 기준으로 구체화하고, 매체·소재·일정과 커뮤니케이션을 관리합니다. 운영 데이터를 같은 기준으로 정리해 다음 액션으로 연결하는 캠페인 AE입니다.</p></article><div class="workflow"><div><b>01 · Brief & Planning</b><span>목적·KPI·산출물</span></div><div><b>02 · Campaign Operation</b><span>매체·소재·일정·이슈</span></div><div><b>03 · Data & Reporting</b><span>성과·변동·리포트</span></div><div><b>04 · Insight & Follow-up</b><span>유지·개선·테스트</span></div></div></div>
@@ -335,12 +322,11 @@ const filters = document.querySelectorAll('.filter');
 const search = document.querySelector('.search');
 const entityTabs = document.querySelectorAll('.entity-tab');
 const entityViews = document.querySelectorAll('.entity-view');
-const campaignRows = document.querySelectorAll('.campaign-body .selectable-row');
+const campaignRows = document.querySelectorAll('.campaign-body tr');
 const selectionLabel = document.querySelector('.selection-label');
 const clearSelection = document.querySelector('.clear-selection');
 let activeFilter = 'all';
 let activeEntity = 'campaign-list';
-let selectedCampaign = '';
 
 navButtons.forEach((button)=>{
   button.addEventListener('click',()=>{
@@ -364,8 +350,7 @@ function updateRows(){
   items.forEach((item)=>{
     const matchesFilter = activeFilter === 'all' || (item.dataset.type || '').split(' ').includes(activeFilter);
     const matchesQuery = !query || item.innerText.toLowerCase().includes(query);
-    const matchesCampaign = !selectedCampaign || activeEntity === 'campaign-list' || item.dataset.parent === selectedCampaign;
-    const isVisible = matchesFilter && matchesQuery && matchesCampaign;
+    const isVisible = matchesFilter && matchesQuery;
     item.hidden = !isVisible;
     if(isVisible) visibleCount += 1;
   });
@@ -377,8 +362,10 @@ function updateRows(){
 
 function setEntity(entityId){
   activeEntity = entityId;
+  activeFilter = 'all';
   entityTabs.forEach((tab)=>tab.classList.toggle('active',tab.dataset.entity===entityId));
   entityViews.forEach((view)=>view.classList.toggle('active',view.id===entityId));
+  filters.forEach((filter)=>filter.classList.toggle('active',filter.dataset.filter==='all'));
   search.value = '';
   updateRows();
 }
@@ -387,24 +374,8 @@ entityTabs.forEach((tab)=>{
   tab.addEventListener('click',()=>setEntity(tab.dataset.entity));
 });
 
-campaignRows.forEach((row)=>{
-  row.addEventListener('click',(event)=>{
-    if(event.target.closest('a')) return;
-    selectedCampaign = row.dataset.campaign || '';
-    campaignRows.forEach((item)=>{
-      const selected = item === row;
-      item.classList.toggle('selected',selected);
-      const checkbox = item.querySelector('.row-check');
-      if(checkbox) checkbox.checked = selected;
-    });
-    selectionLabel.textContent = `${row.dataset.label}의 하위 항목을 보고 있습니다`;
-    setEntity('adset-list');
-  });
-});
-
 clearSelection.addEventListener('click',()=>{
-  selectedCampaign = '';
-  selectionLabel.textContent = '항목을 선택하면 하위 구조가 연결됩니다';
+  selectionLabel.textContent = '캠페인 경험과 실행 도구, 결과물을 광고관리자 구조로 확인합니다';
   campaignRows.forEach((row)=>{
     row.classList.remove('selected');
     const checkbox = row.querySelector('.row-check');
