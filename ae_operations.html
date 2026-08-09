@@ -59,8 +59,6 @@ a{color:inherit;text-decoration:none}
 .nav-button:hover{background:rgba(255,255,255,.035);color:#fff}
 .nav-button.active{border-color:rgba(114,228,255,.2);background:linear-gradient(90deg,rgba(114,228,255,.12),rgba(179,166,255,.06));color:#fff}
 .nav-button.active::before{background:var(--cyan);box-shadow:0 0 14px rgba(114,228,255,.7)}
-.back-link{position:absolute;left:16px;right:16px;bottom:18px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;color:#9caac0;font-size:12px;text-align:center}
-.back-link:hover{border-color:var(--line-strong);color:#fff}
 .main{min-width:0;padding:0 28px 48px}
 .topbar{
   position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
@@ -70,6 +68,9 @@ a{color:inherit;text-decoration:none}
 .account small{display:block;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.12em}.account strong{display:block;margin-top:5px;font-size:15px}
 .status{display:flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid rgba(101,226,189,.18);border-radius:999px;color:#9ee9d1;font-size:11px;background:rgba(101,226,189,.06)}
 .status i{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}
+.portfolio-view-switch{position:fixed;top:14px;left:50%;z-index:50;display:flex;gap:4px;padding:5px;border:1px solid var(--line);border-radius:999px;background:rgba(8,13,24,.88);box-shadow:0 14px 42px rgba(0,0,0,.28);backdrop-filter:blur(20px);transform:translateX(-50%)}
+.portfolio-view-button{display:flex;align-items:center;justify-content:center;min-height:32px;padding:0 14px;border-radius:999px;color:#65758b;font-size:10px;font-weight:800;letter-spacing:.06em;transition:.2s ease}
+.portfolio-view-button:hover{color:#fff}.portfolio-view-button.active{color:#fff;background:linear-gradient(135deg,rgba(114,228,255,.15),rgba(179,166,255,.2));box-shadow:inset 0 0 0 1px rgba(114,228,255,.16),0 0 20px rgba(179,166,255,.1)}
 .workspace{padding-top:30px}
 .view{display:none}.view.active{display:block;animation:viewIn .36s ease both}
 @keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -101,12 +102,16 @@ tbody tr{transition:.2s ease}tbody tr:hover{background:rgba(114,228,255,.035)}tb
 .tool-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.tool{padding:18px;border:1px solid var(--line);border-radius:12px;background:rgba(14,21,34,.72)}.tool b{display:block;font-size:14px}.tool span{display:block;margin-top:8px;color:var(--muted);font-size:11px;line-height:1.5}.level{height:3px;margin-top:16px;border-radius:10px;background:#263247;overflow:hidden}.level i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--lavender))}.level-label{margin-top:15px;color:#65758b;font-size:9px;font-weight:700;letter-spacing:.1em}
 .summary-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}.summary-card{padding:26px;border:1px solid var(--line);border-radius:14px;background:rgba(14,21,34,.72)}.summary-card h2{font-size:clamp(25px,3vw,40px);letter-spacing:-.04em}.summary-card p{margin-top:16px;color:var(--muted);font-size:14px;line-height:1.75}.workflow{display:grid;gap:9px}.workflow div{display:flex;align-items:center;justify-content:space-between;padding:14px;border:1px solid var(--line);border-radius:10px}.workflow b{font-size:12px}.workflow span{color:var(--muted);font-size:10px}
 .disclaimer{margin-top:24px;color:#48566a;font-size:9px;text-align:right}
-@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{position:sticky;z-index:30;height:auto;padding:10px 14px;border-right:0;border-bottom:1px solid var(--line)}.brand{display:none}.side-label,.back-link{display:none}.sidebar nav{display:flex;gap:5px;overflow-x:auto}.nav-button{width:auto;flex:0 0 auto;padding:9px 11px}.main{padding:0 16px 36px}.metrics,.tool-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{position:sticky;z-index:30;height:auto;padding:10px 14px;border-right:0;border-bottom:1px solid var(--line)}.brand{display:none}.side-label{display:none}.sidebar nav{display:flex;gap:5px;overflow-x:auto}.nav-button{width:auto;flex:0 0 auto;padding:9px 11px}.main{padding:46px 16px 36px}.metrics,.tool-grid{grid-template-columns:repeat(2,1fr)}.portfolio-view-switch{top:58px}}
 @media(max-width:580px){.topbar{min-height:62px}.workspace{padding-top:22px}.heading-row{align-items:start;flex-direction:column}.date-chip{display:none}.metrics{grid-template-columns:1fr 1fr;gap:8px}.metric{padding:14px}.metric strong{font-size:22px}.panel-toolbar{align-items:stretch;flex-direction:column}.search{width:100%}.experience{grid-template-columns:1fr;gap:9px}.tool-grid,.summary-grid{grid-template-columns:1fr}.nav-button::before{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.view.active{animation:none}}
 </style>
 </head>
 <body>
+<div class="portfolio-view-switch" role="group" aria-label="포트폴리오 보기 방식">
+  <a class="portfolio-view-button" href="jo_hyeonjang.html">PORTFOLIO</a>
+  <a class="portfolio-view-button active" href="ae_operations.html" aria-current="page">AE DESK</a>
+</div>
 <div class="shell">
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark">AE</div><div><strong>OPERATIONS DESK</strong><span>JO HYEONJANG · PORTFOLIO</span></div></div>
@@ -117,7 +122,6 @@ tbody tr{transition:.2s ease}tbody tr:hover{background:rgba(114,228,255,.035)}tb
       <button class="nav-button" data-view="toolkit">Toolkit</button>
       <button class="nav-button" data-view="summary">AE Summary</button>
     </nav>
-    <a class="back-link" href="jo_hyeonjang.html">← 기본 포트폴리오로 돌아가기</a>
   </aside>
 
   <main class="main">

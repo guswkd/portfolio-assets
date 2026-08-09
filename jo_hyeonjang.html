@@ -272,7 +272,7 @@ body.light-mode .theme-icon-moon{
 
 .portfolio-nav:hover,
 .portfolio-nav:focus-within{
-  max-width:860px;
+  max-width:720px;
 }
 
 .portfolio-nav a{
@@ -323,6 +323,64 @@ body.light-mode .portfolio-nav::before{
 body.light-mode .portfolio-nav a:hover{
   background:rgba(0,0,0,.06);
   color:#111827;
+}
+
+.portfolio-view-switch{
+  position:fixed;
+  top:24px;
+  left:50%;
+  z-index:1001;
+  display:flex;
+  gap:4px;
+  padding:5px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  background:rgba(8,13,28,.72);
+  box-shadow:0 14px 42px rgba(0,0,0,.22);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  transform:translateX(-50%);
+}
+
+.portfolio-view-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:36px;
+  padding:0 15px;
+  border-radius:999px;
+  color:rgba(255,255,255,.56);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-decoration:none;
+  transition:background .25s ease,color .25s ease,box-shadow .25s ease;
+}
+
+.portfolio-view-button:hover{color:white}
+
+.portfolio-view-button.active{
+  color:white;
+  background:linear-gradient(135deg,rgba(34,211,238,.2),rgba(139,92,246,.28));
+  box-shadow:inset 0 0 0 1px rgba(125,211,252,.2),0 0 20px rgba(139,92,246,.15);
+}
+
+body.light-mode .portfolio-view-switch{
+  border-color:rgba(14,165,233,.16);
+  background:rgba(255,255,255,.76);
+  box-shadow:0 14px 38px rgba(79,70,229,.1);
+}
+
+body.light-mode .portfolio-view-button{color:rgba(17,24,39,.5)}
+body.light-mode .portfolio-view-button:hover,
+body.light-mode .portfolio-view-button.active{color:#111827}
+body.light-mode .portfolio-view-button.active{
+  background:linear-gradient(135deg,rgba(56,189,248,.2),rgba(139,92,246,.18));
+}
+
+@media(max-width:768px){
+  .portfolio-view-switch{top:16px;left:16px;transform:none}
+  .portfolio-view-button{min-height:32px;padding:0 11px;font-size:10px}
 }
 
 .contact-toggle:hover{
@@ -3581,8 +3639,11 @@ body.light-mode .manifesto-section::after{
   <a href="#campaign">CAMPAIGNS</a>
   <a href="#skills">TOOLKIT</a>
   <a href="#check">SUMMARY</a>
-  <a href="ae_operations.html" target="_blank" rel="noopener">AE DESK ↗</a>
 </nav>
+<div class="portfolio-view-switch" role="group" aria-label="포트폴리오 보기 방식">
+  <a class="portfolio-view-button active" href="jo_hyeonjang.html" aria-current="page">PORTFOLIO</a>
+  <a class="portfolio-view-button" href="ae_operations.html">AE DESK</a>
+</div>
 <button class="mode-toggle" type="button" aria-label="라이트 모드로 전환">
   <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/>
