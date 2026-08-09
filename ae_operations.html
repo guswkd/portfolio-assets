@@ -209,7 +209,62 @@ tbody tr:hover{background:#f5f6f7}.selectable-row.selected{background:#e7f3ff}
 table{min-width:1450px}th{height:42px}td{height:46px;padding-top:7px;padding-bottom:7px}.campaign-name{min-width:280px}.campaign-name img{width:38px;height:30px}
 .history-list{min-height:440px;background:#fff}
 .disclaimer{margin:10px 6px 0}
-@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{position:sticky;z-index:50;height:auto;padding:6px 10px;border-right:0;border-bottom:1px solid var(--line)}.brand{display:none}.side-label{display:none}.sidebar nav{display:flex;gap:5px;overflow-x:auto}.nav-button{width:38px;height:38px;flex:0 0 auto;padding:0}.main{padding:42px 8px 24px}.metrics,.tool-grid{grid-template-columns:repeat(2,1fr)}.portfolio-view-switch{top:52px;right:10px}.status{margin-right:0}.entity-tabs{grid-template-columns:repeat(3,minmax(180px,1fr));overflow-x:auto}.workspace-shortcut.primary{margin-left:0}}
+
+/* ADS MANAGER PROPORTIONS: 실제 운영 화면에 가까운 밀도와 화면 점유율 */
+html,body{height:100%}
+body{overflow:hidden}
+.shell{height:100dvh;min-height:680px;overflow:hidden}
+.sidebar{position:relative;height:100%;min-height:0}
+.main{height:100%;padding:0 8px 10px;overflow:hidden}
+.topbar{height:58px;min-height:58px;padding:8px 12px}
+.workspace{height:calc(100% - 58px);padding-top:8px;overflow:hidden}
+#campaigns{height:100%;min-height:0}
+#experience,#summary{height:100%;padding-bottom:28px;overflow:auto}
+.workspace-shortcuts{height:52px;min-height:52px;padding:7px 10px}
+.workspace-shortcut{height:36px;padding:0 14px;font-size:12px}
+.manager-search{height:40px;min-height:40px;padding:5px 10px}
+.manager-search input{height:30px;font-size:12px}
+.entity-tabs{height:52px;grid-template-columns:repeat(3,minmax(260px,1fr))}
+.entity-tabs .entity-tab{min-height:52px;padding:10px 14px}
+.entity-tabs .entity-tab b{font-size:16px}
+.selection-bar{display:none}
+.panel{height:calc(100% - 144px);min-height:0;display:flex;flex-direction:column}
+.panel-toolbar{height:52px;min-height:52px;padding:7px 10px}
+.table-action{height:36px;padding:0 12px;font-size:12px}
+.table-action.compact{width:36px;padding:0}
+.entity-view.active{min-height:0;flex:1;overflow:hidden}
+.entity-view.active:not(#history-list){display:flex;flex-direction:column}
+.table-wrap{flex:1;min-height:0;height:100%;overflow:auto;background:#fff}
+table{min-width:1540px;table-layout:fixed}
+th{height:44px;padding:0 12px;font-size:12px}
+td{height:46px;padding:7px 12px;font-size:12px;line-height:1.25}
+.entity-name strong{font-size:12px}.delivery{font-size:11px}
+.campaign-body th:nth-child(1),.campaign-body td:nth-child(1){width:44px}
+#campaign-list th:nth-child(1){width:44px}
+#campaign-list th:nth-child(2){width:92px}
+#campaign-list th:nth-child(3){width:320px}
+#campaign-list th:nth-child(4){width:150px}
+#campaign-list th:nth-child(5){width:220px}
+#campaign-list th:nth-child(6){width:150px}
+#campaign-list th:nth-child(7){width:360px}
+#campaign-list th:nth-child(8){width:180px}
+#adset-list th:nth-child(1){width:100px}
+#adset-list th:nth-child(2){width:330px}
+#adset-list th:nth-child(3){width:220px}
+#adset-list th:nth-child(4){width:430px}
+#adset-list th:nth-child(5){width:250px}
+#adset-list th:nth-child(6){width:210px}
+#ad-list th:nth-child(1){width:100px}
+#ad-list th:nth-child(2){width:320px}
+#ad-list th:nth-child(3){width:290px}
+#ad-list th:nth-child(4){width:150px}
+#ad-list th:nth-child(5){width:360px}
+#ad-list th:nth-child(6){width:160px}
+#ad-list th:nth-child(7){width:160px}
+.history-list{height:100%;min-height:0;overflow:auto}
+.history-item{min-height:52px;padding:12px 16px}
+.disclaimer{position:fixed;right:14px;bottom:3px;margin:0;pointer-events:none}
+@media(max-width:900px){body{overflow:auto}.shell{grid-template-columns:1fr;height:auto;min-height:100vh;overflow:visible}.sidebar{position:sticky;z-index:50;height:auto;padding:6px 10px;border-right:0;border-bottom:1px solid var(--line)}.brand{display:none}.side-label{display:none}.sidebar nav{display:flex;gap:5px;overflow-x:auto}.nav-button{width:38px;height:38px;flex:0 0 auto;padding:0}.main{height:auto;padding:42px 8px 24px;overflow:visible}.topbar{height:62px}.workspace{height:auto;overflow:visible}.metrics,.tool-grid{grid-template-columns:repeat(2,1fr)}.portfolio-view-switch{top:52px;right:10px}.status{margin-right:0}.entity-tabs{grid-template-columns:repeat(3,minmax(180px,1fr));overflow-x:auto}.workspace-shortcut.primary{margin-left:0}.panel{height:auto;min-height:520px}.entity-view.active{overflow:visible}.table-wrap{min-height:440px;height:auto}.disclaimer{position:static;margin:10px 6px 0}}
 @media(max-width:580px){.topbar{min-height:62px}.workspace{padding-top:22px}.heading-row{align-items:start;flex-direction:column}.date-chip{display:none}.metrics{grid-template-columns:1fr 1fr;gap:8px}.metric{padding:14px}.metric strong{font-size:22px}.panel-toolbar,.manager-head{align-items:stretch;flex-direction:column}.search{width:100%}.experience{grid-template-columns:1fr;gap:9px}.tool-grid,.summary-grid{grid-template-columns:1fr}.nav-button::before{display:none}.entity-tabs{grid-template-columns:repeat(3,minmax(150px,1fr));overflow-x:auto}.history-item{grid-template-columns:1fr;gap:5px}.selection-bar{align-items:flex-start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.view.active{animation:none}}
 </style>
