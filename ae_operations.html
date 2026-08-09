@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AE Operations Desk · 조현장</title>
+<meta name="description" content="캠페인 AE 조현장의 캠페인, 경력, 도구를 운영 대시보드 형식으로 정리한 포트폴리오입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080c14;
+  --panel:#0e1522;
+  --panel-2:#121c2b;
+  --line:rgba(169,190,224,.14);
+  --line-strong:rgba(130,226,255,.34);
+  --text:#eef5ff;
+  --muted:#8493aa;
+  --cyan:#72e4ff;
+  --lavender:#b3a6ff;
+  --mint:#65e2bd;
+  --rose:#ff8db8;
+  --shadow:0 24px 80px rgba(0,0,0,.34);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  color:var(--text);
+  font-family:'Pretendard',sans-serif;
+  background:
+    radial-gradient(circle at 72% -12%,rgba(121,89,255,.14),transparent 34%),
+    radial-gradient(circle at 0 82%,rgba(36,197,226,.1),transparent 28%),
+    var(--bg);
+}
+button,a{font:inherit}
+button{color:inherit}
+a{color:inherit;text-decoration:none}
+.shell{display:grid;grid-template-columns:238px minmax(0,1fr);min-height:100vh}
+.sidebar{
+  position:sticky;top:0;height:100vh;padding:22px 16px;
+  border-right:1px solid var(--line);
+  background:rgba(7,11,19,.84);backdrop-filter:blur(22px);
+}
+.brand{display:flex;align-items:center;gap:11px;padding:8px 10px 24px}
+.brand-mark{
+  width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--cyan),var(--lavender));
+  color:#07101a;font-size:13px;font-weight:900;box-shadow:0 0 24px rgba(114,228,255,.2)
+}
+.brand strong{display:block;font-size:14px}.brand span{display:block;margin-top:3px;color:var(--muted);font-size:11px}
+.side-label{padding:14px 12px 7px;color:#58677d;font-size:10px;font-weight:800;letter-spacing:.14em}
+.nav-button{
+  width:100%;display:flex;align-items:center;gap:10px;padding:11px 12px;margin:3px 0;
+  border:1px solid transparent;border-radius:10px;background:transparent;color:#93a1b5;
+  font-size:13px;text-align:left;cursor:pointer;transition:.2s ease
+}
+.nav-button::before{content:'';width:7px;height:7px;border-radius:50%;background:#435067;box-shadow:0 0 0 4px rgba(67,80,103,.12)}
+.nav-button:hover{background:rgba(255,255,255,.035);color:#fff}
+.nav-button.active{border-color:rgba(114,228,255,.2);background:linear-gradient(90deg,rgba(114,228,255,.12),rgba(179,166,255,.06));color:#fff}
+.nav-button.active::before{background:var(--cyan);box-shadow:0 0 14px rgba(114,228,255,.7)}
+.back-link{position:absolute;left:16px;right:16px;bottom:18px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;color:#9caac0;font-size:12px;text-align:center}
+.back-link:hover{border-color:var(--line-strong);color:#fff}
+.main{min-width:0;padding:0 28px 48px}
+.topbar{
+  position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+  min-height:72px;padding:12px 0;border-bottom:1px solid var(--line);
+  background:linear-gradient(to bottom,rgba(8,12,20,.98),rgba(8,12,20,.88));backdrop-filter:blur(18px)
+}
+.account small{display:block;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.12em}.account strong{display:block;margin-top:5px;font-size:15px}
+.status{display:flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid rgba(101,226,189,.18);border-radius:999px;color:#9ee9d1;font-size:11px;background:rgba(101,226,189,.06)}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}
+.workspace{padding-top:30px}
+.view{display:none}.view.active{display:block;animation:viewIn .36s ease both}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.heading-row{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:22px}
+.eyebrow{color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:.15em}
+h1{margin-top:8px;font-size:clamp(30px,4vw,54px);line-height:1;letter-spacing:-.055em}
+.heading-copy{max-width:560px;margin-top:12px;color:var(--muted);font-size:14px;line-height:1.65}
+.date-chip{padding:9px 12px;border:1px solid var(--line);border-radius:9px;color:#9ba9bd;font-size:11px;white-space:nowrap}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.metric{padding:18px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));box-shadow:var(--shadow)}
+.metric span{color:var(--muted);font-size:11px}.metric strong{display:block;margin-top:10px;font-size:26px;letter-spacing:-.04em}.metric small{display:block;margin-top:6px;color:#607087;font-size:10px}
+.metric:nth-child(1) strong{color:var(--cyan)}.metric:nth-child(2) strong{color:var(--lavender)}.metric:nth-child(3) strong{color:var(--mint)}.metric:nth-child(4) strong{color:var(--rose)}
+.panel{border:1px solid var(--line);border-radius:14px;background:rgba(14,21,34,.74);box-shadow:var(--shadow);overflow:hidden}
+.panel-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border-bottom:1px solid var(--line)}
+.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:transparent;color:#8695ab;font-size:11px;cursor:pointer}.filter.active,.filter:hover{border-color:var(--line-strong);background:rgba(114,228,255,.08);color:#dff9ff}
+.search{width:210px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;outline:none;background:#0a111d;color:#fff;font-size:11px}.search:focus{border-color:var(--line-strong)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:850px}
+th{padding:11px 13px;border-bottom:1px solid var(--line);color:#64738a;font-size:10px;font-weight:700;text-align:left;letter-spacing:.06em}
+td{padding:13px;border-bottom:1px solid rgba(169,190,224,.085);color:#bdc9da;font-size:12px;vertical-align:middle}
+tbody tr{transition:.2s ease}tbody tr:hover{background:rgba(114,228,255,.035)}tbody tr.hidden{display:none}
+.campaign-name{display:flex;align-items:center;gap:11px;min-width:220px}.campaign-name img{width:48px;height:36px;border-radius:6px;object-fit:cover;border:1px solid var(--line)}.campaign-name strong{display:block;color:#f2f7ff;font-size:12px}.campaign-name small{display:block;margin-top:4px;color:#64738a;font-size:10px}
+.delivery{display:inline-flex;align-items:center;gap:6px;color:#94dfca;font-size:10px}.delivery::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--mint)}
+.tag{display:inline-flex;padding:5px 8px;border-radius:999px;background:rgba(179,166,255,.08);color:#bdb4ff;font-size:10px}
+.asset-link{display:inline-flex;padding:6px 9px;border:1px solid var(--line);border-radius:7px;color:#a6b4c8;font-size:10px}.asset-link:hover{border-color:var(--line-strong);color:#fff}
+.timeline{display:grid;gap:12px}
+.experience{display:grid;grid-template-columns:150px 1fr;gap:22px;padding:22px;border:1px solid var(--line);border-radius:14px;background:rgba(14,21,34,.7)}
+.experience .period{color:var(--cyan);font-size:11px;font-weight:700}.experience h3{font-size:20px}.experience .role{margin-top:6px;color:var(--muted);font-size:12px}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.chip{padding:6px 9px;border:1px solid var(--line);border-radius:7px;color:#95a4b8;font-size:10px}
+.tool-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.tool{padding:18px;border:1px solid var(--line);border-radius:12px;background:rgba(14,21,34,.72)}.tool b{display:block;font-size:14px}.tool span{display:block;margin-top:8px;color:var(--muted);font-size:11px;line-height:1.5}.level{height:3px;margin-top:16px;border-radius:10px;background:#263247;overflow:hidden}.level i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--lavender))}.level-label{margin-top:15px;color:#65758b;font-size:9px;font-weight:700;letter-spacing:.1em}
+.summary-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}.summary-card{padding:26px;border:1px solid var(--line);border-radius:14px;background:rgba(14,21,34,.72)}.summary-card h2{font-size:clamp(25px,3vw,40px);letter-spacing:-.04em}.summary-card p{margin-top:16px;color:var(--muted);font-size:14px;line-height:1.75}.workflow{display:grid;gap:9px}.workflow div{display:flex;align-items:center;justify-content:space-between;padding:14px;border:1px solid var(--line);border-radius:10px}.workflow b{font-size:12px}.workflow span{color:var(--muted);font-size:10px}
+.disclaimer{margin-top:24px;color:#48566a;font-size:9px;text-align:right}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{position:sticky;z-index:30;height:auto;padding:10px 14px;border-right:0;border-bottom:1px solid var(--line)}.brand{display:none}.side-label,.back-link{display:none}.sidebar nav{display:flex;gap:5px;overflow-x:auto}.nav-button{width:auto;flex:0 0 auto;padding:9px 11px}.main{padding:0 16px 36px}.metrics,.tool-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.topbar{min-height:62px}.workspace{padding-top:22px}.heading-row{align-items:start;flex-direction:column}.date-chip{display:none}.metrics{grid-template-columns:1fr 1fr;gap:8px}.metric{padding:14px}.metric strong{font-size:22px}.panel-toolbar{align-items:stretch;flex-direction:column}.search{width:100%}.experience{grid-template-columns:1fr;gap:9px}.tool-grid,.summary-grid{grid-template-columns:1fr}.nav-button::before{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.view.active{animation:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">AE</div><div><strong>OPERATIONS DESK</strong><span>JO HYEONJANG · PORTFOLIO</span></div></div>
+    <div class="side-label">WORKSPACE</div>
+    <nav aria-label="대시보드 화면">
+      <button class="nav-button active" data-view="campaigns">Campaigns</button>
+      <button class="nav-button" data-view="experience">Experience</button>
+      <button class="nav-button" data-view="toolkit">Toolkit</button>
+      <button class="nav-button" data-view="summary">AE Summary</button>
+    </nav>
+    <a class="back-link" href="jo_hyeonjang.html">← 기본 포트폴리오로 돌아가기</a>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="account"><small>PORTFOLIO ACCOUNT</small><strong>Campaign AE · 조현장</strong></div>
+      <div class="status"><i></i> AVAILABLE FOR REVIEW</div>
+    </header>
+
+    <div class="workspace">
+      <section class="view active" id="campaigns">
+        <div class="heading-row"><div><span class="eyebrow">CAMPAIGN CONTROL</span><h1>Campaigns</h1><p class="heading-copy">참여한 캠페인과 제안서 결과물을 운영 화면처럼 한 번에 확인합니다. 임의의 성과 수치 대신 작업 유형과 결과물만 표시합니다.</p></div><div class="date-chip">ARCHIVE · 2021—2026</div></div>
+        <div class="metrics">
+          <article class="metric"><span>Total campaigns</span><strong>08</strong><small>브랜드·AI·리뷰·제안서</small></article>
+          <article class="metric"><span>Campaign types</span><strong>04</strong><small>작업 유형 기준</small></article>
+          <article class="metric"><span>Proposal works</span><strong>02</strong><small>KODA · KOSAC</small></article>
+          <article class="metric"><span>AI creative</span><strong>03</strong><small>알바몬 2026 · 클리오 2건</small></article>
+        </div>
+        <div class="panel">
+          <div class="panel-toolbar"><div class="filters"><button class="filter active" data-filter="all">전체</button><button class="filter" data-filter="brand">브랜드</button><button class="filter" data-filter="ai">AI</button><button class="filter" data-filter="review">리뷰</button><button class="filter" data-filter="proposal">제안서</button></div><input class="search" type="search" placeholder="캠페인명 검색" aria-label="캠페인명 검색"></div>
+          <div class="table-wrap"><table><thead><tr><th>Campaign</th><th>Delivery</th><th>Type</th><th>Contribution</th><th>Asset</th></tr></thead><tbody>
+            <tr data-type="brand"><td><div class="campaign-name"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2021_albamon.jpg" alt=""><div><strong>알바몬 브랜드 캠페인</strong><small>2021 · Brand</small></div></div></td><td><span class="delivery">Archived</span></td><td><span class="tag">브랜드</span></td><td>캠페인 참여 작업</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1uEGdk4hleIy7Hf5ma0TfnG3xuVeu23YE/view?usp=sharing">작품 보기 ↗</a></td></tr>
+            <tr data-type="brand ai"><td><div class="campaign-name"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2026_albamon.jpg" alt=""><div><strong>알바몬 2026 캠페인</strong><small>2026 · Brand / AI</small></div></div></td><td><span class="delivery">Archived</span></td><td><span class="tag">브랜드·AI</span></td><td>AI 활용 캠페인 작업</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1P_-DBRePIUrfonFynojpwPa2WtOnvnNV/view?usp=sharing">작품 보기 ↗</a></td></tr>
+            <tr data-type="brand"><td><div class="campaign-name"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2021_KANU.jpg" alt=""><div><strong>카누 브랜드 캠페인</strong><small>2021 · Brand</small></div></div></td><td><span class="delivery">Archived</span></td><td><span class="tag">브랜드</span></td><td>캠페인 참여 작업</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1VY1IFYBmNwC99Ok2Wxq06NZoJSm07zyN/view?usp=sharing">작품 보기 ↗</a></td></tr>
+            <tr data-type="ai"><td><div class="campaign-name"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2024_CLIO_AI_1.jpg" alt=""><div><strong>클리오 AI 캠페인 1</strong><small>2024 · AI Creative</small></div></div></td><td><span class="delivery">Archived</span></td><td><span class="tag">AI</span></td><td>AI 기반 캠페인 시안</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1F4A2J0w_mpXhJiR9MtswDFRHa3CK3qDd/view?usp=sharing">작품 보기 ↗</a></td></tr>
+            <tr data-type="ai"><td><div class="campaign-name"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2024_CLIO_AI_2.jpg" alt=""><div><strong>클리오 AI 캠페인 2</strong><small>2024 · AI Creative</small></div></div></td><td><span class="delivery">Archived</span></td><td><span class="tag">AI</span></td><td>AI 기반 캠페인 시안</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1eaGXR74ljSw9a-GW62QF1u40cxZJLLUI/view?usp=sharing">작품 보기 ↗</a></td></tr>
+            <tr data-type="review"><td><div class="campaign-name"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2021_LVMH.jpg" alt=""><div><strong>LVMH 리뷰 캠페인</strong><small>2021 · Review</small></div></div></td><td><span class="delivery">Archived</span></td><td><span class="tag">리뷰</span></td><td>리뷰형 콘텐츠 작업</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1ok2W4bJ269aMB14SeaGqg0JSeHnbMl9v/view?usp=sharing">작품 보기 ↗</a></td></tr>
+            <tr data-type="proposal"><td><div class="campaign-name"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2025_KODA.jpg" alt=""><div><strong>KODA 제안서</strong><small>2025 · Proposal</small></div></div></td><td><span class="delivery">Archived</span></td><td><span class="tag">제안서</span></td><td>제안서 작성 프로젝트</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1FRO18Ho_1-h7oL276lzyADVDMmyFg9sm/preview">PDF 보기 ↗</a></td></tr>
+            <tr data-type="proposal"><td><div class="campaign-name"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2024_KOSAC.jpg" alt=""><div><strong>KOSAC 제안서</strong><small>2024 · Proposal</small></div></div></td><td><span class="delivery">Archived</span></td><td><span class="tag">제안서</span></td><td>제안서 작성 프로젝트</td><td><a class="asset-link" target="_blank" rel="noopener" href="https://drive.google.com/uc?export=download&amp;id=1pRfYhvivCPu6xFSBbrGCqR5mKY5Rf9eh">PDF 받기 ↗</a></td></tr>
+          </tbody></table></div>
+        </div>
+      </section>
+
+      <section class="view" id="experience">
+        <div class="heading-row"><div><span class="eyebrow">ACCOUNT HISTORY</span><h1>Experience</h1><p class="heading-copy">교육에서 미디어 플래닝, 퍼포먼스 AE로 이어진 경험을 역할과 업무 범위 중심으로 정리했습니다.</p></div></div>
+        <div class="timeline">
+          <article class="experience"><div class="period">2025.07—2025.09</div><div><h3>KODA 디지털 광고 협회</h3><p class="role">2026 KODA ACADEMY 교육생 [조장]</p><div class="chips"><span class="chip">광고 전략 및 실습</span><span class="chip">데이터 분석·리포트</span><span class="chip">브랜딩·PR</span><span class="chip">광고 제안 발표</span></div></div></article>
+          <article class="experience"><div class="period">2025.10—2026.01</div><div><h3>Next Media Group</h3><p class="role">Media Planner · Intern</p><div class="chips"><span class="chip">미디어 믹스</span><span class="chip">일일·주간 리포팅</span><span class="chip">로우데이터 정리</span><span class="chip">캠페인 운영</span></div></div></article>
+          <article class="experience"><div class="period">2026.06—CURRENT</div><div><h3>Growth B</h3><p class="role">Performance AE</p><div class="chips"><span class="chip">퍼포먼스 캠페인 운영</span><span class="chip">캠페인 구축·집행 관리</span><span class="chip">KPI 모니터링</span><span class="chip">성과 분석·리포팅</span><span class="chip">광고주 커뮤니케이션</span></div></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="toolkit">
+        <div class="heading-row"><div><span class="eyebrow">EXECUTION STACK</span><h1>Toolkit</h1><p class="heading-copy">제안서와 제작 커뮤니케이션, 매체 운영, 데이터 리포팅에 사용하는 도구입니다.</p></div></div>
+        <div class="tool-grid">
+          <article class="tool"><b>PowerPoint</b><span>제안서·보고자료 구조화</span><div class="level"><i style="width:85%"></i></div></article><article class="tool"><b>Excel</b><span>로우데이터·피벗·성과표</span><div class="level"><i style="width:75%"></i></div></article><article class="tool"><b>Illustrator</b><span>제안 시안·광고 소재·도식화</span><div class="level"><i style="width:85%"></i></div></article><article class="tool"><b>Photoshop</b><span>이미지 보정·썸네일·합성</span><div class="level"><i style="width:80%"></i></div></article>
+          <article class="tool"><b>Premiere Pro</b><span>컷 편집·자막·숏폼 시안</span><div class="level"><i style="width:75%"></i></div></article><article class="tool"><b>Word</b><span>회의록·보고서·원고 정리</span><div class="level"><i style="width:80%"></i></div></article><article class="tool"><b>Midjourney</b><span>콘셉트 시안·무드보드</span><div class="level"><i style="width:70%"></i></div></article><article class="tool"><b>Runway</b><span>AI 영상 소스·모션 시안</span><div class="level"><i style="width:65%"></i></div></article>
+          <article class="tool"><b>Naver Ads</b><span>검색광고·키워드·리포팅</span><div class="level-label">PRACTICAL EXPERIENCE</div></article><article class="tool"><b>Google Ads</b><span>운영·지표 모니터링</span><div class="level-label">PRACTICAL EXPERIENCE</div></article><article class="tool"><b>Meta Ads</b><span>소재·성과 확인·운영</span><div class="level-label">PRACTICAL EXPERIENCE</div></article><article class="tool"><b>Kakao Ads</b><span>소재 관리·성과 리포팅</span><div class="level-label">PRACTICAL EXPERIENCE</div></article>
+        </div>
+      </section>
+
+      <section class="view" id="summary">
+        <div class="heading-row"><div><span class="eyebrow">OPERATOR PROFILE</span><h1>AE Summary</h1></div></div>
+        <div class="summary-grid"><article class="summary-card"><h2>현장을 읽고,<br>실행의 다음 수를 정리합니다.</h2><p>브리프의 목적을 실행 기준으로 구체화하고, 매체·소재·일정과 커뮤니케이션을 관리합니다. 운영 데이터를 같은 기준으로 정리해 다음 액션으로 연결하는 캠페인 AE입니다.</p></article><div class="workflow"><div><b>01 · Brief & Planning</b><span>목적·KPI·산출물</span></div><div><b>02 · Campaign Operation</b><span>매체·소재·일정·이슈</span></div><div><b>03 · Data & Reporting</b><span>성과·변동·리포트</span></div><div><b>04 · Insight & Follow-up</b><span>유지·개선·테스트</span></div></div></div>
+      </section>
+      <p class="disclaimer">Independent portfolio interface inspired by campaign operations workflows. Not affiliated with or endorsed by Meta.</p>
+    </div>
+  </main>
+</div>
+<script>
+const navButtons = document.querySelectorAll('.nav-button');
+const views = document.querySelectorAll('.view');
+const filters = document.querySelectorAll('.filter');
+const rows = document.querySelectorAll('tbody tr');
+const search = document.querySelector('.search');
+let activeFilter = 'all';
+
+navButtons.forEach((button)=>{
+  button.addEventListener('click',()=>{
+    navButtons.forEach((item)=>item.classList.toggle('active',item===button));
+    views.forEach((view)=>view.classList.toggle('active',view.id===button.dataset.view));
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+function updateRows(){
+  const query = (search?.value || '').trim().toLowerCase();
+  rows.forEach((row)=>{
+    const matchesFilter = activeFilter === 'all' || (row.dataset.type || '').split(' ').includes(activeFilter);
+    const matchesQuery = !query || row.innerText.toLowerCase().includes(query);
+    row.classList.toggle('hidden',!(matchesFilter && matchesQuery));
+  });
+}
+
+filters.forEach((button)=>{
+  button.addEventListener('click',()=>{
+    activeFilter = button.dataset.filter || 'all';
+    filters.forEach((item)=>item.classList.toggle('active',item===button));
+    updateRows();
+  });
+});
+search?.addEventListener('input',updateRows);
+</script>
+</body>
+</html>
