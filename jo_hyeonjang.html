@@ -347,6 +347,12 @@ body.light-mode .portfolio-nav a:hover{
   display:none !important;
 }
 
+/* 메인 포트폴리오 4단계 흐름에서 보류한 섹션 */
+.skills-section[hidden],
+.quality-section[hidden]{
+  display:none !important;
+}
+
 .portfolio-view-button{
   display:flex;
   align-items:center;
@@ -3676,11 +3682,10 @@ body.light-mode .manifesto-section::after{
 <div class="background"></div>
 <div class="scroll-progress-bar"></div>
 <nav class="portfolio-nav" aria-label="섹션 이동">
+  <a href="#hero">HERO</a>
   <a href="#profile">ABOUT</a>
   <a href="#experience">EXPERIENCE</a>
   <a href="#campaign">CAMPAIGNS</a>
-  <a href="#skills">TOOLKIT</a>
-  <a href="#check">SUMMARY</a>
 </nav>
 <!-- AE DESK 보류: hidden 속성을 제거하면 전환 버튼이 다시 표시됩니다. -->
 <div class="portfolio-view-switch" role="group" aria-label="포트폴리오 보기 방식" hidden>
@@ -3708,7 +3713,7 @@ body.light-mode .manifesto-section::after{
 </div>
 
 
-<section class="hero">
+<section class="hero" id="hero">
 
     <!-- EDIT: 첫 화면 배경 키워드 / 실제 단어는 아래 script의 talentKeywords 배열에서 수정 -->
     <div class="keyword-cloud" aria-hidden="true"></div>
@@ -3757,13 +3762,12 @@ body.light-mode .manifesto-section::after{
     <article class="profile-card">
       <div class="profile-kicker">CAMPAIGN AE</div>
       <h2 class="profile-title">
-        “모든 제품에는 본래의 드라마가 있다.<br>
-        우리의 일은 그것을 찾아내는 것이다.”
+        현장을 읽고,<br>
+        필요한 실행을 정리합니다.
       </h2>
-      <cite class="profile-quote-source">— 레오 버넷(Leo Burnett)</cite>
       <p class="profile-copy">
-        브랜드와 소비자가 만나는 접점을 관찰하고, 필요한 실행을 차분하게 정리하는 캠페인 AE입니다.
-        기획 의도를 놓치지 않으면서 운영과 데이터를 다음 액션까지 연결합니다.
+        브랜드와 소비자가 만나는 접점을 살피고, 기획 의도를 실제 운영으로 연결하는 캠페인 AE 조현장입니다.<br>
+        맡은 내용을 정확히 확인하고, 팀이 다시 보기 쉬운 형태로 정리합니다.
       </p>
     </article>
 
@@ -3773,7 +3777,8 @@ body.light-mode .manifesto-section::after{
 
 <!-- SKILLS: 사용 툴/매체 숙련도 영역 -->
 
-<section class="skills-section" id="skills" data-imc-stage="TOOLKIT" data-chapter="05 · TOOLKIT">
+<!-- 메인 흐름 개편으로 보류: hidden 속성을 제거하면 TOOLKIT이 다시 표시됩니다. -->
+<section class="skills-section" id="skills" data-imc-stage="TOOLKIT" data-chapter="05 · TOOLKIT" hidden>
 
   <h2 class="section-heading">
     EXECUTION TOOLKIT
@@ -3908,10 +3913,10 @@ body.light-mode .manifesto-section::after{
 <section class="experience-section" id="experience">
 
   <h2 class="section-heading">
-    EXPERIENCE
+    EDUCATION &amp; EXPERIENCE
   </h2>
   <p class="section-intro">
-    교육에서 전략을, 인턴에서 매체 운영을, 현업에서 성과 관리를 익혀온 과정입니다.
+    광고 교육부터 미디어 플래닝, 퍼포먼스 캠페인 운영까지 이어진 학력·경력입니다.
   </p>
   <div class="experience-grid">
 
@@ -4168,7 +4173,8 @@ body.light-mode .manifesto-section::after{
 </section>
 
 <!-- CHECK POINT: 대행사 실무 적합도 확인 기준 -->
-<section class="quality-section" id="check" data-imc-stage="SUMMARY" data-chapter="06 · SUMMARY">
+<!-- 메인 흐름 개편으로 보류: hidden 속성을 제거하면 SUMMARY가 다시 표시됩니다. -->
+<section class="quality-section" id="check" data-imc-stage="SUMMARY" data-chapter="06 · SUMMARY" hidden>
 
   <h2 class="section-heading">
     STRATEGY SUMMARY
