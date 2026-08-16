@@ -2834,7 +2834,10 @@ body.light-mode .exp-meta span{
   width:90%;
   column-gap:30px;
   row-gap:34px;
-  height:clamp(450px, 62svh, 610px);
+  height:auto;
+  min-height:0;
+  grid-template-rows:repeat(2,auto);
+  grid-auto-rows:auto;
 }
 
 .campaign-filter{
