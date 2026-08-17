@@ -3724,6 +3724,7 @@ body.light-mode .profile-card{
   cursor:pointer;
 }
 .layout-editor button:hover{background:rgba(125,211,252,.16)}
+.layout-editor button.is-active{border-color:#67e8f9;background:rgba(34,211,238,.2);color:#cffafe}
 
 [data-layout-key]{
   translate:var(--layout-x,0px) var(--layout-y,0px);
@@ -3763,6 +3764,17 @@ body.light-mode .profile-card{
 
 .layout-edit-mode .layout-section-handle{display:inline-flex;align-items:center}
 .layout-edit-mode .layout-section-drop{box-shadow:inset 0 0 0 2px rgba(125,211,252,.55)}
+.layout-text-mode [data-layout-key]{cursor:default}
+.layout-text-mode [data-layout-text]{
+  outline:1px solid rgba(196,181,253,.7);
+  outline-offset:3px;
+  cursor:text;
+  caret-color:#67e8f9;
+}
+.layout-text-mode [data-layout-text]:focus{
+  outline:2px solid #a78bfa;
+  background:rgba(139,92,246,.08);
+}
 
 @media(max-width:768px){
   .profile-section .profile-title{
@@ -3781,6 +3793,7 @@ body.light-mode .profile-card{
 <div class="scroll-progress-bar"></div>
 <div class="layout-editor" hidden aria-label="레이아웃 편집 도구">
   <span>LAYOUT EDIT</span>
+  <button class="layout-text-toggle" type="button">텍스트 편집</button>
   <button class="layout-copy" type="button">설정 복사</button>
   <button class="layout-reset" type="button">초기화</button>
 </div>
@@ -5114,20 +5127,72 @@ window.addEventListener('click',(e)=>{
 });
 
 // LAYOUT EDITOR: URL 끝에 ?layout-edit=1을 붙이면 블록 이동과 섹션 재정렬이 활성화됩니다.
-const LAYOUT_STORAGE_KEY = 'jo-hyeonjang-portfolio-layout-v1';
+const LAYOUT_STORAGE_KEY = 'jo-hyeonjang-portfolio-layout-v2';
 const layoutEditor = document.querySelector('.layout-editor');
+const layoutTextToggle = document.querySelector('.layout-text-toggle');
 const layoutCopyButton = document.querySelector('.layout-copy');
 const layoutResetButton = document.querySelector('.layout-reset');
 const layoutEditEnabled = new URLSearchParams(window.location.search).get('layout-edit') === '1';
-const layoutBlocks = [
-  ['hero-copy','.hero-copy'],
+const layoutBlockDefinitions = [
+  ['navigation','.portfolio-nav'],
+  ['theme-toggle','.mode-toggle'],
+  ['contact-toggle','.contact-toggle'],
+  ['hero-cell','.hero-cell'],
   ['hero-identity','.hero-identity'],
   ['scroll-indicator','.scroll-indicator'],
-  ['profile-card','.profile-card'],
-  ['experience-grid','.experience-grid'],
+  ['about-heading','.profile-section > .section-heading'],
+  ['about-kicker','.profile-kicker'],
+  ['about-title','.profile-title'],
+  ['about-source','.profile-quote-source'],
+  ['about-copy','.profile-copy'],
+  ['experience-heading','.experience-section > .section-heading'],
+  ['experience-intro','.experience-section > .section-intro'],
+  ['experience-card','.experience-card'],
+  ['campaign-heading','.campaign-section > .section-heading'],
+  ['campaign-intro','.campaign-section > .section-intro'],
   ['campaign-filter','.campaign-filter'],
-  ['projects','.projects']
+  ['campaign-card','.project-card']
 ];
+const layoutBlocks = layoutBlockDefinitions.flatMap(([baseKey,selector])=>{
+  const elements = Array.from(document.querySelectorAll(selector))
+    .filter(element=>!element.closest('[hidden]'));
+
+  return elements.map((element,index)=>({
+    key:elements.length > 1 ? `${baseKey}-${index + 1}` : baseKey,
+    element
+  }));
+});
+const layoutTextDefinitions = [
+  ['hero-letter','.hero-cell > span'],
+  ['hero-identity','.hero-identity'],
+  ['about-heading','.profile-section > .section-heading'],
+  ['about-kicker','.profile-kicker'],
+  ['about-title','.profile-title'],
+  ['about-source','.profile-quote-source'],
+  ['about-copy','.profile-copy'],
+  ['experience-heading','.experience-section > .section-heading'],
+  ['experience-intro','.experience-section > .section-intro'],
+  ['experience-label','.exp-label'],
+  ['experience-organization','.exp-org'],
+  ['experience-period','.exp-period'],
+  ['experience-role','.exp-role'],
+  ['experience-tag','.exp-meta span'],
+  ['campaign-heading','.campaign-section > .section-heading'],
+  ['campaign-intro','.campaign-section > .section-intro'],
+  ['campaign-filter','.campaign-filter-button'],
+  ['campaign-title','.project-title'],
+  ['campaign-description','.project-desc'],
+  ['campaign-label','.project-label']
+];
+const layoutTextItems = layoutTextDefinitions.flatMap(([baseKey,selector])=>{
+  const elements = Array.from(document.querySelectorAll(selector))
+    .filter(element=>!element.closest('[hidden]'));
+
+  return elements.map((element,index)=>({
+    key:elements.length > 1 ? `${baseKey}-${index + 1}` : baseKey,
+    element
+  }));
+});
 const layoutSectionIds = ['hero','profile','experience','campaign'];
 
 function readLayoutState(){
@@ -5141,6 +5206,7 @@ function readLayoutState(){
 let layoutState = readLayoutState();
 layoutState.positions ||= {};
 layoutState.order ||= layoutSectionIds;
+layoutState.text ||= {};
 
 function saveLayoutState(){
   window.localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(layoutState));
@@ -5157,30 +5223,37 @@ function applySectionOrder(){
 }
 
 function applyBlockPositions(){
-  layoutBlocks.forEach(([key,selector])=>{
-    const element = document.querySelector(selector);
-    if(!element) return;
-
+  layoutBlocks.forEach(({ key,element })=>{
     const position = layoutState.positions[key] || { x:0, y:0 };
     element.dataset.layoutKey = key;
+    element.setAttribute('title', `드래그: ${key}`);
     element.style.setProperty('--layout-x', `${position.x || 0}px`);
     element.style.setProperty('--layout-y', `${position.y || 0}px`);
   });
 }
 
+function applyTextContent(){
+  layoutTextItems.forEach(({ key,element })=>{
+    element.dataset.layoutText = key;
+    if(Object.prototype.hasOwnProperty.call(layoutState.text,key)){
+      element.innerHTML = layoutState.text[key];
+    }
+  });
+}
+
 applySectionOrder();
 applyBlockPositions();
+applyTextContent();
 
 if(layoutEditEnabled){
   document.body.classList.add('layout-edit-mode');
   layoutEditor.hidden = false;
+  layoutEditor.querySelector('span').innerText = `LAYOUT EDIT · ${layoutBlocks.length} BLOCKS`;
 
-  layoutBlocks.forEach(([key,selector])=>{
-    const element = document.querySelector(selector);
-    if(!element) return;
-
+  layoutBlocks.forEach(({ key,element })=>{
     element.addEventListener('pointerdown',(event)=>{
       if(event.button !== 0) return;
+      if(document.body.classList.contains('layout-text-mode')) return;
 
       event.preventDefault();
       element.setPointerCapture(event.pointerId);
@@ -5256,11 +5329,38 @@ if(layoutEditEnabled){
   });
 
   document.addEventListener('click',(event)=>{
-    if(event.target.closest('[data-layout-key]')){
+    if(
+      !document.body.classList.contains('layout-text-mode') &&
+      event.target.closest('[data-layout-key]')
+    ){
       event.preventDefault();
       event.stopPropagation();
     }
   },true);
+
+  layoutTextToggle.addEventListener('click',()=>{
+    const textModeEnabled = document.body.classList.toggle('layout-text-mode');
+    layoutTextToggle.classList.toggle('is-active',textModeEnabled);
+    layoutTextToggle.innerText = textModeEnabled ? '텍스트 완료' : '텍스트 편집';
+
+    layoutTextItems.forEach(({ element })=>{
+      element.setAttribute('contenteditable', textModeEnabled ? 'true' : 'false');
+      element.setAttribute('spellcheck','false');
+    });
+  });
+
+  layoutTextItems.forEach(({ key,element })=>{
+    element.addEventListener('click',(event)=>{
+      if(document.body.classList.contains('layout-text-mode')){
+        event.stopPropagation();
+      }
+    });
+
+    element.addEventListener('input',()=>{
+      layoutState.text[key] = element.innerHTML;
+      saveLayoutState();
+    });
+  });
 
   layoutCopyButton.addEventListener('click',async()=>{
     const serializedState = JSON.stringify(layoutState,null,2);
