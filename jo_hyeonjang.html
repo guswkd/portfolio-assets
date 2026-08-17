@@ -3725,6 +3725,7 @@ body.light-mode .profile-card{
 }
 .layout-editor button:hover{background:rgba(125,211,252,.16)}
 .layout-editor button.is-active{border-color:#67e8f9;background:rgba(34,211,238,.2);color:#cffafe}
+.layout-editor button:disabled{opacity:.38;cursor:not-allowed}
 
 [data-layout-key]{
   translate:var(--layout-x,0px) var(--layout-y,0px);
@@ -3741,6 +3742,10 @@ body.light-mode .profile-card{
   z-index:100;
   outline-style:solid;
   cursor:grabbing;
+}
+.layout-edit-mode [data-layout-key].is-layout-selected{
+  outline:2px solid #67e8f9;
+  outline-offset:7px;
 }
 
 .layout-section-handle{
@@ -3805,6 +3810,8 @@ body.light-mode .profile-card{
 <div class="layout-editor" hidden aria-label="레이아웃 편집 도구">
   <span>LAYOUT EDIT</span>
   <button class="layout-text-toggle" type="button">텍스트 편집</button>
+  <button class="layout-undo" type="button" disabled>실행 취소</button>
+  <button class="layout-redo" type="button" disabled>다시 실행</button>
   <button class="layout-copy" type="button">설정 복사</button>
   <button class="layout-reset" type="button">초기화</button>
 </div>
@@ -5143,6 +5150,8 @@ window.addEventListener('click',(e)=>{
 const LAYOUT_STORAGE_KEY = 'jo-hyeonjang-portfolio-layout-v2';
 const layoutEditor = document.querySelector('.layout-editor');
 const layoutTextToggle = document.querySelector('.layout-text-toggle');
+const layoutUndoButton = document.querySelector('.layout-undo');
+const layoutRedoButton = document.querySelector('.layout-redo');
 const layoutCopyButton = document.querySelector('.layout-copy');
 const layoutResetButton = document.querySelector('.layout-reset');
 const layoutVerticalGuide = document.querySelector('.layout-guide-vertical');
@@ -5174,7 +5183,8 @@ const layoutBlocks = layoutBlockDefinitions.flatMap(([baseKey,selector])=>{
 
   return elements.map((element,index)=>({
     key:elements.length > 1 ? `${baseKey}-${index + 1}` : baseKey,
-    element
+    element,
+    originalHTML:element.innerHTML
   }));
 });
 const layoutTextDefinitions = [
@@ -5222,9 +5232,29 @@ let layoutState = readLayoutState();
 layoutState.positions ||= {};
 layoutState.order ||= layoutSectionIds;
 layoutState.text ||= {};
+layoutState.layers ||= {};
+const layoutUndoStack = [];
+const layoutRedoStack = [];
 
 function saveLayoutState(){
   window.localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(layoutState));
+}
+
+function serializeLayoutState(){
+  return JSON.stringify(layoutState);
+}
+
+function updateLayoutHistoryButtons(){
+  layoutUndoButton.disabled = layoutUndoStack.length === 0;
+  layoutRedoButton.disabled = layoutRedoStack.length === 0;
+}
+
+function recordLayoutChange(previousSnapshot){
+  if(!previousSnapshot || previousSnapshot === serializeLayoutState()) return;
+  layoutUndoStack.push(previousSnapshot);
+  if(layoutUndoStack.length > 50) layoutUndoStack.shift();
+  layoutRedoStack.length = 0;
+  updateLayoutHistoryButtons();
 }
 
 function applySectionOrder(){
@@ -5244,16 +5274,35 @@ function applyBlockPositions(){
     element.setAttribute('title', `드래그: ${key}`);
     element.style.setProperty('--layout-x', `${position.x || 0}px`);
     element.style.setProperty('--layout-y', `${position.y || 0}px`);
+    if(Object.prototype.hasOwnProperty.call(layoutState.layers,key)){
+      element.style.zIndex = String(layoutState.layers[key]);
+    }else{
+      element.style.removeProperty('z-index');
+    }
   });
 }
 
 function applyTextContent(){
-  layoutTextItems.forEach(({ key,element })=>{
+  layoutTextItems.forEach(({ key,element,originalHTML })=>{
     element.dataset.layoutText = key;
     if(Object.prototype.hasOwnProperty.call(layoutState.text,key)){
       element.innerHTML = layoutState.text[key];
+    }else{
+      element.innerHTML = originalHTML;
     }
   });
+}
+
+function restoreLayoutSnapshot(snapshot){
+  layoutState = JSON.parse(snapshot);
+  layoutState.positions ||= {};
+  layoutState.order ||= layoutSectionIds;
+  layoutState.text ||= {};
+  layoutState.layers ||= {};
+  applySectionOrder();
+  applyBlockPositions();
+  applyTextContent();
+  saveLayoutState();
 }
 
 applySectionOrder();
@@ -5279,6 +5328,8 @@ if(layoutEditEnabled){
       const currentPosition = layoutState.positions[key] || { x:0, y:0 };
       const originX = Number(currentPosition.x) || 0;
       const originY = Number(currentPosition.y) || 0;
+      const stateBeforeDrag = serializeLayoutState();
+      let blockMoved = false;
       const startRect = element.getBoundingClientRect();
       const otherRects = layoutBlocks
         .filter(block=>block.element !== element)
@@ -5306,6 +5357,7 @@ if(layoutEditEnabled){
       };
 
       const moveBlock = (moveEvent)=>{
+        blockMoved = true;
         let nextX = Math.round(originX + moveEvent.clientX - startX);
         let nextY = Math.round(originY + moveEvent.clientY - startY);
 
@@ -5360,6 +5412,7 @@ if(layoutEditEnabled){
         element.removeEventListener('pointerup', finishBlock);
         element.removeEventListener('pointercancel', finishBlock);
         saveLayoutState();
+        if(blockMoved) recordLayoutChange(stateBeforeDrag);
       };
 
       element.addEventListener('pointermove', moveBlock);
@@ -5367,6 +5420,8 @@ if(layoutEditEnabled){
       element.addEventListener('pointercancel', finishBlock);
     });
   });
+
+  let sectionStateBeforeDrag = null;
 
   layoutSectionIds.forEach((sectionId)=>{
     const section = document.getElementById(sectionId);
@@ -5380,6 +5435,7 @@ if(layoutEditEnabled){
     section.prepend(handle);
 
     handle.addEventListener('dragstart',(event)=>{
+      sectionStateBeforeDrag = serializeLayoutState();
       event.dataTransfer.setData('text/plain', sectionId);
       event.dataTransfer.effectAllowed = 'move';
     });
@@ -5406,6 +5462,8 @@ if(layoutEditEnabled){
         .sort((a,b)=>a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1)
         .map(sectionElement=>sectionElement.id);
       saveLayoutState();
+      recordLayoutChange(sectionStateBeforeDrag);
+      sectionStateBeforeDrag = null;
     });
   });
 
@@ -5431,16 +5489,43 @@ if(layoutEditEnabled){
   });
 
   layoutTextItems.forEach(({ key,element })=>{
+    let stateBeforeTextEdit = null;
+
     element.addEventListener('click',(event)=>{
       if(document.body.classList.contains('layout-text-mode')){
         event.stopPropagation();
       }
     });
 
+    element.addEventListener('focus',()=>{
+      stateBeforeTextEdit = serializeLayoutState();
+    });
+
     element.addEventListener('input',()=>{
       layoutState.text[key] = element.innerHTML;
       saveLayoutState();
     });
+
+    element.addEventListener('blur',()=>{
+      recordLayoutChange(stateBeforeTextEdit);
+      stateBeforeTextEdit = null;
+    });
+  });
+
+  layoutUndoButton.addEventListener('click',()=>{
+    const previousSnapshot = layoutUndoStack.pop();
+    if(!previousSnapshot) return;
+    layoutRedoStack.push(serializeLayoutState());
+    restoreLayoutSnapshot(previousSnapshot);
+    updateLayoutHistoryButtons();
+  });
+
+  layoutRedoButton.addEventListener('click',()=>{
+    const nextSnapshot = layoutRedoStack.pop();
+    if(!nextSnapshot) return;
+    layoutUndoStack.push(serializeLayoutState());
+    restoreLayoutSnapshot(nextSnapshot);
+    updateLayoutHistoryButtons();
   });
 
   layoutCopyButton.addEventListener('click',async()=>{
@@ -5455,8 +5540,15 @@ if(layoutEditEnabled){
   });
 
   layoutResetButton.addEventListener('click',()=>{
-    window.localStorage.removeItem(LAYOUT_STORAGE_KEY);
-    window.location.reload();
+    const previousSnapshot = serializeLayoutState();
+    layoutState = {
+      positions:{},
+      order:[...layoutSectionIds],
+      text:{},
+      layers:{}
+    };
+    restoreLayoutSnapshot(JSON.stringify(layoutState));
+    recordLayoutChange(previousSnapshot);
   });
 }
 
