@@ -3692,6 +3692,78 @@ body.light-mode .profile-card{
   letter-spacing:-.045em;
 }
 
+/* LAYOUT EDITOR: ?layout-edit=1 접속 시 주요 블록과 섹션 순서를 직접 조정 */
+.layout-editor{
+  position:fixed;
+  left:50%;
+  bottom:22px;
+  z-index:20000;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  background:rgba(8,13,24,.92);
+  box-shadow:0 18px 50px rgba(0,0,0,.35);
+  backdrop-filter:blur(20px);
+  transform:translateX(-50%);
+}
+
+.layout-editor[hidden]{display:none !important}
+.layout-editor span{padding:0 8px;color:#dbeafe;font-size:11px;font-weight:800}
+.layout-editor button{
+  min-height:34px;
+  padding:0 13px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+}
+.layout-editor button:hover{background:rgba(125,211,252,.16)}
+
+[data-layout-key]{
+  translate:var(--layout-x,0px) var(--layout-y,0px);
+}
+
+.layout-edit-mode [data-layout-key]{
+  outline:1px dashed rgba(125,211,252,.55);
+  outline-offset:6px;
+  cursor:grab;
+  touch-action:none;
+}
+
+.layout-edit-mode [data-layout-key].is-layout-dragging{
+  z-index:100;
+  outline-style:solid;
+  cursor:grabbing;
+}
+
+.layout-section-handle{
+  position:absolute;
+  top:12px;
+  left:50%;
+  z-index:120;
+  display:none;
+  min-height:30px;
+  padding:0 12px;
+  border:1px solid rgba(125,211,252,.42);
+  border-radius:999px;
+  background:rgba(8,13,24,.88);
+  color:#dbeafe;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
+  cursor:grab;
+  transform:translateX(-50%);
+}
+
+.layout-edit-mode .layout-section-handle{display:inline-flex;align-items:center}
+.layout-edit-mode .layout-section-drop{box-shadow:inset 0 0 0 2px rgba(125,211,252,.55)}
+
 @media(max-width:768px){
   .profile-section .profile-title{
     font-size:clamp(30px,8.2vw,40px);
@@ -3707,6 +3779,11 @@ body.light-mode .profile-card{
 
 <div class="background"></div>
 <div class="scroll-progress-bar"></div>
+<div class="layout-editor" hidden aria-label="레이아웃 편집 도구">
+  <span>LAYOUT EDIT</span>
+  <button class="layout-copy" type="button">설정 복사</button>
+  <button class="layout-reset" type="button">초기화</button>
+</div>
 <nav class="portfolio-nav" aria-label="섹션 이동">
   <a href="#hero">HERO</a>
   <a href="#profile">ABOUT</a>
@@ -5036,6 +5113,172 @@ window.addEventListener('click',(e)=>{
     contactPanel.classList.remove('active');
   }
 });
+
+// LAYOUT EDITOR: URL 끝에 ?layout-edit=1을 붙이면 블록 이동과 섹션 재정렬이 활성화됩니다.
+const LAYOUT_STORAGE_KEY = 'jo-hyeonjang-portfolio-layout-v1';
+const layoutEditor = document.querySelector('.layout-editor');
+const layoutCopyButton = document.querySelector('.layout-copy');
+const layoutResetButton = document.querySelector('.layout-reset');
+const layoutEditEnabled = new URLSearchParams(window.location.search).get('layout-edit') === '1';
+const layoutBlocks = [
+  ['hero-copy','.hero-copy'],
+  ['hero-identity','.hero-identity'],
+  ['scroll-indicator','.scroll-indicator'],
+  ['profile-card','.profile-card'],
+  ['experience-grid','.experience-grid'],
+  ['campaign-filter','.campaign-filter'],
+  ['projects','.projects']
+];
+const layoutSectionIds = ['hero','profile','experience','campaign'];
+
+function readLayoutState(){
+  try{
+    return JSON.parse(window.localStorage.getItem(LAYOUT_STORAGE_KEY)) || {};
+  }catch(error){
+    return {};
+  }
+}
+
+let layoutState = readLayoutState();
+layoutState.positions ||= {};
+layoutState.order ||= layoutSectionIds;
+
+function saveLayoutState(){
+  window.localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(layoutState));
+}
+
+function applySectionOrder(){
+  const scriptAnchor = document.querySelector('body > script');
+  if(!scriptAnchor) return;
+
+  layoutState.order.forEach((sectionId)=>{
+    const section = document.getElementById(sectionId);
+    if(section) document.body.insertBefore(section, scriptAnchor);
+  });
+}
+
+function applyBlockPositions(){
+  layoutBlocks.forEach(([key,selector])=>{
+    const element = document.querySelector(selector);
+    if(!element) return;
+
+    const position = layoutState.positions[key] || { x:0, y:0 };
+    element.dataset.layoutKey = key;
+    element.style.setProperty('--layout-x', `${position.x || 0}px`);
+    element.style.setProperty('--layout-y', `${position.y || 0}px`);
+  });
+}
+
+applySectionOrder();
+applyBlockPositions();
+
+if(layoutEditEnabled){
+  document.body.classList.add('layout-edit-mode');
+  layoutEditor.hidden = false;
+
+  layoutBlocks.forEach(([key,selector])=>{
+    const element = document.querySelector(selector);
+    if(!element) return;
+
+    element.addEventListener('pointerdown',(event)=>{
+      if(event.button !== 0) return;
+
+      event.preventDefault();
+      element.setPointerCapture(event.pointerId);
+      element.classList.add('is-layout-dragging');
+
+      const startX = event.clientX;
+      const startY = event.clientY;
+      const currentPosition = layoutState.positions[key] || { x:0, y:0 };
+      const originX = Number(currentPosition.x) || 0;
+      const originY = Number(currentPosition.y) || 0;
+
+      const moveBlock = (moveEvent)=>{
+        const nextX = Math.round(originX + moveEvent.clientX - startX);
+        const nextY = Math.round(originY + moveEvent.clientY - startY);
+        element.style.setProperty('--layout-x', `${nextX}px`);
+        element.style.setProperty('--layout-y', `${nextY}px`);
+        layoutState.positions[key] = { x:nextX, y:nextY };
+      };
+
+      const finishBlock = ()=>{
+        element.classList.remove('is-layout-dragging');
+        element.removeEventListener('pointermove', moveBlock);
+        element.removeEventListener('pointerup', finishBlock);
+        element.removeEventListener('pointercancel', finishBlock);
+        saveLayoutState();
+      };
+
+      element.addEventListener('pointermove', moveBlock);
+      element.addEventListener('pointerup', finishBlock);
+      element.addEventListener('pointercancel', finishBlock);
+    });
+  });
+
+  layoutSectionIds.forEach((sectionId)=>{
+    const section = document.getElementById(sectionId);
+    if(!section) return;
+
+    const handle = document.createElement('button');
+    handle.type = 'button';
+    handle.className = 'layout-section-handle';
+    handle.draggable = true;
+    handle.innerText = `↕ ${sectionId.toUpperCase()}`;
+    section.prepend(handle);
+
+    handle.addEventListener('dragstart',(event)=>{
+      event.dataTransfer.setData('text/plain', sectionId);
+      event.dataTransfer.effectAllowed = 'move';
+    });
+
+    section.addEventListener('dragover',(event)=>{
+      event.preventDefault();
+      section.classList.add('layout-section-drop');
+    });
+
+    section.addEventListener('dragleave',()=>section.classList.remove('layout-section-drop'));
+    section.addEventListener('drop',(event)=>{
+      event.preventDefault();
+      section.classList.remove('layout-section-drop');
+      const draggedId = event.dataTransfer.getData('text/plain');
+      const draggedSection = document.getElementById(draggedId);
+      if(!draggedSection || draggedSection === section) return;
+
+      const bounds = section.getBoundingClientRect();
+      const insertAfter = event.clientY > bounds.top + bounds.height / 2;
+      section.parentNode.insertBefore(draggedSection, insertAfter ? section.nextSibling : section);
+      layoutState.order = layoutSectionIds
+        .map(id=>document.getElementById(id))
+        .filter(Boolean)
+        .sort((a,b)=>a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1)
+        .map(sectionElement=>sectionElement.id);
+      saveLayoutState();
+    });
+  });
+
+  document.addEventListener('click',(event)=>{
+    if(event.target.closest('[data-layout-key]')){
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  },true);
+
+  layoutCopyButton.addEventListener('click',async()=>{
+    const serializedState = JSON.stringify(layoutState,null,2);
+    try{
+      await navigator.clipboard.writeText(serializedState);
+      layoutCopyButton.innerText = '복사됨';
+      window.setTimeout(()=>layoutCopyButton.innerText = '설정 복사',1200);
+    }catch(error){
+      window.prompt('아래 설정을 복사해 주세요.', serializedState);
+    }
+  });
+
+  layoutResetButton.addEventListener('click',()=>{
+    window.localStorage.removeItem(LAYOUT_STORAGE_KEY);
+    window.location.reload();
+  });
+}
 
 </script>
 
