@@ -3764,6 +3764,17 @@ body.light-mode .profile-card{
 
 .layout-edit-mode .layout-section-handle{display:inline-flex;align-items:center}
 .layout-edit-mode .layout-section-drop{box-shadow:inset 0 0 0 2px rgba(125,211,252,.55)}
+.layout-guide{
+  position:fixed;
+  z-index:19999;
+  display:none;
+  pointer-events:none;
+  background:#67e8f9;
+  box-shadow:0 0 10px rgba(103,232,249,.75);
+}
+.layout-guide.is-visible{display:block}
+.layout-guide-vertical{top:0;bottom:0;width:1px}
+.layout-guide-horizontal{left:0;right:0;height:1px}
 .layout-text-mode [data-layout-key]{cursor:default}
 .layout-text-mode [data-layout-text]{
   outline:1px solid rgba(196,181,253,.7);
@@ -3797,6 +3808,8 @@ body.light-mode .profile-card{
   <button class="layout-copy" type="button">설정 복사</button>
   <button class="layout-reset" type="button">초기화</button>
 </div>
+<div class="layout-guide layout-guide-vertical" aria-hidden="true"></div>
+<div class="layout-guide layout-guide-horizontal" aria-hidden="true"></div>
 <nav class="portfolio-nav" aria-label="섹션 이동">
   <a href="#profile">ABOUT</a>
   <a href="#experience">EXPERIENCE</a>
@@ -5132,6 +5145,8 @@ const layoutEditor = document.querySelector('.layout-editor');
 const layoutTextToggle = document.querySelector('.layout-text-toggle');
 const layoutCopyButton = document.querySelector('.layout-copy');
 const layoutResetButton = document.querySelector('.layout-reset');
+const layoutVerticalGuide = document.querySelector('.layout-guide-vertical');
+const layoutHorizontalGuide = document.querySelector('.layout-guide-horizontal');
 const layoutEditEnabled = new URLSearchParams(window.location.search).get('layout-edit') === '1';
 const layoutBlockDefinitions = [
   ['navigation','.portfolio-nav'],
@@ -5248,7 +5263,7 @@ applyTextContent();
 if(layoutEditEnabled){
   document.body.classList.add('layout-edit-mode');
   layoutEditor.hidden = false;
-  layoutEditor.querySelector('span').innerText = `LAYOUT EDIT · ${layoutBlocks.length} BLOCKS`;
+  layoutEditor.querySelector('span').innerText = `LAYOUT EDIT · ${layoutBlocks.length} BLOCKS · SHIFT GUIDE`;
 
   layoutBlocks.forEach(({ key,element })=>{
     element.addEventListener('pointerdown',(event)=>{
@@ -5264,16 +5279,82 @@ if(layoutEditEnabled){
       const currentPosition = layoutState.positions[key] || { x:0, y:0 };
       const originX = Number(currentPosition.x) || 0;
       const originY = Number(currentPosition.y) || 0;
+      const startRect = element.getBoundingClientRect();
+      const otherRects = layoutBlocks
+        .filter(block=>block.element !== element)
+        .map(block=>block.element.getBoundingClientRect());
+
+      const hideLayoutGuides = ()=>{
+        layoutVerticalGuide.classList.remove('is-visible');
+        layoutHorizontalGuide.classList.remove('is-visible');
+      };
+
+      const findSnap = (movingAnchors,targetAnchors)=>{
+        let bestSnap = null;
+
+        movingAnchors.forEach((movingAnchor)=>{
+          targetAnchors.forEach((targetAnchor)=>{
+            const distance = targetAnchor - movingAnchor;
+            if(Math.abs(distance) > 8) return;
+            if(!bestSnap || Math.abs(distance) < Math.abs(bestSnap.distance)){
+              bestSnap = { distance,target:targetAnchor };
+            }
+          });
+        });
+
+        return bestSnap;
+      };
 
       const moveBlock = (moveEvent)=>{
-        const nextX = Math.round(originX + moveEvent.clientX - startX);
-        const nextY = Math.round(originY + moveEvent.clientY - startY);
+        let nextX = Math.round(originX + moveEvent.clientX - startX);
+        let nextY = Math.round(originY + moveEvent.clientY - startY);
+
+        hideLayoutGuides();
+
+        if(moveEvent.shiftKey){
+          const deltaX = nextX - originX;
+          const deltaY = nextY - originY;
+          const movingXAnchors = [
+            startRect.left + deltaX,
+            startRect.left + deltaX + startRect.width / 2,
+            startRect.right + deltaX
+          ];
+          const movingYAnchors = [
+            startRect.top + deltaY,
+            startRect.top + deltaY + startRect.height / 2,
+            startRect.bottom + deltaY
+          ];
+          const targetXAnchors = [
+            window.innerWidth / 2,
+            ...otherRects.flatMap(rect=>[rect.left,rect.left + rect.width / 2,rect.right])
+          ];
+          const targetYAnchors = [
+            window.innerHeight / 2,
+            ...otherRects.flatMap(rect=>[rect.top,rect.top + rect.height / 2,rect.bottom])
+          ];
+          const horizontalSnap = findSnap(movingXAnchors,targetXAnchors);
+          const verticalSnap = findSnap(movingYAnchors,targetYAnchors);
+
+          if(horizontalSnap){
+            nextX = Math.round(nextX + horizontalSnap.distance);
+            layoutVerticalGuide.style.left = `${horizontalSnap.target}px`;
+            layoutVerticalGuide.classList.add('is-visible');
+          }
+
+          if(verticalSnap){
+            nextY = Math.round(nextY + verticalSnap.distance);
+            layoutHorizontalGuide.style.top = `${verticalSnap.target}px`;
+            layoutHorizontalGuide.classList.add('is-visible');
+          }
+        }
+
         element.style.setProperty('--layout-x', `${nextX}px`);
         element.style.setProperty('--layout-y', `${nextY}px`);
         layoutState.positions[key] = { x:nextX, y:nextY };
       };
 
       const finishBlock = ()=>{
+        hideLayoutGuides();
         element.classList.remove('is-layout-dragging');
         element.removeEventListener('pointermove', moveBlock);
         element.removeEventListener('pointerup', finishBlock);
