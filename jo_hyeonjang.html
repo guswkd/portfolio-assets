@@ -5147,7 +5147,8 @@ window.addEventListener('click',(e)=>{
 });
 
 // LAYOUT EDITOR: URL 끝에 ?layout-edit=1을 붙이면 블록 이동과 섹션 재정렬이 활성화됩니다.
-const LAYOUT_STORAGE_KEY = 'jo-hyeonjang-portfolio-layout-v2';
+// 편집기 저장 형식이 바뀌면 키 버전을 올려 이전의 손상된 저장값과 분리합니다.
+const LAYOUT_STORAGE_KEY = 'jo-hyeonjang-portfolio-layout-v3';
 const layoutEditor = document.querySelector('.layout-editor');
 const layoutTextToggle = document.querySelector('.layout-text-toggle');
 const layoutUndoButton = document.querySelector('.layout-undo');
@@ -5215,7 +5216,8 @@ const layoutTextItems = layoutTextDefinitions.flatMap(([baseKey,selector])=>{
 
   return elements.map((element,index)=>({
     key:elements.length > 1 ? `${baseKey}-${index + 1}` : baseKey,
-    element
+    element,
+    originalText:element.innerText
   }));
 });
 const layoutSectionIds = ['hero','profile','experience','campaign'];
@@ -5283,12 +5285,12 @@ function applyBlockPositions(){
 }
 
 function applyTextContent(){
-  layoutTextItems.forEach(({ key,element,originalHTML })=>{
+  layoutTextItems.forEach(({ key,element,originalText })=>{
     element.dataset.layoutText = key;
     if(Object.prototype.hasOwnProperty.call(layoutState.text,key)){
-      element.innerHTML = layoutState.text[key];
+      element.innerText = String(layoutState.text[key]);
     }else{
-      element.innerHTML = originalHTML;
+      element.innerText = originalText;
     }
   });
 }
@@ -5305,11 +5307,11 @@ function restoreLayoutSnapshot(snapshot){
   saveLayoutState();
 }
 
-applySectionOrder();
-applyBlockPositions();
-applyTextContent();
-
 if(layoutEditEnabled){
+  // 편집기 저장값은 편집 URL에서만 적용합니다. 일반 포트폴리오는 항상 원본 HTML을 표시합니다.
+  applySectionOrder();
+  applyBlockPositions();
+  applyTextContent();
   document.body.classList.add('layout-edit-mode');
   layoutEditor.hidden = false;
   layoutEditor.querySelector('span').innerText = `LAYOUT EDIT · ${layoutBlocks.length} BLOCKS · SHIFT GUIDE`;
@@ -5502,7 +5504,8 @@ if(layoutEditEnabled){
     });
 
     element.addEventListener('input',()=>{
-      layoutState.text[key] = element.innerHTML;
+      // HTML 조각 대신 일반 텍스트만 저장해 태그 손상과 문자 깨짐을 방지합니다.
+      layoutState.text[key] = element.innerText;
       saveLayoutState();
     });
 
