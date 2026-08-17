@@ -1657,33 +1657,6 @@ body.light-mode .profile-quote-source{
   color:rgba(255,255,255,.72);
 }
 
-.profile-quote{
-  max-width:860px;
-  margin-top:24px;
-  padding-top:18px;
-  border-top:1px solid rgba(255,255,255,.1);
-}
-
-.profile-quote p{
-  color:rgba(255,255,255,.82);
-  font-size:15px;
-  font-weight:600;
-  line-height:1.65;
-}
-
-.profile-quote .profile-quote-source{
-  display:block;
-  margin:8px 0 0;
-}
-
-body.light-mode .profile-quote{
-  border-top-color:rgba(17,24,39,.1);
-}
-
-body.light-mode .profile-quote p{
-  color:rgba(17,24,39,.76);
-}
-
 .profile-list{
   display:grid;
   gap:14px;
@@ -3700,6 +3673,17 @@ body.light-mode .manifesto-section::after{
   }
 }
 
+/* ABOUT: 별도 카드 박스 없이 소개 문장 자체에 집중합니다. */
+.profile-card,
+body.light-mode .profile-card{
+  padding:20px 0 8px;
+  background:none;
+  border:0;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+
 /* PORTFOLIO MIND MAP: 전체 포트폴리오 보기 전환 */
 </style>
 </head>
@@ -3790,16 +3774,13 @@ body.light-mode .manifesto-section::after{
       <div class="profile-kicker">CAMPAIGN AE</div>
       <h2 class="profile-title">
         현장을 읽고,<br>
-        필요한 실행을 정리합니다.
+        브랜드 안의 드라마를 찾아 실행으로 연결합니다.
       </h2>
+      <cite class="profile-quote-source">“모든 제품에는 본래의 드라마가 있다.” — 레오 버넷(Leo Burnett)</cite>
       <p class="profile-copy">
         브랜드와 소비자가 만나는 접점을 살피고, 기획 의도를 실제 운영으로 연결하는 캠페인 AE 조현장입니다.<br>
         맡은 내용을 정확히 확인하고, 팀이 다시 보기 쉬운 형태로 정리합니다.
       </p>
-      <blockquote class="profile-quote">
-        <p>“모든 제품에는 본래의 드라마가 있다. 우리의 일은 그것을 찾아내는 것이다.”</p>
-        <cite class="profile-quote-source">— 레오 버넷(Leo Burnett)</cite>
-      </blockquote>
     </article>
 
   </div>
