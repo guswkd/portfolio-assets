@@ -3692,6 +3692,200 @@ body.light-mode .profile-card{
   letter-spacing:-.045em;
 }
 
+/* CAMPAIGN AE POSITIONING: 기존 비주얼 안에서 경력의 방향만 빠르게 읽히게 합니다. */
+.hero-positioning{
+  position:absolute;
+  left:50%;
+  bottom:82px;
+  z-index:2;
+  width:min(720px,calc(100% - 40px));
+  text-align:center;
+  transform:translateX(-50%);
+}
+
+.hero-positioning .hero-identity{
+  position:static;
+  width:auto;
+  max-width:none;
+  margin:0;
+  transform:none;
+}
+
+.hero-positioning-title{
+  margin-top:9px;
+  font-size:clamp(17px,1.55vw,24px);
+  font-weight:800;
+  letter-spacing:-.035em;
+}
+
+.hero-positioning-copy{
+  margin-top:7px;
+  color:rgba(255,255,255,.58);
+  font-size:clamp(11px,.9vw,14px);
+  line-height:1.55;
+}
+
+body.light-mode .hero-positioning-copy{color:rgba(17,24,39,.58)}
+
+.profile-keywords{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:28px;
+}
+
+.profile-keywords span,
+.skill-category-legend span{
+  padding:7px 11px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  background:rgba(255,255,255,.055);
+  color:rgba(255,255,255,.72);
+  font-size:12px;
+}
+
+body.light-mode .profile-keywords span,
+body.light-mode .skill-category-legend span{
+  border-color:rgba(17,24,39,.1);
+  background:rgba(255,255,255,.58);
+  color:rgba(17,24,39,.68);
+}
+
+.skill-category-legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  width:92%;
+  margin:24px auto -36px;
+}
+
+.skill-category-legend strong{
+  margin-right:6px;
+  color:#7dd3fc;
+  font-size:11px;
+  letter-spacing:.04em;
+}
+
+body.light-mode .skill-category-legend strong{color:#4f46e5}
+
+.experience-grid{
+  height:auto;
+  min-height:430px;
+}
+
+.career-path{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  width:92%;
+  margin:24px auto 6px;
+}
+
+.career-path div{
+  min-width:180px;
+  padding:14px 18px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:16px;
+  background:rgba(255,255,255,.035);
+  text-align:center;
+}
+
+.career-path strong,
+.career-path span{display:block}
+.career-path strong{font-size:13px}
+.career-path span{margin-top:5px;color:rgba(255,255,255,.54);font-size:11px}
+.career-path i{color:#7dd3fc;font-style:normal}
+
+body.light-mode .career-path div{border-color:rgba(17,24,39,.1);background:rgba(255,255,255,.42)}
+body.light-mode .career-path span{color:rgba(17,24,39,.56)}
+body.light-mode .career-path i{color:#4f46e5}
+
+.experience-card{min-height:430px}
+
+.exp-bridge{
+  margin-top:auto;
+  padding-top:18px;
+  color:rgba(255,255,255,.58);
+  font-size:12px;
+  line-height:1.55;
+}
+
+body.light-mode .exp-bridge{color:rgba(17,24,39,.58)}
+
+.performance-case-section{
+  width:100%;
+  padding:64px 0;
+  background:transparent;
+}
+
+body.light-mode .performance-case-section{background:transparent}
+
+.performance-case-card{
+  display:grid;
+  grid-template-columns:minmax(240px,.72fr) minmax(0,1.28fr);
+  gap:30px;
+  width:92%;
+  margin:34px auto 0;
+  padding:32px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 12% 10%,rgba(34,211,238,.12),transparent 32%),
+    linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.03));
+  box-shadow:0 24px 68px rgba(0,0,0,.2);
+}
+
+.performance-case-kicker{
+  color:#7dd3fc;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.performance-case-heading h3{
+  margin-top:18px;
+  font-size:clamp(34px,4vw,58px);
+  letter-spacing:-.045em;
+}
+
+.performance-case-heading p{
+  margin-top:14px;
+  color:rgba(255,255,255,.6);
+  font-size:14px;
+  line-height:1.65;
+}
+
+.performance-case-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+.performance-case-grid div{
+  min-height:110px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;
+  background:rgba(255,255,255,.035);
+}
+
+.performance-case-grid strong,
+.performance-case-grid span{display:block}
+.performance-case-grid strong{font-size:12px;letter-spacing:.04em}
+.performance-case-grid span{margin-top:9px;color:rgba(255,255,255,.56);font-size:13px;line-height:1.5}
+
+body.light-mode .performance-case-card{
+  border-color:rgba(14,165,233,.18);
+  background:linear-gradient(135deg,rgba(224,242,254,.58),rgba(237,233,254,.42));
+  box-shadow:0 24px 68px rgba(79,70,229,.1);
+}
+
+body.light-mode .performance-case-heading p,
+body.light-mode .performance-case-grid span{color:rgba(17,24,39,.58)}
+body.light-mode .performance-case-grid div{border-color:rgba(17,24,39,.09);background:rgba(255,255,255,.42)}
+body.light-mode .performance-case-kicker{color:#4f46e5}
+
 /* LAYOUT EDITOR: ?layout-edit=1 접속 시 주요 블록과 섹션 순서를 직접 조정 */
 .layout-editor{
   position:fixed;
@@ -3793,10 +3987,31 @@ body.light-mode .profile-card{
 }
 
 @media(max-width:768px){
+  .hero-positioning{bottom:78px}
+  .hero-positioning-copy br{display:none}
+
   .profile-section .profile-title{
     font-size:clamp(30px,8.2vw,40px);
     line-height:1.16;
   }
+
+  .skill-category-legend{margin-bottom:-18px}
+
+  .performance-case-card{
+    grid-template-columns:1fr;
+    padding:24px;
+  }
+
+  .performance-case-grid{grid-template-columns:1fr}
+
+  .career-path{
+    align-items:stretch;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .career-path i{align-self:center;transform:rotate(90deg)}
+  .career-path div{min-width:0}
 }
 
 /* PORTFOLIO MIND MAP: 전체 포트폴리오 보기 전환 */
@@ -3819,8 +4034,11 @@ body.light-mode .profile-card{
 <div class="layout-guide layout-guide-horizontal" aria-hidden="true"></div>
 <nav class="portfolio-nav" aria-label="섹션 이동">
   <a href="#profile">ABOUT</a>
+  <a href="#skills">TOOLKIT</a>
   <a href="#experience">EXPERIENCE</a>
+  <a href="#performance-case">CASE</a>
   <a href="#campaign">CAMPAIGNS</a>
+  <a href="#check">SUMMARY</a>
 </nav>
 <!-- AE DESK 보류: hidden 속성을 제거하면 전환 버튼이 다시 표시됩니다. -->
 <div class="portfolio-view-switch" role="group" aria-label="포트폴리오 보기 방식" hidden>
@@ -3867,7 +4085,11 @@ body.light-mode .profile-card{
       <div class="hero-cell hero-outline"><span>이</span></div>
       <div class="hero-cell hero-outline"><span>다</span></div>
   </div>
-  <p class="hero-identity"><strong>CAMPAIGN AE · 조현장</strong> — 현장을 실행으로.</p>
+  <div class="hero-positioning">
+    <p class="hero-identity"><strong>CAMPAIGN AE · 조현장</strong></p>
+    <p class="hero-positioning-title">현장을 읽고, 전략을 실행으로.</p>
+    <p class="hero-positioning-copy">Media Planning부터 Performance Campaign까지,<br>실행 경험을 캠페인 기획으로 확장합니다.</p>
+  </div>
   <div class="scroll-indicator">
     <div class="cta-arrow-option is-selected" aria-label="아래로 스크롤">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -3902,9 +4124,14 @@ body.light-mode .profile-card{
       </h2>
       <cite class="profile-quote-source">— 레오 버넷(Leo Burnett)</cite>
       <p class="profile-copy">
-        현장을 읽고 브랜드 안의 드라마를 찾아, 기획 의도를 실제 운영으로 연결하는 캠페인 AE 조현장입니다.<br>
-        맡은 내용을 정확히 확인하고, 팀이 다시 보기 쉬운 형태로 정리합니다.
+        현장을 읽고 브랜드 안의 드라마를 찾아,<br>
+        기획 의도를 실제 실행으로 연결하는 캠페인 AE 조현장입니다.<br><br>
+        미디어 플래닝과 퍼포먼스 캠페인 운영 경험을 바탕으로<br>
+        브랜드의 문제를 매체·소재·운영까지 실행 가능한 캠페인으로 구체화합니다.
       </p>
+      <div class="profile-keywords" aria-label="핵심 역량">
+        <span>브랜드 문제</span><span>캠페인 전략</span><span>미디어</span><span>크리에이티브</span><span>실행</span><span>데이터</span><span>인사이트</span>
+      </div>
     </article>
 
   </div>
@@ -3913,15 +4140,20 @@ body.light-mode .profile-card{
 
 <!-- SKILLS: 사용 툴/매체 숙련도 영역 -->
 
-<!-- 메인 흐름 개편으로 보류: hidden 속성을 제거하면 TOOLKIT이 다시 표시됩니다. -->
-<section class="skills-section" id="skills" data-imc-stage="TOOLKIT" data-chapter="05 · TOOLKIT" hidden>
+<section class="skills-section" id="skills" data-imc-stage="TOOLKIT" data-chapter="03 · TOOLKIT">
 
   <h2 class="section-heading">
     EXECUTION TOOLKIT
   </h2>
   <p class="section-intro">
-    기획 근거의 시각화부터 제작 커뮤니케이션, 매체 운영, 데이터 분석과 리포팅까지 연결하는 실무 도구입니다.
+    아이디어를 제안서에서 끝내지 않고, 제작·매체 운영·성과 분석까지 연결하기 위해 사용하는 실무 도구입니다.
   </p>
+  <div class="skill-category-legend" aria-label="툴 분류">
+    <span><strong>Planning</strong> PowerPoint · Excel · Word</span>
+    <span><strong>Creative</strong> Photoshop · Illustrator · Premiere Pro</span>
+    <span><strong>AI Creative</strong> Midjourney · Runway</span>
+    <span><strong>Media</strong> Meta · Google · Naver · Kakao</span>
+  </div>
   <div class="skills-layout">
 
     <!-- EDIT: 스킬 카드 / data-name=스킬명, data-percent=그래프 길이, data-level=강조 라벨, data-period=사용기간, data-range=활용범위, img src=로고 -->
@@ -4054,6 +4286,13 @@ body.light-mode .profile-card{
   <p class="section-intro">
     광고 교육부터 미디어 플래닝, 퍼포먼스 캠페인 운영까지 이어진 학력·경력입니다.
   </p>
+  <div class="career-path" aria-label="캠페인 AE로 확장된 경력 흐름">
+    <div><strong>Media Planning</strong><span>집행 구조 이해</span></div>
+    <i aria-hidden="true">→</i>
+    <div><strong>Performance AE</strong><span>운영·분석·개선</span></div>
+    <i aria-hidden="true">→</i>
+    <div><strong>Campaign AE</strong><span>브랜드 문제부터 캠페인 설계</span></div>
+  </div>
   <div class="experience-grid">
 
     <!-- EDIT: 교육 경험 카드 / 라벨, 기관명, 기간, 교육명, 하단 태그 수정 -->
@@ -4075,21 +4314,19 @@ body.light-mode .profile-card{
           </div>
 
           <div class="exp-role">
-            2026 KODA ACADEMY 교육생 [조장]
+            KODA ACADEMY 교육생 [조장]
           </div>
         </div>
 
       </div>
 
       <div class="exp-meta">
-        <span>광고 전략 및 실습</span>
-        <span>데이터 분석 및 리포트 작성</span>
-        <span>브랜딩 및 PR</span>
-        <span>생성형 AI</span>
-        <span>크리에이티브 실습</span>
-        <span>오피스 프로그램 실습</span>
-        <span>광고 제안 발표</span>
+        <span>광고 전략 · 브랜드 캠페인 기획</span>
+        <span>데이터 분석 · 캠페인 리포팅</span>
+        <span>생성형 AI 크리에이티브</span>
+        <span>경쟁 PT · 광고 제안 실습</span>
       </div>
+      <!-- TODO: 교육 기간(2025.07~09)과 공식 아카데미 연도를 증빙 자료 기준으로 최종 확인 -->
 
     </div>
 
@@ -4117,15 +4354,13 @@ body.light-mode .profile-card{
       </div>
 
       <div class="exp-meta">
-        <span>리포팅 폼 제작</span>
-        <span>미디어 믹스 작성</span>
-        <span>일일/주간 리포팅</span>
-        <span>로우데이터 정리</span>
-        <span>매체 제작 가이드 제작</span>
-        <span>매체 세팅</span>
-        <span>게재 보고</span>
-        <span>캠페인 운영</span>
+        <span>광고 목적·예산 기반 Media Mix 작성</span>
+        <span>디지털 매체 세팅·캠페인 운영</span>
+        <span>매체별 제작 가이드·게재 일정 관리</span>
+        <span>Raw Data 기반 일간·주간 성과 리포팅</span>
+        <span>대행사 요청사항·매체 커뮤니케이션</span>
       </div>
+      <p class="exp-bridge">대행사와 매체 사이에서 캠페인이 실제로 집행되는 구조를 경험했습니다.</p>
 
     </div>
 
@@ -4152,18 +4387,40 @@ body.light-mode .profile-card{
       </div>
 
       <div class="exp-meta">
-        <span>퍼포먼스 캠페인 운영</span>
-        <span>매체별 캠페인 구축·집행 관리</span>
-        <span>KPI·성과 모니터링</span>
-        <span>성과 데이터 분석·리포팅</span>
-        <span>광고주 커뮤니케이션</span>
-        <span>자산 매핑</span>
+        <span>광고주 목적·KPI 기반 캠페인 구조 설계</span>
+        <span>디지털 매체 캠페인 구축·운영</span>
+        <span>소재별 성과 분석·개선 방향 도출</span>
+        <span>성과 리포트·후속 테스트 플랜</span>
+        <span>광고주 커뮤니케이션·일정 관리</span>
+        <span>광고 계정·픽셀·전환 자산 관리</span>
       </div>
+      <p class="exp-bridge">광고주와 직접 소통하며 목적 설정부터 운영, 분석, 다음 액션까지 연결합니다.</p>
 
     </div>
 
   </div>
 
+</section>
+
+<!-- PERFORMANCE CASE: 실제 수치와 공개 가능한 범위를 확인한 뒤 내용을 입력합니다. -->
+<section class="performance-case-section" id="performance-case" data-imc-stage="PERFORMANCE CASE" data-chapter="05 · CASE">
+  <h2 class="section-heading">PERFORMANCE CASE</h2>
+  <p class="section-intro">퍼포먼스 운영 경험을 캠페인 가설과 다음 액션으로 연결한 실무 사례입니다.</p>
+  <article class="performance-case-card">
+    <div class="performance-case-heading">
+      <span class="performance-case-kicker">CONFIDENTIAL · INPUT REQUIRED</span>
+      <h3>BRAND A</h3>
+      <p>브랜드명과 민감 정보는 공개 가능 범위에 맞춰 익명화할 수 있습니다.</p>
+    </div>
+    <div class="performance-case-grid">
+      <div><strong>01 Objective</strong><span>TODO · 광고주가 해결하려 한 문제</span></div>
+      <div><strong>02 Hypothesis</strong><span>TODO · 성과 개선을 위해 설정한 가설</span></div>
+      <div><strong>03 Execution</strong><span>TODO · 캠페인 또는 소재 테스트 방법</span></div>
+      <div><strong>04 Result</strong><span>TODO · 공개 가능한 실제 성과만 입력</span></div>
+      <div><strong>05 Insight</strong><span>TODO · 데이터에서 확인한 핵심 인사이트</span></div>
+      <div><strong>06 Next Action</strong><span>TODO · 후속 운영 및 테스트 방향</span></div>
+    </div>
+  </article>
 </section>
 
 <!-- EDIT: 캠페인 수정 영역 / img src=썸네일, project-title=제목, project-desc=설명 -->
@@ -4173,7 +4430,7 @@ body.light-mode .profile-card{
   CAMPAIGNS
 </h2>
 <p class="section-intro">
-  교육과 프로젝트에서 참여한 브랜드·콘텐츠·AI·제안서 작업을 역할과 결과물 중심으로 정리했습니다.
+  브랜드가 마주한 문제를 어떻게 해석하고, 어떤 전략과 크리에이티브로 풀어냈는지를 중심으로 정리했습니다.
 </p>
 <div class="campaign-filter" aria-label="캠페인 필터">
   <button class="campaign-filter-button active" type="button" data-filter="all">전체</button>
@@ -4195,7 +4452,7 @@ body.light-mode .profile-card{
       </div>
 
       <div class="project-desc">
-        브랜드 캠페인 참여 작업
+        브랜드 캠페인 기획 작업
       </div>
     </div>
   </div>
@@ -4210,7 +4467,7 @@ body.light-mode .profile-card{
       </div>
 
       <div class="project-desc">
-        브랜드 캠페인·AI 활용 작업
+        브랜드 캠페인 · AI 크리에이티브
       </div>
     </div>
   </div>
@@ -4225,7 +4482,7 @@ body.light-mode .profile-card{
       </div>
 
       <div class="project-desc">
-        브랜드 캠페인 참여 작업
+        브랜드 캠페인 기획 작업
       </div>
     </div>
   </div>
@@ -4236,11 +4493,11 @@ body.light-mode .profile-card{
 
     <div class="project-info">
       <div class="project-title">
-        클리오 AI 캠페인 1
+        CLIO AI CREATIVE EXPERIMENT · 01
       </div>
 
       <div class="project-desc">
-        AI 기반 캠페인 시안 작업
+        AI 크리에이티브 콘셉트 01
       </div>
     </div>
   </div>
@@ -4251,11 +4508,11 @@ body.light-mode .profile-card{
 
     <div class="project-info">
       <div class="project-title">
-        클리오 AI 캠페인 2
+        CLIO AI CREATIVE EXPERIMENT · 02
       </div>
 
       <div class="project-desc">
-        AI 기반 캠페인 시안 작업
+        AI 크리에이티브 콘셉트 02
       </div>
     </div>
   </div>
@@ -4270,7 +4527,7 @@ body.light-mode .profile-card{
       </div>
 
       <div class="project-desc">
-        리뷰형 콘텐츠 캠페인 작업
+        리뷰형 콘텐츠 캠페인
       </div>
     </div>
   </div>
@@ -4285,7 +4542,7 @@ body.light-mode .profile-card{
       </div>
 
       <div class="project-desc">
-        제안서 작성 프로젝트
+        캠페인 전략 제안서
       </div>
     </div>
   </div>
@@ -4300,7 +4557,7 @@ body.light-mode .profile-card{
       </div>
 
       <div class="project-desc">
-        제안서 작성 프로젝트
+        경쟁 PT 캠페인 제안서
       </div>
     </div>
   </div>
@@ -4310,8 +4567,7 @@ body.light-mode .profile-card{
 </section>
 
 <!-- CHECK POINT: 대행사 실무 적합도 확인 기준 -->
-<!-- 메인 흐름 개편으로 보류: hidden 속성을 제거하면 SUMMARY가 다시 표시됩니다. -->
-<section class="quality-section" id="check" data-imc-stage="SUMMARY" data-chapter="06 · SUMMARY" hidden>
+<section class="quality-section" id="check" data-imc-stage="SUMMARY" data-chapter="07 · SUMMARY">
 
   <h2 class="section-heading">
     STRATEGY SUMMARY
@@ -4321,13 +4577,12 @@ body.light-mode .profile-card{
     <article class="quality-panel">
       <div class="quality-kicker">CAMPAIGN READY</div>
       <h3>
-        기획부터 인사이트까지,<br>
-        흐름을 끊지 않고 연결하는 AE.
+        전략을 실행으로,<br>
+        실행을 다시 인사이트로.
       </h3>
       <p>
-        캠페인 AE의 역할은 기획안을 만드는 데서 끝나지 않습니다.
-        브리프의 목적을 실행 기준으로 구체화하고, 매체·소재·일정과 커뮤니케이션을 관리하며,
-        성과 데이터에서 다음 액션을 찾습니다. 이 전 과정을 끊김 없이 연결하는 실무자로 일합니다.
+        브리프의 목적을 캠페인 전략으로 구체화하고, 매체·소재·일정과 커뮤니케이션을 연결합니다.
+        캠페인이 끝난 뒤에는 성과와 현장 피드백을 분석해 다음 액션까지 제안합니다.
       </p>
     </article>
 
@@ -4375,7 +4630,7 @@ body.light-mode .profile-card{
   자주 조정하는 순서·시간·애니메이션 값은 이 객체에서 관리합니다.
 */
 const PORTFOLIO_CONFIG = Object.freeze({
-  sectionOrder:['profile','experience','campaign','skills','check'],
+  sectionOrder:['profile','skills','experience','performance-case','campaign','check'],
   lightModeHours:{ start:7, end:19 },
   keyword:{
     desktopDuration:7200,
@@ -4590,8 +4845,33 @@ function setupCampaignCards(){
   filterCampaignCards(activeFilter);
 }
 
+function prioritizeCampaignCards(){
+  const projectContainer = document.querySelector('.projects');
+  if(!projectContainer) return;
+
+  const priority = [
+    '알바몬 브랜드 캠페인',
+    'KODA 제안서',
+    'KOSAC 제안서',
+    '카누 브랜드 캠페인',
+    'LVMH 리뷰 캠페인',
+    '알바몬 2026 캠페인',
+    'CLIO AI CREATIVE EXPERIMENT · 01',
+    'CLIO AI CREATIVE EXPERIMENT · 02'
+  ];
+
+  [...projectCards]
+    .sort((a,b)=>{
+      const aTitle = a.querySelector('.project-title')?.innerText.trim() || '';
+      const bTitle = b.querySelector('.project-title')?.innerText.trim() || '';
+      return priority.indexOf(aTitle) - priority.indexOf(bTitle);
+    })
+    .forEach(card=>projectContainer.appendChild(card));
+}
+
 setupSkillLogoFallbacks();
 setupCampaignCards();
+prioritizeCampaignCards();
 
 campaignFilterButtons.forEach((button)=>{
   button.addEventListener('click',()=>{
@@ -4711,6 +4991,7 @@ const revealTargets = [
   ...document.querySelectorAll('.skill-tab'),
   document.querySelector('.skill-detail'),
   ...document.querySelectorAll('.experience-card'),
+  document.querySelector('.performance-case-card'),
   ...document.querySelectorAll('.project-card'),
   document.querySelector('.quality-panel'),
   ...document.querySelectorAll('.quality-card')
@@ -5220,7 +5501,7 @@ const layoutTextItems = layoutTextDefinitions.flatMap(([baseKey,selector])=>{
     originalText:element.innerText
   }));
 });
-const layoutSectionIds = ['hero','profile','experience','campaign'];
+const layoutSectionIds = ['hero','profile','skills','experience','performance-case','campaign','check'];
 
 function readLayoutState(){
   try{
