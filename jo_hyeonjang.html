@@ -3692,6 +3692,28 @@ body.light-mode .profile-card{
   letter-spacing:-.045em;
 }
 
+.profile-keywords{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:28px;
+}
+
+.profile-keywords span{
+  padding:7px 11px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  background:rgba(255,255,255,.055);
+  color:rgba(255,255,255,.72);
+  font-size:12px;
+}
+
+body.light-mode .profile-keywords span{
+  border-color:rgba(17,24,39,.1);
+  background:rgba(255,255,255,.58);
+  color:rgba(17,24,39,.68);
+}
+
 /* LAYOUT EDITOR: ?layout-edit=1 접속 시 주요 블록과 섹션 순서를 직접 조정 */
 .layout-editor{
   position:fixed;
@@ -3902,9 +3924,14 @@ body.light-mode .profile-card{
       </h2>
       <cite class="profile-quote-source">— 레오 버넷(Leo Burnett)</cite>
       <p class="profile-copy">
-        현장을 읽고 브랜드 안의 드라마를 찾아, 기획 의도를 실제 운영으로 연결하는 캠페인 AE 조현장입니다.<br>
-        맡은 내용을 정확히 확인하고, 팀이 다시 보기 쉬운 형태로 정리합니다.
+        현장을 읽고 브랜드 안의 드라마를 찾아,<br>
+        기획 의도를 실제 실행으로 연결하는 캠페인 AE 조현장입니다.<br><br>
+        미디어 플래닝과 퍼포먼스 캠페인 운영 경험을 바탕으로<br>
+        브랜드의 문제를 매체·소재·운영까지 실행 가능한 캠페인으로 구체화합니다.
       </p>
+      <div class="profile-keywords" aria-label="핵심 역량">
+        <span>브랜드 문제</span><span>캠페인 전략</span><span>미디어</span><span>크리에이티브</span><span>실행</span><span>데이터</span><span>인사이트</span>
+      </div>
     </article>
 
   </div>
