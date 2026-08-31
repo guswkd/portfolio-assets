@@ -1852,7 +1852,6 @@ body.light-mode .campaign-filter-button.active{
 .project-card{
   position:relative;
   overflow:hidden;
-  min-width:0;
   border-radius:26px;
   min-height:210px;
   aspect-ratio:4/3;
@@ -2445,10 +2444,10 @@ body.light-mode .skills-sidebar .skill-tab{
 /* ATTACHMENT RESTORE: original skill-tab layout */
 .skills-layout{
   --skill-sidebar-width:396px;
-  --skill-sidebar-safe-padding:0px;
+  --skill-sidebar-safe-padding:18px;
   --skill-gap:12px;
   --skill-tab-size:calc((var(--skill-sidebar-width) - (var(--skill-sidebar-safe-padding) * 2) - (var(--skill-gap) * 2)) / 3);
-  --skill-panel-height:calc((var(--skill-tab-size) * 4) + (var(--skill-gap) * 3) + (var(--skill-sidebar-safe-padding) * 2));
+  --skill-panel-height:calc((var(--skill-tab-size) * 4) + (var(--skill-gap) * 3));
   display:grid;
   grid-template-columns:var(--skill-sidebar-width) minmax(0,1fr);
   gap:32px;
@@ -2462,13 +2461,13 @@ body.light-mode .skills-sidebar .skill-tab{
 .skills-sidebar,
 body.light-mode .skills-sidebar{
   width:var(--skill-sidebar-width);
-  height:var(--skill-panel-height);
+  height:calc(var(--skill-panel-height) + (var(--skill-sidebar-safe-padding) * 2));
   display:grid;
   grid-template-columns:repeat(3,var(--skill-tab-size));
   grid-template-rows:repeat(4,var(--skill-tab-size));
   gap:var(--skill-gap);
   padding:var(--skill-sidebar-safe-padding);
-  margin:0;
+  margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
   overflow:visible;
   border:0;
   border-radius:0;
@@ -2572,17 +2571,6 @@ body.light-mode .skills-sidebar{
   transform:scale(1.07) !important;
 }
 
-/* TOOLKIT ALIGNMENT: 선택·호버·등장 상태에서도 모든 로고 박스 크기와 행을 고정합니다. */
-.skills-sidebar .skill-tab,
-.skills-sidebar .skill-tab.active,
-.skills-sidebar .skill-tab:hover,
-.skills-sidebar .skill-tab.reveal-item,
-.skills-sidebar .skill-tab.reveal-item.is-visible,
-.skills-sidebar .skill-tab.reveal-item.is-visible.active,
-.skills-sidebar .skill-tab.reveal-item.is-visible:hover{
-  transform:none !important;
-}
-
 @media(max-width:1100px){
   .skills-layout{
     --skill-sidebar-width:100%;
@@ -2600,7 +2588,7 @@ body.light-mode .skills-sidebar{
     grid-template-columns:repeat(3,minmax(0,1fr));
     grid-template-rows:auto;
     padding:var(--skill-sidebar-safe-padding);
-    margin:0;
+    margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
   }
 }
 
@@ -2886,15 +2874,12 @@ body.light-mode .exp-meta span{
     width:92%;
     gap:28px;
     height:auto;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    grid-template-rows:auto;
   }
 }
 
 @media(max-width:768px){
   .projects{
     gap:24px;
-    grid-template-columns:minmax(0,1fr);
   }
 }
 
@@ -3707,125 +3692,6 @@ body.light-mode .profile-card{
   letter-spacing:-.045em;
 }
 
-/* CAMPAIGN AE POSITIONING: 기존 비주얼 안에서 경력의 방향만 빠르게 읽히게 합니다. */
-.hero-positioning{
-  position:absolute;
-  left:50%;
-  bottom:100px;
-  z-index:2;
-  width:min(720px,calc(100% - 40px));
-  text-align:center;
-  transform:translateX(-50%);
-}
-
-/* LAYOUT SAFETY: 히어로 격자와 소개 문구가 뷰포트 높이와 관계없이 겹치지 않게 분리합니다. */
-.hero-copy{
-  --hero-cell:clamp(88px,min(10vw,calc((100svh - 300px) / 3)),154px);
-  position:absolute;
-  left:50%;
-  top:calc(50% - 80px);
-  transform:translate(-50%,-50%);
-}
-
-/* 고정 메뉴와 스크롤 진입 시 섹션 제목이 겹치지 않는 공통 여백 */
-@media(min-width:769px){
-  .profile-section,
-  .skills-section,
-  .experience-section,
-  .campaign-section{
-    padding-top:104px;
-  }
-}
-
-.hero-positioning .hero-identity{
-  position:static;
-  width:auto;
-  max-width:none;
-  margin:0;
-  transform:none;
-}
-
-.hero-positioning-title{
-  margin-top:9px;
-  font-size:clamp(17px,1.55vw,24px);
-  font-weight:800;
-  letter-spacing:-.035em;
-}
-
-.hero-positioning-copy{
-  margin-top:7px;
-  color:rgba(255,255,255,.58);
-  font-size:clamp(11px,.9vw,14px);
-  line-height:1.55;
-}
-
-body.light-mode .hero-positioning-copy{color:rgba(17,24,39,.58)}
-
-.profile-keywords{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:28px;
-}
-
-.profile-keywords span{
-  padding:7px 11px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:999px;
-  background:rgba(255,255,255,.055);
-  color:rgba(255,255,255,.72);
-  font-size:12px;
-}
-
-body.light-mode .profile-keywords span{
-  border-color:rgba(17,24,39,.1);
-  background:rgba(255,255,255,.58);
-  color:rgba(17,24,39,.68);
-}
-
-/* 숙련도 수치 대신 툴 이름과 한 줄 실무 활용 범위만 표시합니다. */
-.skills-section .skill-detail-grid{
-  display:none !important;
-}
-
-.skills-section .skill-detail{
-  justify-content:center;
-}
-
-.skills-section .skill-detail-top{
-  padding-top:0;
-}
-
-.skills-section .skill-detail-sub{
-  max-width:760px;
-  font-size:clamp(15px,1.3vw,20px);
-  line-height:1.65;
-}
-
-.experience-grid{
-  height:auto;
-  min-height:0;
-  grid-auto-rows:1fr;
-}
-
-.experience-card{
-  display:flex;
-  flex-direction:column;
-  height:100%;
-  min-height:360px;
-  overflow:hidden;
-}
-
-.experience-card .exp-main{
-  flex:0 0 auto;
-  min-height:138px;
-  margin:0 0 18px;
-}
-
-.experience-card .exp-meta{
-  flex:0 0 auto;
-}
-
 /* LAYOUT EDITOR: ?layout-edit=1 접속 시 주요 블록과 섹션 순서를 직접 조정 */
 .layout-editor{
   position:fixed;
@@ -3927,16 +3793,10 @@ body.light-mode .profile-keywords span{
 }
 
 @media(max-width:768px){
-  .hero-positioning{bottom:96px}
-  .hero-positioning-copy br{display:none}
-
-  .experience-card{min-height:0}
-
   .profile-section .profile-title{
     font-size:clamp(30px,8.2vw,40px);
     line-height:1.16;
   }
-
 }
 
 /* PORTFOLIO MIND MAP: 전체 포트폴리오 보기 전환 */
@@ -3959,7 +3819,6 @@ body.light-mode .profile-keywords span{
 <div class="layout-guide layout-guide-horizontal" aria-hidden="true"></div>
 <nav class="portfolio-nav" aria-label="섹션 이동">
   <a href="#profile">ABOUT</a>
-  <a href="#skills">TOOLKIT</a>
   <a href="#experience">EXPERIENCE</a>
   <a href="#campaign">CAMPAIGNS</a>
 </nav>
@@ -4008,11 +3867,7 @@ body.light-mode .profile-keywords span{
       <div class="hero-cell hero-outline"><span>이</span></div>
       <div class="hero-cell hero-outline"><span>다</span></div>
   </div>
-  <div class="hero-positioning">
-    <p class="hero-identity"><strong>CAMPAIGN AE · 조현장</strong></p>
-    <p class="hero-positioning-title">현장을 읽고, 전략을 실행으로.</p>
-    <p class="hero-positioning-copy">Media Planning부터 Performance Campaign까지,<br>실행 경험을 캠페인 기획으로 확장합니다.</p>
-  </div>
+  <p class="hero-identity"><strong>CAMPAIGN AE · 조현장</strong> — 현장을 실행으로.</p>
   <div class="scroll-indicator">
     <div class="cta-arrow-option is-selected" aria-label="아래로 스크롤">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -4047,14 +3902,9 @@ body.light-mode .profile-keywords span{
       </h2>
       <cite class="profile-quote-source">— 레오 버넷(Leo Burnett)</cite>
       <p class="profile-copy">
-        현장을 읽고 브랜드 안의 드라마를 찾아,<br>
-        기획 의도를 실제 실행으로 연결하는 캠페인 AE 조현장입니다.<br><br>
-        미디어 플래닝과 퍼포먼스 캠페인 운영 경험을 바탕으로<br>
-        브랜드의 문제를 매체·소재·운영까지 실행 가능한 캠페인으로 구체화합니다.
+        현장을 읽고 브랜드 안의 드라마를 찾아, 기획 의도를 실제 운영으로 연결하는 캠페인 AE 조현장입니다.<br>
+        맡은 내용을 정확히 확인하고, 팀이 다시 보기 쉬운 형태로 정리합니다.
       </p>
-      <div class="profile-keywords" aria-label="핵심 역량">
-        <span>브랜드 문제</span><span>캠페인 전략</span><span>미디어</span><span>크리에이티브</span><span>실행</span><span>데이터</span><span>인사이트</span>
-      </div>
     </article>
 
   </div>
@@ -4063,76 +3913,78 @@ body.light-mode .profile-keywords span{
 
 <!-- SKILLS: 사용 툴/매체 숙련도 영역 -->
 
-<section class="skills-section" id="skills" data-imc-stage="TOOLKIT" data-chapter="03 · TOOLKIT">
+<!-- 메인 흐름 개편으로 보류: hidden 속성을 제거하면 TOOLKIT이 다시 표시됩니다. -->
+<section class="skills-section" id="skills" data-imc-stage="TOOLKIT" data-chapter="05 · TOOLKIT" hidden>
 
   <h2 class="section-heading">
     EXECUTION TOOLKIT
   </h2>
   <p class="section-intro">
-    아이디어를 제안서에서 끝내지 않고, 제작·매체 운영·성과 분석까지 연결하기 위해 사용하는 실무 도구입니다.
+    기획 근거의 시각화부터 제작 커뮤니케이션, 매체 운영, 데이터 분석과 리포팅까지 연결하는 실무 도구입니다.
   </p>
   <div class="skills-layout">
 
-    <!-- EDIT: 스킬 카드 / data-name=스킬명, data-range=실무 활용 범위. 숙련도 수치는 사용하지 않습니다. -->
+    <!-- EDIT: 스킬 카드 / data-name=스킬명, data-percent=그래프 길이, data-level=강조 라벨, data-period=사용기간, data-range=활용범위, img src=로고 -->
+    <!-- NOTE: 네이버/구글/메타/카카오는 data-percent를 비워두면 그래프가 숨겨집니다. -->
     <div class="skills-sidebar">
 
-      <div class="skill-tab" data-name="Illustrator" data-percent="" data-level="중상" data-period="" data-range="키비주얼·그래픽 요소·광고 시안 제작 및 벡터 이미지 편집">
+      <div class="skill-tab" data-name="Illustrator" data-percent="85%" data-level="중상" data-period="약 4년" data-range="제안 시안 · 광고 소재 수정 · 도식화">
         <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%B5%E1%86%AF%E1%84%85%E1%85%A5%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5.svg" alt="Illustrator" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">Ai</span>
       </div>
 
-      <div class="skill-tab" data-name="Photoshop" data-percent="" data-level="중상" data-period="" data-range="광고 소재·캠페인 시안 제작, 이미지 합성·보정 및 리사이징">
+      <div class="skill-tab" data-name="Photoshop" data-percent="80%" data-level="중상" data-period="약 4년" data-range="이미지 보정 · 썸네일 · 레퍼런스 가공">
         <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%A9%E1%84%90%E1%85%A9%E1%84%89%E1%85%A3%E1%86%B8.svg" alt="Photoshop" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">Ps</span>
       </div>
 
-      <div class="skill-tab" data-name="Premiere Pro" data-percent="" data-level="중하" data-period="" data-range="디지털 광고·숏폼 영상의 자막·사운드·컷 편집 및 간단한 모션 작업">
+      <div class="skill-tab" data-name="Premiere Pro" data-percent="75%" data-level="중하" data-period="약 3년" data-range="컷 편집 · 자막 · 숏폼 시안">
         <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%B3%E1%84%85%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8B%E1%85%A5%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9.svg" alt="Premiere Pro" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">Pr</span>
       </div>
 
-      <div class="skill-tab" data-name="Excel" data-percent="" data-level="중" data-period="" data-range="Raw Data 정리·함수·피벗테이블을 활용한 광고 데이터 분석 및 리포팅">
+      <div class="skill-tab" data-name="Excel" data-percent="75%" data-level="중" data-period="약 3년" data-range="로우데이터 정리 · 피벗 · 성과 리포트">
         <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%A6%E1%86%A8%E1%84%89%E1%85%A6%E1%86%AF.svg" alt="Excel" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">X</span>
       </div>
 
-      <div class="skill-tab" data-name="PowerPoint" data-percent="" data-level="상" data-period="" data-range="캠페인 기획서·제안서·경쟁 PT·성과 보고서 작성 및 시각화">
+      <div class="skill-tab" data-name="PowerPoint" data-percent="85%" data-level="상" data-period="약 4년" data-range="제안서 작성 · 보고자료 · 레퍼런스 정리">
         <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%A1%E1%84%8B%E1%85%AF%E1%84%91%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%90%E1%85%B3.svg" alt="PowerPoint" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">P</span>
       </div>
 
-      <div class="skill-tab" data-name="Word" data-percent="" data-level="중상" data-period="" data-range="브리프·회의록·운영 가이드 등 프로젝트 실무 문서 작성 및 정리">
+      <div class="skill-tab" data-name="Word" data-percent="80%" data-level="중상" data-period="약 4년" data-range="회의록 · 보고서 · 제안서 원고 정리">
         <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%AF%E1%84%83%E1%85%B3.svg" alt="Word" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">W</span>
       </div>
 
-      <div class="skill-tab" data-name="Midjourney" data-percent="" data-level="중" data-period="" data-range="캠페인 콘셉트 이미지·키비주얼 탐색 및 광고 크리에이티브 시안 제작">
+      <div class="skill-tab" data-name="Midjourney" data-percent="70%" data-level="중" data-period="약 1년" data-range="이미지 레퍼런스 · 콘셉트 시안 · 무드보드">
         <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" alt="Midjourney" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">MJ</span>
       </div>
 
-      <div class="skill-tab" data-name="Runway" data-percent="" data-level="중하" data-period="" data-range="AI 기반 영상 생성·이미지 모션·영상 확장 및 캠페인 영상 시안 제작">
+      <div class="skill-tab" data-name="Runway" data-percent="65%" data-level="중하" data-period="약 1년" data-range="AI 영상 소스 · 모션 시안 · 레퍼런스">
         <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" alt="Runway" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">RW</span>
       </div>
 
-      <div class="skill-tab" data-name="Naver Ads" data-percent="" data-level="중" data-period="실무 운영 경험" data-range="실무 운영 경험 · 검색·디스플레이 광고 세팅·운영, 소재 관리 및 성과 리포팅">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%87%E1%85%A5.svg" alt="Naver Ads" onerror="this.classList.add('is-broken')">
+      <div class="skill-tab" data-name="Naver" data-percent="" data-level="" data-period="실무 경험" data-range="검색광고 운영 · 키워드/소재 확인 · 리포팅">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%87%E1%85%A5.svg" alt="Naver" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">N</span>
       </div>
 
-      <div class="skill-tab" data-name="Google Ads" data-percent="" data-level="중" data-period="실무 운영 경험" data-range="실무 운영 경험 · 검색·디스플레이·영상 캠페인 세팅, 운영 및 기본 성과 분석">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%80%E1%85%AE%E1%84%80%E1%85%B3%E1%86%AF.svg" alt="Google Ads" onerror="this.classList.add('is-broken')">
+      <div class="skill-tab" data-name="Google" data-percent="" data-level="" data-period="실무 경험" data-range="Google Ads 운영 · 지표 모니터링 · 리포팅">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%80%E1%85%AE%E1%84%80%E1%85%B3%E1%86%AF.svg" alt="Google" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">G</span>
       </div>
 
-      <div class="skill-tab" data-name="Meta Ads Manager" data-percent="" data-level="중" data-period="실무 운영 경험" data-range="실무 운영 경험 · 캠페인 구조 설계·광고 세팅·타깃/예산 운영·소재 테스트 및 성과 분석">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%A6%E1%84%90%E1%85%A1.svg" alt="Meta Ads Manager" onerror="this.classList.add('is-broken')">
+      <div class="skill-tab" data-name="Meta" data-percent="" data-level="" data-period="실무 경험" data-range="Meta Ads 운영 · 소재 관리 · 성과 확인">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%A6%E1%84%90%E1%85%A1.svg" alt="Meta" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">M</span>
       </div>
 
-      <div class="skill-tab" data-name="Kakao Moment" data-percent="" data-level="중" data-period="실무 운영 경험" data-range="실무 운영 경험 · 캠페인 세팅·타기팅·소재 운영 및 기본 성과 분석">
-        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8F%E1%85%A1%E1%84%8F%E1%85%A1%E1%84%8B%E1%85%A9.svg" alt="Kakao Moment" onerror="this.classList.add('is-broken')">
+      <div class="skill-tab" data-name="Kakao" data-percent="" data-level="" data-period="실무 경험" data-range="카카오 광고 운영 · 소재 관리 · 리포팅">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8F%E1%85%A1%E1%84%8F%E1%85%A1%E1%84%8B%E1%85%A9.svg" alt="Kakao" onerror="this.classList.add('is-broken')">
         <span class="skill-logo-fallback">K</span>
       </div>
 
@@ -4150,7 +4002,7 @@ body.light-mode .profile-keywords span{
           </div>
 
           <div class="skill-detail-sub">
-            로고를 선택하면 캠페인 실무에서 활용하는 범위가 표시됩니다.
+            턴테이블 위의 로고를 선택하면 상세 내용이 표시됩니다.
           </div>
 
           <div class="skill-barometer" style="display:none;">
@@ -4199,11 +4051,18 @@ body.light-mode .profile-keywords span{
   <h2 class="section-heading">
     EDUCATION &amp; EXPERIENCE
   </h2>
+  <p class="section-intro">
+    광고 교육부터 미디어 플래닝, 퍼포먼스 캠페인 운영까지 이어진 학력·경력입니다.
+  </p>
   <div class="experience-grid">
 
-    <!-- EDIT: 교육 경험 카드 / 기관명, 기간, 교육명, 하단 태그 수정 -->
+    <!-- EDIT: 교육 경험 카드 / 라벨, 기관명, 기간, 교육명, 하단 태그 수정 -->
     <!-- NOTE: exp-meta 안의 span이 하단 태그입니다. 필요 없으면 span 한 줄을 삭제해도 됩니다. -->
     <div class="experience-card">
+
+      <div class="exp-label">
+        Education
+      </div>
 
       <div class="exp-main">
 
@@ -4216,25 +4075,31 @@ body.light-mode .profile-keywords span{
           </div>
 
           <div class="exp-role">
-            KODA ACADEMY 교육생 [조장]
+            2026 KODA ACADEMY 교육생 [조장]
           </div>
         </div>
 
       </div>
 
       <div class="exp-meta">
-        <span>광고 전략 · 브랜드 캠페인 기획</span>
-        <span>데이터 분석 · 캠페인 리포팅</span>
-        <span>생성형 AI 크리에이티브</span>
-        <span>경쟁 PT · 광고 제안 실습</span>
+        <span>광고 전략 및 실습</span>
+        <span>데이터 분석 및 리포트 작성</span>
+        <span>브랜딩 및 PR</span>
+        <span>생성형 AI</span>
+        <span>크리에이티브 실습</span>
+        <span>오피스 프로그램 실습</span>
+        <span>광고 제안 발표</span>
       </div>
-      <!-- TODO: 교육 기간(2025.07~09)과 공식 아카데미 연도를 증빙 자료 기준으로 최종 확인 -->
 
     </div>
 
     <!-- EDIT: 인턴 경험 카드 / 라벨, 회사명, 기간, 직무, 하단 업무 태그 수정 -->
     <!-- NOTE: 회사 로고는 img src, 라이트/다크 로고는 data-light-src와 data-dark-src에서 수정 -->
     <div class="experience-card">
+
+      <div class="exp-label">
+        Intern
+      </div>
 
       <div class="exp-main">
         <img class="exp-logo theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/NMG_Dark.png" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/NMG_Light.png" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/NMG_Dark.png" alt="NMG">
@@ -4252,16 +4117,24 @@ body.light-mode .profile-keywords span{
       </div>
 
       <div class="exp-meta">
-        <span>광고 목적·예산 기반 Media Mix 작성</span>
-        <span>디지털 매체 세팅·캠페인 운영</span>
-        <span>매체별 제작 가이드·게재 일정 관리</span>
-        <span>Raw Data 기반 일간·주간 성과 리포팅</span>
-        <span>대행사 요청사항·매체 커뮤니케이션</span>
+        <span>리포팅 폼 제작</span>
+        <span>미디어 믹스 작성</span>
+        <span>일일/주간 리포팅</span>
+        <span>로우데이터 정리</span>
+        <span>매체 제작 가이드 제작</span>
+        <span>매체 세팅</span>
+        <span>게재 보고</span>
+        <span>캠페인 운영</span>
       </div>
+
     </div>
 
     <!-- EDIT: 현재 재직 경험 카드 / 회사명, 기간, 직무, 하단 업무 태그 수정 -->
     <div class="experience-card">
+
+      <div class="exp-label">
+        Current Role
+      </div>
 
       <div class="exp-main">
         <img class="exp-logo theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/GB_Dark.png" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/GB_Light.png" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/GB_Dark.png" alt="GB">
@@ -4279,13 +4152,14 @@ body.light-mode .profile-keywords span{
       </div>
 
       <div class="exp-meta">
-        <span>광고주 목적·KPI 기반 캠페인 구조 설계</span>
-        <span>디지털 매체 캠페인 구축·운영</span>
-        <span>소재별 성과 분석·개선 방향 도출</span>
-        <span>성과 리포트·후속 테스트 플랜</span>
-        <span>광고주 커뮤니케이션·일정 관리</span>
-        <span>광고 계정·픽셀·전환 자산 관리</span>
+        <span>퍼포먼스 캠페인 운영</span>
+        <span>매체별 캠페인 구축·집행 관리</span>
+        <span>KPI·성과 모니터링</span>
+        <span>성과 데이터 분석·리포팅</span>
+        <span>광고주 커뮤니케이션</span>
+        <span>자산 매핑</span>
       </div>
+
     </div>
 
   </div>
@@ -4299,7 +4173,7 @@ body.light-mode .profile-keywords span{
   CAMPAIGNS
 </h2>
 <p class="section-intro">
-  브랜드가 마주한 문제를 어떻게 해석하고, 어떤 전략과 크리에이티브로 풀어냈는지를 중심으로 정리했습니다.
+  교육과 프로젝트에서 참여한 브랜드·콘텐츠·AI·제안서 작업을 역할과 결과물 중심으로 정리했습니다.
 </p>
 <div class="campaign-filter" aria-label="캠페인 필터">
   <button class="campaign-filter-button active" type="button" data-filter="all">전체</button>
@@ -4311,9 +4185,6 @@ body.light-mode .profile-keywords span{
 
 <section class="projects">
 
-  <!-- TODO: 실제 운영 브랜드 성과 공개 가능 시 이 그리드에 PERFORMANCE CASE 카드를 추가합니다.
-       권장 구조: Objective → Hypothesis → Execution → Result → Insight → Next Action -->
-
   <!-- EDIT: 캠페인 카드 / 원본 영상·PDF가 준비되면 data-asset-url에 주소를 입력합니다. -->
   <div class="project-card" data-asset-url="https://drive.google.com/file/d/1uEGdk4hleIy7Hf5ma0TfnG3xuVeu23YE/view?usp=sharing">
     <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/2021_albamon.jpg" alt="2021 albamon">
@@ -4324,7 +4195,7 @@ body.light-mode .profile-keywords span{
       </div>
 
       <div class="project-desc">
-        브랜드 캠페인 기획 작업
+        브랜드 캠페인 참여 작업
       </div>
     </div>
   </div>
@@ -4339,7 +4210,7 @@ body.light-mode .profile-keywords span{
       </div>
 
       <div class="project-desc">
-        브랜드 캠페인 · AI 크리에이티브
+        브랜드 캠페인·AI 활용 작업
       </div>
     </div>
   </div>
@@ -4354,7 +4225,7 @@ body.light-mode .profile-keywords span{
       </div>
 
       <div class="project-desc">
-        브랜드 캠페인 기획 작업
+        브랜드 캠페인 참여 작업
       </div>
     </div>
   </div>
@@ -4365,11 +4236,11 @@ body.light-mode .profile-keywords span{
 
     <div class="project-info">
       <div class="project-title">
-        CLIO AI CREATIVE EXPERIMENT · 01
+        클리오 AI 캠페인 1
       </div>
 
       <div class="project-desc">
-        AI 크리에이티브 콘셉트 01
+        AI 기반 캠페인 시안 작업
       </div>
     </div>
   </div>
@@ -4380,11 +4251,11 @@ body.light-mode .profile-keywords span{
 
     <div class="project-info">
       <div class="project-title">
-        CLIO AI CREATIVE EXPERIMENT · 02
+        클리오 AI 캠페인 2
       </div>
 
       <div class="project-desc">
-        AI 크리에이티브 콘셉트 02
+        AI 기반 캠페인 시안 작업
       </div>
     </div>
   </div>
@@ -4399,7 +4270,7 @@ body.light-mode .profile-keywords span{
       </div>
 
       <div class="project-desc">
-        리뷰형 콘텐츠 캠페인
+        리뷰형 콘텐츠 캠페인 작업
       </div>
     </div>
   </div>
@@ -4414,7 +4285,7 @@ body.light-mode .profile-keywords span{
       </div>
 
       <div class="project-desc">
-        캠페인 전략 제안서
+        제안서 작성 프로젝트
       </div>
     </div>
   </div>
@@ -4429,12 +4300,71 @@ body.light-mode .profile-keywords span{
       </div>
 
       <div class="project-desc">
-        경쟁 PT 캠페인 제안서
+        제안서 작성 프로젝트
       </div>
     </div>
   </div>
 
 </section>
+
+</section>
+
+<!-- CHECK POINT: 대행사 실무 적합도 확인 기준 -->
+<!-- 메인 흐름 개편으로 보류: hidden 속성을 제거하면 SUMMARY가 다시 표시됩니다. -->
+<section class="quality-section" id="check" data-imc-stage="SUMMARY" data-chapter="06 · SUMMARY" hidden>
+
+  <h2 class="section-heading">
+    STRATEGY SUMMARY
+  </h2>
+
+  <div class="quality-layout">
+    <article class="quality-panel">
+      <div class="quality-kicker">CAMPAIGN READY</div>
+      <h3>
+        기획부터 인사이트까지,<br>
+        흐름을 끊지 않고 연결하는 AE.
+      </h3>
+      <p>
+        캠페인 AE의 역할은 기획안을 만드는 데서 끝나지 않습니다.
+        브리프의 목적을 실행 기준으로 구체화하고, 매체·소재·일정과 커뮤니케이션을 관리하며,
+        성과 데이터에서 다음 액션을 찾습니다. 이 전 과정을 끊김 없이 연결하는 실무자로 일합니다.
+      </p>
+    </article>
+
+    <div class="quality-list">
+      <article class="quality-card">
+        <div class="quality-check">✓</div>
+        <div>
+          <strong>Brief & Planning</strong>
+          <span>캠페인 목적·KPI·산출물을 정리하고, 시장·타깃·경쟁사 근거를 실행 방향으로 구조화합니다.</span>
+        </div>
+      </article>
+
+      <article class="quality-card">
+        <div class="quality-check">✓</div>
+        <div>
+          <strong>Campaign Operation</strong>
+          <span>매체 세팅, 소재 버전, 일정, 피드백과 이슈를 관리해 캠페인의 실행 정확도를 높입니다.</span>
+        </div>
+      </article>
+
+      <article class="quality-card">
+        <div class="quality-check">✓</div>
+        <div>
+          <strong>Data & Reporting</strong>
+          <span>매체별 성과를 동일 기준으로 정리하고, KPI 대비 변동과 주요 이슈를 리포트로 공유합니다.</span>
+        </div>
+      </article>
+
+      <article class="quality-card">
+        <div class="quality-check">✓</div>
+        <div>
+          <strong>Insight & Follow-up</strong>
+          <span>성과 원인과 현장 피드백을 교차 확인해 다음 운영의 유지·개선·테스트 액션을 제안합니다.</span>
+        </div>
+      </article>
+    </div>
+  </div>
 
 </section>
 
@@ -4445,7 +4375,7 @@ body.light-mode .profile-keywords span{
   자주 조정하는 순서·시간·애니메이션 값은 이 객체에서 관리합니다.
 */
 const PORTFOLIO_CONFIG = Object.freeze({
-  sectionOrder:['profile','skills','experience','campaign'],
+  sectionOrder:['profile','experience','campaign','skills','check'],
   lightModeHours:{ start:7, end:19 },
   keyword:{
     desktopDuration:7200,
@@ -4518,10 +4448,10 @@ const skillLogoFallbacks = {
   Word:'W',
   Midjourney:'MJ',
   Runway:'RW',
-  'Naver Ads':'N',
-  'Google Ads':'G',
-  'Meta Ads Manager':'M',
-  'Kakao Moment':'K'
+  Naver:'N',
+  Google:'G',
+  Meta:'M',
+  Kakao:'K'
 };
 
 function setupSkillLogoFallbacks(){
@@ -4660,33 +4590,8 @@ function setupCampaignCards(){
   filterCampaignCards(activeFilter);
 }
 
-function prioritizeCampaignCards(){
-  const projectContainer = document.querySelector('.projects');
-  if(!projectContainer) return;
-
-  const priority = [
-    '알바몬 브랜드 캠페인',
-    'KODA 제안서',
-    'KOSAC 제안서',
-    '카누 브랜드 캠페인',
-    'LVMH 리뷰 캠페인',
-    '알바몬 2026 캠페인',
-    'CLIO AI CREATIVE EXPERIMENT · 01',
-    'CLIO AI CREATIVE EXPERIMENT · 02'
-  ];
-
-  [...projectCards]
-    .sort((a,b)=>{
-      const aTitle = a.querySelector('.project-title')?.innerText.trim() || '';
-      const bTitle = b.querySelector('.project-title')?.innerText.trim() || '';
-      return priority.indexOf(aTitle) - priority.indexOf(bTitle);
-    })
-    .forEach(card=>projectContainer.appendChild(card));
-}
-
 setupSkillLogoFallbacks();
 setupCampaignCards();
-prioritizeCampaignCards();
 
 campaignFilterButtons.forEach((button)=>{
   button.addEventListener('click',()=>{
@@ -4713,43 +4618,91 @@ function reorderPortfolioSections(){
 
 reorderPortfolioSections();
 
-// EDIT TEXT: 스킬 설명은 캠페인 AE 실무에서 가능한 작업을 한 줄로 보여줍니다.
+// EDIT TEXT: 스킬 설명박스 문구 / title=상단 설명, cards=하단 카드 2개
 const skillCopy = {
   Illustrator:{
-    title:'키비주얼·그래픽 요소·광고 시안 제작 및 벡터 이미지 편집'
+    title:'제안 아이디어와 제작 방향을 시안·도식으로 구체화합니다.',
+    cards:[
+      { label:'활용 범위', value:'제안 시안 · 광고 소재 수정 · 아이콘과 정보 도식화' },
+      { label:'업무 적용', value:'제작 의도와 필수 요소를 시각화해 커뮤니케이션 기준을 정리' }
+    ]
   },
   Photoshop:{
-    title:'광고 소재·캠페인 시안 제작, 이미지 합성·보정 및 리사이징'
+    title:'제안서와 캠페인 소재에 필요한 이미지를 목적에 맞게 보정·가공합니다.',
+    cards:[
+      { label:'활용 범위', value:'이미지 보정 · 누끼 · 썸네일과 합성 시안 제작' },
+      { label:'업무 적용', value:'매체 규격과 메시지 위계에 맞춰 이미지 톤과 구성을 정리' }
+    ]
   },
   'Premiere Pro':{
-    title:'디지털 광고·숏폼 영상의 자막·사운드·컷 편집 및 간단한 모션 작업'
+    title:'영상 메시지와 호흡을 확인할 수 있는 숏폼·편집 시안을 제작합니다.',
+    cards:[
+      { label:'활용 범위', value:'컷 편집 · 자막 · 음원과 화면 비율 조정' },
+      { label:'업무 적용', value:'기획 의도와 편집 포인트를 제작 전 시안으로 구체화' }
+    ]
   },
   Excel:{
-    title:'Raw Data 정리·함수·피벗테이블을 활용한 광고 데이터 분석 및 리포팅'
+    title:'매체 데이터를 동일 기준으로 정리하고 KPI·증감·이슈를 확인합니다.',
+    cards:[
+      { label:'활용 범위', value:'로우데이터 정리 · 피벗 · 성과표와 증감률 확인' },
+      { label:'업무 적용', value:'매체별 성과를 비교하고 주요 변동과 확인 필요 항목을 표시' }
+    ]
   },
   PowerPoint:{
-    title:'캠페인 기획서·제안서·경쟁 PT·성과 보고서 작성 및 시각화'
+    title:'리서치와 데이터를 문제–전략–실행–결과의 제안 흐름으로 구조화합니다.',
+    cards:[
+      { label:'활용 범위', value:'제안서 작성 · 경쟁사 사례 · 캠페인 보고자료' },
+      { label:'업무 적용', value:'핵심 메시지와 근거가 빠르게 읽히도록 정보 위계를 설계' }
+    ]
   },
   Word:{
-    title:'브리프·회의록·운영 가이드 등 프로젝트 실무 문서 작성 및 정리'
+    title:'회의·요청·결정사항을 담당자와 마감일이 명확한 실행 문서로 정리합니다.',
+    cards:[
+      { label:'활용 경험', value:'회의록 · 보고서 · 제안서 원고와 피드백 정리' },
+      { label:'업무 적용', value:'결정사항, 담당자, 마감일과 후속 액션을 명확히 기록' }
+    ]
   },
   Midjourney:{
-    title:'캠페인 콘셉트 이미지·키비주얼 탐색 및 광고 크리에이티브 시안 제작'
+    title:'초기 아이디어를 시각화하고 레퍼런스 범위를 넓힐 때 활용합니다.',
+    cards:[
+      { label:'핵심 활용', value:'이미지 레퍼런스 생성 · 콘셉트 시안 · 무드보드 제작' },
+      { label:'업무 적용', value:'팀과 제작 방향을 논의할 수 있는 참고 이미지를 빠르게 준비' }
+    ]
   },
   Runway:{
-    title:'AI 기반 영상 생성·이미지 모션·영상 확장 및 캠페인 영상 시안 제작'
+    title:'영상 콘셉트를 확인하기 위한 짧은 AI 소스와 모션 시안을 만듭니다.',
+    cards:[
+      { label:'핵심 활용', value:'AI 영상 소스 · 모션 레퍼런스 · 분위기 샘플 제작' },
+      { label:'업무 적용', value:'제작 전 톤앤무드와 움직임을 공유하는 참고 자료로 활용' }
+    ]
   },
-  'Naver Ads':{
-    title:'실무 운영 경험 · 검색·디스플레이 광고 세팅·운영, 소재 관리 및 성과 리포팅'
+  Naver:{
+    title:'네이버 검색광고의 키워드·소재·성과 흐름을 점검하고 리포트에 반영합니다.',
+    cards:[
+      { label:'경험 범위', value:'검색광고 · 키워드/소재 관리 · 성과 리포팅' },
+      { label:'업무 적용', value:'키워드와 소재 상태를 확인하고 주요 변동을 리포트로 공유' }
+    ]
   },
-  'Google Ads':{
-    title:'실무 운영 경험 · 검색·디스플레이·영상 캠페인 세팅, 운영 및 기본 성과 분석'
+  Google:{
+    title:'Google Ads의 주요 지표와 캠페인 변동을 모니터링하고 리포팅합니다.',
+    cards:[
+      { label:'경험 범위', value:'캠페인 운영 · 주요 지표 모니터링 · 리포트 작성' },
+      { label:'업무 적용', value:'검색·디스플레이 성과 변동과 확인 필요 항목을 정리' }
+    ]
   },
-  'Meta Ads Manager':{
-    title:'실무 운영 경험 · 캠페인 구조 설계·광고 세팅·타깃/예산 운영·소재 테스트 및 성과 분석'
+  Meta:{
+    title:'Meta 광고의 소재별 성과와 주요 지표 변화를 확인하며 운영합니다.',
+    cards:[
+      { label:'경험 범위', value:'소재 관리 · 캠페인 운영 · 성과 확인' },
+      { label:'업무 적용', value:'소재별 반응 차이와 주요 지표 변화를 확인해 공유' }
+    ]
   },
-  'Kakao Moment':{
-    title:'실무 운영 경험 · 캠페인 세팅·타기팅·소재 운영 및 기본 성과 분석'
+  Kakao:{
+    title:'카카오 광고의 집행 상태와 주요 성과를 점검하고 리포트에 반영합니다.',
+    cards:[
+      { label:'경험 범위', value:'캠페인 운영 · 소재 관리 · 성과 리포팅' },
+      { label:'업무 적용', value:'집행 상태와 주요 지표 변동을 확인해 후속 항목과 함께 공유' }
+    ]
   }
 };
 
@@ -4758,7 +4711,9 @@ const revealTargets = [
   ...document.querySelectorAll('.skill-tab'),
   document.querySelector('.skill-detail'),
   ...document.querySelectorAll('.experience-card'),
-  ...document.querySelectorAll('.project-card')
+  ...document.querySelectorAll('.project-card'),
+  document.querySelector('.quality-panel'),
+  ...document.querySelectorAll('.quality-card')
 ].filter(Boolean);
 
 revealTargets.forEach((item,index)=>{
@@ -4943,6 +4898,7 @@ startTalentKeywords();
 // EDIT NOTE: 스킬 탭 data값과 skillCopy 문구를 상세 패널에 자동 반영하는 영역.
 function renderSkillDetail(tab){
   const skillName = tab.dataset.name;
+  const percent = tab.dataset.percent;
   const level = tab.dataset.level;
   const period = tab.dataset.period;
   const range = tab.dataset.range;
@@ -4953,16 +4909,10 @@ function renderSkillDetail(tab){
 
   skillScaleLabels.forEach(label=>label.classList.remove('active'));
 
-  if(level){
+  if(percent){
     skillBarometer.style.display = 'block';
-    const levelWidth = {
-      '하':'20%',
-      '중하':'40%',
-      '중':'60%',
-      '중상':'80%',
-      '상':'100%'
-    };
-    skillBarometerFill.style.width = levelWidth[level] || '60%';
+    const activeSegmentCount = Math.max(1, Math.min(5, Math.ceil(parseInt(percent, 10) / 20)));
+    skillBarometerFill.style.width = `${activeSegmentCount * 20}%`;
 
     if(level === '상' || level === '중상'){
       skillScaleLabels[2]?.classList.add('active');
@@ -5221,6 +5171,7 @@ const layoutBlockDefinitions = [
   ['about-source','.profile-quote-source'],
   ['about-copy','.profile-copy'],
   ['experience-heading','.experience-section > .section-heading'],
+  ['experience-intro','.experience-section > .section-intro'],
   ['experience-card','.experience-card'],
   ['campaign-heading','.campaign-section > .section-heading'],
   ['campaign-intro','.campaign-section > .section-intro'],
@@ -5246,6 +5197,7 @@ const layoutTextDefinitions = [
   ['about-source','.profile-quote-source'],
   ['about-copy','.profile-copy'],
   ['experience-heading','.experience-section > .section-heading'],
+  ['experience-intro','.experience-section > .section-intro'],
   ['experience-label','.exp-label'],
   ['experience-organization','.exp-org'],
   ['experience-period','.exp-period'],
@@ -5268,7 +5220,7 @@ const layoutTextItems = layoutTextDefinitions.flatMap(([baseKey,selector])=>{
     originalText:element.innerText
   }));
 });
-const layoutSectionIds = ['hero','profile','skills','experience','campaign'];
+const layoutSectionIds = ['hero','profile','experience','campaign'];
 
 function readLayoutState(){
   try{
