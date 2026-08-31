@@ -3811,8 +3811,8 @@ body.light-mode .profile-keywords span{
 .experience-card{
   display:flex;
   flex-direction:column;
-  height:auto;
-  min-height:500px;
+  height:100%;
+  min-height:360px;
   overflow:hidden;
 }
 
@@ -3825,16 +3825,6 @@ body.light-mode .profile-keywords span{
 .experience-card .exp-meta{
   flex:0 0 auto;
 }
-
-.exp-bridge{
-  margin-top:auto;
-  padding-top:18px;
-  color:rgba(255,255,255,.58);
-  font-size:12px;
-  line-height:1.55;
-}
-
-body.light-mode .exp-bridge{color:rgba(17,24,39,.58)}
 
 /* LAYOUT EDITOR: ?layout-edit=1 접속 시 주요 블록과 섹션 순서를 직접 조정 */
 .layout-editor{
@@ -4209,9 +4199,6 @@ body.light-mode .exp-bridge{color:rgba(17,24,39,.58)}
   <h2 class="section-heading">
     EDUCATION &amp; EXPERIENCE
   </h2>
-  <p class="section-intro">
-    광고 교육부터 미디어 플래닝, 퍼포먼스 캠페인 운영까지 이어진 학력·경력입니다.
-  </p>
   <div class="experience-grid">
 
     <!-- EDIT: 교육 경험 카드 / 기관명, 기간, 교육명, 하단 태그 수정 -->
@@ -4271,8 +4258,6 @@ body.light-mode .exp-bridge{color:rgba(17,24,39,.58)}
         <span>Raw Data 기반 일간·주간 성과 리포팅</span>
         <span>대행사 요청사항·매체 커뮤니케이션</span>
       </div>
-      <p class="exp-bridge">대행사와 매체 사이에서 캠페인이 실제로 집행되는 구조를 경험했습니다.</p>
-
     </div>
 
     <!-- EDIT: 현재 재직 경험 카드 / 회사명, 기간, 직무, 하단 업무 태그 수정 -->
@@ -4301,8 +4286,6 @@ body.light-mode .exp-bridge{color:rgba(17,24,39,.58)}
         <span>광고주 커뮤니케이션·일정 관리</span>
         <span>광고 계정·픽셀·전환 자산 관리</span>
       </div>
-      <p class="exp-bridge">광고주와 직접 소통하며 목적 설정부터 운영, 분석, 다음 액션까지 연결합니다.</p>
-
     </div>
 
   </div>
@@ -5238,7 +5221,6 @@ const layoutBlockDefinitions = [
   ['about-source','.profile-quote-source'],
   ['about-copy','.profile-copy'],
   ['experience-heading','.experience-section > .section-heading'],
-  ['experience-intro','.experience-section > .section-intro'],
   ['experience-card','.experience-card'],
   ['campaign-heading','.campaign-section > .section-heading'],
   ['campaign-intro','.campaign-section > .section-intro'],
@@ -5264,7 +5246,6 @@ const layoutTextDefinitions = [
   ['about-source','.profile-quote-source'],
   ['about-copy','.profile-copy'],
   ['experience-heading','.experience-section > .section-heading'],
-  ['experience-intro','.experience-section > .section-intro'],
   ['experience-label','.exp-label'],
   ['experience-organization','.exp-org'],
   ['experience-period','.exp-period'],
