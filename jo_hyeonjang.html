@@ -3813,79 +3813,6 @@ body.light-mode .career-path i{color:#4f46e5}
 
 body.light-mode .exp-bridge{color:rgba(17,24,39,.58)}
 
-.performance-case-section{
-  width:100%;
-  padding:64px 0;
-  background:transparent;
-}
-
-body.light-mode .performance-case-section{background:transparent}
-
-.performance-case-card{
-  display:grid;
-  grid-template-columns:minmax(240px,.72fr) minmax(0,1.28fr);
-  gap:30px;
-  width:92%;
-  margin:34px auto 0;
-  padding:32px;
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:28px;
-  background:
-    radial-gradient(circle at 12% 10%,rgba(34,211,238,.12),transparent 32%),
-    linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.03));
-  box-shadow:0 24px 68px rgba(0,0,0,.2);
-}
-
-.performance-case-kicker{
-  color:#7dd3fc;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.08em;
-}
-
-.performance-case-heading h3{
-  margin-top:18px;
-  font-size:clamp(34px,4vw,58px);
-  letter-spacing:-.045em;
-}
-
-.performance-case-heading p{
-  margin-top:14px;
-  color:rgba(255,255,255,.6);
-  font-size:14px;
-  line-height:1.65;
-}
-
-.performance-case-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-}
-
-.performance-case-grid div{
-  min-height:110px;
-  padding:18px;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:18px;
-  background:rgba(255,255,255,.035);
-}
-
-.performance-case-grid strong,
-.performance-case-grid span{display:block}
-.performance-case-grid strong{font-size:12px;letter-spacing:.04em}
-.performance-case-grid span{margin-top:9px;color:rgba(255,255,255,.56);font-size:13px;line-height:1.5}
-
-body.light-mode .performance-case-card{
-  border-color:rgba(14,165,233,.18);
-  background:linear-gradient(135deg,rgba(224,242,254,.58),rgba(237,233,254,.42));
-  box-shadow:0 24px 68px rgba(79,70,229,.1);
-}
-
-body.light-mode .performance-case-heading p,
-body.light-mode .performance-case-grid span{color:rgba(17,24,39,.58)}
-body.light-mode .performance-case-grid div{border-color:rgba(17,24,39,.09);background:rgba(255,255,255,.42)}
-body.light-mode .performance-case-kicker{color:#4f46e5}
-
 /* LAYOUT EDITOR: ?layout-edit=1 접속 시 주요 블록과 섹션 순서를 직접 조정 */
 .layout-editor{
   position:fixed;
@@ -3997,13 +3924,6 @@ body.light-mode .performance-case-kicker{color:#4f46e5}
 
   .skill-category-legend{margin-bottom:-18px}
 
-  .performance-case-card{
-    grid-template-columns:1fr;
-    padding:24px;
-  }
-
-  .performance-case-grid{grid-template-columns:1fr}
-
   .career-path{
     align-items:stretch;
     flex-direction:column;
@@ -4036,7 +3956,6 @@ body.light-mode .performance-case-kicker{color:#4f46e5}
   <a href="#profile">ABOUT</a>
   <a href="#skills">TOOLKIT</a>
   <a href="#experience">EXPERIENCE</a>
-  <a href="#performance-case">CASE</a>
   <a href="#campaign">CAMPAIGNS</a>
   <a href="#check">SUMMARY</a>
 </nav>
@@ -4402,27 +4321,6 @@ body.light-mode .performance-case-kicker{color:#4f46e5}
 
 </section>
 
-<!-- PERFORMANCE CASE: 실제 수치와 공개 가능한 범위를 확인한 뒤 내용을 입력합니다. -->
-<section class="performance-case-section" id="performance-case" data-imc-stage="PERFORMANCE CASE" data-chapter="05 · CASE">
-  <h2 class="section-heading">PERFORMANCE CASE</h2>
-  <p class="section-intro">퍼포먼스 운영 경험을 캠페인 가설과 다음 액션으로 연결한 실무 사례입니다.</p>
-  <article class="performance-case-card">
-    <div class="performance-case-heading">
-      <span class="performance-case-kicker">CONFIDENTIAL · INPUT REQUIRED</span>
-      <h3>BRAND A</h3>
-      <p>브랜드명과 민감 정보는 공개 가능 범위에 맞춰 익명화할 수 있습니다.</p>
-    </div>
-    <div class="performance-case-grid">
-      <div><strong>01 Objective</strong><span>TODO · 광고주가 해결하려 한 문제</span></div>
-      <div><strong>02 Hypothesis</strong><span>TODO · 성과 개선을 위해 설정한 가설</span></div>
-      <div><strong>03 Execution</strong><span>TODO · 캠페인 또는 소재 테스트 방법</span></div>
-      <div><strong>04 Result</strong><span>TODO · 공개 가능한 실제 성과만 입력</span></div>
-      <div><strong>05 Insight</strong><span>TODO · 데이터에서 확인한 핵심 인사이트</span></div>
-      <div><strong>06 Next Action</strong><span>TODO · 후속 운영 및 테스트 방향</span></div>
-    </div>
-  </article>
-</section>
-
 <!-- EDIT: 캠페인 수정 영역 / img src=썸네일, project-title=제목, project-desc=설명 -->
 <section class="campaign-section" id="campaign">
 
@@ -4441,6 +4339,9 @@ body.light-mode .performance-case-kicker{color:#4f46e5}
 </div>
 
 <section class="projects">
+
+  <!-- TODO: 실제 운영 브랜드 성과 공개 가능 시 이 그리드에 PERFORMANCE CASE 카드를 추가합니다.
+       권장 구조: Objective → Hypothesis → Execution → Result → Insight → Next Action -->
 
   <!-- EDIT: 캠페인 카드 / 원본 영상·PDF가 준비되면 data-asset-url에 주소를 입력합니다. -->
   <div class="project-card" data-asset-url="https://drive.google.com/file/d/1uEGdk4hleIy7Hf5ma0TfnG3xuVeu23YE/view?usp=sharing">
@@ -4630,7 +4531,7 @@ body.light-mode .performance-case-kicker{color:#4f46e5}
   자주 조정하는 순서·시간·애니메이션 값은 이 객체에서 관리합니다.
 */
 const PORTFOLIO_CONFIG = Object.freeze({
-  sectionOrder:['profile','skills','experience','performance-case','campaign','check'],
+  sectionOrder:['profile','skills','experience','campaign','check'],
   lightModeHours:{ start:7, end:19 },
   keyword:{
     desktopDuration:7200,
@@ -4991,7 +4892,6 @@ const revealTargets = [
   ...document.querySelectorAll('.skill-tab'),
   document.querySelector('.skill-detail'),
   ...document.querySelectorAll('.experience-card'),
-  document.querySelector('.performance-case-card'),
   ...document.querySelectorAll('.project-card'),
   document.querySelector('.quality-panel'),
   ...document.querySelectorAll('.quality-card')
@@ -5501,7 +5401,7 @@ const layoutTextItems = layoutTextDefinitions.flatMap(([baseKey,selector])=>{
     originalText:element.innerText
   }));
 });
-const layoutSectionIds = ['hero','profile','skills','experience','performance-case','campaign','check'];
+const layoutSectionIds = ['hero','profile','skills','experience','campaign','check'];
 
 function readLayoutState(){
   try{
