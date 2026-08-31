@@ -2445,7 +2445,7 @@ body.light-mode .skills-sidebar .skill-tab{
 /* ATTACHMENT RESTORE: original skill-tab layout */
 .skills-layout{
   --skill-sidebar-width:396px;
-  --skill-sidebar-safe-padding:18px;
+  --skill-sidebar-safe-padding:0px;
   --skill-gap:12px;
   --skill-tab-size:calc((var(--skill-sidebar-width) - (var(--skill-sidebar-safe-padding) * 2) - (var(--skill-gap) * 2)) / 3);
   --skill-panel-height:calc((var(--skill-tab-size) * 4) + (var(--skill-gap) * 3) + (var(--skill-sidebar-safe-padding) * 2));
@@ -2570,6 +2570,17 @@ body.light-mode .skills-sidebar{
 .skill-tab.reveal-item.is-visible.active,
 .skill-tab.reveal-item.is-visible:hover{
   transform:scale(1.07) !important;
+}
+
+/* TOOLKIT ALIGNMENT: 선택·호버·등장 상태에서도 모든 로고 박스 크기와 행을 고정합니다. */
+.skills-sidebar .skill-tab,
+.skills-sidebar .skill-tab.active,
+.skills-sidebar .skill-tab:hover,
+.skills-sidebar .skill-tab.reveal-item,
+.skills-sidebar .skill-tab.reveal-item.is-visible,
+.skills-sidebar .skill-tab.reveal-item.is-visible.active,
+.skills-sidebar .skill-tab.reveal-item.is-visible:hover{
+  transform:none !important;
 }
 
 @media(max-width:1100px){
