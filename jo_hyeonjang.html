@@ -2447,7 +2447,7 @@ body.light-mode .skills-sidebar .skill-tab{
   --skill-sidebar-safe-padding:18px;
   --skill-gap:12px;
   --skill-tab-size:calc((var(--skill-sidebar-width) - (var(--skill-sidebar-safe-padding) * 2) - (var(--skill-gap) * 2)) / 3);
-  --skill-panel-height:calc((var(--skill-tab-size) * 4) + (var(--skill-gap) * 3));
+  --skill-panel-height:calc((var(--skill-tab-size) * 4) + (var(--skill-gap) * 3) + (var(--skill-sidebar-safe-padding) * 2));
   display:grid;
   grid-template-columns:var(--skill-sidebar-width) minmax(0,1fr);
   gap:32px;
@@ -2461,13 +2461,13 @@ body.light-mode .skills-sidebar .skill-tab{
 .skills-sidebar,
 body.light-mode .skills-sidebar{
   width:var(--skill-sidebar-width);
-  height:calc(var(--skill-panel-height) + (var(--skill-sidebar-safe-padding) * 2));
+  height:var(--skill-panel-height);
   display:grid;
   grid-template-columns:repeat(3,var(--skill-tab-size));
   grid-template-rows:repeat(4,var(--skill-tab-size));
   gap:var(--skill-gap);
   padding:var(--skill-sidebar-safe-padding);
-  margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
+  margin:0;
   overflow:visible;
   border:0;
   border-radius:0;
@@ -2588,7 +2588,7 @@ body.light-mode .skills-sidebar{
     grid-template-columns:repeat(3,minmax(0,1fr));
     grid-template-rows:auto;
     padding:var(--skill-sidebar-safe-padding);
-    margin:calc(var(--skill-sidebar-safe-padding) * -1) 0;
+    margin:0;
   }
 }
 
@@ -3734,8 +3734,7 @@ body.light-mode .hero-positioning-copy{color:rgba(17,24,39,.58)}
   margin-top:28px;
 }
 
-.profile-keywords span,
-.skill-category-legend span{
+.profile-keywords span{
   padding:7px 11px;
   border:1px solid rgba(255,255,255,.12);
   border-radius:999px;
@@ -3744,29 +3743,11 @@ body.light-mode .hero-positioning-copy{color:rgba(17,24,39,.58)}
   font-size:12px;
 }
 
-body.light-mode .profile-keywords span,
-body.light-mode .skill-category-legend span{
+body.light-mode .profile-keywords span{
   border-color:rgba(17,24,39,.1);
   background:rgba(255,255,255,.58);
   color:rgba(17,24,39,.68);
 }
-
-.skill-category-legend{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  width:92%;
-  margin:24px auto -36px;
-}
-
-.skill-category-legend strong{
-  margin-right:6px;
-  color:#7dd3fc;
-  font-size:11px;
-  letter-spacing:.04em;
-}
-
-body.light-mode .skill-category-legend strong{color:#4f46e5}
 
 /* 숙련도 수치 대신 툴 이름과 한 줄 실무 활용 범위만 표시합니다. */
 .skills-section .skill-detail-grid{
@@ -3932,8 +3913,6 @@ body.light-mode .exp-bridge{color:rgba(17,24,39,.58)}
     line-height:1.16;
   }
 
-  .skill-category-legend{margin-bottom:-18px}
-
 }
 
 /* PORTFOLIO MIND MAP: 전체 포트폴리오 보기 전환 */
@@ -4068,12 +4047,6 @@ body.light-mode .exp-bridge{color:rgba(17,24,39,.58)}
   <p class="section-intro">
     아이디어를 제안서에서 끝내지 않고, 제작·매체 운영·성과 분석까지 연결하기 위해 사용하는 실무 도구입니다.
   </p>
-  <div class="skill-category-legend" aria-label="툴 분류">
-    <span><strong>Planning</strong> PowerPoint · Excel · Word</span>
-    <span><strong>Creative</strong> Photoshop · Illustrator · Premiere Pro</span>
-    <span><strong>AI Creative</strong> Midjourney · Runway</span>
-    <span><strong>Media</strong> Meta Ads Manager · Google Ads · Naver Ads · Kakao Moment</span>
-  </div>
   <div class="skills-layout">
 
     <!-- EDIT: 스킬 카드 / data-name=스킬명, data-range=실무 활용 범위. 숙련도 수치는 사용하지 않습니다. -->
