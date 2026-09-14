@@ -3822,10 +3822,167 @@ body.light-mode .profile-keywords span{
 }
 
 /* PORTFOLIO MIND MAP: 전체 포트폴리오 보기 전환 */
+/* GOLDENAX VISUAL THEME — 콘텐츠와 레이아웃은 유지하는 독립 테마.
+   body의 goldenax-theme 클래스를 제거하면 기존 디자인으로 돌아갑니다.
+   Reference: goldenax.co.kr — #000 / #fff / #e60021, 이미지 20px, CTA 9px. */
+body.goldenax-theme{
+  --gx-accent:#e60021;
+  --gx-bg:#000;
+  --gx-surface:#111;
+  --gx-raised:#1b1b1b;
+  --gx-text:#fff;
+  --gx-muted:#aaa;
+  --gx-line:#363636;
+  --gx-radius:20px;
+  --hero-accent-dark:linear-gradient(#e60021,#e60021);
+  --hero-accent-light:linear-gradient(#e60021,#e60021);
+  --skill-graph-dark:linear-gradient(90deg,#e60021,#e60021);
+  --skill-graph-light:linear-gradient(90deg,#e60021,#e60021);
+  background:var(--gx-bg);
+  color:var(--gx-text);
+}
+body.goldenax-theme.light-mode{
+  --gx-bg:#fff;
+  --gx-surface:#f5f5f5;
+  --gx-raised:#eaeaea;
+  --gx-text:#111;
+  --gx-muted:#626262;
+  --gx-line:#d5d5d5;
+  background:var(--gx-bg);
+  color:var(--gx-text);
+}
+body.goldenax-theme .background{background:var(--gx-bg)}
+body.goldenax-theme .background::before,
+body.goldenax-theme .background::after,
+body.goldenax-theme .hero-accent::before{display:none}
+body.goldenax-theme .hero-copy{--hero-line:var(--gx-line)}
+body.goldenax-theme .hero-cell{border-color:var(--gx-line)}
+body.goldenax-theme .hero-outline{
+  color:var(--gx-text);
+  -webkit-text-fill-color:currentColor;
+  text-shadow:none;
+}
+body.goldenax-theme .hero-accent,
+body.goldenax-theme .field-keyword{
+  background:none;
+  color:var(--gx-accent);
+  -webkit-text-fill-color:currentColor;
+  text-shadow:none;
+  filter:none;
+}
+body.goldenax-theme .hero-identity,
+body.goldenax-theme .hero-identity strong,
+body.goldenax-theme .section-heading,
+body.goldenax-theme .profile-title,
+body.goldenax-theme .exp-org,
+body.goldenax-theme .skill-detail-title{color:var(--gx-text);text-shadow:none}
+body.goldenax-theme .talent-keyword{color:var(--gx-muted);text-shadow:none}
+body.goldenax-theme .scroll-progress-bar{
+  background:var(--gx-accent);
+  box-shadow:none;
+  filter:none;
+}
+body.goldenax-theme .scroll-progress-bar::before,
+body.goldenax-theme .scroll-progress-bar::after{display:none}
+body.goldenax-theme .scroll-indicator,
+body.goldenax-theme .cta-arrow-option,
+body.goldenax-theme .cta-arrow-option.is-selected{
+  color:var(--gx-accent);
+  filter:none;
+  text-shadow:none;
+}
+body.goldenax-theme .cta-arrow-option svg{filter:none}
+body.goldenax-theme .experience-card,
+body.goldenax-theme .skill-detail,
+body.goldenax-theme .skill-detail-card,
+body.goldenax-theme .skills-sidebar .skill-tab,
+body.goldenax-theme .project-card,
+body.goldenax-theme .project-modal-box,
+body.goldenax-theme .contact-panel{
+  background:var(--gx-surface);
+  border:1px solid var(--gx-line);
+  border-radius:var(--gx-radius);
+  box-shadow:none;
+  backdrop-filter:none;
+}
+body.goldenax-theme .profile-card{
+  background:none;
+  border:0;
+  box-shadow:none;
+  backdrop-filter:none;
+}
+body.goldenax-theme .experience-card:hover,
+body.goldenax-theme .project-card:hover,
+body.goldenax-theme .skills-sidebar .skill-tab:hover,
+body.goldenax-theme .skills-sidebar .skill-tab.active{
+  border-color:var(--gx-accent);
+  background:var(--gx-raised);
+  box-shadow:none;
+}
+body.goldenax-theme .skill-tab::before,
+body.goldenax-theme .skill-tab::after{display:none}
+body.goldenax-theme .skill-barometer-track{
+  background:var(--gx-raised);
+  border-color:var(--gx-line);
+  box-shadow:none;
+}
+body.goldenax-theme .skill-barometer-fill{background:var(--gx-accent);box-shadow:none}
+body.goldenax-theme .skill-scale-labels span.active{color:var(--gx-accent)}
+body.goldenax-theme .profile-copy,
+body.goldenax-theme .profile-quote-source,
+body.goldenax-theme .section-intro,
+body.goldenax-theme .exp-period,
+body.goldenax-theme .exp-role,
+body.goldenax-theme .skill-detail-sub,
+body.goldenax-theme .skill-detail-card p,
+body.goldenax-theme .contact-inner p{color:var(--gx-muted)}
+body.goldenax-theme .profile-kicker,
+body.goldenax-theme .profile-keywords span,
+body.goldenax-theme .exp-label,
+body.goldenax-theme .exp-meta span,
+body.goldenax-theme .campaign-filter-button{
+  color:var(--gx-text);
+  background:transparent;
+  border:1px solid var(--gx-line);
+  border-radius:30px;
+  box-shadow:none;
+}
+body.goldenax-theme .campaign-filter-button.active,
+body.goldenax-theme .campaign-filter-button:hover{
+  color:#fff;
+  background:var(--gx-accent);
+  border-color:var(--gx-accent);
+}
+body.goldenax-theme .portfolio-nav,
+body.goldenax-theme .mode-toggle{
+  color:var(--gx-text);
+  background:var(--gx-surface);
+  border-color:var(--gx-line);
+  box-shadow:none;
+}
+body.goldenax-theme .portfolio-nav a{color:var(--gx-text)}
+body.goldenax-theme .portfolio-nav a:hover{color:var(--gx-accent);background:var(--gx-raised)}
+body.goldenax-theme .portfolio-nav::before{color:var(--gx-text)}
+body.goldenax-theme .contact-toggle,
+body.goldenax-theme .project-view-button{
+  color:#fff;
+  background:var(--gx-accent);
+  border:1px solid var(--gx-accent);
+  border-radius:9px;
+  box-shadow:none;
+}
+body.goldenax-theme .contact-toggle:hover,
+body.goldenax-theme .project-view-button:hover{background:#bf001b;border-color:#bf001b}
+body.goldenax-theme .project-info{
+  background:linear-gradient(to top,rgba(0,0,0,.95),rgba(0,0,0,.65) 58%,transparent);
+  color:#fff;
+}
+body.goldenax-theme .project-title{color:#fff}
+body.goldenax-theme .project-desc{color:#ddd}
 </style>
 </head>
 
-<body>
+<body class="goldenax-theme">
 
 <div class="background"></div>
 <div class="scroll-progress-bar"></div>
