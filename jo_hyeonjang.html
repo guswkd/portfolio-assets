@@ -4076,6 +4076,41 @@ body.goldenax-theme .gx-about-track .profile-copy{font-size:clamp(13px,1.3vw,16p
   .gx-about-window{inset:0;border-radius:0}
   .gx-about-window img{transform:none}
 }
+/* CONTACT: 레퍼런스의 레드 CTA와 우상향 라인 화살표. */
+body.goldenax-theme .contact-toggle,
+body.goldenax-theme.gx-red-scene .contact-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  padding:0 18px;
+  background:#e60021;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:9px;
+  backdrop-filter:none;
+  letter-spacing:0;
+  transition:background-color .2s ease,border-color .2s ease;
+}
+.contact-arrow{
+  display:block;
+  width:19px;
+  height:19px;
+  flex:none;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:transform .25s cubic-bezier(.22,1,.36,1);
+}
+body.goldenax-theme .contact-toggle:hover{background:#bf001b;border-color:#fff}
+.contact-toggle:hover .contact-arrow{transform:translate(2px,-2px)}
+.contact-toggle:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){
+  .contact-arrow{transition:none}
+  .contact-toggle:hover .contact-arrow{transform:none}
+}
 </style>
 </head>
 
@@ -4112,7 +4147,7 @@ body.goldenax-theme .gx-about-track .profile-copy{font-size:clamp(13px,1.3vw,16p
     <path d="M12 2.2v2.1M12 19.7v2.1M2.2 12h2.1M19.7 12h2.1M5.1 5.1l1.5 1.5M17.4 17.4l1.5 1.5M18.9 5.1l-1.5 1.5M6.6 17.4l-1.5 1.5"/>
   </svg>
 </button>
-<button class="contact-toggle" type="button">CONTACT</button>
+<button class="contact-toggle" type="button"><span>Contact</span><svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
 <div class="contact-panel">
   <div class="contact-inner">
     <!-- EDIT: 연락처 / 이메일, 전화번호, SNS만 본인 정보로 수정 -->
