@@ -6018,8 +6018,12 @@ versionDialog.querySelector('form').addEventListener('submit',event=>{
   else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: ad / gn';
 });
 window.addEventListener('keydown',event=>{
-  // Control + Option(Alt) + Shift + P. 기존 Command/Ctrl + Shift + K는 사용하지 않습니다.
-  if(event.ctrlKey&&event.altKey&&event.shiftKey&&!event.metaKey&&!event.repeat&&event.code==='KeyP'){
+  // Shift + C: 입력창·텍스트 편집 중에는 일반 입력을 방해하지 않습니다.
+  const target = event.target;
+  const isTyping = target instanceof Element && (
+    target.closest('input,textarea,select,[role="textbox"]') || target.isContentEditable
+  );
+  if(!isTyping&&!event.isComposing&&!event.ctrlKey&&!event.altKey&&event.shiftKey&&!event.metaKey&&!event.repeat&&event.code==='KeyC'){
     event.preventDefault();openVersionCommand();
   }
 });
