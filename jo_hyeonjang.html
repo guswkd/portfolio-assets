@@ -6043,13 +6043,13 @@ if(adquaCover) document.body.style.setProperty('--adqua-hero-image',`url(${JSON.
 const versionDialog = document.createElement('dialog');
 versionDialog.className='version-command';
 versionDialog.setAttribute('aria-label','포트폴리오 버전 전환');
-versionDialog.innerHTML='<form><label for="portfolio-version-command">버전 명령</label><input id="portfolio-version-command" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="ad / gn"><p role="status">ad 또는 gn을 입력하세요.</p><div class="version-command-actions"><button type="button">취소</button><button type="submit">전환</button></div></form>';
+versionDialog.innerHTML='<form><label for="portfolio-version-command">버전 명령</label><input id="portfolio-version-command" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="aq / gn"><p role="status">aq 또는 gn을 입력하세요.</p><div class="version-command-actions"><button type="button">취소</button><button type="submit">전환</button></div></form>';
 document.body.append(versionDialog);
 const versionInput=versionDialog.querySelector('input');
 function openVersionCommand(){
   if(versionDialog.open) return;
   versionInput.value='';
-  versionDialog.querySelector('[role="status"]').textContent='ad 또는 gn을 입력하세요.';
+  versionDialog.querySelector('[role="status"]').textContent='aq 또는 gn을 입력하세요.';
   versionDialog.showModal();
   versionInput.focus();
 }
@@ -6057,20 +6057,34 @@ versionDialog.querySelector('button[type="button"]').addEventListener('click',()
 versionDialog.querySelector('form').addEventListener('submit',event=>{
   event.preventDefault();
   const command = versionInput.value.trim().toLowerCase();
-  const version = command === 'ad' ? 'adqua' : command === 'gn' ? 'goldenax' : '';
+  const version = command === 'aq' ? 'adqua' : command === 'gn' ? 'goldenax' : '';
   if(version && setPortfolioVersion(version,true)) versionDialog.close();
-  else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: ad / gn';
+  else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: aq / gn';
 });
+// A + Q + G + N 동시 누르기. 순서대로 입력하는 문자열 명령과는 다릅니다.
+const versionChord = ['KeyA','KeyQ','KeyG','KeyN'];
+const versionPressedKeys = new Set();
 window.addEventListener('keydown',event=>{
-  // Shift + C: 입력창·텍스트 편집 중에는 일반 입력을 방해하지 않습니다.
   const target = event.target;
   const isTyping = target instanceof Element && (
     target.closest('input,textarea,select,[role="textbox"]') || target.isContentEditable
   );
-  if(!isTyping&&!event.isComposing&&!event.ctrlKey&&!event.altKey&&event.shiftKey&&!event.metaKey&&!event.repeat&&event.code==='KeyC'){
-    event.preventDefault();openVersionCommand();
+  if(isTyping||event.isComposing||event.ctrlKey||event.altKey||event.metaKey||event.shiftKey||versionDialog.open){
+    versionPressedKeys.clear();
+    return;
+  }
+  if(event.repeat||!versionChord.includes(event.code)) return;
+  versionPressedKeys.add(event.code);
+  if(versionChord.every(code=>versionPressedKeys.has(code))){
+    event.preventDefault();
+    versionPressedKeys.clear();
+    openVersionCommand();
   }
 });
+window.addEventListener('keyup',event=>versionPressedKeys.delete(event.code));
+window.addEventListener('blur',()=>versionPressedKeys.clear());
+window.addEventListener('focusin',()=>versionPressedKeys.clear());
+document.addEventListener('visibilitychange',()=>versionPressedKeys.clear());
 // 모바일: 히어로의 이름/직무 문구를 1초간 길게 누릅니다.
 const versionTouchTarget=document.querySelector('.hero-identity');
 if(versionTouchTarget){
