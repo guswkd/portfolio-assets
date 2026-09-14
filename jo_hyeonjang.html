@@ -6018,7 +6018,8 @@ versionDialog.querySelector('form').addEventListener('submit',event=>{
   else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: ad / gn';
 });
 window.addEventListener('keydown',event=>{
-  if((event.ctrlKey||event.metaKey)&&event.shiftKey&&event.code==='KeyK'){
+  // Control + Option(Alt) + Shift + P. 기존 Command/Ctrl + Shift + K는 사용하지 않습니다.
+  if(event.ctrlKey&&event.altKey&&event.shiftKey&&!event.metaKey&&!event.repeat&&event.code==='KeyP'){
     event.preventDefault();openVersionCommand();
   }
 });
