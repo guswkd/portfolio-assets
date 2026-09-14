@@ -4079,19 +4079,30 @@ body.goldenax-theme .gx-about-track .profile-copy{font-size:clamp(13px,1.3vw,16p
 /* CONTACT: 레퍼런스의 레드 CTA와 우상향 라인 화살표. */
 body.goldenax-theme .contact-toggle,
 body.goldenax-theme.gx-red-scene .contact-toggle{
+  top:50%;
+  right:0;
+  width:40px;
+  height:154px;
+  transform:translateY(-50%);
   display:inline-flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:16px;
-  padding:0 18px;
+  padding:16px 0;
   background:#e60021;
   color:#fff;
   border:1px solid rgba(255,255,255,.25);
-  border-radius:9px;
+  border-radius:0;
+  border-right:0;
   backdrop-filter:none;
   letter-spacing:0;
   transition:background-color .2s ease,border-color .2s ease;
 }
+body.goldenax-theme .contact-toggle > span{writing-mode:vertical-rl}
+body.goldenax-theme .contact-toggle:hover{transform:translateY(-50%)}
+body.goldenax-theme .contact-toggle .contact-arrow{transform:rotate(90deg)}
+body.goldenax-theme .contact-toggle:hover .contact-arrow{transform:translateY(2px) rotate(90deg)}
 .contact-arrow{
   display:block;
   width:19px;
@@ -4110,6 +4121,7 @@ body.goldenax-theme .contact-toggle:hover{background:#bf001b;border-color:#fff}
 @media(prefers-reduced-motion:reduce){
   .contact-arrow{transition:none}
   .contact-toggle:hover .contact-arrow{transform:none}
+  body.goldenax-theme .contact-toggle:hover .contact-arrow{transform:rotate(90deg)}
 }
 </style>
 </head>
