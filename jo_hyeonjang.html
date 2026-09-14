@@ -5999,21 +5999,23 @@ if(adquaCover) document.body.style.setProperty('--adqua-hero-image',`url(${JSON.
 const versionDialog = document.createElement('dialog');
 versionDialog.className='version-command';
 versionDialog.setAttribute('aria-label','포트폴리오 버전 전환');
-versionDialog.innerHTML='<form><label for="portfolio-version-command">버전 명령</label><input id="portfolio-version-command" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="adqua / goldenax"><p role="status">adqua 또는 goldenax를 입력하세요.</p><div class="version-command-actions"><button type="button">취소</button><button type="submit">전환</button></div></form>';
+versionDialog.innerHTML='<form><label for="portfolio-version-command">버전 명령</label><input id="portfolio-version-command" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="ad / gn"><p role="status">ad 또는 gn을 입력하세요.</p><div class="version-command-actions"><button type="button">취소</button><button type="submit">전환</button></div></form>';
 document.body.append(versionDialog);
 const versionInput=versionDialog.querySelector('input');
 function openVersionCommand(){
   if(versionDialog.open) return;
   versionInput.value='';
-  versionDialog.querySelector('[role="status"]').textContent='adqua 또는 goldenax를 입력하세요.';
+  versionDialog.querySelector('[role="status"]').textContent='ad 또는 gn을 입력하세요.';
   versionDialog.showModal();
   versionInput.focus();
 }
 versionDialog.querySelector('button[type="button"]').addEventListener('click',()=>versionDialog.close());
 versionDialog.querySelector('form').addEventListener('submit',event=>{
   event.preventDefault();
-  if(setPortfolioVersion(versionInput.value.trim().toLowerCase(),true)) versionDialog.close();
-  else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: adqua / goldenax';
+  const command = versionInput.value.trim().toLowerCase();
+  const version = command === 'ad' ? 'adqua' : command === 'gn' ? 'goldenax' : '';
+  if(version && setPortfolioVersion(version,true)) versionDialog.close();
+  else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: ad / gn';
 });
 window.addEventListener('keydown',event=>{
   if((event.ctrlKey||event.metaKey)&&event.shiftKey&&event.code==='KeyK'){
