@@ -4123,10 +4123,93 @@ body.goldenax-theme .contact-toggle:hover{background:#bf001b;border-color:#fff}
   .contact-toggle:hover .contact-arrow{transform:none}
   body.goldenax-theme .contact-toggle:hover .contact-arrow{transform:rotate(90deg)}
 }
+/* ADQUA VERSION: 공통 콘텐츠를 그대로 사용하는 블루/풀블리드 디자인. */
+body.goldenax-theme.adqua-theme{
+  --gx-accent:#0000ff;--gx-radius:0px;
+  --hero-accent-dark:linear-gradient(#fff,#fff);
+  --hero-accent-light:linear-gradient(#fff,#fff);
+}
+body.adqua-theme .background::after{display:none}
+body.adqua-theme .gx-about-track{height:auto}
+body.goldenax-theme.adqua-theme .gx-about-track .profile-section{
+  position:relative;height:auto;min-height:80svh;padding:100px 7vw;
+}
+body.adqua-theme .gx-about-window{display:none}
+body.goldenax-theme.adqua-theme .gx-about-track .profile-layout{opacity:1;transform:none}
+body.goldenax-theme.adqua-theme .gx-about-track .section-heading{color:var(--gx-text)}
+body.goldenax-theme.adqua-theme .gx-about-track .profile-title{
+  background:none;color:var(--gx-text);-webkit-text-fill-color:currentColor;
+}
+body.goldenax-theme.adqua-theme .gx-about-track .profile-copy,
+body.goldenax-theme.adqua-theme .gx-about-track .profile-quote-source{color:var(--gx-muted)}
+body.goldenax-theme.adqua-theme .gx-about-track .profile-kicker,
+body.goldenax-theme.adqua-theme .gx-about-track .profile-keywords span{color:var(--gx-text);background:none;border-color:var(--gx-line);border-radius:0}
+body.goldenax-theme.adqua-theme .hero{
+  background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.65)),var(--adqua-hero-image,none) center/cover !important;
+}
+body.goldenax-theme.adqua-theme .hero-copy{--hero-line:rgba(255,255,255,.4)}
+body.goldenax-theme.adqua-theme .hero-cell{border-color:rgba(255,255,255,.4);color:white;-webkit-text-fill-color:white}
+body.goldenax-theme.adqua-theme .hero-identity,
+body.goldenax-theme.adqua-theme .hero-identity strong{color:white}
+body.adqua-theme .keyword-cloud{opacity:.35}
+body.goldenax-theme.adqua-theme .portfolio-nav{
+  left:0;right:0;top:0;bottom:auto;width:100%;max-width:none;height:64px;
+  transform:none;padding:0 175px 0 235px;gap:28px;
+  display:flex;justify-content:flex-end;align-items:center;
+  border:0;border-radius:0;background:rgba(0,0,255,.94);overflow:visible;
+}
+body.goldenax-theme.adqua-theme .portfolio-nav::before{
+  content:'JO HYEONJANG';position:absolute;left:24px;top:50%;
+  transform:translateY(-50%);color:#fff;font-size:19px;font-weight:800;letter-spacing:-.04em;
+}
+body.goldenax-theme.adqua-theme .portfolio-nav a{
+  opacity:1;visibility:visible;transform:none;max-width:none;width:auto;
+  padding:0;color:#fff;pointer-events:auto;font-size:12px;
+}
+body.goldenax-theme.adqua-theme .portfolio-nav a:hover{background:none;text-decoration:underline;text-underline-offset:6px}
+body.goldenax-theme.adqua-theme .contact-toggle{
+  top:14px;right:24px;width:125px;height:36px;padding:0 10px;
+  transform:none;flex-direction:row;gap:10px;border:1px solid rgba(255,255,255,.5);
+  border-radius:0;background:#0000ff;color:white;font-size:13px;
+}
+body.goldenax-theme.adqua-theme .contact-toggle > span{writing-mode:horizontal-tb}
+body.goldenax-theme.adqua-theme .contact-toggle .contact-arrow{transform:none}
+body.goldenax-theme.adqua-theme .contact-toggle:hover .contact-arrow{transform:translate(2px,-2px)}
+body.goldenax-theme.adqua-theme .mode-toggle{top:auto;bottom:24px;right:24px}
+body.goldenax-theme.adqua-theme .experience-card,
+body.goldenax-theme.adqua-theme .project-card,
+body.goldenax-theme.adqua-theme .project-modal-box{border-radius:0}
+body.goldenax-theme.adqua-theme .project-view-button{background:#0000ff;border-color:#0000ff;border-radius:0;color:white}
+body.goldenax-theme.adqua-theme .campaign-filter-button{border-radius:0}
+body.adqua-theme .campaign-section{padding-left:0;padding-right:0}
+body.adqua-theme .campaign-section > :not(.projects){margin-left:5vw;margin-right:5vw}
+body.adqua-theme .projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;width:100%;padding:0}
+body.goldenax-theme.adqua-theme .project-card{width:100%;max-width:none;margin:0;transform:none;aspect-ratio:16/10;min-width:0}
+body.adqua-theme .project-card img{width:100%;height:100%;object-fit:cover}
+body.adqua-theme .project-card:hover img{transform:scale(1.035)}
+body.adqua-theme .project-info{border-radius:0}
+.version-command{width:min(420px,90vw);margin:auto;padding:28px;border:1px solid #555;border-radius:12px;background:#111;color:#fff;z-index:30000}
+.version-command::backdrop{background:rgba(0,0,0,.7)}
+.version-command label{display:block;font-weight:700;margin-bottom:14px}
+.version-command input{width:100%;padding:12px;background:#222;color:#fff;border:1px solid #666;border-radius:4px;font:inherit}
+.version-command p{font-size:12px;color:#bbb;margin:12px 0}
+.version-command-actions{display:flex;justify-content:flex-end;gap:8px}
+.version-command button{padding:9px 15px;background:#fff;color:#111;border:0;border-radius:4px;cursor:pointer}
+@media(max-width:820px){
+  body.goldenax-theme.adqua-theme .portfolio-nav{height:96px;padding:57px 16px 12px;justify-content:center;gap:22px}
+  body.goldenax-theme.adqua-theme .portfolio-nav::before{top:25px;left:16px;font-size:17px}
+  body.goldenax-theme.adqua-theme .contact-toggle{top:9px;right:12px;height:32px;width:112px}
+  body.adqua-theme .projects{grid-template-columns:minmax(0,1fr)}
+  body.goldenax-theme.adqua-theme .gx-about-track .profile-section{padding:90px 7vw}
+}
+@media(prefers-reduced-motion:reduce){
+  body.adqua-theme .project-card:hover img{transform:none}
+  body.goldenax-theme.adqua-theme .contact-toggle:hover .contact-arrow{transform:none}
+}
 </style>
 </head>
 
-<body class="goldenax-theme">
+<body class="goldenax-theme adqua-theme">
 
 <div class="background"></div>
 <div class="scroll-progress-bar"></div>
@@ -5883,6 +5966,69 @@ if(layoutEditEnabled){
   });
 }
 
+// VERSION REGISTRY: 콘텐츠는 공유하며 버전별 디자인만 교체합니다.
+// 버전 추가 시 이 목록과 해당 CSS 클래스를 추가하세요.
+const portfolioVersions = {
+  adqua:{className:'adqua-theme',label:'AdQUA'},
+  goldenax:{className:'',label:'Goldenax'}
+};
+const portfolioVersionKey = 'portfolio-visual-version-v1';
+function setPortfolioVersion(name,remember=false){
+  if(!Object.hasOwn(portfolioVersions,name)) return false;
+  document.body.classList.remove('adqua-theme','gx-red-scene');
+  const selected = portfolioVersions[name];
+  if(selected.className) document.body.classList.add(selected.className);
+  document.body.dataset.portfolioVersion = name;
+  if(remember){
+    try{localStorage.setItem(portfolioVersionKey,name)}catch(error){}
+    const url = new URL(location.href);
+    url.searchParams.set('version',name);
+    history.replaceState(null,'',url);
+  }
+  window.dispatchEvent(new Event('portfolio-version-change'));
+  return true;
+}
+let storedPortfolioVersion;
+try{storedPortfolioVersion=localStorage.getItem(portfolioVersionKey)}catch(error){}
+const linkedPortfolioVersion = new URLSearchParams(location.search).get('version');
+setPortfolioVersion(Object.hasOwn(portfolioVersions,linkedPortfolioVersion||'') ? linkedPortfolioVersion :
+  Object.hasOwn(portfolioVersions,storedPortfolioVersion||'') ? storedPortfolioVersion : 'adqua');
+const adquaCover = document.querySelector('.project-card img');
+if(adquaCover) document.body.style.setProperty('--adqua-hero-image',`url(${JSON.stringify(adquaCover.src)})`);
+
+const versionDialog = document.createElement('dialog');
+versionDialog.className='version-command';
+versionDialog.setAttribute('aria-label','포트폴리오 버전 전환');
+versionDialog.innerHTML='<form><label for="portfolio-version-command">버전 명령</label><input id="portfolio-version-command" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="adqua / goldenax"><p role="status">adqua 또는 goldenax를 입력하세요.</p><div class="version-command-actions"><button type="button">취소</button><button type="submit">전환</button></div></form>';
+document.body.append(versionDialog);
+const versionInput=versionDialog.querySelector('input');
+function openVersionCommand(){
+  if(versionDialog.open) return;
+  versionInput.value='';
+  versionDialog.querySelector('[role="status"]').textContent='adqua 또는 goldenax를 입력하세요.';
+  versionDialog.showModal();
+  versionInput.focus();
+}
+versionDialog.querySelector('button[type="button"]').addEventListener('click',()=>versionDialog.close());
+versionDialog.querySelector('form').addEventListener('submit',event=>{
+  event.preventDefault();
+  if(setPortfolioVersion(versionInput.value.trim().toLowerCase(),true)) versionDialog.close();
+  else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: adqua / goldenax';
+});
+window.addEventListener('keydown',event=>{
+  if((event.ctrlKey||event.metaKey)&&event.shiftKey&&event.code==='KeyK'){
+    event.preventDefault();openVersionCommand();
+  }
+});
+// 모바일: 히어로의 이름/직무 문구를 1초간 길게 누릅니다.
+const versionTouchTarget=document.querySelector('.hero-identity');
+if(versionTouchTarget){
+  let holdTimer=0;
+  const cancelHold=()=>clearTimeout(holdTimer);
+  versionTouchTarget.addEventListener('pointerdown',()=>{cancelHold();holdTimer=setTimeout(openVersionCommand,1000)});
+  ['pointerup','pointercancel','pointerleave','pointermove'].forEach(type=>versionTouchTarget.addEventListener(type,cancelHold));
+}
+
 // GOLDENAX SCROLL: 원본을 참고한 이미지 창 확대 + 상하 커튼. 외부 라이브러리 없음.
 if(document.body.classList.contains('goldenax-theme')){
   const about = document.getElementById('profile');
@@ -5916,6 +6062,11 @@ if(document.body.classList.contains('goldenax-theme')){
     backgroundFrame = 0;
     const light = document.body.classList.contains('light-mode');
     document.body.style.setProperty('--gx-scroll-bg',light?'#fff':'#000');
+    if(document.body.classList.contains('adqua-theme')){
+      document.body.classList.remove('gx-red-scene');
+      document.body.style.setProperty('--gx-curtain','50%');
+      return;
+    }
     if(aboutTrack){
       const rect = aboutTrack.getBoundingClientRect();
       const progress = clampBackground(-rect.top/Math.max(1,rect.height-innerHeight));
@@ -5941,6 +6092,7 @@ if(document.body.classList.contains('goldenax-theme')){
   window.addEventListener('scroll',scheduleScrollBackground,{passive:true});
   window.addEventListener('resize',scheduleScrollBackground,{passive:true});
   window.addEventListener('pageshow',scheduleScrollBackground);
+  window.addEventListener('portfolio-version-change',scheduleScrollBackground);
   modeToggle.addEventListener('click',scheduleScrollBackground);
   reducedBackgroundMotion.addEventListener('change',scheduleScrollBackground);
   compactBackgroundMotion.addEventListener('change',scheduleScrollBackground);
