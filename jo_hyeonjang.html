@@ -3990,7 +3990,7 @@ body.goldenax-theme .background::after{
   width:100%;
   height:100%;
   background:#e60021;
-  clip-path:circle(var(--gx-red-radius,0%) at 50% 70%);
+  clip-path:inset(var(--gx-curtain,50%) 0);
   opacity:1;
   transform:none;
   filter:none;
@@ -4012,6 +4012,69 @@ body.goldenax-theme.gx-red-scene .campaign-filter-button:hover,
 body.goldenax-theme.gx-red-scene .project-view-button{background:#fff;color:#b0001a}
 @media(prefers-reduced-motion:reduce){
   body.goldenax-theme .background::after{will-change:auto}
+}
+/* 원본의 작은 이미지 창 → 전체 화면 확장, 이후 본문 등장 리듬. */
+.gx-about-track{position:relative;z-index:2;height:260svh}
+body.goldenax-theme .gx-about-track .profile-section{
+  position:sticky;
+  top:0;
+  height:100svh;
+  min-height:0;
+  padding:5vh 7vw;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  isolation:isolate;
+  overflow:hidden;
+}
+.gx-about-window{
+  position:absolute;
+  inset:var(--gx-window-y,32%) var(--gx-window-x,32%);
+  z-index:-1;
+  border-radius:var(--gx-window-radius,20px);
+  overflow:hidden;
+  background:#171717;
+}
+.gx-about-window img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) brightness(.42);
+  transform:scale(var(--gx-image-scale,1.12));
+}
+.gx-about-window::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.7),rgba(0,0,0,.2));
+}
+body.goldenax-theme .gx-about-track .section-heading{
+  position:relative;color:white;font-size:clamp(28px,4vw,54px);
+  opacity:var(--gx-heading-opacity,1);
+}
+body.goldenax-theme .gx-about-track .profile-layout{
+  position:relative;margin:0;width:100%;
+  opacity:var(--gx-copy-opacity,0);
+  transform:translateY(var(--gx-copy-y,40px));
+}
+body.goldenax-theme .gx-about-track .profile-title{
+  color:white;font-size:clamp(30px,3.6vw,54px);
+  background:linear-gradient(90deg,#e60021 var(--gx-title-fill,0%),#fff var(--gx-title-fill,0%));
+  background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+body.goldenax-theme .gx-about-track .profile-copy,
+body.goldenax-theme .gx-about-track .profile-quote-source{color:#ddd}
+body.goldenax-theme .gx-about-track .profile-kicker,
+body.goldenax-theme .gx-about-track .profile-keywords span{color:white;border-color:#666;background:rgba(0,0,0,.3)}
+body.goldenax-theme .gx-about-track .profile-copy{font-size:clamp(13px,1.3vw,16px)}
+@media(max-width:820px),(max-height:620px){
+  .gx-about-track{height:auto}
+  body.goldenax-theme .gx-about-track .profile-section{position:relative;height:auto;min-height:100svh;padding:80px 7vw}
+  body.goldenax-theme .gx-about-track .profile-layout{opacity:1;transform:none}
+  .gx-about-window{inset:0;border-radius:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .gx-about-track{height:auto}
+  body.goldenax-theme .gx-about-track .profile-section{position:relative;height:auto;min-height:100svh}
+  body.goldenax-theme .gx-about-track .profile-layout{opacity:1;transform:none}
+  .gx-about-window{inset:0;border-radius:0}
+  .gx-about-window img{transform:none}
 }
 </style>
 </head>
@@ -5773,32 +5836,57 @@ if(layoutEditEnabled){
   });
 }
 
-// GOLDENAX SCROLL BACKGROUND: 일반 스크롤은 유지하고 배경만 연동합니다.
+// GOLDENAX SCROLL: 원본을 참고한 이미지 창 확대 + 상하 커튼. 외부 라이브러리 없음.
 if(document.body.classList.contains('goldenax-theme')){
-  const scrollScenes = ['hero','profile','experience','campaign']
-    .map(id=>document.getElementById(id)).filter(Boolean);
+  const about = document.getElementById('profile');
+  const campaign = document.getElementById('campaign');
   const reducedBackgroundMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const compactBackgroundMotion = matchMedia('(max-width:820px), (max-height:620px)');
+  let aboutTrack = null;
+  // 편집 모드에서는 기존 섹션 순서/이동 구조를 유지합니다.
+  if(about && !new URLSearchParams(location.search).has('layout-edit')){
+    aboutTrack = document.createElement('div');
+    aboutTrack.className = 'gx-about-track';
+    about.before(aboutTrack);
+    aboutTrack.append(about);
+    const windowElement = document.createElement('div');
+    windowElement.className = 'gx-about-window';
+    windowElement.setAttribute('aria-hidden','true');
+    const source = document.querySelector('.project-card img');
+    if(source){
+      const backdrop = document.createElement('img');
+      backdrop.src = source.currentSrc || source.src;
+      backdrop.alt = '';
+      backdrop.decoding = 'async';
+      windowElement.append(backdrop);
+    }
+    about.prepend(windowElement);
+  }
   let backgroundFrame = 0;
   const clampBackground = value=>Math.max(0,Math.min(1,value));
-  const smoothBackground = value=>value*value*(3-2*value);
+  const smoothBackground = value=>(1-Math.cos(Math.PI*clampBackground(value)))/2;
   function renderScrollBackground(){
     backgroundFrame = 0;
     const light = document.body.classList.contains('light-mode');
-    const focus = innerHeight*.7;
-    let shade = light ? 255 : 0;
-    let red = 0;
-    scrollScenes.slice(1).forEach(section=>{
-      const top = section.getBoundingClientRect().top;
-      const raw = clampBackground((focus-top)/Math.max(innerHeight*.8,1));
-      const progress = reducedBackgroundMotion.matches ? (raw>=.5?1:0) : smoothBackground(raw);
-      if(section.id==='profile') shade += (light?-13:22)*progress;
-      if(section.id==='experience') shade += (light?13:-22)*progress;
-      if(section.id==='campaign') red = progress;
-    });
-    const channel = Math.round(Math.max(0,Math.min(255,shade)));
-    document.body.style.setProperty('--gx-scroll-bg',`rgb(${channel},${channel},${channel})`);
-    document.body.style.setProperty('--gx-red-radius',`${(red*100).toFixed(2)}%`);
-    document.body.classList.toggle('gx-red-scene',red>.62);
+    document.body.style.setProperty('--gx-scroll-bg',light?'#fff':'#000');
+    if(aboutTrack){
+      const rect = aboutTrack.getBoundingClientRect();
+      const progress = clampBackground(-rect.top/Math.max(1,rect.height-innerHeight));
+      const staticScene = reducedBackgroundMotion.matches || compactBackgroundMotion.matches;
+      const expansion = staticScene ? 1 : smoothBackground(progress/.52);
+      const copy = staticScene ? 1 : smoothBackground((progress-.32)/.26);
+      aboutTrack.style.setProperty('--gx-window-y',`${32*(1-expansion)}%`);
+      aboutTrack.style.setProperty('--gx-window-x',`${32*(1-expansion)}%`);
+      aboutTrack.style.setProperty('--gx-window-radius',`${20*(1-expansion)}px`);
+      aboutTrack.style.setProperty('--gx-image-scale',`${1.12-.12*expansion}`);
+      aboutTrack.style.setProperty('--gx-copy-opacity',copy);
+      aboutTrack.style.setProperty('--gx-copy-y',`${40*(1-copy)}px`);
+      aboutTrack.style.setProperty('--gx-title-fill',`${staticScene?100:100*smoothBackground((progress-.58)/.38)}%`);
+    }
+    const raw = campaign ? clampBackground((innerHeight*.85-campaign.getBoundingClientRect().top)/Math.max(1,innerHeight*.85)) : 0;
+    const red = reducedBackgroundMotion.matches ? (raw>.5?1:0) : smoothBackground(raw);
+    document.body.style.setProperty('--gx-curtain',`${50*(1-red)}%`);
+    document.body.classList.toggle('gx-red-scene',red>.7);
   }
   function scheduleScrollBackground(){
     if(!backgroundFrame) backgroundFrame=requestAnimationFrame(renderScrollBackground);
@@ -5808,6 +5896,7 @@ if(document.body.classList.contains('goldenax-theme')){
   window.addEventListener('pageshow',scheduleScrollBackground);
   modeToggle.addEventListener('click',scheduleScrollBackground);
   reducedBackgroundMotion.addEventListener('change',scheduleScrollBackground);
+  compactBackgroundMotion.addEventListener('change',scheduleScrollBackground);
   new ResizeObserver(scheduleScrollBackground).observe(document.body);
   scheduleScrollBackground();
 }
