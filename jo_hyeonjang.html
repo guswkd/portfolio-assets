@@ -3979,6 +3979,40 @@ body.goldenax-theme .project-info{
 }
 body.goldenax-theme .project-title{color:#fff}
 body.goldenax-theme .project-desc{color:#ddd}
+/* 스크롤 배경: 고정된 하나의 배경에서 레드 영역이 화면 전체로 확장됩니다. */
+body.goldenax-theme .background{
+  background:var(--gx-scroll-bg,var(--gx-bg));
+}
+body.goldenax-theme .background::after{
+  display:block;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  background:#e60021;
+  clip-path:circle(var(--gx-red-radius,0%) at 50% 70%);
+  opacity:1;
+  transform:none;
+  filter:none;
+  mix-blend-mode:normal;
+  animation:none;
+  will-change:clip-path;
+}
+body.goldenax-theme.gx-red-scene{
+  --gx-text:#fff;
+  --gx-muted:#f5cbd1;
+  --gx-line:rgba(255,255,255,.35);
+  --gx-surface:#a90019;
+  --gx-raised:#8c0015;
+  --gx-accent:#fff;
+}
+body.goldenax-theme.gx-red-scene .contact-toggle,
+body.goldenax-theme.gx-red-scene .campaign-filter-button.active,
+body.goldenax-theme.gx-red-scene .campaign-filter-button:hover,
+body.goldenax-theme.gx-red-scene .project-view-button{background:#fff;color:#b0001a}
+@media(prefers-reduced-motion:reduce){
+  body.goldenax-theme .background::after{will-change:auto}
+}
 </style>
 </head>
 
@@ -5739,6 +5773,44 @@ if(layoutEditEnabled){
   });
 }
 
+// GOLDENAX SCROLL BACKGROUND: 일반 스크롤은 유지하고 배경만 연동합니다.
+if(document.body.classList.contains('goldenax-theme')){
+  const scrollScenes = ['hero','profile','experience','campaign']
+    .map(id=>document.getElementById(id)).filter(Boolean);
+  const reducedBackgroundMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let backgroundFrame = 0;
+  const clampBackground = value=>Math.max(0,Math.min(1,value));
+  const smoothBackground = value=>value*value*(3-2*value);
+  function renderScrollBackground(){
+    backgroundFrame = 0;
+    const light = document.body.classList.contains('light-mode');
+    const focus = innerHeight*.7;
+    let shade = light ? 255 : 0;
+    let red = 0;
+    scrollScenes.slice(1).forEach(section=>{
+      const top = section.getBoundingClientRect().top;
+      const raw = clampBackground((focus-top)/Math.max(innerHeight*.8,1));
+      const progress = reducedBackgroundMotion.matches ? (raw>=.5?1:0) : smoothBackground(raw);
+      if(section.id==='profile') shade += (light?-13:22)*progress;
+      if(section.id==='experience') shade += (light?13:-22)*progress;
+      if(section.id==='campaign') red = progress;
+    });
+    const channel = Math.round(Math.max(0,Math.min(255,shade)));
+    document.body.style.setProperty('--gx-scroll-bg',`rgb(${channel},${channel},${channel})`);
+    document.body.style.setProperty('--gx-red-radius',`${(red*100).toFixed(2)}%`);
+    document.body.classList.toggle('gx-red-scene',red>.62);
+  }
+  function scheduleScrollBackground(){
+    if(!backgroundFrame) backgroundFrame=requestAnimationFrame(renderScrollBackground);
+  }
+  window.addEventListener('scroll',scheduleScrollBackground,{passive:true});
+  window.addEventListener('resize',scheduleScrollBackground,{passive:true});
+  window.addEventListener('pageshow',scheduleScrollBackground);
+  modeToggle.addEventListener('click',scheduleScrollBackground);
+  reducedBackgroundMotion.addEventListener('change',scheduleScrollBackground);
+  new ResizeObserver(scheduleScrollBackground).observe(document.body);
+  scheduleScrollBackground();
+}
 </script>
 
 </body>
