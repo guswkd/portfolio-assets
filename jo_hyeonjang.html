@@ -4330,6 +4330,29 @@ body.goldenax-theme.adqua-theme .contact-toggle{display:none}
     font-size:24px;border-bottom:1px solid rgba(255,255,255,.2);text-align:left;
   }
 }
+/* 라이트 모드: 바 배경은 없애고 메뉴와 컬러 로고만 표시합니다. */
+body.goldenax-theme.light-mode .portfolio-nav{background:transparent;backdrop-filter:none;box-shadow:none}
+body.goldenax-theme.light-mode .portfolio-nav a,
+body.goldenax-theme.light-mode .header-contact-button,
+body.goldenax-theme.light-mode .header-menu-toggle{color:#171717}
+body.goldenax-theme.light-mode .company-brand img{filter:none}
+body.goldenax-theme.adqua-theme.light-mode .hero{background:#f5f5f8 !important}
+body.goldenax-theme.adqua-theme.light-mode .hero::before{opacity:.07}
+body.goldenax-theme.adqua-theme.light-mode .hero-copy{--hero-line:rgba(0,0,0,.2)}
+body.goldenax-theme.adqua-theme.light-mode .hero-cell{border-color:rgba(0,0,0,.2);color:#171717;-webkit-text-fill-color:#171717}
+body.goldenax-theme.adqua-theme.light-mode .hero-cell.hero-accent{color:#0000ff;-webkit-text-fill-color:#0000ff}
+body.goldenax-theme.adqua-theme.light-mode .hero-identity,
+body.goldenax-theme.adqua-theme.light-mode .hero-identity strong{color:#171717}
+body.goldenax-theme.light-mode.gx-red-scene .portfolio-nav a,
+body.goldenax-theme.light-mode.gx-red-scene .header-contact-button,
+body.goldenax-theme.light-mode.gx-red-scene .header-menu-toggle{color:#fff}
+body.goldenax-theme.light-mode.gx-red-scene .company-logo-goldenax{filter:brightness(0) invert(1)}
+@media(max-width:820px){
+  body.goldenax-theme.light-mode.header-menu-open .portfolio-nav{background:#fff}
+  body.goldenax-theme.light-mode.header-menu-open .portfolio-nav a,
+  body.goldenax-theme.light-mode.header-menu-open .header-contact-button{color:#171717;border-color:rgba(0,0,0,.15)}
+  body.goldenax-theme.light-mode.header-menu-open .header-menu-toggle{color:#171717}
+}
 </style>
 </head>
 
@@ -4356,8 +4379,8 @@ body.goldenax-theme.adqua-theme .contact-toggle{display:none}
 </nav>
 <!-- AE DESK 보류: hidden 속성을 제거하면 전환 버튼이 다시 표시됩니다. -->
 <div class="company-brand">
-  <img class="company-logo-goldenax" src="assets/logos/goldenax.png" alt="골드넥스" width="56" height="30">
-  <img class="company-logo-adqua" src="assets/logos/adqua.png?v=20260918" alt="애드쿠아" width="156" height="47">
+  <img class="company-logo-goldenax theme-swap-logo" src="assets/logos/goldenax.png" data-dark-src="assets/logos/goldenax.png" data-light-src="assets/logos/goldenax-color.png" alt="골드넥스" width="56" height="30">
+  <img class="company-logo-adqua theme-swap-logo" src="assets/logos/adqua.png?v=20260918" data-dark-src="assets/logos/adqua.png?v=20260918" data-light-src="assets/logos/adqua-color.png" alt="애드쿠아" width="156" height="47">
 </div>
 <div class="portfolio-view-switch" role="group" aria-label="포트폴리오 보기 방식" hidden>
   <a class="portfolio-view-button active" href="jo_hyeonjang.html" aria-current="page">PORTFOLIO</a>
