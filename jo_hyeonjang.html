@@ -4276,6 +4276,60 @@ body.goldenax-theme.adqua-theme .portfolio-nav::before{display:none}
 @media(max-width:768px){
   body.goldenax-theme:not(.adqua-theme) .company-brand{top:24px;left:24px}
 }
+/* REFERENCE HEADERS: Goldenax = 좌측 로고/우측 메뉴, AdQUA = 좌측 로고/중앙 메뉴. */
+body.goldenax-theme .portfolio-nav{
+  inset:0 0 auto;width:100%;max-width:none;height:114px;
+  display:flex;justify-content:flex-end;align-items:center;gap:25px;
+  padding:0 2.5vw 0 130px;border:0;border-radius:0;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(10px);transform:none;overflow:visible;
+}
+body.goldenax-theme .portfolio-nav::before{display:none}
+body.goldenax-theme .portfolio-nav a,
+body.goldenax-theme .portfolio-nav:hover a,
+body.goldenax-theme .portfolio-nav:focus-within a{
+  max-width:none;width:auto;opacity:1;visibility:visible;transform:none;
+  padding:0;min-height:44px;color:#fff;font-size:15px;border-radius:0;
+}
+body.goldenax-theme .portfolio-nav a:hover{background:none;text-decoration:underline;text-underline-offset:7px}
+body.goldenax-theme .company-brand{left:2.5vw;top:40px;transform:none}
+body.goldenax-theme .company-logo-goldenax{width:56px;height:34px;filter:none}
+body.goldenax-theme .mode-toggle{top:auto;bottom:24px;right:24px}
+.header-contact-button{border:0;padding:0;min-height:44px;background:none;color:white;font:inherit;font-size:15px;font-weight:800;cursor:pointer}
+.header-menu-toggle{display:none}
+body.goldenax-theme.adqua-theme .portfolio-nav{
+  height:62px;padding:0 170px;justify-content:center;gap:36px;
+  background:rgba(0,0,255,.94);backdrop-filter:none;
+}
+body.goldenax-theme.adqua-theme .portfolio-nav a,
+body.adqua-theme .header-contact-button{font-size:13px;font-weight:600}
+body.goldenax-theme.adqua-theme .company-brand{left:2vw;top:17px;transform:none}
+body.goldenax-theme.adqua-theme .company-logo-adqua{width:109px;height:33px}
+body.goldenax-theme.adqua-theme .contact-toggle{display:none}
+@media(max-width:820px){
+  body.goldenax-theme .company-brand{left:24px;top:20px}
+  body.goldenax-theme.adqua-theme .company-brand{left:16px;top:17px}
+  .header-menu-toggle{
+    display:flex;position:fixed;right:18px;top:15px;z-index:1002;
+    width:42px;height:42px;align-items:center;justify-content:center;
+    background:transparent;color:white;border:0;cursor:pointer;
+  }
+  .header-menu-toggle svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8}
+  body.goldenax-theme .portfolio-nav,
+  body.goldenax-theme.adqua-theme .portfolio-nav{
+    height:76px;padding:0;gap:0;flex-direction:column;align-items:stretch;justify-content:flex-start;
+    overflow:hidden;
+  }
+  body.goldenax-theme.adqua-theme .portfolio-nav{height:62px}
+  body.goldenax-theme .portfolio-nav a,
+  body.goldenax-theme .portfolio-nav .header-contact-button{display:none}
+  body.goldenax-theme.header-menu-open .portfolio-nav{height:100svh;padding:100px 24px 32px;background:#000;overflow-y:auto}
+  body.goldenax-theme.adqua-theme.header-menu-open .portfolio-nav{background:#0000ff}
+  body.goldenax-theme.header-menu-open .portfolio-nav a,
+  body.goldenax-theme.header-menu-open .portfolio-nav .header-contact-button{
+    display:flex;align-items:center;justify-content:flex-start;min-height:76px;
+    font-size:24px;border-bottom:1px solid rgba(255,255,255,.2);text-align:left;
+  }
+}
 </style>
 </head>
 
@@ -4293,10 +4347,12 @@ body.goldenax-theme.adqua-theme .portfolio-nav::before{display:none}
 </div>
 <div class="layout-guide layout-guide-vertical" aria-hidden="true"></div>
 <div class="layout-guide layout-guide-horizontal" aria-hidden="true"></div>
-<nav class="portfolio-nav" aria-label="섹션 이동">
+<button class="header-menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="portfolio-navigation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+<nav class="portfolio-nav" id="portfolio-navigation" aria-label="섹션 이동">
   <a href="#profile">ABOUT</a>
   <a href="#experience">EXPERIENCE</a>
   <a href="#campaign">CAMPAIGNS</a>
+  <button class="header-contact-button" type="button">CONTACT</button>
 </nav>
 <!-- AE DESK 보류: hidden 속성을 제거하면 전환 버튼이 다시 표시됩니다. -->
 <div class="company-brand">
@@ -6040,18 +6096,25 @@ if(layoutEditEnabled){
   });
 }
 
-// 메뉴의 실제 너비를 따라 로고를 배치하므로 hover/키보드 확장 중에도 겹치지 않습니다.
-const brandNavigation = document.querySelector('.portfolio-nav');
-function syncBrandWithNavigation(){
-  if(!brandNavigation) return;
-  document.body.style.setProperty('--brand-after-menu',`${brandNavigation.getBoundingClientRect().right+18}px`);
+// 모바일 헤더 메뉴: 포트폴리오의 실제 섹션과 연락처 패널에 연결합니다.
+const headerMenuToggle=document.querySelector('.header-menu-toggle');
+function setHeaderMenu(open){
+  document.body.classList.toggle('header-menu-open',open);
+  headerMenuToggle.setAttribute('aria-expanded',String(open));
+  headerMenuToggle.setAttribute('aria-label',open?'메뉴 닫기':'메뉴 열기');
 }
-if(brandNavigation){
-  new ResizeObserver(syncBrandWithNavigation).observe(brandNavigation);
-  window.addEventListener('resize',syncBrandWithNavigation,{passive:true});
-  window.addEventListener('portfolio-version-change',syncBrandWithNavigation);
-  syncBrandWithNavigation();
-}
+headerMenuToggle.addEventListener('click',()=>setHeaderMenu(!document.body.classList.contains('header-menu-open')));
+document.querySelectorAll('.portfolio-nav a').forEach(link=>link.addEventListener('click',()=>setHeaderMenu(false)));
+document.querySelector('.header-contact-button').addEventListener('click',event=>{
+  event.stopPropagation();setHeaderMenu(false);contactToggle.click();
+});
+window.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&document.body.classList.contains('header-menu-open')){
+    setHeaderMenu(false);headerMenuToggle.focus();
+  }
+});
+window.addEventListener('portfolio-version-change',()=>setHeaderMenu(false));
+matchMedia('(max-width:820px)').addEventListener('change',()=>setHeaderMenu(false));
 
 // VERSION REGISTRY: 콘텐츠는 공유하며 버전별 디자인만 교체합니다.
 // 버전 추가 시 이 목록과 해당 CSS 클래스를 추가하세요.
