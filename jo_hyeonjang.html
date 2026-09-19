@@ -16,7 +16,7 @@
   1. 색상과 테마: 아래 :root 변수
   2. 화면 문구와 경력: <body> 안의 각 section
   3. 캠페인 원본 연결: .project-card의 data-asset-url
-  4. 업무 프로세스: HOW I WORK 섹션의 work-panel
+  4. 스킬 상세 문구: script 안의 skillCopy
   5. 첫 화면 키워드: script 안의 talentKeywords
 */
 
@@ -4353,6 +4353,11 @@ body.goldenax-theme.light-mode.gx-red-scene .company-logo-goldenax{filter:none}
   body.goldenax-theme.light-mode.header-menu-open .header-contact-button{color:#171717;border-color:rgba(0,0,0,.15)}
   body.goldenax-theme.light-mode.header-menu-open .header-menu-toggle{color:#171717}
 }
+/* TOOLKIT copy: preserve the turntable while allowing longer role labels to wrap. */
+#skills .skill-detail-sub{white-space:pre-line;overflow-wrap:anywhere}
+#skills .skill-scale-labels{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+#skills .skill-scale-labels span:nth-child(n){grid-column:auto;min-width:0;font-size:clamp(9px,1.2vw,13px);overflow-wrap:anywhere}
+#skills .skill-detail-top>div{min-width:0;max-width:100%}
 /* Goldenax header: move the navigation, logo and mobile control as one unit. */
 body.goldenax-theme:not(.adqua-theme){--header-slide:0px}
 body.goldenax-theme:not(.adqua-theme).header-scroll-hidden{--header-slide:-72px}
@@ -4391,55 +4396,6 @@ body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{trans
 @media(prefers-reduced-motion:reduce){
   body.goldenax-theme:not(.adqua-theme) .site-header{transition:none}
 }
-
-/* HOW I WORK: typography-led process, no skill meters or turntable cards. */
-#skills .work-process{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:48px;border-bottom:1px solid currentColor}
-#skills .work-step{appearance:none;position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:14px;min-width:0;padding:0 0 28px;border:0;border-radius:0;background:none;color:inherit;font:inherit;text-align:left;opacity:.35;cursor:pointer;transition:opacity .2s}
-#skills .work-step.is-active,#skills .work-step:hover,#skills .work-step:focus-visible{opacity:1}
-#skills .work-step:focus-visible{outline:2px solid currentColor;outline-offset:6px}
-#skills .work-step.is-active::before{content:"";position:absolute;bottom:-1px;left:0;right:0;height:3px;background:currentColor}
-#skills .work-step:not(:last-child)::after{content:"→";position:absolute;right:0;bottom:28px;font-size:22px;opacity:.6}
-#skills .work-number{font-size:clamp(48px,7vw,108px);font-weight:800;letter-spacing:-.06em;line-height:1}
-#skills .work-name{font-size:clamp(14px,1.8vw,24px);font-weight:700;letter-spacing:.02em}
-#skills .work-details{padding-top:36px}
-#skills .work-panel{min-height:280px;animation:work-reveal .2s ease}
-#skills .work-panel[hidden]{display:none}
-#skills .work-caption{font-size:12px;letter-spacing:.12em;opacity:.55;margin:0 0 14px}
-#skills .work-panel h3{font-size:clamp(24px,3vw,42px);line-height:1.35;word-break:keep-all;margin:0 0 24px}
-#skills .work-tasks{display:flex;flex-wrap:wrap;gap:10px 28px;list-style:none;padding:0;margin:0;font-size:clamp(14px,1.4vw,18px);opacity:.7}
-#skills .work-tools{display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px;margin-top:40px}
-#skills .work-tool{display:inline-flex;align-items:center;gap:9px;font-size:12px;line-height:1.5}
-#skills .work-tool img{width:26px;height:26px;object-fit:contain}
-#skills .work-tool-mark{font-size:10px;font-weight:800;width:26px;text-align:center}
-@keyframes work-reveal{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
-@media(max-width:600px){
- #skills .work-process{gap:12px;margin:32px 48px 0 16px}
- #skills .work-number{font-size:clamp(38px,12vw,60px)}
- #skills .work-name{font-size:clamp(10px,2.8vw,15px)}
- #skills .work-step{gap:12px;padding-bottom:22px}
- #skills .work-step:not(:last-child)::after{font-size:12px;bottom:48px;right:-9px}
- #skills .work-details{padding:28px 48px 0 16px}
- #skills .work-panel{min-height:310px}
- #skills .work-tasks{gap:10px 20px}
- #skills .work-tools{gap:14px 18px;margin-top:28px}
-}
-@media(prefers-reduced-motion:reduce){#skills .work-panel{animation:none}#skills .work-step{transition:none}}
-/* Requested header exceptions: AdQUA remains blue in both themes. */
-body.goldenax-theme.adqua-theme .portfolio-nav{background:#0000ff;backdrop-filter:none}
-body.goldenax-theme.adqua-theme .portfolio-nav a,
-body.goldenax-theme.adqua-theme .header-menu-toggle{color:#fff}
-body.goldenax-theme.adqua-theme .company-brand .company-logo-adqua{filter:brightness(0) invert(1)}
-body.goldenax-theme.adqua-theme .contact-toggle{
- display:inline-flex;top:50%;right:0;width:36px;height:150px;padding:14px 0;
- flex-direction:column;justify-content:space-between;transform:translateY(-50%);
- background:#0000ff;color:#fff;border:0;border-radius:0;font-size:16px;
-}
-body.goldenax-theme.adqua-theme .contact-toggle>span{writing-mode:vertical-rl}
-body.goldenax-theme.adqua-theme .contact-toggle:hover{transform:translateY(-50%)}
-body.goldenax-theme.adqua-theme.light-mode.header-menu-open .portfolio-nav{background:#0000ff}
-body.goldenax-theme.adqua-theme.light-mode.header-menu-open .portfolio-nav a,
-body.goldenax-theme.adqua-theme.light-mode.header-menu-open .header-menu-toggle{color:#fff}
-
 </style>
 </head>
 
@@ -4463,6 +4419,7 @@ body.goldenax-theme.adqua-theme.light-mode.header-menu-open .header-menu-toggle{
   <a href="#profile">ABOUT</a>
   <a href="#experience">EXPERIENCE</a>
   <a href="#campaign">CAMPAIGNS</a>
+  <button class="header-contact-button" type="button">CONTACT</button>
 </nav>
 <!-- AE DESK 보류: hidden 속성을 제거하면 전환 버튼이 다시 표시됩니다. -->
 <div class="company-brand">
@@ -4566,17 +4523,131 @@ body.goldenax-theme.adqua-theme.light-mode.header-menu-open .header-menu-toggle{
 <!-- SKILLS: 사용 툴/매체 숙련도 영역 -->
 
 <!-- TOOLKIT: 기존 툴·설명·숙련도를 유지해 다시 표시합니다. -->
-<section class="skills-section" id="skills" data-imc-stage="HOW I WORK" data-chapter="05 · HOW I WORK">
-  <h2 class="section-heading">HOW I WORK</h2>
-  <p class="section-intro">기획을 실행으로 연결하는 방법</p>
-  <div class="work-process" role="tablist" aria-label="Campaign AE 업무 프로세스"><button class="work-step is-active" id="work-tab-0" type="button" role="tab" aria-selected="true" aria-controls="work-panel-0" tabindex="0"><span class="work-number">01</span><span class="work-name">PLAN</span></button>
-<button class="work-step" id="work-tab-1" type="button" role="tab" aria-selected="false" aria-controls="work-panel-1" tabindex="-1"><span class="work-number">02</span><span class="work-name">CREATE</span></button>
-<button class="work-step" id="work-tab-2" type="button" role="tab" aria-selected="false" aria-controls="work-panel-2" tabindex="-1"><span class="work-number">03</span><span class="work-name">OPERATE</span></button>
-<button class="work-step" id="work-tab-3" type="button" role="tab" aria-selected="false" aria-controls="work-panel-3" tabindex="-1"><span class="work-number">04</span><span class="work-name">ANALYZE</span></button></div>
-  <div class="work-details"><div class="work-panel" id="work-panel-0" role="tabpanel" aria-labelledby="work-tab-0"><p class="work-caption">01 / PLAN</p><h3>기획을 구조화합니다.</h3><ul class="work-tasks"><li>Brief Analysis</li><li>Research</li><li>Ideation</li><li>Proposal</li></ul><div class="work-tools" aria-label="관련 툴"><span class="work-tool"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%A1%E1%84%8B%E1%85%AF%E1%84%91%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%90%E1%85%B3.svg" alt="PowerPoint" onerror="this.hidden=true"><span>PowerPoint</span></span><span class="work-tool"><span class="work-tool-mark" aria-hidden="true">GPT</span><span>ChatGPT</span></span></div></div>
-<div class="work-panel" id="work-panel-1" role="tabpanel" aria-labelledby="work-tab-1" hidden><p class="work-caption">02 / CREATE</p><h3>아이디어를 눈에 보이게 만듭니다.</h3><ul class="work-tasks"><li>Creative Draft</li><li>Visualizing</li><li>Video Editing</li><li>AI Prototyping</li></ul><div class="work-tools" aria-label="관련 툴"><span class="work-tool"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%A9%E1%84%90%E1%85%A9%E1%84%89%E1%85%A3%E1%86%B8.svg" alt="Photoshop" onerror="this.hidden=true"><span>Photoshop</span></span><span class="work-tool"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%B5%E1%86%AF%E1%84%85%E1%85%A5%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5.svg" alt="Illustrator" onerror="this.hidden=true"><span>Illustrator</span></span><span class="work-tool"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%B3%E1%84%85%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8B%E1%85%A5%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9.svg" alt="Premiere Pro" onerror="this.hidden=true"><span>Premiere Pro</span></span><span class="work-tool"><img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" alt="Midjourney" onerror="this.hidden=true"><span>Midjourney</span></span><span class="work-tool"><img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" alt="Runway" onerror="this.hidden=true"><span>Runway</span></span></div></div>
-<div class="work-panel" id="work-panel-2" role="tabpanel" aria-labelledby="work-tab-2" hidden><p class="work-caption">03 / OPERATE</p><h3>실제 캠페인으로 연결합니다.</h3><ul class="work-tasks"><li>Media Setup</li><li>Creative Operation</li><li>Target Management</li><li>Campaign Monitoring</li></ul><div class="work-tools" aria-label="관련 툴"><span class="work-tool"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%A6%E1%84%90%E1%85%A1.svg" alt="Meta" onerror="this.hidden=true"><span>Meta Ads</span></span><span class="work-tool"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%87%E1%85%A5.svg" alt="Naver" onerror="this.hidden=true"><span>NAVER GFA</span></span><span class="work-tool"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8F%E1%85%A1%E1%84%8F%E1%85%A1%E1%84%8B%E1%85%A9.svg" alt="Kakao" onerror="this.hidden=true"><span>Kakao Moment</span></span></div></div>
-<div class="work-panel" id="work-panel-3" role="tabpanel" aria-labelledby="work-tab-3" hidden><p class="work-caption">04 / ANALYZE</p><h3>결과를 다음 액션으로 연결합니다.</h3><ul class="work-tasks"><li>Raw Data</li><li>Performance Analysis</li><li>Reporting</li><li>Optimization</li></ul><div class="work-tools" aria-label="관련 툴"><span class="work-tool"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%A6%E1%86%A8%E1%84%89%E1%85%A6%E1%86%AF.svg" alt="Excel" onerror="this.hidden=true"><span>Excel</span></span><span class="work-tool"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%A6%E1%84%90%E1%85%A1.svg" alt="Meta" onerror="this.hidden=true"><span>Meta Ads</span></span><span class="work-tool"><img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%87%E1%85%A5.svg" alt="Naver" onerror="this.hidden=true"><span>NAVER GFA</span></span></div></div></div>
+<section class="skills-section" id="skills" data-imc-stage="TOOLKIT" data-chapter="05 · TOOLKIT">
+
+  <h2 class="section-heading">
+    EXECUTION TOOLKIT
+  </h2>
+  <p class="section-intro">
+    FROM PLANNING TO EXECUTION<br>기획부터 제작, 매체 운영까지<br>캠페인의 실행 과정을 이해하고 연결합니다.
+  </p>
+  <div class="skills-layout">
+
+    <!-- EDIT: 툴 순서는 기획/데이터 → 크리에이티브/AI → 매체 운영. 상세 문구는 skillCopy에서 관리합니다. -->
+    <div class="skills-sidebar">
+
+      <div class="skill-tab" data-level="PROFICIENT" data-name="PowerPoint">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%A1%E1%84%8B%E1%85%AF%E1%84%91%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%90%E1%85%B3.svg" alt="PowerPoint" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">P</span>
+      </div>
+
+      <div class="skill-tab" data-level="PROFICIENT" data-name="Excel">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%A6%E1%86%A8%E1%84%89%E1%85%A6%E1%86%AF.svg" alt="Excel" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">X</span>
+      </div>
+
+      <div class="skill-tab" data-level="WORKING" data-name="Photoshop">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%A9%E1%84%90%E1%85%A9%E1%84%89%E1%85%A3%E1%86%B8.svg" alt="Photoshop" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">Ps</span>
+      </div>
+
+      <div class="skill-tab" data-level="WORKING" data-name="Illustrator">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8B%E1%85%B5%E1%86%AF%E1%84%85%E1%85%A5%E1%84%89%E1%85%B3%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5.svg" alt="Illustrator" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">Ai</span>
+      </div>
+
+      <div class="skill-tab" data-level="WORKING" data-name="Premiere Pro">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%91%E1%85%B3%E1%84%85%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8B%E1%85%A5%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9.svg" alt="Premiere Pro" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">Pr</span>
+      </div>
+
+      <div class="skill-tab" data-level="WORKING" data-name="Midjourney">
+        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%B5%E1%84%83%E1%85%B3%E1%84%8C%E1%85%A5%E1%84%82%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" alt="Midjourney" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">MJ</span>
+      </div>
+
+      <div class="skill-tab" data-level="WORKING" data-name="Runway">
+        <img class="theme-swap-logo" data-dark-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" data-light-src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3.svg" src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%85%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%B5_%E1%84%83%E1%85%A1%E1%84%8F%E1%85%B3.svg" alt="Runway" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">RW</span>
+      </div>
+
+      <div class="skill-tab" data-level="PROFICIENT" data-name="ChatGPT"><span class="skill-logo-fallback" style="display:grid">GPT</span>
+      </div>
+
+      <div class="skill-tab" data-level="PROFICIENT" data-name="Meta Ads">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%86%E1%85%A6%E1%84%90%E1%85%A1.svg" alt="Meta" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">M</span>
+      </div>
+
+      <div class="skill-tab" data-level="PROFICIENT" data-name="NAVER GFA">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%87%E1%85%A5.svg" alt="Naver" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">N</span>
+      </div>
+
+      <div class="skill-tab" data-level="WORKING" data-name="Kakao Moment">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%8F%E1%85%A1%E1%84%8F%E1%85%A1%E1%84%8B%E1%85%A9.svg" alt="Kakao" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">K</span>
+      </div>
+
+      <div class="skill-tab" data-level="UNDERSTAND" data-name="Google Ads">
+        <img src="https://raw.githubusercontent.com/guswkd/portfolio-assets/main/%E1%84%80%E1%85%AE%E1%84%80%E1%85%B3%E1%86%AF.svg" alt="Google" onerror="this.classList.add('is-broken')">
+        <span class="skill-logo-fallback">G</span>
+      </div>
+
+    </div>
+
+    <!-- EDIT: 스킬 상세 기본값 / 스킬 선택 전 안내 문구와 카드 내용 -->
+    <div class="skill-detail">
+
+      <div class="skill-detail-top">
+
+        <div>
+
+          <div class="skill-detail-title">
+            SELECT TOOL
+          </div>
+
+          <div class="skill-detail-sub">
+            턴테이블 위의 로고를 선택하면 상세 내용이 표시됩니다.
+          </div>
+
+          <div class="skill-barometer" style="display:none;">
+            <div class="skill-barometer-track">
+              <div class="skill-barometer-fill"></div>
+              <span class="skill-boundary"></span>
+              <span class="skill-boundary"></span>
+              <span class="skill-boundary"></span>
+              <span class="skill-boundary"></span>
+            </div>
+            <div class="skill-scale-labels">
+              <span>UNDERSTAND</span>
+              <span>WORKING</span>
+              <span class="active">PROFICIENT</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="skill-detail-grid">
+
+        <div class="skill-detail-card">
+          <h4>대기</h4>
+          <p>아직 선택된 스킬이 없습니다</p>
+        </div>
+
+        <div class="skill-detail-card">
+          <h4>선택</h4>
+          <p>로고를 클릭해 캠페인 실무 활용과 역량을 확인하세요</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
 <!-- EXPERIENCE: 실무/프로젝트 경험 영역 -->
@@ -4960,6 +5031,13 @@ const contactPanel = document.querySelector('.contact-panel');
 const progressBar = document.querySelector('.scroll-progress-bar');
 const themeSwapLogos = document.querySelectorAll('.theme-swap-logo');
 
+const skillTabs = document.querySelectorAll('.skill-tab');
+const skillDetailTitle = document.querySelector('.skill-detail-title');
+const skillBarometerFill = document.querySelector('.skill-barometer-fill');
+const skillBarometer = document.querySelector('.skill-barometer');
+const skillScaleLabels = document.querySelectorAll('.skill-scale-labels span');
+const skillDetailCards = document.querySelectorAll('.skill-detail-card');
+const skillDetailSub = document.querySelector('.skill-detail-sub');
 const projectCards = document.querySelectorAll('.project-card');
 const portfolioNavLinks = document.querySelectorAll('.portfolio-nav a');
 const campaignFilterButtons = document.querySelectorAll('.campaign-filter-button');
@@ -4967,6 +5045,46 @@ const projectModal = document.querySelector('.project-modal');
 const projectModalBox = document.querySelector('.project-modal-box');
 const projectModalClose = document.querySelector('.project-modal-close');
 const projectModalImage = document.querySelector('.project-modal-image');
+const skillLogoFallbacks = {
+  Illustrator:'Ai',
+  Photoshop:'Ps',
+  'Premiere Pro':'Pr',
+  Excel:'X',
+  PowerPoint:'P',
+  Word:'W',
+  Midjourney:'MJ',
+  Runway:'RW',
+  Naver:'N',
+  Google:'G',
+  Meta:'M',
+  Kakao:'K'
+};
+
+function setupSkillLogoFallbacks(){
+  skillTabs.forEach((tab)=>{
+    const image = tab.querySelector('img');
+    if(!image) return;
+
+    image.alt = tab.dataset.name || 'Skill logo';
+
+    let fallback = tab.querySelector('.skill-logo-fallback');
+    if(!fallback){
+      fallback = document.createElement('span');
+      fallback.className = 'skill-logo-fallback';
+      fallback.innerText = skillLogoFallbacks[tab.dataset.name] || tab.dataset.name?.slice(0,2) || 'SK';
+      image.insertAdjacentElement('afterend', fallback);
+    }
+
+    if(image.complete && image.naturalWidth === 0){
+      image.classList.add('is-broken');
+    }
+
+    image.addEventListener('error',()=>{
+      image.classList.add('is-broken');
+    });
+  });
+}
+
 function getCampaignViewType(text){
   return /코삭|kosac|cosac|코다|koda/i.test(text.normalize('NFC')) ? 'pdf' : 'video';
 }
@@ -5078,7 +5196,7 @@ function setupCampaignCards(){
   filterCampaignCards(activeFilter);
 }
 
-
+setupSkillLogoFallbacks();
 setupCampaignCards();
 
 campaignFilterButtons.forEach((button)=>{
@@ -5106,8 +5224,86 @@ function reorderPortfolioSections(){
 
 reorderPortfolioSections();
 
+// TOOLKIT: category=업무 영역, title=활용 분야, description=실무 설명, level=역량 단계.
+const skillCopy = {
+  "PowerPoint": {
+    "category": "PLANNING & DATA",
+    "title": "CAMPAIGN PROPOSAL & DECK",
+    "description": "캠페인 기획안 및 제안서 구성\n논리 구조 설계부터 PT 자료 제작까지",
+    "level": "PROFICIENT"
+  },
+  "Excel": {
+    "category": "PLANNING & DATA",
+    "title": "MEDIA & DATA ANALYSIS",
+    "description": "미디어믹스 및 로우데이터 정리\n캠페인 성과 분석과 리포팅",
+    "level": "PROFICIENT"
+  },
+  "Photoshop": {
+    "category": "CREATIVE & AI",
+    "title": "CREATIVE PRODUCTION",
+    "description": "광고 이미지 보정 및 합성\n디지털 광고 소재 제작과 베리에이션",
+    "level": "WORKING"
+  },
+  "Illustrator": {
+    "category": "CREATIVE & AI",
+    "title": "CREATIVE PRODUCTION",
+    "description": "광고 소재 시안 및 레이아웃 제작\n간단한 그래픽 에셋 제작과 수정",
+    "level": "WORKING"
+  },
+  "Premiere Pro": {
+    "category": "CREATIVE & AI",
+    "title": "VIDEO PRODUCTION",
+    "description": "숏폼 및 디지털 광고 영상 편집\n컷 편집, 자막과 기본 모션 작업",
+    "level": "WORKING"
+  },
+  "Midjourney": {
+    "category": "CREATIVE & AI",
+    "title": "AI VISUAL IDEATION",
+    "description": "캠페인 콘셉트 비주얼 제작\n스토리보드 및 레퍼런스 이미지 구현",
+    "level": "WORKING"
+  },
+  "Runway": {
+    "category": "CREATIVE & AI",
+    "title": "AI VIDEO PRODUCTION",
+    "description": "AI 기반 영상 소스 생성\n기획 단계의 영상 콘셉트 시각화",
+    "level": "WORKING"
+  },
+  "ChatGPT": {
+    "category": "CREATIVE & AI",
+    "title": "AI RESEARCH & IDEATION",
+    "description": "시장·경쟁사 리서치와 아이데이션\n카피 베리에이션 및 기획 구조화",
+    "level": "PROFICIENT"
+  },
+  "Meta Ads": {
+    "category": "MEDIA OPERATION",
+    "title": "CAMPAIGN OPERATION",
+    "description": "캠페인 세팅 및 소재·타깃 운영\n성과 모니터링과 데이터 기반 최적화",
+    "level": "PROFICIENT"
+  },
+  "NAVER GFA": {
+    "category": "MEDIA OPERATION",
+    "title": "DISPLAY CAMPAIGN OPERATION",
+    "description": "디스플레이 캠페인 세팅 및 운영\n소재별 성과 모니터링과 리포팅",
+    "level": "PROFICIENT"
+  },
+  "Kakao Moment": {
+    "category": "MEDIA OPERATION",
+    "title": "DISPLAY CAMPAIGN OPERATION",
+    "description": "카카오 디스플레이 캠페인 세팅 및 운영\n게재 관리와 캠페인 성과 확인",
+    "level": "WORKING"
+  },
+  "Google Ads": {
+    "category": "MEDIA OPERATION",
+    "title": "DIGITAL MEDIA OPERATION",
+    "description": "캠페인 구조 및 매체 운영 방식 이해\n기본 세팅과 주요 성과 지표 확인",
+    "level": "UNDERSTAND"
+  }
+};
+
 const revealTargets = [
   ...document.querySelectorAll('.profile-card'),
+  ...document.querySelectorAll('.skill-tab'),
+  document.querySelector('.skill-detail'),
   ...document.querySelectorAll('.experience-card'),
   ...document.querySelectorAll('.project-card'),
   document.querySelector('.quality-panel'),
@@ -5293,34 +5489,42 @@ function startTalentKeywords(){
 startTalentKeywords();
 
 
-// HOW I WORK: a single selected stage for pointer, touch and keyboard.
-(()=>{
-  const tabs=[...document.querySelectorAll('.work-step')];
-  const panels=[...document.querySelectorAll('.work-panel')];
-  function select(index,focus=false){
-    tabs.forEach((tab,i)=>{
-      tab.classList.toggle('is-active',i===index);
-      tab.setAttribute('aria-selected',String(i===index));
-      tab.tabIndex=i===index?0:-1;
-      panels[i].hidden=i!==index;
-    });
-    if(focus)tabs[index].focus();
-  }
-  tabs.forEach((tab,index)=>{
-    tab.addEventListener('click',()=>select(index));
-    tab.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')select(index);});
-    tab.addEventListener('focus',()=>select(index));
-    tab.addEventListener('keydown',event=>{
-      let next=index;
-      if(event.key==='ArrowRight')next=(index+1)%tabs.length;
-      else if(event.key==='ArrowLeft')next=(index+tabs.length-1)%tabs.length;
-      else if(event.key==='Home')next=0;
-      else if(event.key==='End')next=tabs.length-1;
-      else return;
-      event.preventDefault();select(next,true);
-    });
+// EDIT NOTE: 스킬 탭 data값과 skillCopy 문구를 상세 패널에 자동 반영하는 영역.
+function renderSkillDetail(tab){
+  const copy = skillCopy[tab.dataset.name];
+  if(!copy) return;
+  skillDetailTitle.innerText = tab.dataset.name;
+  skillDetailSub.innerText = copy.category + '\n' + copy.title + '\n' + copy.description;
+  const levels = ['UNDERSTAND','WORKING','PROFICIENT'];
+  const explanations = {
+    PROFICIENT:'독립적으로 실무 산출물 제작 또는 운영 가능',
+    WORKING:'실무에서 직접 활용 가능',
+    UNDERSTAND:'기본 기능 및 업무 구조 이해'
+  };
+  skillBarometer.style.display = 'block';
+  skillBarometerFill.style.width = ({UNDERSTAND:20,WORKING:60,PROFICIENT:100}[copy.level]) + '%';
+  skillScaleLabels.forEach((label,index)=>{
+    label.innerText = levels[index];
+    label.classList.toggle('active',levels[index] === copy.level);
   });
-})();
+  skillDetailCards[0].querySelector('h4').innerText = copy.level;
+  skillDetailCards[0].querySelector('p').innerText = explanations[copy.level];
+  skillDetailCards[1].querySelector('h4').innerText = copy.category;
+  skillDetailCards[1].querySelector('p').innerText = copy.title;
+}
+
+function activateSkillTab(tab){
+  if(tab.classList.contains('active')) return;
+
+  skillTabs.forEach(item=>item.classList.remove('active'));
+  tab.classList.add('active');
+  renderSkillDetail(tab);
+}
+
+skillTabs.forEach(tab=>{
+  tab.addEventListener('focus',()=>activateSkillTab(tab));
+  tab.addEventListener('click',()=>activateSkillTab(tab));
+});
 
 portfolioNavLinks.forEach((link)=>{
   link.addEventListener('click',(e)=>{
@@ -5936,6 +6140,9 @@ function setHeaderMenu(open){
 }
 headerMenuToggle.addEventListener('click',()=>setHeaderMenu(!document.body.classList.contains('header-menu-open')));
 document.querySelectorAll('.portfolio-nav a').forEach(link=>link.addEventListener('click',()=>setHeaderMenu(false)));
+document.querySelector('.header-contact-button').addEventListener('click',event=>{
+  event.stopPropagation();setHeaderMenu(false);contactToggle.click();
+});
 window.addEventListener('keydown',event=>{
   if(event.key==='Escape'&&document.body.classList.contains('header-menu-open')){
     setHeaderMenu(false);headerMenuToggle.focus();
