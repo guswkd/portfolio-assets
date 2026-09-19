@@ -4239,7 +4239,7 @@ body.goldenax-theme .hero-identity{
 }
 body.goldenax-theme .scroll-indicator{
   position:relative;top:auto;bottom:auto;left:auto;right:auto;
-  transform:none;flex:none;margin:12px 0 0;
+  transform:none;flex:none;margin:clamp(24px,3.5vh,36px) 0 0;
 }
 body.goldenax-theme .scroll-indicator .cta-arrow-option{
   width:44px;height:40px;min-height:0;padding:0;
@@ -4373,15 +4373,20 @@ body.goldenax-theme:not(.adqua-theme) .site-header .company-brand{top:19px}
 body.goldenax-theme:not(.adqua-theme).light-mode .site-header{background:#fff}
 body.goldenax-theme:not(.adqua-theme).header-menu-open .site-header{height:100svh}
 body.goldenax-theme:not(.adqua-theme) .contact-toggle{
-  width:182px;height:36px;right:-73px;top:50%;padding:0 20px;
-  flex-direction:row;gap:22px;writing-mode:horizontal-tb;
-  transform:translateY(-50%) rotate(90deg);
+  width:56px;height:270px;right:0;top:50%;padding:20px 0;
+  flex-direction:column;justify-content:space-between;gap:0;
+  writing-mode:horizontal-tb;transform:translateY(-50%);
+  background:#ea0029;border:0;font-size:22px;font-weight:800;
 }
-body.goldenax-theme:not(.adqua-theme) .contact-toggle>span{writing-mode:horizontal-tb}
-body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover{transform:translateY(-50%) rotate(90deg)}
+.contact-brand{display:none}
+body.goldenax-theme:not(.adqua-theme) .contact-brand{display:block;width:40px;height:22px;object-fit:cover;flex:none}
+body.goldenax-theme:not(.adqua-theme) .contact-toggle>span{writing-mode:vertical-rl}
+body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover{transform:translateY(-50%)}
 body.goldenax-theme:not(.adqua-theme) .contact-toggle .contact-arrow{transform:none}
-body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{transform:translateX(2px)}
+body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{transform:translate(2px,-2px)}
 @media(max-width:820px){
+  body.goldenax-theme:not(.adqua-theme) .contact-toggle{width:42px;height:220px;padding:16px 0;font-size:19px}
+  body.goldenax-theme:not(.adqua-theme) .contact-brand{width:30px;height:17px}
   body.goldenax-theme:not(.adqua-theme):not(.header-menu-open) .site-header,
   body.goldenax-theme:not(.adqua-theme):not(.header-menu-open) .site-header .portfolio-nav{height:64px}
   body.goldenax-theme:not(.adqua-theme) .site-header .company-brand{top:15px}
@@ -4435,7 +4440,7 @@ body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{trans
     <path d="M12 2.2v2.1M12 19.7v2.1M2.2 12h2.1M19.7 12h2.1M5.1 5.1l1.5 1.5M17.4 17.4l1.5 1.5M18.9 5.1l-1.5 1.5M6.6 17.4l-1.5 1.5"/>
   </svg>
 </button>
-<button class="contact-toggle" type="button"><span>Contact</span><svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h20m-7-7 7 7-7 7"/></svg></button>
+<button class="contact-toggle" type="button" aria-label="Contact 연락처 열기"><img class="contact-brand" src="assets/logos/goldenax.png" alt="" aria-hidden="true"><span>Contact</span><svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M7 5h12v12"/></svg></button>
 <div class="contact-panel">
   <div class="contact-inner">
     <!-- EDIT: 연락처 / 이메일, 전화번호, SNS만 본인 정보로 수정 -->
