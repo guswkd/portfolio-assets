@@ -4355,14 +4355,16 @@ body.goldenax-theme.light-mode.gx-red-scene .company-logo-goldenax{filter:bright
 }
 /* Goldenax header: move the navigation, logo and mobile control as one unit. */
 body.goldenax-theme:not(.adqua-theme){--header-slide:0px}
-body.goldenax-theme:not(.adqua-theme).header-scroll-hidden{--header-slide:-100px}
+body.goldenax-theme:not(.adqua-theme).header-scroll-hidden{--header-slide:-72px}
 .site-header{display:contents}
 body.goldenax-theme:not(.adqua-theme) .site-header{
-  display:block;position:fixed;inset:0 0 auto;height:114px;z-index:1001;
+  display:block;position:fixed;inset:0 0 auto;height:72px;z-index:1001;
   background:#000;transform:translateY(var(--header-slide));
   transition:transform .4s cubic-bezier(.25,.1,.25,1);
 }
 body.goldenax-theme:not(.adqua-theme) .site-header .portfolio-nav{background:transparent;backdrop-filter:none}
+body.goldenax-theme:not(.adqua-theme):not(.header-menu-open) .site-header .portfolio-nav{height:72px}
+body.goldenax-theme:not(.adqua-theme) .site-header .company-brand{top:19px}
 body.goldenax-theme:not(.adqua-theme).light-mode .site-header{background:#fff}
 body.goldenax-theme:not(.adqua-theme).header-menu-open .site-header{height:100svh}
 body.goldenax-theme:not(.adqua-theme) .contact-toggle{
@@ -4375,8 +4377,11 @@ body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover{transform:translateY
 body.goldenax-theme:not(.adqua-theme) .contact-toggle .contact-arrow{transform:none}
 body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{transform:translateX(2px)}
 @media(max-width:820px){
-  body.goldenax-theme:not(.adqua-theme) .site-header{height:76px}
-  body.goldenax-theme:not(.adqua-theme).header-scroll-hidden{--header-slide:-76px}
+  body.goldenax-theme:not(.adqua-theme):not(.header-menu-open) .site-header,
+  body.goldenax-theme:not(.adqua-theme):not(.header-menu-open) .site-header .portfolio-nav{height:64px}
+  body.goldenax-theme:not(.adqua-theme) .site-header .company-brand{top:15px}
+  body.goldenax-theme:not(.adqua-theme) .site-header .header-menu-toggle{top:11px}
+  body.goldenax-theme:not(.adqua-theme).header-scroll-hidden{--header-slide:-64px}
 }
 @media(prefers-reduced-motion:reduce){
   body.goldenax-theme:not(.adqua-theme) .site-header{transition:none}
