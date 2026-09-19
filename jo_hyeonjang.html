@@ -4353,6 +4353,19 @@ body.goldenax-theme.light-mode.gx-red-scene .company-logo-goldenax{filter:bright
   body.goldenax-theme.light-mode.header-menu-open .header-contact-button{color:#171717;border-color:rgba(0,0,0,.15)}
   body.goldenax-theme.light-mode.header-menu-open .header-menu-toggle{color:#171717}
 }
+/* Goldenax header: move the navigation, logo and mobile control as one unit. */
+body.goldenax-theme:not(.adqua-theme){--header-slide:0px}
+body.goldenax-theme:not(.adqua-theme).header-scroll-hidden{--header-slide:-124px}
+body.goldenax-theme:not(.adqua-theme) .portfolio-nav,
+body.goldenax-theme:not(.adqua-theme) .company-brand,
+body.goldenax-theme:not(.adqua-theme) .header-menu-toggle{
+  translate:0 var(--header-slide);transition:translate .28s ease;
+}
+@media(prefers-reduced-motion:reduce){
+  body.goldenax-theme:not(.adqua-theme) .portfolio-nav,
+  body.goldenax-theme:not(.adqua-theme) .company-brand,
+  body.goldenax-theme:not(.adqua-theme) .header-menu-toggle{transition:none}
+}
 </style>
 </head>
 
@@ -6138,6 +6151,33 @@ window.addEventListener('keydown',event=>{
 });
 window.addEventListener('portfolio-version-change',()=>setHeaderMenu(false));
 matchMedia('(max-width:820px)').addEventListener('change',()=>setHeaderMenu(false));
+
+// Hide only Goldenax's header after deliberate downward movement.
+(()=>{
+  let previousY=Math.max(0,window.scrollY),travel=0,pending=false;
+  const header=document.querySelector('.portfolio-nav');
+  function show(){document.body.classList.remove('header-scroll-hidden');travel=0;}
+  function update(){
+    pending=false;
+    const y=Math.max(0,window.scrollY),delta=y-previousY;
+    previousY=y;
+    if(document.body.classList.contains('adqua-theme')||y<120||
+       document.body.classList.contains('header-menu-open')||
+       header.contains(document.activeElement)||document.activeElement===headerMenuToggle){show();return;}
+    if(Math.sign(delta)!==Math.sign(travel))travel=0;
+    travel+=delta;
+    if(travel>24){document.body.classList.add('header-scroll-hidden');travel=0;}
+    else if(travel < -12)show();
+  }
+  window.addEventListener('scroll',()=>{
+    if(!pending){pending=true;requestAnimationFrame(update);}
+  },{passive:true});
+  header.addEventListener('focusin',show);
+  headerMenuToggle.addEventListener('focus',show);
+  headerMenuToggle.addEventListener('click',show);
+  window.addEventListener('portfolio-version-change',()=>{show();previousY=Math.max(0,window.scrollY);});
+  window.addEventListener('resize',show);
+})();
 
 // VERSION REGISTRY: 콘텐츠는 공유하며 버전별 디자인만 교체합니다.
 // 버전 추가 시 이 목록과 해당 CSS 클래스를 추가하세요.
