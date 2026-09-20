@@ -4397,7 +4397,19 @@ body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{trans
 /* Shared Korean chapter system; existing section typography stays in place. */
 .section-heading .chapter-index{display:block;font-size:clamp(12px,1vw,15px);line-height:1.5;letter-spacing:.12em;font-weight:500;margin-bottom:12px;opacity:.65}
 #experience>.section-heading,#campaign>.section-heading,#skills>.section-heading{letter-spacing:-.045em;line-height:1.2}
-.section-heading .title-initial{color:var(--gx-accent,#6b62ff)}
+/* 제목은 일반 한글 음절을 유지하고, 초성 자리가 놓이는 부분에만 포인트를 줍니다. */
+.section-heading .title-initial{
+  color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  background-color:var(--gx-text,#fff);
+}
+.section-heading .title-initial.onset-side{
+  background-image:linear-gradient(90deg,var(--gx-accent,#6b62ff) 0 42%,var(--gx-text,#fff) 50% 100%);
+}
+.section-heading .title-initial.onset-top{
+  background-image:linear-gradient(180deg,var(--gx-accent,#6b62ff) 0 38%,var(--gx-text,#fff) 48% 100%);
+}
 @media(max-width:600px){
  #experience>.section-heading,#campaign>.section-heading,#skills>.section-heading{font-size:clamp(36px,10vw,52px)}
  .section-heading .chapter-index{margin-bottom:8px}
@@ -4500,7 +4512,7 @@ body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{trans
 <section class="profile-section" id="profile">
 
   <h2 class="section-heading">
-    현재의 <span class="title-initial">조</span><span class="title-initial">현</span>장
+    현재의 조현장
   </h2>
   <p class="section-intro">되고 싶은 AE</p>
 
@@ -4534,7 +4546,7 @@ body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{trans
 <section class="skills-section" id="skills" data-imc-stage="확장" data-chapter="확장한 역량">
 
   <h2 class="section-heading">
-    <span class="title-initial">확</span><span class="title-initial">장</span>한 역량
+    <span class="title-initial onset-side">확</span><span class="title-initial onset-side">장</span>한 역량
   </h2>
   <p class="section-intro">
     필요한 일을 직접 해낼 수 있도록,<br>업무의 범위를 넓혀왔습니다.
@@ -4657,7 +4669,7 @@ body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{trans
 <section class="experience-section" id="experience" data-chapter="걸어온 흔적">
 
   <h2 class="section-heading">
-    걸어온 <span class="title-initial">흔</span><span class="title-initial">적</span>
+    걸어온 <span class="title-initial onset-top">흔</span><span class="title-initial onset-side">적</span>
   </h2>
   <p class="section-intro">
     교육과 인턴, 실무까지
@@ -4778,7 +4790,7 @@ body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{trans
 <section class="campaign-section" id="campaign" data-chapter="부딪힌 현장">
 
 <h2 class="section-heading">
-  부딪힌 <span class="title-initial">현</span><span class="title-initial">장</span>
+  부딪힌 <span class="title-initial onset-side">현</span><span class="title-initial onset-side">장</span>
 </h2>
 <p class="section-intro">
   생각에 머물지 않고, 직접 실행으로 옮겼습니다.
@@ -4919,7 +4931,7 @@ body.goldenax-theme:not(.adqua-theme) .contact-toggle:hover .contact-arrow{trans
 
 <!-- AWARDS: 실제 수상·선정 성과가 준비되면 hidden을 제거해 공개합니다. -->
 <section class="awards-section" id="awards" data-chapter="남겨진 훈장" hidden>
-  <h2 class="section-heading">남겨진 <span class="title-initial">훈</span><span class="title-initial">장</span></h2>
+  <h2 class="section-heading">남겨진 <span class="title-initial onset-top">훈</span><span class="title-initial onset-side">장</span></h2>
 </section>
 
 <!-- CHECK POINT: 대행사 실무 적합도 확인 기준 -->
