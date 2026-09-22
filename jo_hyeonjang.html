@@ -5227,8 +5227,7 @@ versionDialog.querySelector('form').addEventListener('submit',event=>{
   if(version && setPortfolioVersion(version,true)) versionDialog.close();
   else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: gn / ac / mb';
 });
-// 화면 어디에서나 gn / ac / mb를 순서대로 입력하면 즉시 테마를 전환합니다.
-const versionCommandMap = {gn:'goldenax',ac:'adconex',mb:'motherbrain'};
+// gn은 버전 선택창을 여는 고정 히든 명령입니다. 테마 선택은 창 안에서만 합니다.
 let versionKeyBuffer = '';
 let versionKeyTimer = 0;
 window.addEventListener('keydown',event=>{
@@ -5245,11 +5244,11 @@ window.addEventListener('keydown',event=>{
   versionKeyBuffer=(versionKeyBuffer + event.code.slice(3).toLowerCase()).slice(-2);
   window.clearTimeout(versionKeyTimer);
   versionKeyTimer=window.setTimeout(()=>{versionKeyBuffer=''},800);
-  const version=versionCommandMap[versionKeyBuffer];
-  if(version){
-    setPortfolioVersion(version,true);
+  if(versionKeyBuffer === 'gn'){
+    event.preventDefault();
     versionKeyBuffer='';
     window.clearTimeout(versionKeyTimer);
+    openVersionCommand();
   }
 });
 window.addEventListener('blur',()=>{versionKeyBuffer='';window.clearTimeout(versionKeyTimer)});
