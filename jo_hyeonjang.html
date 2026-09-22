@@ -5148,6 +5148,24 @@ window.addEventListener('click',(e)=>{
 });
 
 
+// 모바일 메뉴와 연락처 버튼을 초기화한 뒤 스크롤 동작을 연결합니다.
+const headerMenuToggle=document.querySelector('.header-menu-toggle');
+function setHeaderMenu(open){
+  document.body.classList.toggle('header-menu-open',open);
+  headerMenuToggle.setAttribute('aria-expanded',String(open));
+  headerMenuToggle.setAttribute('aria-label',open?'메뉴 닫기':'메뉴 열기');
+}
+headerMenuToggle.addEventListener('click',()=>setHeaderMenu(!document.body.classList.contains('header-menu-open')));
+document.querySelectorAll('.portfolio-nav a').forEach(link=>link.addEventListener('click',()=>setHeaderMenu(false)));
+document.querySelector('.header-contact-button').addEventListener('click',event=>{
+  event.stopPropagation();setHeaderMenu(false);contactToggle.click();
+});
+window.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&document.body.classList.contains('header-menu-open')){
+    setHeaderMenu(false);headerMenuToggle.focus();
+  }
+});
+
 // Hide only Goldenax's header after deliberate downward movement.
 (()=>{
   let previousY=Math.max(0,window.scrollY),travel=0,pending=false;
@@ -5243,7 +5261,7 @@ window.addEventListener('keydown',event=>{
   if(event.repeat || !/^Key[A-Z]$/.test(event.code)) return;
   versionKeyBuffer=(versionKeyBuffer + event.code.slice(3).toLowerCase()).slice(-2);
   window.clearTimeout(versionKeyTimer);
-  versionKeyTimer=window.setTimeout(()=>{versionKeyBuffer=''},800);
+  versionKeyTimer=window.setTimeout(()=>{versionKeyBuffer=''},2000);
   if(versionKeyBuffer === 'gn'){
     event.preventDefault();
     versionKeyBuffer='';
