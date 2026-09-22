@@ -4108,6 +4108,11 @@ body.goldenax-theme.adconex-theme .mode-toggle{display:none}
  body.goldenax-theme #skills .skill-detail-grid{grid-template-columns:1fr;gap:18px;margin-top:8px}
  body.goldenax-theme #skills .skill-tab img{width:55%;height:55%}
 }
+/* Motherbrain hero: a restrained personal accent, without changing the site palette. */
+body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
+  color:#315caa;
+  -webkit-text-fill-color:#315caa;
+}
 </style>
 </head>
 
@@ -4170,7 +4175,6 @@ body.goldenax-theme.adconex-theme .mode-toggle{display:none}
       <div class="hero-cell hero-outline"><span>이</span></div>
       <div class="hero-cell hero-outline"><span>다</span></div>
   </div>
-  <p class="hero-identity"><strong>CAMPAIGN AE · 조현장</strong> — 현장을 실행으로.</p>
   <div class="scroll-indicator">
     <div class="cta-arrow-option is-selected" aria-label="아래로 스크롤">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -5448,8 +5452,8 @@ window.addEventListener('keydown',event=>{
 window.addEventListener('blur',()=>{versionKeyBuffer='';window.clearTimeout(versionKeyTimer)});
 window.addEventListener('focusin',()=>{versionKeyBuffer='';window.clearTimeout(versionKeyTimer)});
 document.addEventListener('visibilitychange',()=>{versionKeyBuffer='';window.clearTimeout(versionKeyTimer)});
-// 모바일: 히어로의 이름/직무 문구를 1초간 길게 누릅니다.
-const versionTouchTarget=document.querySelector('.hero-identity');
+// 모바일: 원고지 타이틀을 1초간 길게 누릅니다.
+const versionTouchTarget=document.querySelector('.hero-copy');
 if(versionTouchTarget){
   let holdTimer=0;
   const cancelHold=()=>clearTimeout(holdTimer);
