@@ -5240,8 +5240,9 @@ window.addEventListener('keydown',event=>{
     versionKeyBuffer='';
     return;
   }
-  if(event.repeat || !/^[a-z]$/i.test(event.key)) return;
-  versionKeyBuffer=(versionKeyBuffer + event.key.toLowerCase()).slice(-2);
+  // event.key는 한글 입력 상태에서 달라지므로, 물리 키 코드로 명령을 판별합니다.
+  if(event.repeat || !/^Key[A-Z]$/.test(event.code)) return;
+  versionKeyBuffer=(versionKeyBuffer + event.code.slice(3).toLowerCase()).slice(-2);
   window.clearTimeout(versionKeyTimer);
   versionKeyTimer=window.setTimeout(()=>{versionKeyBuffer=''},800);
   const version=versionCommandMap[versionKeyBuffer];
