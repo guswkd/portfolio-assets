@@ -3943,6 +3943,68 @@ body.goldenax-theme:not(.adconex-theme) .contact-toggle:hover .contact-arrow{tra
  #experience>.section-heading,#campaign>.section-heading,#skills>.section-heading{font-size:clamp(36px,10vw,52px)}
  .section-heading .chapter-index{margin-bottom:8px}
 }
+/* Reference-site themes: isolated from Goldenax's red curtain and floating rail. */
+body.goldenax-theme.adconex-theme{--gx-bg:#000;--gx-surface:#111;--gx-raised:#191919;--gx-text:#fff;--gx-muted:#a6a6a6;--gx-line:#333;--gx-accent:#f7941d;--gx-radius:0px;background:var(--gx-bg)}
+body.goldenax-theme.adconex-theme.light-mode{--gx-bg:#fff;--gx-surface:#fff;--gx-raised:#f4f4f4;--gx-text:#111;--gx-muted:#666;--gx-line:#ddd}
+body.goldenax-theme.motherbrain-theme{--gx-bg:#fff;--gx-surface:#fff;--gx-raised:#f5f5f5;--gx-text:#000;--gx-muted:#666;--gx-line:#ddd;--gx-accent:#000;--gx-radius:0px;background:var(--gx-bg)}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .background{background:var(--gx-bg)!important}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .site-header{display:block;position:fixed;inset:0 0 auto;height:80px;z-index:1001;transform:none;background:var(--gx-bg);border-bottom:0}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .site-header .portfolio-nav{position:absolute;inset:0;width:100%;height:80px;max-width:none;padding:0 4vw 0 230px;display:flex;flex-direction:row;justify-content:flex-end;align-items:center;gap:clamp(22px,4vw,64px);background:none;backdrop-filter:none;border:0;border-radius:0;transform:none}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .site-header .portfolio-nav a{font-size:16px;font-weight:650;color:var(--gx-text);letter-spacing:0;min-height:44px}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .site-header .company-brand{left:4vw;top:24px;transform:none;height:32px;display:flex;align-items:center}
+body.goldenax-theme.adconex-theme .company-brand .company-logo-adconex{width:145px;height:30px;padding:0;background:none;object-fit:contain;filter:none}
+body.goldenax-theme.motherbrain-theme .company-brand .company-logo-motherbrain{width:150px;height:38px;object-fit:contain;filter:none}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .header-contact-button{display:block;color:var(--gx-text);font-size:15px;font-weight:600}
+body.goldenax-theme.adconex-theme .header-contact-button{border:1px solid var(--gx-text);border-radius:24px;padding:0 22px;height:42px;min-height:42px}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .contact-toggle{display:none}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .gx-about-track{height:auto}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .gx-about-window{display:none}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .gx-about-track .profile-section{position:relative;height:auto;min-height:0;padding:120px 7vw;background:var(--gx-bg)}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .gx-about-track .profile-layout{opacity:1;transform:none}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .gx-about-track .profile-title{background:none;color:var(--gx-text);-webkit-text-fill-color:currentColor}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .gx-about-track .section-heading{color:var(--gx-text)}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .gx-about-track :is(.profile-copy,.profile-quote-source){color:var(--gx-muted)}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .section-heading{font-size:clamp(38px,5vw,76px);letter-spacing:-.055em;line-height:1.12;font-weight:800}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) :is(.experience-card,.skill-detail,.project-modal-box){border-radius:0;box-shadow:none;background:var(--gx-surface)}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .experience-card{border:0;border-top:1px solid var(--gx-line)}
+body.goldenax-theme.adconex-theme :is(.project-view-button,.campaign-filter-button,.profile-keywords span){border-radius:30px}
+body.goldenax-theme.adconex-theme .hero{position:relative;isolation:isolate;overflow:hidden;background:#000!important}
+.ac-reference-collage{display:none}
+body.adconex-theme .ac-reference-collage{display:block;position:absolute;inset:90px 0 0;z-index:-1;pointer-events:none;opacity:.48}
+.ac-reference-collage img{position:absolute;width:25%;height:26%;object-fit:cover;border-radius:0;filter:brightness(.55)}
+.ac-reference-collage img:nth-child(1){left:2%;top:2%}
+.ac-reference-collage img:nth-child(2){right:2%;top:12%;width:22%}
+.ac-reference-collage img:nth-child(3){left:7%;bottom:8%;width:20%;height:32%}
+.ac-reference-collage img:nth-child(4){right:4%;bottom:6%;width:26%;height:29%}
+body.goldenax-theme.adconex-theme .hero::before{display:none}
+body.goldenax-theme.adconex-theme .hero-cell{color:#fff;-webkit-text-fill-color:#fff;border-color:#555}
+body.goldenax-theme.adconex-theme .hero-cell.hero-accent{color:#f7941d;-webkit-text-fill-color:#f7941d}
+body.goldenax-theme.adconex-theme .hero-identity,body.goldenax-theme.adconex-theme .hero-identity strong{color:#fff}
+body.goldenax-theme.motherbrain-theme .hero{background:#f5f5f5!important}
+body.goldenax-theme.motherbrain-theme .hero-cell{color:#000;-webkit-text-fill-color:#000;border-color:#bdbdbd}
+body.goldenax-theme.motherbrain-theme .hero-copy{--hero-line:#bdbdbd}
+body.goldenax-theme.motherbrain-theme .hero-identity,body.goldenax-theme.motherbrain-theme .hero-identity strong{color:#000}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .keyword-cloud{display:none}
+body.goldenax-theme.motherbrain-theme :is(.profile-kicker,.profile-keywords span,.campaign-filter-button,.project-view-button){border-radius:0;background:transparent;color:var(--gx-text);border-color:var(--gx-line)}
+body.goldenax-theme.motherbrain-theme .projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;width:100%}
+body.goldenax-theme.motherbrain-theme .project-card{width:100%;min-width:0;border:0;border-radius:0;aspect-ratio:4/3;transform:none}
+body.goldenax-theme.motherbrain-theme .project-view-button{background:#fff;color:#000}
+body.goldenax-theme.adconex-theme .projects{gap:24px;padding:0 5vw}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .project-card{transition:opacity .25s ease}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .project-card:hover{transform:none}
+body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .mode-toggle{border-radius:50%;width:42px;height:42px}
+@media(max-width:820px){
+ body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .site-header{height:64px}
+ body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .site-header .company-brand{top:15px;left:20px}
+ body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .site-header .header-menu-toggle{top:11px;color:var(--gx-text)}
+ body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .site-header .portfolio-nav{height:64px;padding:0;overflow:hidden}
+ body.goldenax-theme:is(.adconex-theme,.motherbrain-theme):not(.header-menu-open) .site-header .portfolio-nav :is(a,button){display:none}
+ body.goldenax-theme:is(.adconex-theme,.motherbrain-theme).header-menu-open .site-header .portfolio-nav{height:100svh;background:var(--gx-bg);padding:95px 24px 32px;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:8px;overflow:auto}
+ body.goldenax-theme:is(.adconex-theme,.motherbrain-theme).header-menu-open .portfolio-nav :is(a,button){display:flex;color:var(--gx-text);font-size:26px;min-height:70px}
+ body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .gx-about-track .profile-section{padding:80px 6vw}
+ body.goldenax-theme.motherbrain-theme .projects{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+}
+@media(max-width:540px){body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .projects{grid-template-columns:1fr;gap:20px}.ac-reference-collage img{width:40%}}
 </style>
 </head>
 
@@ -3961,7 +4023,7 @@ body.goldenax-theme:not(.adconex-theme) .contact-toggle:hover .contact-arrow{tra
 </nav>
 <div class="company-brand">
   <img class="company-logo-goldenax theme-swap-logo" src="assets/logos/goldenax.png" data-dark-src="assets/logos/goldenax.png" data-light-src="assets/logos/goldenax-color.png" alt="골드넥스" width="56" height="30">
-  <img class="company-logo-adconex" src="assets/logos/adconex.jpg" alt="애드커넥스" width="156" height="47">
+  <img class="company-logo-adconex" src="https://www.adconex.co.kr/assets/front/images/common/main-logo.png" alt="애드커넥스" width="156" height="47">
   <img class="company-logo-motherbrain" src="assets/logos/motherbrain.png" alt="마더브레인" width="142" height="36">
 </div>
 </header>
@@ -5223,6 +5285,15 @@ setPortfolioVersion(Object.hasOwn(portfolioVersions,linkedPortfolioVersion||'') 
   Object.hasOwn(portfolioVersions,storedPortfolioVersion||'') ? storedPortfolioVersion : 'goldenax');
 const adconexCover = document.querySelector('.project-card img');
 if(adconexCover) document.body.style.setProperty('--adconex-hero-image',`url(${JSON.stringify(adconexCover.src)})`);
+const referenceCollage=document.createElement('div');
+referenceCollage.className='ac-reference-collage';
+referenceCollage.setAttribute('aria-hidden','true');
+Array.from(document.querySelectorAll('.project-card img')).slice(0,4).forEach(source=>{
+  const picture=document.createElement('img');
+  picture.src=source.src;picture.alt='';picture.loading='lazy';
+  referenceCollage.append(picture);
+});
+document.querySelector('.hero').prepend(referenceCollage);
 
 const versionDialog = document.createElement('dialog');
 versionDialog.className='version-command';
