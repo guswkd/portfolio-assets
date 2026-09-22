@@ -5227,30 +5227,33 @@ versionDialog.querySelector('form').addEventListener('submit',event=>{
   if(version && setPortfolioVersion(version,true)) versionDialog.close();
   else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: gn / ac / mb';
 });
-// G + N 동시 누르기로 히든 버전 입력창을 엽니다.
-const versionChord = ['KeyG','KeyN'];
-const versionPressedKeys = new Set();
+// 화면 어디에서나 gn / ac / mb를 순서대로 입력하면 즉시 테마를 전환합니다.
+const versionCommandMap = {gn:'goldenax',ac:'adconex',mb:'motherbrain'};
+let versionKeyBuffer = '';
+let versionKeyTimer = 0;
 window.addEventListener('keydown',event=>{
   const target = event.target;
   const isTyping = target instanceof Element && (
     target.closest('input,textarea,select,[role="textbox"]') || target.isContentEditable
   );
   if(isTyping||event.isComposing||event.ctrlKey||event.altKey||event.metaKey||event.shiftKey||versionDialog.open){
-    versionPressedKeys.clear();
+    versionKeyBuffer='';
     return;
   }
-  if(event.repeat||!versionChord.includes(event.code)) return;
-  versionPressedKeys.add(event.code);
-  if(versionChord.every(code=>versionPressedKeys.has(code))){
-    event.preventDefault();
-    versionPressedKeys.clear();
-    openVersionCommand();
+  if(event.repeat || !/^[a-z]$/i.test(event.key)) return;
+  versionKeyBuffer=(versionKeyBuffer + event.key.toLowerCase()).slice(-2);
+  window.clearTimeout(versionKeyTimer);
+  versionKeyTimer=window.setTimeout(()=>{versionKeyBuffer=''},800);
+  const version=versionCommandMap[versionKeyBuffer];
+  if(version){
+    setPortfolioVersion(version,true);
+    versionKeyBuffer='';
+    window.clearTimeout(versionKeyTimer);
   }
 });
-window.addEventListener('keyup',event=>versionPressedKeys.delete(event.code));
-window.addEventListener('blur',()=>versionPressedKeys.clear());
-window.addEventListener('focusin',()=>versionPressedKeys.clear());
-document.addEventListener('visibilitychange',()=>versionPressedKeys.clear());
+window.addEventListener('blur',()=>{versionKeyBuffer='';window.clearTimeout(versionKeyTimer)});
+window.addEventListener('focusin',()=>{versionKeyBuffer='';window.clearTimeout(versionKeyTimer)});
+document.addEventListener('visibilitychange',()=>{versionKeyBuffer='';window.clearTimeout(versionKeyTimer)});
 // 모바일: 히어로의 이름/직무 문구를 1초간 길게 누릅니다.
 const versionTouchTarget=document.querySelector('.hero-identity');
 if(versionTouchTarget){
