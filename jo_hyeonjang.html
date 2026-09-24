@@ -4114,6 +4114,7 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
   -webkit-text-fill-color:#315caa;
 }
 </style>
+<link rel="stylesheet" href="assets/adconex.css?v=20260924">
 </head>
 
 <body class="goldenax-theme">
@@ -4131,7 +4132,7 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
 </nav>
 <div class="company-brand">
   <img class="company-logo-goldenax theme-swap-logo" src="assets/logos/goldenax.png" data-dark-src="assets/logos/goldenax.png" data-light-src="assets/logos/goldenax-color.png" alt="골드넥스" width="56" height="30">
-  <img class="company-logo-adconex" src="https://www.adconex.co.kr/assets/front/images/common/main-logo.png" alt="애드커넥스" width="156" height="47">
+  <img class="company-logo-adconex" src="assets/logos/adconex-header.png" alt="애드커넥스" width="156" height="47">
   <img class="company-logo-motherbrain" src="assets/logos/motherbrain.png" alt="마더브레인" width="142" height="36">
 </div>
 </header>
@@ -5402,7 +5403,25 @@ Array.from(document.querySelectorAll('.project-card img')).slice(0,4).forEach(so
   picture.src=source.src;picture.alt='';picture.loading='lazy';
   referenceCollage.append(picture);
 });
-document.querySelector('.hero').prepend(referenceCollage);
+const acOpening=document.createElement('div');
+acOpening.className='ac-opening';
+acOpening.innerHTML='<div class="ac-opening-copy"><p>JO HYEONJANG · PORTFOLIO</p><h1><span>언제나</span><span><em>현장이</em> 답이다.</span></h1><small>Scroll Down ↓</small></div>';
+acOpening.prepend(referenceCollage);
+document.querySelector('.hero').prepend(acOpening);
+let acScrollFrame=0;
+function updateAcOpening(){
+  acScrollFrame=0;
+  if(!document.body.classList.contains('adconex-theme')) return;
+  const hero=document.querySelector('.hero');
+  const distance=Math.max(1,hero.offsetHeight-innerHeight);
+  const progress=Math.max(0,Math.min(1,-hero.getBoundingClientRect().top/distance));
+  acOpening.style.setProperty('--ac-progress',progress.toFixed(3));
+}
+function scheduleAcOpening(){if(!acScrollFrame) acScrollFrame=requestAnimationFrame(updateAcOpening)}
+window.addEventListener('scroll',scheduleAcOpening,{passive:true});
+window.addEventListener('resize',scheduleAcOpening);
+window.addEventListener('portfolio-version-change',scheduleAcOpening);
+scheduleAcOpening();
 
 const versionDialog = document.createElement('dialog');
 versionDialog.className='version-command';
@@ -5452,14 +5471,13 @@ window.addEventListener('keydown',event=>{
 window.addEventListener('blur',()=>{versionKeyBuffer='';window.clearTimeout(versionKeyTimer)});
 window.addEventListener('focusin',()=>{versionKeyBuffer='';window.clearTimeout(versionKeyTimer)});
 document.addEventListener('visibilitychange',()=>{versionKeyBuffer='';window.clearTimeout(versionKeyTimer)});
-// 모바일: 원고지 타이틀을 1초간 길게 누릅니다.
-const versionTouchTarget=document.querySelector('.hero-copy');
-if(versionTouchTarget){
+// 모바일: 각 버전의 히어로 타이틀 영역을 1초간 길게 누릅니다.
+document.querySelectorAll('.hero-copy,.ac-opening').forEach(versionTouchTarget=>{
   let holdTimer=0;
   const cancelHold=()=>clearTimeout(holdTimer);
   versionTouchTarget.addEventListener('pointerdown',()=>{cancelHold();holdTimer=setTimeout(openVersionCommand,1000)});
   ['pointerup','pointercancel','pointerleave','pointermove'].forEach(type=>versionTouchTarget.addEventListener(type,cancelHold));
-}
+});
 
 // GOLDENAX SCROLL: 원본을 참고한 이미지 창 확대 + 상하 커튼. 외부 라이브러리 없음.
 if(document.body.classList.contains('goldenax-theme')){
