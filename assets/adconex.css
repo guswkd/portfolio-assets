@@ -43,7 +43,19 @@ body.goldenax-theme.adconex-theme #campaign .project-title{color:#111;font-size:
 body.goldenax-theme.adconex-theme #campaign .project-view-button{background:#111;border:1px solid #111;color:#fff;font-size:13px;padding:9px 18px;border-radius:24px}
 body.goldenax-theme.adconex-theme #campaign .project-label{color:#666;background:none;border:0;padding:0 6px;font-size:13px}
 body.goldenax-theme.adconex-theme #skills .skill-detail{background:#0d0d0d;border:1px solid #333}
+/* Fill the section's content width instead of leaving a 940px block at the left. */
+body.goldenax-theme.adconex-theme #skills .skills-layout{width:100%;max-width:none;grid-template-columns:clamp(300px,27vw,360px) minmax(0,1fr);gap:clamp(28px,3vw,44px)}
+body.goldenax-theme.adconex-theme #skills .skills-sidebar{gap:14px}
+body.goldenax-theme.adconex-theme #skills .skill-tab img{width:60%;height:60%;max-width:72px;max-height:72px}
+body.goldenax-theme.adconex-theme #skills .skill-detail{padding:clamp(30px,3vw,44px);justify-content:center}
+body.goldenax-theme.adconex-theme #skills .skill-detail-title{font-size:clamp(32px,2.8vw,42px)}
+body.goldenax-theme.adconex-theme #skills .skill-detail-sub{font-size:clamp(15px,1.25vw,18px)}
+body.goldenax-theme.adconex-theme #skills .skill-barometer{max-width:100%;margin-top:28px}
+body.goldenax-theme.adconex-theme #skills .skill-detail-grid{margin-top:36px}
 @media(max-width:820px){
+ body.goldenax-theme.adconex-theme #skills .skills-layout{display:flex;gap:24px}
+ body.goldenax-theme.adconex-theme #skills .skill-detail{padding:26px;min-height:320px}
+ body.goldenax-theme.adconex-theme #skills .skill-detail-title{font-size:30px}
  body.goldenax-theme.adconex-theme .site-header{height:70px}
  body.goldenax-theme.adconex-theme .site-header .company-brand{top:19px;left:22px}
  body.goldenax-theme.adconex-theme .company-brand .company-logo-adconex{width:134px}
@@ -57,4 +69,5 @@ body.goldenax-theme.adconex-theme #skills .skill-detail{background:#0d0d0d;borde
  .ac-opening-copy p{font-size:11px}
  body.adconex-theme .ac-reference-collage img{width:40%;height:24%}
 }
+@media(max-width:540px){body.goldenax-theme.adconex-theme #skills .skills-sidebar{gap:10px}body.goldenax-theme.adconex-theme #skills .skill-detail{padding:24px 20px}body.goldenax-theme.adconex-theme #skills .skill-detail-grid{margin-top:24px}}
 @media(prefers-reduced-motion:reduce){body.adconex-theme .ac-opening-copy{transform:none;opacity:1}body.adconex-theme .ac-reference-collage{transform:none;opacity:.15}}
