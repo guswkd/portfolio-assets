@@ -2,11 +2,17 @@
 .ac-opening{display:none}
 body.goldenax-theme.adconex-theme .company-brand .company-logo-adconex,
 body.goldenax-theme.adconex-theme:not(.light-mode) .company-brand .company-logo-adconex{display:block;width:156px;height:32px;object-fit:contain;filter:none;opacity:1;background:none}
-body.goldenax-theme.adconex-theme .site-header{height:88px;background:#000}
+body.goldenax-theme.adconex-theme .site-header{height:88px;background:#fff;transform:translateY(-105%);visibility:hidden;pointer-events:none;transition:transform .32s ease,visibility .32s;border-bottom:1px solid #eee}
+body.goldenax-theme.adconex-theme.ac-header-visible .site-header,
+body.goldenax-theme.adconex-theme.header-menu-open .site-header{transform:translateY(0);visibility:visible;pointer-events:auto}
 body.goldenax-theme.adconex-theme .site-header .company-brand{top:28px;left:40px}
-body.goldenax-theme.adconex-theme .site-header .portfolio-nav{height:88px;padding:0 40px 0 240px;gap:clamp(30px,4vw,70px)}
-body.goldenax-theme.adconex-theme .site-header .portfolio-nav a{font-size:18px;font-weight:600}
-body.goldenax-theme.adconex-theme .header-contact-button{border-radius:24px;font-size:15px;font-weight:500;padding-inline:24px}
+body.goldenax-theme.adconex-theme .site-header .portfolio-nav{height:88px;padding:0 220px;justify-content:center;gap:clamp(30px,4vw,64px)}
+body.goldenax-theme.adconex-theme .site-header .portfolio-nav a{font-size:18px;font-weight:650;color:#111}
+.ac-contact-copy{display:none}
+body.adconex-theme .default-contact-copy{display:none}
+body.adconex-theme .ac-contact-copy{display:inline}
+body.goldenax-theme.adconex-theme .header-contact-button{position:absolute;right:40px;top:22px;display:flex;align-items:center;gap:10px;height:44px;border:1px solid #111;color:#111;background:#fff;border-radius:26px;font-size:17px;font-weight:650;padding:4px 6px 4px 16px}
+body.goldenax-theme.adconex-theme .header-contact-button::after{content:'+';display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#000;color:white;font-size:27px;font-weight:300;line-height:1}
 body.goldenax-theme.adconex-theme .hero{display:block;min-height:170svh;height:auto;padding:0;overflow:visible;background:#000!important}
 body.adconex-theme .hero>.hero-copy,body.adconex-theme .hero>.scroll-indicator{display:none}
 body.adconex-theme .ac-opening{display:flex;position:sticky;top:88px;height:calc(100svh - 88px);min-height:480px;align-items:center;justify-content:center;isolation:isolate;overflow:hidden}
@@ -60,8 +66,11 @@ body.goldenax-theme.adconex-theme #skills .skill-detail-grid{margin-top:36px}
  body.goldenax-theme.adconex-theme .site-header .company-brand{top:19px;left:22px}
  body.goldenax-theme.adconex-theme .company-brand .company-logo-adconex{width:134px}
  body.goldenax-theme.adconex-theme .site-header .portfolio-nav{height:70px;padding:0}
- body.goldenax-theme.adconex-theme .site-header .header-menu-toggle{top:14px}
+ body.goldenax-theme.adconex-theme .site-header .header-menu-toggle{top:14px;color:#111}
  body.goldenax-theme.adconex-theme.header-menu-open .site-header .portfolio-nav{height:100svh;padding:100px 24px 32px;gap:8px}
+ body.goldenax-theme.adconex-theme.header-menu-open .site-header .portfolio-nav{background:#fff}
+ body.goldenax-theme.adconex-theme.header-menu-open .site-header .portfolio-nav a{color:#111;border-color:#ddd}
+ body.goldenax-theme.adconex-theme.header-menu-open .header-contact-button{position:static;align-self:flex-start;min-height:44px;margin-top:20px;color:#111;border:1px solid #111;font-size:17px;padding:4px 6px 4px 16px}
  body.adconex-theme .ac-opening{top:70px;height:calc(100svh - 70px);min-height:420px}
  body.goldenax-theme.adconex-theme #campaign{padding:80px 24px}
  body.goldenax-theme.adconex-theme #campaign .projects{grid-template-columns:1fr;gap:38px}
@@ -70,4 +79,4 @@ body.goldenax-theme.adconex-theme #skills .skill-detail-grid{margin-top:36px}
  body.adconex-theme .ac-reference-collage img{width:40%;height:24%}
 }
 @media(max-width:540px){body.goldenax-theme.adconex-theme #skills .skills-sidebar{gap:10px}body.goldenax-theme.adconex-theme #skills .skill-detail{padding:24px 20px}body.goldenax-theme.adconex-theme #skills .skill-detail-grid{margin-top:24px}}
-@media(prefers-reduced-motion:reduce){body.adconex-theme .ac-opening-copy{transform:none;opacity:1}body.adconex-theme .ac-reference-collage{transform:none;opacity:.15}}
+@media(prefers-reduced-motion:reduce){body.adconex-theme .ac-opening-copy{transform:none;opacity:1}body.adconex-theme .ac-reference-collage{transform:none;opacity:.15}body.goldenax-theme.adconex-theme .site-header{transition:none}}

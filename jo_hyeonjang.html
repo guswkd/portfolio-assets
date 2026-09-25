@@ -4114,7 +4114,7 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
   -webkit-text-fill-color:#315caa;
 }
 </style>
-<link rel="stylesheet" href="assets/adconex.css?v=20260924-2">
+<link rel="stylesheet" href="assets/adconex.css?v=20260924-3">
 <link rel="stylesheet" href="assets/layout-scale.css?v=20260924">
 </head>
 
@@ -4129,11 +4129,11 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
   <a href="#experience">흔적</a>
   <a href="#campaign">현장</a>
   <a href="#skills">확장</a>
-  <button class="header-contact-button" type="button">CONTACT</button>
+  <button class="header-contact-button" type="button"><span class="default-contact-copy">CONTACT</span><span class="ac-contact-copy">Conex us</span></button>
 </nav>
 <div class="company-brand">
   <img class="company-logo-goldenax theme-swap-logo" src="assets/logos/goldenax.png" data-dark-src="assets/logos/goldenax.png" data-light-src="assets/logos/goldenax-color.png" alt="골드넥스" width="56" height="30">
-  <img class="company-logo-adconex" src="assets/logos/adconex-header.png" alt="애드커넥스" width="156" height="47">
+  <img class="company-logo-adconex" src="assets/logos/adconex-header-color.png" alt="애드커넥스" width="156" height="47">
   <img class="company-logo-motherbrain" src="assets/logos/motherbrain.png" alt="마더브레인" width="142" height="36">
 </div>
 </header>
@@ -5347,6 +5347,10 @@ window.addEventListener('keydown',event=>{
     pending=false;
     const y=Math.max(0,window.scrollY),delta=y-previousY;
     previousY=y;
+    if(document.body.classList.contains('adconex-theme')){
+      document.body.classList.toggle('ac-header-visible',y>48||document.body.classList.contains('header-menu-open'));
+      show();return;
+    }
     if(document.body.classList.contains('adconex-theme')||y<120||
        document.body.classList.contains('header-menu-open')||
        header.contains(document.activeElement)||document.activeElement===headerMenuToggle){show();return;}
@@ -5361,7 +5365,7 @@ window.addEventListener('keydown',event=>{
   header.addEventListener('focusin',show);
   headerMenuToggle.addEventListener('focus',show);
   headerMenuToggle.addEventListener('click',show);
-  window.addEventListener('portfolio-version-change',()=>{show();previousY=Math.max(0,window.scrollY);});
+  window.addEventListener('portfolio-version-change',()=>{show();previousY=Math.max(0,window.scrollY);update();});
   window.addEventListener('resize',show);
 })();
 
