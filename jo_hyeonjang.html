@@ -4116,7 +4116,18 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
 </style>
 <link rel="stylesheet" href="assets/adconex.css?v=20260924-3">
 <link rel="stylesheet" href="assets/layout-scale.css?v=20260924">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
 <style>
+/* Official reference uses SUIT for Korean/navigation. Proprietary webfonts are not redistributed. */
+body.motherbrain-theme,
+body.motherbrain-theme :is(button,input,textarea,select){font-family:'SUIT',sans-serif}
+body.goldenax-theme.motherbrain-theme .site-header .portfolio-nav :is(a,button){font-weight:600;letter-spacing:normal}
+body.goldenax-theme.motherbrain-theme :is(.section-heading,.profile-title){font-family:'SUIT',sans-serif;letter-spacing:-.035em}
+body.goldenax-theme.motherbrain-theme .section-heading{font-weight:800}
+body.goldenax-theme.motherbrain-theme .profile-title{font-weight:700;line-height:1.25}
+body.goldenax-theme.motherbrain-theme :is(.section-intro,.profile-copy,.skill-detail-sub){font-weight:400;letter-spacing:-.015em}
+body.goldenax-theme.motherbrain-theme :is(.exp-role,.exp-period,.exp-meta){font-weight:400;letter-spacing:normal}
+body.goldenax-theme.motherbrain-theme :is(.skill-detail-title,.profile-kicker){font-family:'Helvetica Now Display','Helvetica Neue',Helvetica,'SUIT',sans-serif;font-weight:800;letter-spacing:-.035em}
 /* Motherbrain: light line objects connect each chapter without covering content. */
 .mb-chapter-object,.mb-hero-object{display:none}
 body.motherbrain-theme .mb-chapter-object{
