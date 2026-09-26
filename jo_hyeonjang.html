@@ -3985,7 +3985,8 @@ body.goldenax-theme.motherbrain-theme .hero{background:#f5f5f5!important}
 body.goldenax-theme.motherbrain-theme .hero-cell{color:#000;-webkit-text-fill-color:#000;border-color:#bdbdbd}
 body.goldenax-theme.motherbrain-theme .hero-copy{--hero-line:#bdbdbd}
 body.goldenax-theme.motherbrain-theme .hero-identity,body.goldenax-theme.motherbrain-theme .hero-identity strong{color:#000}
-body.goldenax-theme.adconex-theme .keyword-cloud{display:none}
+body.goldenax-theme.adconex-theme .keyword-cloud{display:block;height:100svh;bottom:auto;opacity:1;z-index:3}
+body.goldenax-theme.adconex-theme .keyword-cloud .talent-keyword{color:#c8c8c8;filter:none;text-shadow:none}
 body.goldenax-theme.motherbrain-theme .keyword-cloud{display:block}
 body.goldenax-theme.motherbrain-theme :is(.profile-kicker,.profile-keywords span,.campaign-filter-button,.project-view-button){border-radius:0;background:transparent;color:var(--gx-text);border-color:var(--gx-line)}
 body.goldenax-theme.motherbrain-theme .projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;width:100%}
@@ -4125,7 +4126,7 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
   -webkit-text-fill-color:#315caa;
 }
 </style>
-<link rel="stylesheet" href="assets/adconex.css?v=20260924-3">
+<link rel="stylesheet" href="assets/adconex.css?v=20260926-1">
 <link rel="stylesheet" href="assets/layout-scale.css?v=20260924">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
 <style>
@@ -5071,7 +5072,9 @@ function spawnTalentKeyword(){
 
 function getKeywordPoint(keywordText = '', keywordSize = 13){
   const cloudRect = keywordCloud.getBoundingClientRect();
-  const heroRect = heroCopy?.getBoundingClientRect();
+  const activeHeroCopy = document.body.classList.contains('adconex-theme')
+    ? document.querySelector('.ac-opening-copy') : heroCopy;
+  const heroRect = activeHeroCopy?.getBoundingClientRect();
   const collisionGap = window.innerWidth < 768 ? 12 : 20;
   const estimatedWidth = Math.max(54, keywordText.length * keywordSize * .95 + 24);
   const estimatedHeight = keywordSize * 2.2;
