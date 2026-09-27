@@ -3489,12 +3489,12 @@ body.goldenax-theme .project-info{
 }
 body.goldenax-theme .project-title{color:#fff}
 body.goldenax-theme .project-desc{color:#ddd}
-/* 스크롤 배경: 고정된 하나의 배경에서 레드 영역이 화면 전체로 확장됩니다. */
+/* Red belongs to the campaign section, never to the fixed page background. */
 body.goldenax-theme .background{
   background:var(--gx-scroll-bg,var(--gx-bg));
 }
 body.goldenax-theme .background::after{
-  display:block;
+  display:none;
   position:absolute;
   inset:0;
   width:100%;
@@ -3509,7 +3509,14 @@ body.goldenax-theme .background::after{
   animation:none;
   will-change:clip-path;
 }
-body.goldenax-theme.gx-red-scene{
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #campaign{
+  position:relative;isolation:isolate;
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #campaign::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:#e60021;opacity:var(--gx-campaign-red,0);
+}
+body.goldenax-theme #campaign.gx-red-scene{
   --gx-text:#fff;
   --gx-muted:#f5cbd1;
   --gx-line:rgba(255,255,255,.35);
@@ -3517,10 +3524,11 @@ body.goldenax-theme.gx-red-scene{
   --gx-raised:#8c0015;
   --gx-accent:#fff;
 }
-body.goldenax-theme.gx-red-scene .contact-toggle,
-body.goldenax-theme.gx-red-scene .campaign-filter-button.active,
-body.goldenax-theme.gx-red-scene .campaign-filter-button:hover,
-body.goldenax-theme.gx-red-scene .project-view-button{background:#fff;color:#b0001a}
+body.goldenax-theme #campaign.gx-red-scene>.section-heading{color:#fff}
+body.goldenax-theme #campaign.gx-red-scene>.section-intro{color:#fff}
+body.goldenax-theme #campaign.gx-red-scene .campaign-filter-button.active,
+body.goldenax-theme #campaign.gx-red-scene .campaign-filter-button:hover,
+body.goldenax-theme #campaign.gx-red-scene .project-view-button{background:#fff;color:#b0001a}
 @media(prefers-reduced-motion:reduce){
   body.goldenax-theme .background::after{will-change:auto}
 }
@@ -4299,10 +4307,10 @@ body.motherbrain-theme #experience{background:#f8f8fc}
 <!-- SKILLS: 사용 툴/매체 숙련도 영역 -->
 
 <!-- TOOLKIT: 기존 툴·설명·숙련도를 유지해 다시 표시합니다. -->
-<section class="skills-section" id="skills" data-chapter="확장한 역량">
+<section class="skills-section" id="skills" data-chapter="역량의 확장">
 
   <h2 class="section-heading">
-    <span class="title-outline">확장</span>한 역량
+    역량의 <span class="title-outline">확장</span>
   </h2>
   <p class="section-intro">
     기획을 만들고, 소재를 다듬고, 매체를 운영하기 위해<br>필요한 도구를 익혀왔습니다.
@@ -5583,6 +5591,8 @@ if(document.body.classList.contains('goldenax-theme')){
     document.body.style.setProperty('--gx-scroll-bg',light || neutralTheme ? '#fff' : '#000');
     if(neutralTheme){
       document.body.classList.remove('gx-red-scene');
+      campaign?.classList.remove('gx-red-scene');
+      campaign?.style.setProperty('--gx-campaign-red','0');
       document.body.style.setProperty('--gx-curtain','50%');
       document.body.style.setProperty('--gx-curtain-visibility','hidden');
       return;
@@ -5605,9 +5615,9 @@ if(document.body.classList.contains('goldenax-theme')){
     const campaignHeading = campaign?.querySelector('.section-heading');
     const raw = campaignHeading ? clampBackground((-innerHeight*.2-campaignHeading.getBoundingClientRect().top)/Math.max(1,innerHeight*.9)) : 0;
     const red = reducedBackgroundMotion.matches ? (raw>.5?1:0) : smoothBackground(raw);
-    document.body.style.setProperty('--gx-curtain',`${50*(1-red)}%`);
-    document.body.style.setProperty('--gx-curtain-visibility',red>.001?'visible':'hidden');
-    document.body.classList.toggle('gx-red-scene',red>.7);
+    document.body.classList.remove('gx-red-scene');
+    campaign?.style.setProperty('--gx-campaign-red',String(red));
+    campaign?.classList.toggle('gx-red-scene',red>.45);
   }
   function scheduleScrollBackground(){
     if(!backgroundFrame) backgroundFrame=requestAnimationFrame(renderScrollBackground);
