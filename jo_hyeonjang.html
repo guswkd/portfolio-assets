@@ -4131,7 +4131,7 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills{
   padding-inline:max(clamp(24px,6vw,96px),calc((100vw - 1368px)/2));
 }
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
-  content:"";display:block;position:absolute;inset:0;z-index:-1;pointer-events:none;background:#e60021;
+  content:"";display:block;position:absolute;inset:0;z-index:-1;pointer-events:none;background:#dc0028;
   clip-path:inset(0 0 calc(100% - var(--skills-red-fill,0%)) 0);
 }
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-heading,
@@ -4142,31 +4142,37 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skills-
 }
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skills-sidebar{gap:8px}
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-tab{
-  border:1px solid rgba(255,255,255,.28);border-radius:0;background:transparent;box-shadow:none;
+  border:1px solid rgba(255,255,255,.2);border-radius:0;background:transparent;box-shadow:none;
 }
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-tab::before,
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-tab::after{display:none}
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-tab:is(.active,:hover){
-  border-color:#fff;background:rgba(255,255,255,.14);box-shadow:none;
+  border-color:rgba(255,255,255,.72);background:rgba(255,255,255,.1);box-shadow:none;
 }
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail{
-  padding:24px 0 20px 48px;border:0;border-left:1px solid rgba(255,255,255,.48);
+  padding:24px 0 20px 48px;border:0;border-left:1px solid rgba(255,255,255,.28);
   border-radius:0;background:transparent;backdrop-filter:none;box-shadow:none;color:#fff;
 }
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills :is(
- .skill-detail-title,.skill-detail-sub,.skill-barometer-label,.skill-scale-labels,
- .skill-scale-labels span,.skill-detail-card h4,.skill-detail-card p
-){color:#fff!important;-webkit-text-fill-color:#fff}
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-barometer-track{
-  border-color:rgba(255,255,255,.35);background:rgba(0,0,0,.12);
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail-title{
+  color:#fff!important;-webkit-text-fill-color:#fff;
 }
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-barometer-fill{background:#fff;box-shadow:none}
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-scale-labels,
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-scale-labels span.active{color:#fff}
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail-card{border-top-color:rgba(255,255,255,.4)}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills :is(.skill-detail-sub,.skill-detail-card p){
+  color:rgba(255,255,255,.78)!important;-webkit-text-fill-color:rgba(255,255,255,.78);
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills :is(
+ .skill-barometer-label,.skill-scale-labels,.skill-scale-labels span,.skill-detail-card h4
+){color:rgba(255,255,255,.58)!important;-webkit-text-fill-color:rgba(255,255,255,.58)}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-barometer-track{
+  border-color:rgba(255,255,255,.26);background:rgba(0,0,0,.14);
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-barometer-fill{background:rgba(255,255,255,.88);box-shadow:none}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-scale-labels span.active{
+  color:#fff!important;-webkit-text-fill-color:#fff;
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail-card{border-top-color:rgba(255,255,255,.24)}
 @media(max-width:820px){
  body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skills-layout{max-width:none}
- body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail{padding:28px 0 0;border-left:0;border-top:1px solid rgba(255,255,255,.48)}
+ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail{padding:28px 0 0;border-left:0;border-top:1px solid rgba(255,255,255,.28)}
 }
 body.motherbrain-theme .title-outline{--chapter-fill-color:#315caa}
 /* Goldenax-only contact rail: fixed visual bounds, centered without rotation offset. */
