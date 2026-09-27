@@ -4126,8 +4126,9 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
 <style>
 /* Goldenax closing section: red begins and ends at the toolkit boundaries. */
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills{
-  position:relative;isolation:isolate;background:var(--gx-bg);max-width:none;
-  padding-inline:max(clamp(24px,6vw,96px),calc((100% - 1368px)/2));
+  position:relative;isolation:isolate;background:var(--gx-bg);width:100%;max-width:none;
+  margin-left:0;margin-right:0;
+  padding-inline:max(clamp(24px,6vw,96px),calc((100vw - 1368px)/2));
 }
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
   content:"";display:block;position:absolute;inset:0;z-index:-1;pointer-events:none;background:#e60021;
@@ -4136,6 +4137,35 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-heading,
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-intro{color:var(--skills-copy-color,var(--gx-text))}
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-heading .title-outline{--chapter-fill-color:var(--skills-word-color,var(--gx-accent));--chapter-base-color:var(--skills-word-base,#929292)}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skills-layout{
+  max-width:1100px;grid-template-columns:320px minmax(0,1fr);gap:clamp(42px,5vw,76px);
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skills-sidebar{gap:8px}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-tab{
+  border:1px solid rgba(255,255,255,.28);border-radius:0;background:transparent;box-shadow:none;
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-tab::before,
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-tab::after{display:none}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-tab:is(.active,:hover){
+  border-color:#fff;background:rgba(255,255,255,.14);box-shadow:none;
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail{
+  padding:24px 0 20px 48px;border:0;border-left:1px solid rgba(255,255,255,.48);
+  border-radius:0;background:transparent;backdrop-filter:none;box-shadow:none;color:#fff;
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail-sub,
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail-card h4{color:rgba(255,255,255,.72)}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-barometer-track{
+  border-color:rgba(255,255,255,.35);background:rgba(0,0,0,.12);
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-barometer-fill{background:#fff;box-shadow:none}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-scale-labels,
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-scale-labels span.active{color:#fff}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail-card{border-top-color:rgba(255,255,255,.4)}
+@media(max-width:820px){
+ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skills-layout{max-width:none}
+ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail{padding:28px 0 0;border-left:0;border-top:1px solid rgba(255,255,255,.48)}
+}
 body.motherbrain-theme .title-outline{--chapter-fill-color:#315caa}
 /* Goldenax-only contact rail: fixed visual bounds, centered without rotation offset. */
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .site-header .portfolio-nav .header-contact-button{display:none}
@@ -5668,7 +5698,7 @@ if(document.body.classList.contains('goldenax-theme')){
       const rect = toolkit.getBoundingClientRect();
       const start = scrollY + rect.top - innerHeight*.85;
       const maxScroll = Math.max(0,document.documentElement.scrollHeight-innerHeight);
-      const end = Math.min(maxScroll,scrollY+rect.top+rect.height-innerHeight*.75);
+      const end = Math.min(maxScroll,scrollY+rect.top-innerHeight*.15);
       const fill = !isGoldenax ? 0 : reduced.matches ? 1 : Math.max(0,Math.min(1,(scrollY-start)/Math.max(1,end-start)));
       toolkit.style.setProperty('--skills-red-fill',`${fill*100}%`);
       const edge = rect.top + rect.height*fill;
