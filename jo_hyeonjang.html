@@ -4126,12 +4126,16 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
 <style>
 /* Goldenax closing section: red begins and ends at the toolkit boundaries. */
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills{
-  background:#e60021;max-width:none;
+  position:relative;isolation:isolate;background:var(--gx-bg);max-width:none;
   padding-inline:max(clamp(24px,6vw,96px),calc((100% - 1368px)/2));
 }
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:#e60021;
+  clip-path:inset(0 0 calc(100% - var(--skills-red-fill,0%)) 0);
+}
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-heading,
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-intro{color:#fff}
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-heading .title-outline{--chapter-fill-color:#fff;--chapter-base-color:#ef8b9a}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-intro{color:var(--skills-copy-color,var(--gx-text))}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-heading .title-outline{--chapter-fill-color:var(--skills-word-color,var(--gx-accent));--chapter-base-color:var(--skills-word-base,#929292)}
 body.motherbrain-theme .title-outline{--chapter-fill-color:#315caa}
 /* Goldenax-only contact rail: fixed visual bounds, centered without rotation offset. */
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .site-header .portfolio-nav .header-contact-button{display:none}
@@ -5654,10 +5658,28 @@ if(document.body.classList.contains('goldenax-theme')){
 // Fill chapter keywords as their headings move from the lower viewport toward the center.
 (() => {
   const words = [...document.querySelectorAll('.section-heading .title-outline')];
+  const toolkit = document.getElementById('skills');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame = 0;
   function render(){
     frame = 0;
+    if(toolkit){
+      const isGoldenax = !document.body.classList.contains('adconex-theme') && !document.body.classList.contains('motherbrain-theme');
+      const rect = toolkit.getBoundingClientRect();
+      const start = scrollY + rect.top - innerHeight*.85;
+      const maxScroll = Math.max(0,document.documentElement.scrollHeight-innerHeight);
+      const end = Math.min(maxScroll,scrollY+rect.top+rect.height-innerHeight*.75);
+      const fill = !isGoldenax ? 0 : reduced.matches ? 1 : Math.max(0,Math.min(1,(scrollY-start)/Math.max(1,end-start)));
+      toolkit.style.setProperty('--skills-red-fill',`${fill*100}%`);
+      const edge = rect.top + rect.height*fill;
+      toolkit.querySelectorAll(':scope > .section-heading,:scope > .section-intro').forEach(copy=>{
+        const bounds = copy.getBoundingClientRect();
+        const covered = isGoldenax && edge >= bounds.top+bounds.height*.5;
+        copy.style.setProperty('--skills-copy-color',covered?'#fff':'var(--gx-text)');
+        copy.style.setProperty('--skills-word-color',covered?'#fff':'var(--gx-accent)');
+        copy.style.setProperty('--skills-word-base',covered?'#ef8b9a':'#929292');
+      });
+    }
     words.forEach(word => {
       const heading = word.closest('.section-heading');
       if (!heading.getClientRects().length) return;
