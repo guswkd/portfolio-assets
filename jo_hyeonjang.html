@@ -3489,7 +3489,7 @@ body.goldenax-theme .project-info{
 }
 body.goldenax-theme .project-title{color:#fff}
 body.goldenax-theme .project-desc{color:#ddd}
-/* Red belongs to the campaign section, never to the fixed page background. */
+/* Page background stays neutral; the final toolkit owns its red background. */
 body.goldenax-theme .background{
   background:var(--gx-scroll-bg,var(--gx-bg));
 }
@@ -3509,26 +3509,6 @@ body.goldenax-theme .background::after{
   animation:none;
   will-change:clip-path;
 }
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #campaign{
-  position:relative;isolation:isolate;
-}
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #campaign::before{
-  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:#e60021;opacity:var(--gx-campaign-red,0);
-}
-body.goldenax-theme #campaign.gx-red-scene{
-  --gx-text:#fff;
-  --gx-muted:#f5cbd1;
-  --gx-line:rgba(255,255,255,.35);
-  --gx-surface:#a90019;
-  --gx-raised:#8c0015;
-  --gx-accent:#fff;
-}
-body.goldenax-theme #campaign.gx-red-scene>.section-heading{color:#fff}
-body.goldenax-theme #campaign.gx-red-scene>.section-intro{color:#fff}
-body.goldenax-theme #campaign.gx-red-scene .campaign-filter-button.active,
-body.goldenax-theme #campaign.gx-red-scene .campaign-filter-button:hover,
-body.goldenax-theme #campaign.gx-red-scene .project-view-button{background:#fff;color:#b0001a}
 @media(prefers-reduced-motion:reduce){
   body.goldenax-theme .background::after{will-change:auto}
 }
@@ -4138,6 +4118,14 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
 <link rel="stylesheet" href="assets/layout-scale.css?v=20260924">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
 <style>
+/* Goldenax closing section: red begins and ends at the toolkit boundaries. */
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills{
+  background:#e60021;max-width:none;
+  padding-inline:max(clamp(24px,6vw,96px),calc((100% - 1368px)/2));
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-heading,
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-intro{color:#fff}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills>.section-heading .title-outline{text-decoration-color:#fff}
 /* Goldenax-only contact rail: fixed visual bounds, centered without rotation offset. */
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .site-header .portfolio-nav .header-contact-button{display:none}
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .contact-toggle{
@@ -5591,8 +5579,6 @@ if(document.body.classList.contains('goldenax-theme')){
     document.body.style.setProperty('--gx-scroll-bg',light || neutralTheme ? '#fff' : '#000');
     if(neutralTheme){
       document.body.classList.remove('gx-red-scene');
-      campaign?.classList.remove('gx-red-scene');
-      campaign?.style.setProperty('--gx-campaign-red','0');
       document.body.style.setProperty('--gx-curtain','50%');
       document.body.style.setProperty('--gx-curtain-visibility','hidden');
       return;
@@ -5611,13 +5597,7 @@ if(document.body.classList.contains('goldenax-theme')){
       aboutTrack.style.setProperty('--gx-copy-y',`${40*(1-copy)}px`);
       aboutTrack.style.setProperty('--gx-title-fill',`${staticScene?100:100*smoothBackground((progress-.58)/.38)}%`);
     }
-    // 캠페인 제목이 화면 위로 20vh 지나간 뒤 시작하고 90vh에 걸쳐 펼칩니다.
-    const campaignHeading = campaign?.querySelector('.section-heading');
-    const raw = campaignHeading ? clampBackground((-innerHeight*.2-campaignHeading.getBoundingClientRect().top)/Math.max(1,innerHeight*.9)) : 0;
-    const red = reducedBackgroundMotion.matches ? (raw>.5?1:0) : smoothBackground(raw);
     document.body.classList.remove('gx-red-scene');
-    campaign?.style.setProperty('--gx-campaign-red',String(red));
-    campaign?.classList.toggle('gx-red-scene',red>.45);
   }
   function scheduleScrollBackground(){
     if(!backgroundFrame) backgroundFrame=requestAnimationFrame(renderScrollBackground);
