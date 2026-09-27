@@ -4130,6 +4130,27 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
 <link rel="stylesheet" href="assets/layout-scale.css?v=20260924">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
 <style>
+/* Goldenax-only contact rail: original 182 × 36 strip rotated at the right edge. */
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .site-header .portfolio-nav .header-contact-button{display:none}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .contact-toggle{
+  box-sizing:border-box;width:182px;height:36px;top:50%;right:0;
+  transform-origin:center top;transform:translateX(50%) translateY(-50%) rotate(90deg);
+  display:flex;flex-direction:row;align-items:center;justify-content:flex-end;gap:8px;
+  padding:0 15px 0 65px;border:0;border-radius:0;background:#e60021;color:#fff;
+  font-size:15px;font-weight:700;line-height:1;letter-spacing:0;box-shadow:none;
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .contact-toggle .contact-brand{
+  position:absolute;left:6px;top:5px;width:27px;height:13px;object-fit:cover;
+  transform:rotate(-90deg);margin:0;
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .contact-toggle>span{writing-mode:horizontal-tb}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .contact-toggle .contact-arrow{
+  width:16px;height:16px;flex:none;transform:rotate(-90deg);margin:0;
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .contact-toggle:hover{
+  background:#e60021;transform:translateX(50%) translateY(-50%) rotate(90deg);
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .contact-toggle:hover .contact-arrow{transform:rotate(-90deg)}
 /* Official reference uses SUIT for Korean/navigation. Proprietary webfonts are not redistributed. */
 body.motherbrain-theme,
 body.motherbrain-theme :is(button,input,textarea,select){font-family:'SUIT',sans-serif}
