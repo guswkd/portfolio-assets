@@ -4153,8 +4153,10 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-d
   padding:24px 0 20px 48px;border:0;border-left:1px solid rgba(255,255,255,.48);
   border-radius:0;background:transparent;backdrop-filter:none;box-shadow:none;color:#fff;
 }
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail-sub,
-body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-detail-card h4{color:rgba(255,255,255,.72)}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills :is(
+ .skill-detail-title,.skill-detail-sub,.skill-barometer-label,.skill-scale-labels,
+ .skill-scale-labels span,.skill-detail-card h4,.skill-detail-card p
+){color:#fff!important;-webkit-text-fill-color:#fff}
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills .skill-barometer-track{
   border-color:rgba(255,255,255,.35);background:rgba(0,0,0,.12);
 }
