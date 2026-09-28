@@ -5693,7 +5693,7 @@ if(document.body.classList.contains('goldenax-theme')){
 })();
 </script>
 <script>
-// Fill chapter keywords as their headings move from the lower viewport toward the center.
+// Fill chapter keywords early: they should be nearly complete when the heading becomes readable.
 (() => {
   const words = [...document.querySelectorAll('.section-heading .title-outline')];
   const toolkit = document.getElementById('skills');
@@ -5722,7 +5722,8 @@ if(document.body.classList.contains('goldenax-theme')){
       const heading = word.closest('.section-heading');
       if (!heading.getClientRects().length) return;
       const top = heading.getBoundingClientRect().top;
-      const progress = reduced.matches ? 1 : Math.max(0,Math.min(1,(innerHeight*.85-top)/(innerHeight*.45)));
+      const raw = Math.max(0,Math.min(1,(innerHeight-top)/(innerHeight*.28)));
+      const progress = reduced.matches ? 1 : 1-Math.pow(1-raw,1.7);
       word.style.setProperty('--chapter-fill',`${(progress*100).toFixed(2)}%`);
     });
   }
