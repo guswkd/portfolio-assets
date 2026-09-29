@@ -21,7 +21,7 @@ body.adconex-theme .ac-opening-copy{position:relative;z-index:2;text-align:cente
 .ac-opening-copy h1{font-size:clamp(68px,9.5vw,154px);font-weight:800;line-height:1.03;letter-spacing:-.065em;margin:0}
 .ac-opening-copy h1 span{display:block}
 .ac-opening-copy h1 em{font-style:normal;color:#f7941d}
-.ac-opening-copy small{display:block;font-size:14px;font-weight:500;margin-top:38px}
+.ac-opening-copy small{display:block;font-size:14px;font-weight:500;margin-top:clamp(52px,7vh,76px)}
 body.adconex-theme .ac-reference-collage{display:block;position:absolute;inset:0;z-index:1;opacity:calc(.1 + var(--ac-progress,0)*.8);transform:scale(calc(.92 + var(--ac-progress,0)*.08))}
 body.adconex-theme .ac-reference-collage img{filter:brightness(.78);width:29%;height:31%;object-fit:cover;box-shadow:none}
 body.adconex-theme .ac-reference-collage img:nth-child(1){left:3%;top:3%}
