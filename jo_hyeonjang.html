@@ -4245,6 +4245,15 @@ body.motherbrain-theme #experience{background:#f8f8fc}
   --motion-smooth:cubic-bezier(.22,.72,.24,1);
   --motion-gentle:cubic-bezier(.25,.1,.25,1);
 }
+@media(min-width:821px){
+  body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .site-header .portfolio-nav a,
+  body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .site-header .portfolio-nav a{
+    min-height:48px;font-size:clamp(18px,1.08vw,20px);line-height:1.2;
+  }
+  body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .site-header .header-contact-button{
+    font-size:clamp(17px,.95vw,18px);
+  }
+}
 .reveal-item{
   transform:translateY(24px);
   transition:opacity .9s var(--motion-gentle),transform .9s var(--motion-smooth);
