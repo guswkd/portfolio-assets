@@ -4123,7 +4123,7 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
   -webkit-text-fill-color:#315caa;
 }
 </style>
-<link rel="stylesheet" href="assets/adconex.css?v=20260929-2">
+<link rel="stylesheet" href="assets/adconex.css?v=20260930-1">
 <link rel="stylesheet" href="assets/layout-scale.css?v=20260924">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
 <style>
@@ -4268,7 +4268,7 @@ body.motherbrain-theme #experience{background:#f8f8fc}
 body{transition-duration:.72s;transition-timing-function:var(--motion-gentle)}
 body.goldenax-theme:not(.adconex-theme) .site-header{transition-duration:.5s;transition-timing-function:var(--motion-gentle)}
 body.goldenax-theme.adconex-theme .site-header{
-  transition:transform .5s var(--motion-gentle),visibility .5s;
+  transition:transform .5s var(--motion-gentle),visibility .5s,background-color .5s var(--motion-gentle),border-color .5s var(--motion-gentle);
 }
 :is(.skill-tab,.experience-card,.campaign-filter-button,.project-card,.project-modal-close,.mode-toggle,.contact-toggle){
   transition-duration:.42s;
@@ -5428,6 +5428,26 @@ window.addEventListener('keydown',event=>{
   headerMenuToggle.addEventListener('click',show);
   window.addEventListener('portfolio-version-change',()=>{show();previousY=Math.max(0,window.scrollY);update();});
   window.addEventListener('resize',show);
+})();
+
+// Fade ADCONEX's header five seconds after it becomes visible or is left idle.
+(()=>{
+  const header=document.querySelector('.site-header');
+  let timer=0,eligible=false;
+  function sync(){
+    const next=document.body.classList.contains('adconex-theme') &&
+      document.body.classList.contains('ac-header-visible') &&
+      !document.body.classList.contains('header-menu-open') &&
+      !header.matches(':hover') && !header.contains(document.activeElement);
+    if(next===eligible)return;
+    eligible=next;
+    clearTimeout(timer);
+    document.body.classList.remove('ac-header-idle');
+    if(next)timer=window.setTimeout(()=>document.body.classList.add('ac-header-idle'),5000);
+  }
+  new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});
+  ['pointerenter','pointerleave','focusin','focusout'].forEach(type=>header.addEventListener(type,()=>queueMicrotask(sync)));
+  sync();
 })();
 
 // VERSION REGISTRY: 콘텐츠는 공유하며 버전별 디자인만 교체합니다.
