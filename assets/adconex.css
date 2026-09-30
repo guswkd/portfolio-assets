@@ -92,6 +92,5 @@ body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .header-
 body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .company-brand .company-logo-adconex{opacity:0}
 .ac-idle-logo{display:none;position:fixed;z-index:1001;left:40px;top:28px;width:156px;height:32px;padding:3px;box-sizing:border-box;object-fit:contain;pointer-events:none}
 body.adconex-theme.ac-header-visible.ac-header-idle:not(.header-menu-open) .ac-idle-logo{display:block}
-.ac-idle-logo-type{filter:brightness(0) invert(1);mix-blend-mode:difference;mask-image:linear-gradient(to right,#000 31%,transparent 31%,transparent 62.5%,#000 62.5%)}
-.ac-idle-logo-mark{clip-path:inset(0 37.5% 0 31%)}
+.ac-idle-logo{filter:brightness(0) invert(1);mix-blend-mode:difference}
 @media(max-width:820px){.ac-idle-logo{left:22px;top:19px;width:134px}body.goldenax-theme.adconex-theme .site-header .company-brand .company-logo-adconex{width:134px}}
