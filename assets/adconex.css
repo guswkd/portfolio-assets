@@ -89,4 +89,4 @@ body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .site-he
 body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .site-header :is(.portfolio-nav a,.header-menu-toggle){color:#fff}
 body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .site-header .header-contact-button{color:#fff;border-color:#fff;background:transparent}
 body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .header-contact-button::after{background:linear-gradient(#000,#000) center/14px 2px no-repeat,linear-gradient(#000,#000) center/2px 14px no-repeat,#fff}
-body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .company-brand .company-logo-adconex{filter:invert(1) hue-rotate(180deg)}
+body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .company-brand .company-logo-adconex{filter:brightness(0) invert(1)}
