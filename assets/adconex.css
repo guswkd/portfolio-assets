@@ -90,7 +90,7 @@ body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .site-he
 body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .site-header .header-contact-button{color:#fff;border-color:#fff;background:transparent}
 body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .header-contact-button::after{background:linear-gradient(#000,#000) center/14px 2px no-repeat,linear-gradient(#000,#000) center/2px 14px no-repeat,#fff}
 body.goldenax-theme.adconex-theme.ac-header-idle:not(.header-menu-open) .company-brand .company-logo-adconex{opacity:0}
-.ac-idle-logo{display:none;position:fixed;z-index:1001;left:40px;top:28px;width:156px;height:32px;padding:3px;box-sizing:border-box;object-fit:contain;pointer-events:none}
+.ac-idle-logo{display:none;position:fixed;z-index:1001;left:40px;top:28px;--ac-logo-width:156px;width:var(--ac-logo-width);height:32px;padding:calc((32px - var(--ac-logo-width)*72/423)/2) calc(var(--ac-logo-width)*2/423);box-sizing:border-box;object-fit:fill;pointer-events:none}
 body.adconex-theme.ac-header-visible.ac-header-idle:not(.header-menu-open) .ac-idle-logo{display:block}
 .ac-idle-logo{filter:brightness(0) invert(1);mix-blend-mode:difference}
-@media(max-width:820px){.ac-idle-logo{left:22px;top:19px;width:134px}body.goldenax-theme.adconex-theme .site-header .company-brand .company-logo-adconex{width:134px}}
+@media(max-width:820px){.ac-idle-logo{left:22px;top:19px;--ac-logo-width:134px}body.goldenax-theme.adconex-theme .site-header .company-brand .company-logo-adconex{width:134px}}
