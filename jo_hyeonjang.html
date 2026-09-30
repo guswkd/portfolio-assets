@@ -4123,18 +4123,28 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
   -webkit-text-fill-color:#315caa;
 }
 
-/* ROAS 성과: 원본 비율과 집계 안내를 모든 테마에서 보존합니다. */
-body #campaign#campaign .projects.roas-projects{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:auto;gap:28px}
-body #campaign#campaign .project-card.roas-card{aspect-ratio:auto;min-height:0;display:block;background:var(--gx-bg,#15221d);border:1px solid rgba(128,128,128,.25)}
-body #campaign#campaign .project-card.roas-card>img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain}
-body #campaign#campaign .project-card.roas-card:hover img{transform:none}
-body #campaign#campaign .roas-card .project-info{position:static;inset:auto;width:auto;padding:20px;background:none;color:inherit}
+/* 브랜드별 성과 미리보기와 광고 소재 영역 */
+body #campaign#campaign .projects.roas-projects{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:auto;gap:24px;align-items:start}
+body #campaign#campaign .project-card.roas-card{aspect-ratio:auto;min-height:0;display:block;cursor:default;background:var(--gx-bg,#15221d);border:1px solid rgba(128,128,128,.25)}
+body #campaign#campaign .roas-card:hover{transform:none}
+.roas-preview{position:relative;display:block;width:100%;padding:0;border:0;background:#f7f8f3;cursor:zoom-in;overflow:hidden;color:#153e30}
+body #campaign#campaign .roas-preview>img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain}
+body #campaign#campaign .roas-card:hover img{transform:none}
+.roas-preview-label{position:absolute;bottom:8px;right:8px;padding:5px 8px;border-radius:4px;background:rgba(255,255,255,.94);font-size:11px;font-weight:700}
+body #campaign#campaign .roas-card .project-info{position:static;inset:auto;width:auto;padding:18px 18px 0;background:none;color:inherit}
 body #campaign#campaign .roas-card .project-title{color:inherit;font-size:20px}
-.roas-value{font-size:22px;font-weight:700;margin:10px 0}
-.roas-note{font-size:14px;line-height:1.65;margin:0;opacity:.8}
-.roas-card:focus-visible{outline:3px solid #108862;outline-offset:4px}
-@media(max-width:700px){body #campaign#campaign .projects.roas-projects{grid-template-columns:1fr}}
-
+.roas-value{font-size:20px;font-weight:700;margin:10px 0}
+.roas-note{font-size:12px;line-height:1.65;margin:0;opacity:.8;min-height:40px}
+.roas-preview:focus-visible{outline:3px solid #108862;outline-offset:-3px}
+.brand-creatives{margin:18px;padding-top:16px;border-top:1px solid rgba(128,128,128,.25)}
+.brand-creatives-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px}
+.brand-creatives-heading h4{font-size:14px;margin:0;font-weight:700}
+.brand-creatives-heading>span{font-size:11px;opacity:.6}
+.brand-creative-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.creative-placeholder{aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1px dashed rgba(128,128,128,.4);border-radius:6px;background:rgba(128,128,128,.035);font-size:11px;opacity:.65}
+.creative-placeholder>span:first-child{font-size:22px;font-weight:300}
+@media(max-width:1100px){body #campaign#campaign .projects.roas-projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){body #campaign#campaign .projects.roas-projects{grid-template-columns:1fr;gap:20px}.roas-note{min-height:0}}
 </style>
 <link rel="stylesheet" href="assets/adconex.css?v=20260930-6">
 <link rel="stylesheet" href="assets/layout-scale.css?v=20260924">
@@ -4683,36 +4693,92 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
   부딪힌 <span class="title-outline">현장</span>
 </h2>
 <p class="section-intro">
-  브랜드별 광고 운영 성과입니다. 카드를 누르면 상세 성과를 크게 볼 수 있습니다.
+  브랜드별 광고 운영 성과와 소재를 모았습니다. 성과 미리보기를 누르면 원본을 크게 볼 수 있습니다.
 </p>
 <section class="projects roas-projects" aria-label="브랜드별 광고 운영 성과">
-  <article class="project-card roas-card" tabindex="0" role="button" aria-label="ONSKA ROAS 성과 크게 보기">
-    <img src="assets/roas/01_ONSKA.png" alt="ONSKA ROAS 150.0% → 627.7%. 2026.06–09 · 9월 27일까지" width="2400" height="1350" loading="lazy">
-    <div class="project-info"><h3 class="project-title">ONSKA · ROAS</h3><p class="roas-value">150.0% → 627.7%</p><p class="roas-note">2026.06–09 · 9월 27일까지</p></div>
+  <article class="project-card roas-card" data-brand="onska">
+    <button class="roas-preview" type="button" aria-label="ONSKA ROAS 성과 크게 보기"><img src="assets/roas/01_ONSKA.png" alt="ONSKA ROAS 150.0% → 627.7%. 2026.06–09 · 9월 27일까지" width="2400" height="1350" loading="lazy"><span class="roas-preview-label">성과 확대 ↗</span></button>
+    <div class="project-info"><h3 class="project-title">ONSKA</h3><p class="roas-value">150.0% → 627.7%</p><p class="roas-note">2026.06–09 · 9월 27일까지</p></div>
+    <section class="brand-creatives" aria-label="ONSKA 광고 소재">
+      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>준비 중</span></div>
+      <div class="brand-creative-grid" data-brand-creatives="onska">
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 01</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 02</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 03</span></div>
+      </div>
+    </section>
   </article>
-  <article class="project-card roas-card" tabindex="0" role="button" aria-label="RAVRAC ROAS 성과 크게 보기">
-    <img src="assets/roas/02_RAVRAC_JUN_SEP.png" alt="RAVRAC ROAS 157.6% → 358.4%. 2026.06–09 · 9월 27일까지 · 1월 ROAS 493.3%" width="2400" height="1350" loading="lazy">
-    <div class="project-info"><h3 class="project-title">RAVRAC · ROAS</h3><p class="roas-value">157.6% → 358.4%</p><p class="roas-note">2026.06–09 · 9월 27일까지 · 1월 ROAS 493.3%</p></div>
+  <article class="project-card roas-card" data-brand="ravrac">
+    <button class="roas-preview" type="button" aria-label="RAVRAC ROAS 성과 크게 보기"><img src="assets/roas/02_RAVRAC_JUN_SEP.png" alt="RAVRAC ROAS 157.6% → 358.4%. 2026.06–09 · 9월 27일까지 · 1월 ROAS 493.3%" width="2400" height="1350" loading="lazy"><span class="roas-preview-label">성과 확대 ↗</span></button>
+    <div class="project-info"><h3 class="project-title">RAVRAC</h3><p class="roas-value">157.6% → 358.4%</p><p class="roas-note">2026.06–09 · 9월 27일까지 · 1월 ROAS 493.3%</p></div>
+    <section class="brand-creatives" aria-label="RAVRAC 광고 소재">
+      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>준비 중</span></div>
+      <div class="brand-creative-grid" data-brand-creatives="ravrac">
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 01</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 02</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 03</span></div>
+      </div>
+    </section>
   </article>
-  <article class="project-card roas-card" tabindex="0" role="button" aria-label="ODEHIS ROAS 성과 크게 보기">
-    <img src="assets/roas/03_ODEHIS.png" alt="ODEHIS ROAS 6.2% → 148.0%. 2026.04–09 · 9월 27일까지" width="2400" height="1350" loading="lazy">
-    <div class="project-info"><h3 class="project-title">ODEHIS · ROAS</h3><p class="roas-value">6.2% → 148.0%</p><p class="roas-note">2026.04–09 · 9월 27일까지</p></div>
+  <article class="project-card roas-card" data-brand="odehis">
+    <button class="roas-preview" type="button" aria-label="ODEHIS ROAS 성과 크게 보기"><img src="assets/roas/03_ODEHIS.png" alt="ODEHIS ROAS 6.2% → 148.0%. 2026.04–09 · 9월 27일까지" width="2400" height="1350" loading="lazy"><span class="roas-preview-label">성과 확대 ↗</span></button>
+    <div class="project-info"><h3 class="project-title">ODEHIS</h3><p class="roas-value">6.2% → 148.0%</p><p class="roas-note">2026.04–09 · 9월 27일까지</p></div>
+    <section class="brand-creatives" aria-label="ODEHIS 광고 소재">
+      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>준비 중</span></div>
+      <div class="brand-creative-grid" data-brand-creatives="odehis">
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 01</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 02</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 03</span></div>
+      </div>
+    </section>
   </article>
-  <article class="project-card roas-card" tabindex="0" role="button" aria-label="HEVVY ROAS 성과 크게 보기">
-    <img src="assets/roas/04_HEVVY.png" alt="HEVVY ROAS 0.0% → 40.6%. 2026.05–08 · 5월 29–31일 / 8월 21일까지" width="2400" height="1350" loading="lazy">
-    <div class="project-info"><h3 class="project-title">HEVVY · ROAS</h3><p class="roas-value">0.0% → 40.6%</p><p class="roas-note">2026.05–08 · 5월 29–31일 / 8월 21일까지</p></div>
+  <article class="project-card roas-card" data-brand="hevvy">
+    <button class="roas-preview" type="button" aria-label="HEVVY ROAS 성과 크게 보기"><img src="assets/roas/04_HEVVY.png" alt="HEVVY ROAS 0.0% → 40.6%. 2026.05–08 · 5월 29–31일 / 8월 21일까지" width="2400" height="1350" loading="lazy"><span class="roas-preview-label">성과 확대 ↗</span></button>
+    <div class="project-info"><h3 class="project-title">HEVVY</h3><p class="roas-value">0.0% → 40.6%</p><p class="roas-note">2026.05–08 · 5월 29–31일 / 8월 21일까지</p></div>
+    <section class="brand-creatives" aria-label="HEVVY 광고 소재">
+      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>준비 중</span></div>
+      <div class="brand-creative-grid" data-brand-creatives="hevvy">
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 01</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 02</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 03</span></div>
+      </div>
+    </section>
   </article>
-  <article class="project-card roas-card" tabindex="0" role="button" aria-label="CHEESESUN ROAS 성과 크게 보기">
-    <img src="assets/roas/05_CHEESESUN.png" alt="CHEESESUN ROAS 192.0% → 196.7%. 2026.06–09 · 9월 27일까지" width="2400" height="1350" loading="lazy">
-    <div class="project-info"><h3 class="project-title">CHEESESUN · ROAS</h3><p class="roas-value">192.0% → 196.7%</p><p class="roas-note">2026.06–09 · 9월 27일까지</p></div>
+  <article class="project-card roas-card" data-brand="cheesesun">
+    <button class="roas-preview" type="button" aria-label="CHEESESUN ROAS 성과 크게 보기"><img src="assets/roas/05_CHEESESUN.png" alt="CHEESESUN ROAS 192.0% → 196.7%. 2026.06–09 · 9월 27일까지" width="2400" height="1350" loading="lazy"><span class="roas-preview-label">성과 확대 ↗</span></button>
+    <div class="project-info"><h3 class="project-title">CHEESESUN</h3><p class="roas-value">192.0% → 196.7%</p><p class="roas-note">2026.06–09 · 9월 27일까지</p></div>
+    <section class="brand-creatives" aria-label="CHEESESUN 광고 소재">
+      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>준비 중</span></div>
+      <div class="brand-creative-grid" data-brand-creatives="cheesesun">
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 01</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 02</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 03</span></div>
+      </div>
+    </section>
   </article>
-  <article class="project-card roas-card" tabindex="0" role="button" aria-label="POWERWAY ROAS 성과 크게 보기">
-    <img src="assets/roas/06_POWERWAY_PARTIAL_SEP.png" alt="POWERWAY ROAS 271.1% → 2236.8%. 2026.05–09 · 9월 1·5일만 집계한 잠정 성과 · 광고비 0인 전환 포함" width="2400" height="1350" loading="lazy">
-    <div class="project-info"><h3 class="project-title">POWERWAY · ROAS</h3><p class="roas-value">271.1% → 2236.8%</p><p class="roas-note">2026.05–09 · 9월 1·5일만 집계한 잠정 성과 · 광고비 0인 전환 포함</p></div>
+  <article class="project-card roas-card" data-brand="powerway">
+    <button class="roas-preview" type="button" aria-label="POWERWAY ROAS 성과 크게 보기"><img src="assets/roas/06_POWERWAY_PARTIAL_SEP.png" alt="POWERWAY ROAS 271.1% → 2236.8%. 2026.05–09 · 9월 1·5일만 집계한 잠정 성과 · 광고비 0인 전환 포함" width="2400" height="1350" loading="lazy"><span class="roas-preview-label">성과 확대 ↗</span></button>
+    <div class="project-info"><h3 class="project-title">POWERWAY</h3><p class="roas-value">271.1% → 2236.8%</p><p class="roas-note">2026.05–09 · 9월 1·5일만 집계한 잠정 성과 · 광고비 0인 전환 포함</p></div>
+    <section class="brand-creatives" aria-label="POWERWAY 광고 소재">
+      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>준비 중</span></div>
+      <div class="brand-creative-grid" data-brand-creatives="powerway">
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 01</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 02</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 03</span></div>
+      </div>
+    </section>
   </article>
-  <article class="project-card roas-card" tabindex="0" role="button" aria-label="ADESII ROAS 성과 크게 보기">
-    <img src="assets/roas/07_ADESII_JUN_AUG.png" alt="ADESII ROAS 57.0% → 129.7%. 2026.06–08 · 판매 캠페인만 · 5월 ROAS 237.2%" width="2400" height="1350" loading="lazy">
-    <div class="project-info"><h3 class="project-title">ADESII · ROAS</h3><p class="roas-value">57.0% → 129.7%</p><p class="roas-note">2026.06–08 · 판매 캠페인만 · 5월 ROAS 237.2%</p></div>
+  <article class="project-card roas-card" data-brand="adesii">
+    <button class="roas-preview" type="button" aria-label="ADESII ROAS 성과 크게 보기"><img src="assets/roas/07_ADESII_JUN_AUG.png" alt="ADESII ROAS 57.0% → 129.7%. 2026.06–08 · 판매 캠페인만 · 5월 ROAS 237.2%" width="2400" height="1350" loading="lazy"><span class="roas-preview-label">성과 확대 ↗</span></button>
+    <div class="project-info"><h3 class="project-title">ADESII</h3><p class="roas-value">57.0% → 129.7%</p><p class="roas-note">2026.06–08 · 판매 캠페인만 · 5월 ROAS 237.2%</p></div>
+    <section class="brand-creatives" aria-label="ADESII 광고 소재">
+      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>준비 중</span></div>
+      <div class="brand-creative-grid" data-brand-creatives="adesii">
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 01</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 02</span></div>
+        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 03</span></div>
+      </div>
+    </section>
   </article>
 </section>
 
@@ -5299,6 +5365,10 @@ function closeProjectModal(){
 }
 
 projectCards.forEach(card=>{
+  if(card.classList.contains('roas-card')){
+    card.querySelector('.roas-preview').addEventListener('click',()=>openProjectModal(card));
+    return;
+  }
   card.addEventListener('keydown',(event)=>{
     if(event.target === card && (event.key === 'Enter' || event.key === ' ')){event.preventDefault();openProjectModal(card);}
   });
