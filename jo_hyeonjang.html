@@ -4145,7 +4145,7 @@ body #campaign#campaign .creative-video-preview{aspect-ratio:4/5;display:flex;fl
 .creative-video-preview span:first-child{font-size:28px}
 .project-modal-image[hidden]{display:none}
 </style>
-<link rel="stylesheet" href="assets/adconex.css?v=20261001-skills-size">
+<link rel="stylesheet" href="assets/adconex.css?v=20261001-manuscript">
 <link rel="stylesheet" href="assets/layout-scale.css?v=20261001-square-tools">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
 <style>
@@ -4498,7 +4498,7 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
       </div>
 
       <div class="skill-tab" data-name="ChatGPT">
-        <img src="assets/logos/chatgpt.webp" alt="ChatGPT" width="128" height="128" loading="lazy" title="ChatGPT — OpenAI">
+        <img src="assets/logos/chatgpt.png" alt="ChatGPT" width="128" height="128" loading="lazy" title="ChatGPT — OpenAI">
         <span class="skill-logo-fallback">GPT</span>
       </div>
     </div>
@@ -5471,7 +5471,11 @@ mixedCreativeImages.forEach(source=>{
 });
 const acOpening=document.createElement('div');
 acOpening.className='ac-opening';
-acOpening.innerHTML='<div class="ac-opening-copy"><p>JO HYEONJANG · PORTFOLIO</p><h1><span>언제나</span><span><em>현장이</em> 답이다.</span></h1><small>Scroll Down ↓</small></div>';
+const acManuscript = heroCopy.cloneNode(true);
+const acCopy = document.createElement('div');
+acCopy.className='ac-opening-copy';
+acCopy.append(acManuscript);
+acOpening.append(acCopy);
 acOpening.prepend(creativeBoard);
 document.querySelector('.hero').prepend(acOpening);
 const acHero = document.querySelector('.hero');

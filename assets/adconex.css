@@ -110,3 +110,8 @@ body.adconex-theme .hero>.keyword-cloud{display:none}
  body.goldenax-theme.adconex-theme .hero{min-height:100svh}
  body.adconex-theme .ac-creative-board{transform:translate(-50%,-50%) rotate(-9deg)}
 }
+
+/* Reuse the same manuscript grid and lettering as the other portfolio versions. */
+body.goldenax-theme.adconex-theme .ac-opening-copy .hero-copy{display:grid;margin:0;--hero-line:rgba(255,255,255,.65)}
+body.goldenax-theme.adconex-theme .ac-opening-copy .hero-outline{color:white;-webkit-text-stroke-color:white}
+body.goldenax-theme.adconex-theme .ac-opening-copy .hero-accent{color:#f7941d}
