@@ -3967,13 +3967,6 @@ body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) :is(.experience-card,.
 body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .experience-card{border:0;border-top:1px solid var(--gx-line)}
 body.goldenax-theme.adconex-theme :is(.project-view-button,.campaign-filter-button,.profile-keywords span){border-radius:30px}
 body.goldenax-theme.adconex-theme .hero{position:relative;isolation:isolate;overflow:hidden;background:#000!important}
-.ac-reference-collage{display:none}
-body.adconex-theme .ac-reference-collage{display:block;position:absolute;inset:90px 0 0;z-index:-1;pointer-events:none;opacity:.48}
-.ac-reference-collage img{position:absolute;width:25%;height:26%;object-fit:cover;border-radius:0;filter:brightness(.55)}
-.ac-reference-collage img:nth-child(1){left:2%;top:2%}
-.ac-reference-collage img:nth-child(2){right:2%;top:12%;width:22%}
-.ac-reference-collage img:nth-child(3){left:7%;bottom:8%;width:20%;height:32%}
-.ac-reference-collage img:nth-child(4){right:4%;bottom:6%;width:26%;height:29%}
 body.goldenax-theme.adconex-theme .hero::before{display:none}
 body.goldenax-theme.adconex-theme .hero-cell{color:#fff;-webkit-text-fill-color:#fff;border-color:#555}
 body.goldenax-theme.adconex-theme .hero-cell.hero-accent{color:#f7941d;-webkit-text-fill-color:#f7941d}
@@ -4070,7 +4063,6 @@ body.goldenax-theme.adconex-theme.light-mode .hero-identity,body.goldenax-theme.
  body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .project-card{aspect-ratio:4/3;min-height:240px}
  body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .skills-sidebar{grid-template-columns:repeat(4,minmax(0,1fr))}
  body.goldenax-theme:is(.adconex-theme,.motherbrain-theme) .section-heading{font-size:36px}
- .ac-reference-collage img{width:40%}
 }
 /* Final alignment contract: headings, intros and content share one left edge. */
 body.goldenax-theme :is(#skills,#experience,#campaign){box-sizing:border-box}
@@ -4125,7 +4117,7 @@ body.goldenax-theme.motherbrain-theme .hero-cell.hero-accent{
 
 /* 브랜드별 성과 미리보기와 광고 소재 영역 */
 body #campaign#campaign .projects.roas-projects{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:auto;gap:24px;align-items:start}
-body #campaign#campaign .project-card.roas-card{aspect-ratio:auto;min-height:0;display:block;cursor:default;background:var(--gx-bg,#15221d);border:1px solid rgba(128,128,128,.25)}
+body #campaign#campaign .project-card.roas-card{aspect-ratio:auto;min-height:0;display:block;cursor:default;background:var(--gx-surface,#15221d);color:var(--gx-text,#fff);border:1px solid rgba(128,128,128,.25)}
 body #campaign#campaign .roas-card:hover{transform:none}
 .roas-preview{position:relative;display:block;width:100%;padding:0;border:0;background:#f7f8f3;cursor:zoom-in;overflow:hidden;color:#153e30}
 body #campaign#campaign .roas-preview>img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain}
@@ -4150,7 +4142,7 @@ body #campaign#campaign .creative-preview{display:block;width:100%;padding:0;bor
 body #campaign#campaign .creative-preview img{display:block;width:100%;height:100%;object-fit:contain;transform:none}
 .creative-preview:focus-visible{outline:3px solid #108862;outline-offset:3px}
 </style>
-<link rel="stylesheet" href="assets/adconex.css?v=20260930-6">
+<link rel="stylesheet" href="assets/adconex.css?v=20261001-zoom-board">
 <link rel="stylesheet" href="assets/layout-scale.css?v=20260924">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
 <style>
@@ -4320,10 +4312,6 @@ body.goldenax-theme .gx-about-window img,
 body.goldenax-theme .gx-about-track .profile-layout{
   transition:inset .14s linear,border-radius .14s linear,transform .14s linear,opacity .14s linear;
 }
-body.adconex-theme .ac-opening-copy,
-body.adconex-theme .ac-reference-collage{
-  transition:transform .16s linear,opacity .16s linear;
-}
 body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
   transition:clip-path .16s linear;
 }
@@ -4337,7 +4325,6 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
   body.goldenax-theme .gx-about-window img,
   body.goldenax-theme .gx-about-track .profile-layout,
   body.adconex-theme .ac-opening-copy,
-  body.adconex-theme .ac-reference-collage,
   body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{transition:none}
 }
 </style>
@@ -5616,11 +5603,11 @@ for(let round=0;round<creativeRounds;round++){
 const adconexCover = mixedCreativeImages[0];
 if(adconexCover) document.body.style.setProperty('--adconex-hero-image',`url(${JSON.stringify(adconexCover.src)})`);
 const referenceCollage=document.createElement('div');
-referenceCollage.className='ac-reference-collage';
+referenceCollage.className='ac-creative-board';
 referenceCollage.setAttribute('aria-hidden','true');
-mixedCreativeImages.forEach(source=>{
+mixedCreativeImages.slice(0,12).forEach(source=>{
   const picture=document.createElement('img');
-  picture.src=source.src;picture.alt='';picture.loading='lazy';
+  picture.src=source.src;picture.alt='';picture.decoding='async';
   picture.style.objectPosition=source.dataset.heroPosition || 'center';
   referenceCollage.append(picture);
 });
@@ -5629,33 +5616,26 @@ acOpening.className='ac-opening';
 acOpening.innerHTML='<div class="ac-opening-copy"><p>JO HYEONJANG · PORTFOLIO</p><h1><span>언제나</span><span><em>현장이</em> 답이다.</span></h1><small>Scroll Down ↓</small></div>';
 acOpening.prepend(referenceCollage);
 document.querySelector('.hero').prepend(acOpening);
+const acHero = document.querySelector('.hero');
+const acReducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let acScrollFrame=0;
+let acLastProgress=-1;
 function updateAcOpening(){
   acScrollFrame=0;
   if(!document.body.classList.contains('adconex-theme')) return;
-  const hero=document.querySelector('.hero');
-  const distance=Math.max(1,hero.offsetHeight-innerHeight);
-  const progress=Math.max(0,Math.min(1,-hero.getBoundingClientRect().top/distance));
-  acOpening.style.setProperty('--ac-progress',progress.toFixed(3));
-  // 스크롤에 맞춰 다음 소재를 대각선 경계로 펼칩니다. 역방향 스크롤도 동일하게 되돌아갑니다.
-  const slides = Array.from(referenceCollage.children);
-  const scene = progress * Math.max(0, slides.length - 1);
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  slides.forEach((slide,index)=>{
-    const reveal = Math.max(0,Math.min(1,scene-index+1));
-    const visible = index === 0 || reveal > 0;
-    slide.style.visibility = visible ? 'visible' : 'hidden';
-    slide.style.zIndex = String(index);
-    slide.style.clipPath = index === 0 || reduceMotion
-      ? 'none'
-      : `polygon(0 0, ${reveal*130}% 0, ${reveal*130-30}% 100%, 0 100%)`;
-    if(reduceMotion) slide.style.visibility = index === Math.round(scene) ? 'visible' : 'hidden';
-  });
+  const distance=Math.max(1,acHero.offsetHeight-innerHeight);
+  const progress=acReducedMotion.matches ? 1 : Math.max(0,Math.min(1,-acHero.getBoundingClientRect().top/distance));
+  if(Math.abs(progress-acLastProgress)<.0005) return;
+  acLastProgress=progress;
+  const eased=progress*progress*(3-2*progress);
+  acOpening.style.setProperty('--ac-progress',progress.toFixed(4));
+  referenceCollage.style.setProperty('--board-scale',(2.25-1.45*eased).toFixed(4));
 }
 function scheduleAcOpening(){if(!acScrollFrame) acScrollFrame=requestAnimationFrame(updateAcOpening)}
 window.addEventListener('scroll',scheduleAcOpening,{passive:true});
 window.addEventListener('resize',scheduleAcOpening);
-window.addEventListener('portfolio-version-change',scheduleAcOpening);
+window.addEventListener('portfolio-version-change',()=>{acLastProgress=-1;scheduleAcOpening()});
+acReducedMotion.addEventListener('change',()=>{acLastProgress=-1;scheduleAcOpening()});
 scheduleAcOpening();
 
 const versionDialog = document.createElement('dialog');
