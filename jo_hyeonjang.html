@@ -4354,7 +4354,7 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
 </header>
 <!-- Use the open-counter monochrome artwork only while the header is transparent. -->
 <img class="ac-idle-logo" src="assets/logos/adconex-header-orange.png" alt="" aria-hidden="true">
-<button class="mode-toggle" type="button" aria-label="라이트 모드로 전환">
+<button hidden style="display:none" class="mode-toggle" type="button" aria-label="라이트 모드로 전환">
   <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/>
   </svg>
@@ -4773,7 +4773,6 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
 */
 const PORTFOLIO_CONFIG = Object.freeze({
   sectionOrder:['profile','experience','campaign','skills'],
-  lightModeHours:{ start:7, end:19 },
   keyword:{
     desktopDuration:7200,
     mobileDuration:6500,
@@ -5293,42 +5292,15 @@ window.addEventListener('scroll', scheduleProgressUpdate, { passive:true });
 window.addEventListener('resize', scheduleProgressUpdate, { passive:true });
 scheduleProgressUpdate();
 
-let manualThemeOverride = false;
-
+// Each portfolio version has one fixed palette, independent of time or device theme.
 function syncThemeControl(){
-  if(document.body.classList.contains('adconex-theme')) document.body.classList.remove('light-mode');
-  const isLightMode = document.body.classList.contains('light-mode');
-
-  modeToggle.setAttribute(
-    'aria-label',
-    isLightMode ? '다크 모드로 전환' : '라이트 모드로 전환'
-  );
-
-  themeSwapLogos.forEach((logo)=>{
-    logo.src = (isLightMode || document.body.classList.contains('motherbrain-theme'))
-      ? logo.dataset.lightSrc
-      : logo.dataset.darkSrc;
+  const isLightMode = !document.body.classList.contains('adconex-theme');
+  document.body.classList.toggle('light-mode', isLightMode);
+  themeSwapLogos.forEach(logo=>{
+    logo.src = isLightMode ? logo.dataset.lightSrc : logo.dataset.darkSrc;
   });
 }
-
-function applyTimeBasedTheme(){
-  if(manualThemeOverride) return;
-
-  const currentHour = new Date().getHours();
-  const { start, end } = PORTFOLIO_CONFIG.lightModeHours;
-  const useLightMode = currentHour >= start && currentHour < end;
-  document.body.classList.toggle('light-mode', useLightMode);
-  syncThemeControl();
-}
-
-applyTimeBasedTheme();
-window.setInterval(applyTimeBasedTheme, 60 * 1000);
-
-modeToggle.addEventListener('click',()=>{
-  manualThemeOverride = true;
-  document.body.classList.toggle('light-mode');
-  syncThemeControl();
-});
+syncThemeControl();
 
 contactToggle.addEventListener('click', ()=>{
   contactPanel.classList.add('active');
@@ -5620,7 +5592,6 @@ if(document.body.classList.contains('goldenax-theme')){
   window.addEventListener('resize',scheduleScrollBackground,{passive:true});
   window.addEventListener('pageshow',scheduleScrollBackground);
   window.addEventListener('portfolio-version-change',scheduleScrollBackground);
-  modeToggle.addEventListener('click',scheduleScrollBackground);
   reducedBackgroundMotion.addEventListener('change',scheduleScrollBackground);
   compactBackgroundMotion.addEventListener('change',scheduleScrollBackground);
   new ResizeObserver(scheduleScrollBackground).observe(document.body);
