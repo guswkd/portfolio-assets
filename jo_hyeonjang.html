@@ -4704,9 +4704,9 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
     <button class="roas-preview" type="button" aria-label="ONSKA 성과 크게 보기"><img src="assets/results-20261001/01_ONSKA.png" alt="ONSKA 150.0% → 627.7%. 2026.06–09 · 9월 27일까지" width="2160" height="1215" loading="lazy"><span class="roas-preview-label">성과 확대 ↗</span></button>
     <div class="project-info"><h3 class="project-title">ONSKA</h3><p class="roas-value">150.0% → 627.7%</p><p class="roas-note">2026.06–09 · 9월 27일까지</p></div>
     <section class="brand-creatives" aria-label="ONSKA 광고 소재">
-      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>소재 3개</span></div>
+      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>소재 2개</span></div>
       <div class="brand-creative-grid" data-brand-creatives="onska">
-        <button class="creative-preview" type="button" aria-label="ONSKA 26FALL OPEN 카카오 메시지 소재 크게 보기"><img src="assets/creatives/onska/fall-kakao.png" alt="ONSKA 26FALL OPEN 카카오 메시지 소재" width="600" height="940" loading="lazy"></button>
+
         <button class="creative-preview" type="button" aria-label="ONSKA 성수 팝업 소재 크게 보기"><img src="assets/creatives/onska/seongsu-popup.jpg" alt="ONSKA 성수 팝업 소재" width="1206" height="2144" loading="lazy"></button>
         <button class="creative-preview" type="button" aria-label="ONSKA XYZ POP-UP 소재 크게 보기"><img src="assets/creatives/onska/xyz-popup.jpg" alt="ONSKA XYZ POP-UP 소재" width="1800" height="2250" loading="lazy"></button>
       </div>
@@ -5617,12 +5617,20 @@ setPortfolioVersion(Object.hasOwn(portfolioVersions,linkedPortfolioVersion||'') 
   Object.hasOwn(portfolioVersions,storedPortfolioVersion||'') ? storedPortfolioVersion : 'goldenax');
 // 현장 밖의 장식 이미지는 광고 소재에서만 가져옵니다. 성과 그래프는 재사용하지 않습니다.
 const creativeImageSelector = '#campaign .brand-creative-grid img';
-const adconexCover = document.querySelector(creativeImageSelector);
+// 브랜드별로 한 장씩 번갈아 배치하여 같은 브랜드가 연속되지 않게 합니다.
+const creativeGroups = Array.from(document.querySelectorAll('#campaign .brand-creative-grid'))
+  .map(grid=>Array.from(grid.querySelectorAll('img'))).filter(group=>group.length);
+const mixedCreativeImages = [];
+const creativeRounds = Math.max(0,...creativeGroups.map(group=>group.length));
+for(let round=0;round<creativeRounds;round++){
+  creativeGroups.forEach(group=>{if(group[round]) mixedCreativeImages.push(group[round]);});
+}
+const adconexCover = mixedCreativeImages[0];
 if(adconexCover) document.body.style.setProperty('--adconex-hero-image',`url(${JSON.stringify(adconexCover.src)})`);
 const referenceCollage=document.createElement('div');
 referenceCollage.className='ac-reference-collage';
 referenceCollage.setAttribute('aria-hidden','true');
-Array.from(document.querySelectorAll(creativeImageSelector)).forEach(source=>{
+mixedCreativeImages.forEach(source=>{
   const picture=document.createElement('img');
   picture.src=source.src;picture.alt='';picture.loading='lazy';
   picture.style.objectPosition=source.dataset.heroPosition || 'center';
