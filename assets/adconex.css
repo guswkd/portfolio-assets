@@ -115,3 +115,11 @@ body.adconex-theme .hero>.keyword-cloud{display:none}
 body.goldenax-theme.adconex-theme .ac-opening-copy .hero-copy{display:grid;margin:0;--hero-line:rgba(255,255,255,.65)}
 body.goldenax-theme.adconex-theme .ac-opening-copy .hero-outline{color:white;-webkit-text-stroke-color:white}
 body.goldenax-theme.adconex-theme .ac-opening-copy .hero-accent{color:#f7941d}
+
+/* Keep the manuscript legible over light and saturated campaign artwork. */
+body.adconex-theme .ac-opening::after{background:radial-gradient(ellipse at center,rgba(0,0,0,.62) 0%,rgba(0,0,0,.42) 45%,rgba(0,0,0,.28) 100%)}
+body.adconex-theme .ac-opening-copy{opacity:1;text-shadow:0 2px 8px rgba(0,0,0,.8)}
+body.goldenax-theme.adconex-theme .ac-opening-copy .hero-copy{--hero-line:rgba(255,255,255,.8)}
+body.goldenax-theme.adconex-theme .ac-opening-copy .hero-cell{border-color:rgba(255,255,255,.8);background:rgba(0,0,0,.28)}
+body.goldenax-theme.adconex-theme .ac-opening-copy .hero-accent{color:#ffae38;-webkit-text-fill-color:#ffae38;-webkit-text-stroke:0}
+body.goldenax-theme.adconex-theme .ac-opening-copy .hero-outline{color:#fff;-webkit-text-fill-color:#fff;-webkit-text-stroke:0}
