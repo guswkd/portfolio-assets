@@ -39,3 +39,17 @@ body.goldenax-theme.goldenax-theme #skills .skill-detail-grid{margin-top:36px}
  body.goldenax-theme #experience .experience-card{padding:24px 18px}
  body.goldenax-theme #campaign .projects{grid-template-columns:1fr}
 }
+
+/* Equal tile tracks align with the detail panel; logo bounds are optical sizes. */
+body.goldenax-theme.goldenax-theme #skills .skills-layout{align-items:stretch}
+body.goldenax-theme.goldenax-theme #skills .skills-sidebar{align-content:stretch;align-items:stretch;grid-template-rows:repeat(3,minmax(92px,1fr))}
+body.goldenax-theme.goldenax-theme #skills .skill-tab{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:92px;aspect-ratio:auto;padding:16px;box-sizing:border-box}
+body.goldenax-theme.goldenax-theme #skills .skill-tab img{width:var(--logo-width,52px);height:var(--logo-height,52px);max-width:100%;max-height:64px;object-fit:contain;flex:none}
+body.goldenax-theme.goldenax-theme #skills .skill-tab[data-name="Meta Ads"]{--logo-width:60px;--logo-height:48px}
+body.goldenax-theme.goldenax-theme #skills .skill-tab[data-name="NAVER GFA"]{--logo-width:48px;--logo-height:48px}
+body.goldenax-theme.goldenax-theme #skills .skill-tab[data-name="Kakao Moment"]{--logo-width:64px;--logo-height:52px}
+body.goldenax-theme.goldenax-theme #skills .skill-tab[data-name="ChatGPT"]{--logo-width:64px;--logo-height:64px}
+@media(max-width:820px){
+ body.goldenax-theme.goldenax-theme #skills .skills-sidebar{grid-template-rows:repeat(3,92px)}
+ body.goldenax-theme.goldenax-theme #skills .skill-tab{padding:14px}
+}
