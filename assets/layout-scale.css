@@ -53,3 +53,14 @@ body.goldenax-theme.goldenax-theme #skills .skill-tab[data-name="ChatGPT"]{--log
  body.goldenax-theme.goldenax-theme #skills .skills-sidebar{grid-template-rows:repeat(3,92px)}
  body.goldenax-theme.goldenax-theme #skills .skill-tab{padding:14px}
 }
+
+/* Selection changes content only, never the geometry of the skills panel. */
+body.goldenax-theme.goldenax-theme #skills .skills-layout{height:440px}
+body.goldenax-theme.goldenax-theme #skills .skill-detail{height:440px;box-sizing:border-box;overflow:auto;justify-content:flex-start}
+body.goldenax-theme.goldenax-theme #skills .skill-detail-title{min-height:1.25em}
+body.goldenax-theme.goldenax-theme #skills .skill-detail-sub{min-height:3.6em}
+@media(max-width:820px){
+ body.goldenax-theme.goldenax-theme #skills .skills-layout{height:auto}
+ body.goldenax-theme.goldenax-theme #skills .skill-detail{height:460px;flex:none;width:100%}
+ body.goldenax-theme.goldenax-theme #skills .skills-sidebar{flex:none}
+}

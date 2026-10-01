@@ -4146,7 +4146,7 @@ body #campaign#campaign .creative-video-preview{aspect-ratio:4/5;display:flex;fl
 .project-modal-image[hidden]{display:none}
 </style>
 <link rel="stylesheet" href="assets/adconex.css?v=20261001-skills-size">
-<link rel="stylesheet" href="assets/layout-scale.css?v=20261001-logo-align">
+<link rel="stylesheet" href="assets/layout-scale.css?v=20261001-stable-skills">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css">
 <style>
 /* Goldenax closing section: red begins and ends at the toolkit boundaries. */
@@ -4517,7 +4517,7 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
           <div class="skill-detail-sub">
             도구를 선택하면 마케팅 업무에서의 활용 범위를 확인할 수 있습니다.
           </div>
-          <div class="skill-barometer" style="display:none;">
+          <div class="skill-barometer" style="visibility:hidden;" aria-hidden="true">
             <div class="skill-barometer-track">
               <div class="skill-barometer-fill"></div>
               <span class="skill-boundary"></span>
@@ -5144,7 +5144,8 @@ function renderSkillDetail(tab){
   skillDetailTitle.innerText = tab.dataset.name;
   skillDetailSub.innerText = copy.description;
   const level = copy.category === '매체' ? null : skillLevels[tab.dataset.name];
-  skillBarometer.style.display = level ? '' : 'none';
+  skillBarometer.style.visibility = level ? 'visible' : 'hidden';
+  skillBarometer.setAttribute('aria-hidden', String(!level));
   skillBarometerFill.style.width = level ? ({'하':20, '중':60, '상':100}[level] + '%') : '0%';
   skillScaleLabels.forEach(label => label.classList.toggle('active', label.textContent === level));
   skillDetailCards[0].querySelector('h4').innerText = '업무 영역';
