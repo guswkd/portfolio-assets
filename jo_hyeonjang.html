@@ -5144,8 +5144,9 @@ function renderSkillDetail(tab){
   skillDetailTitle.innerText = tab.dataset.name;
   skillDetailSub.innerText = copy.description;
   const level = copy.category === '매체' ? null : skillLevels[tab.dataset.name];
-  skillBarometer.style.visibility = level ? 'visible' : 'hidden';
-  skillBarometer.setAttribute('aria-hidden', String(!level));
+  // 숙련도 표시는 임시로 숨기고 기존 공간은 유지합니다.
+  skillBarometer.style.visibility = 'hidden';
+  skillBarometer.setAttribute('aria-hidden', 'true');
   skillBarometerFill.style.width = level ? ({'하':20, '중':60, '상':100}[level] + '%') : '0%';
   skillScaleLabels.forEach(label => label.classList.toggle('active', label.textContent === level));
   skillDetailCards[0].querySelector('h4').innerText = '업무 영역';
