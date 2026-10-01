@@ -4731,11 +4731,11 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
     <button class="roas-preview" type="button" aria-label="HEVVY MAKEUP 성과 크게 보기"><img src="assets/results-20261001/04_HEVVY_MAKEUP.png" alt="HEVVY MAKEUP 15.5% → 40.6%. 2026.06–08 · 7월 ROAS 49.5% · 8월 21일까지" width="2160" height="1215" loading="lazy"><span class="roas-preview-label">성과 확대 ↗</span></button>
     <div class="project-info"><h3 class="project-title">HEVVY MAKEUP</h3><p class="roas-value">15.5% → 40.6%</p><p class="roas-note">2026.06–08 · 7월 ROAS 49.5% · 8월 21일까지</p></div>
     <section class="brand-creatives" aria-label="HEVVY MAKEUP 광고 소재">
-      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>준비 중</span></div>
+      <div class="brand-creatives-heading"><h4>광고 소재</h4><span>소재 3개</span></div>
       <div class="brand-creative-grid" data-brand-creatives="hevvy-makeup">
-        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 01</span></div>
-        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 02</span></div>
-        <div class="creative-placeholder"><span aria-hidden="true">＋</span><span>소재 03</span></div>
+        <button class="creative-preview" type="button" aria-label="HEVVY MAKEUP Onda Seúl 립 틴트 소재 크게 보기"><img src="assets/creatives/hevvy/onda-seul.jpg" alt="HEVVY MAKEUP Onda Seúl 립 틴트 광고 소재" width="1080" height="1350" loading="lazy"></button>
+        <button class="creative-preview" type="button" aria-label="HEVVY MAKEUP 립 치크 소재 크게 보기"><img src="assets/creatives/hevvy/lip-cheek.png" alt="HEVVY MAKEUP 립 치크 광고 소재" width="1080" height="1350" loading="lazy"></button>
+        <button class="creative-preview" type="button" aria-label="HEVVY MAKEUP Dawn Rose 소재 크게 보기"><img src="assets/creatives/hevvy/dawn-rose.png" alt="HEVVY MAKEUP Dawn Rose 광고 소재" width="1080" height="1350" loading="lazy"></button>
       </div>
     </section>
   </article>
@@ -5632,7 +5632,7 @@ if(adconexCover) document.body.style.setProperty('--adconex-hero-image',`url(${J
 const referenceCollage=document.createElement('div');
 referenceCollage.className='ac-creative-board';
 referenceCollage.setAttribute('aria-hidden','true');
-mixedCreativeImages.slice(0,12).forEach(source=>{
+mixedCreativeImages.forEach(source=>{
   const picture=document.createElement('img');
   picture.src=source.src;picture.alt='';picture.decoding='async';
   picture.style.objectPosition=source.dataset.heroPosition || 'center';
