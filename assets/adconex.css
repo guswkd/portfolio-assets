@@ -97,13 +97,13 @@ body.adconex-theme.ac-header-visible.ac-header-idle:not(.header-menu-open) .ac-i
 
 
 /* One continuous scene: mixed-brand creatives pull back into a complete board. */
-body.adconex-theme .ac-creative-board{position:absolute;z-index:0;left:50%;top:50%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.4vw,24px);width:min(120vw,1600px);transform:translate(-50%,-50%) rotate(-9deg) scale(var(--board-scale,2.25));transform-origin:50% 50%;pointer-events:none}
+body.adconex-theme .ac-creative-board{position:absolute;z-index:0;left:50%;top:50%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.4vw,24px);width:calc(125vw + 22svh + 48px);transform:translate(-50%,-50%) rotate(-9deg) scale(var(--board-scale,2.25));transform-origin:50% 50%;pointer-events:none}
 body.adconex-theme .ac-creative-board img{display:block;position:static;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:8px;filter:none;box-shadow:0 12px 36px rgba(0,0,0,.22)}
 body.adconex-theme .ac-opening::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.48))}
 body.adconex-theme .ac-opening-copy{text-shadow:0 2px 24px rgba(0,0,0,.4)}
 body.adconex-theme .hero>.keyword-cloud{display:none}
 @media(max-width:700px){
- body.adconex-theme .ac-creative-board{width:140vw;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+ body.adconex-theme .ac-creative-board{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
  body.goldenax-theme.adconex-theme .hero{min-height:220svh}
 }
 @media(prefers-reduced-motion:reduce){
