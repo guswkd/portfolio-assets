@@ -64,3 +64,19 @@ body.goldenax-theme.goldenax-theme #skills .skill-detail-sub{min-height:3.6em}
  body.goldenax-theme.goldenax-theme #skills .skill-detail{height:460px;flex:none;width:100%}
  body.goldenax-theme.goldenax-theme #skills .skills-sidebar{flex:none}
 }
+
+/* A square 3×3 tool board shares its fixed height with the detail panel. */
+@media(min-width:821px){
+ body.goldenax-theme.goldenax-theme #skills .skills-layout{--skills-size:440px;grid-template-columns:var(--skills-size) minmax(0,1fr);height:var(--skills-size);gap:28px}
+ body.goldenax-theme.goldenax-theme #skills .skills-sidebar{height:var(--skills-size);gap:14px;grid-template-rows:repeat(3,minmax(0,1fr))}
+ body.goldenax-theme.goldenax-theme #skills .skill-tab{min-height:0;aspect-ratio:1}
+ body.goldenax-theme.goldenax-theme #skills .skill-detail{height:var(--skills-size);padding:28px}
+}
+@media(min-width:821px) and (max-width:1100px){
+ body.goldenax-theme.goldenax-theme #skills .skills-layout{grid-template-columns:360px minmax(0,1fr)}
+ body.goldenax-theme.goldenax-theme #skills .skills-sidebar{height:360px;align-self:start}
+}
+@media(max-width:820px){
+ body.goldenax-theme.goldenax-theme #skills .skills-sidebar{height:auto;grid-template-rows:repeat(3,minmax(0,1fr));aspect-ratio:1}
+ body.goldenax-theme.goldenax-theme #skills .skill-tab{height:auto;min-height:0;aspect-ratio:1}
+}
