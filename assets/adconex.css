@@ -51,7 +51,7 @@ body.goldenax-theme.adconex-theme #campaign .project-view-button:is(:hover,:focu
 body.goldenax-theme.adconex-theme #campaign .project-label{color:#666;background:none;border:0;padding:0 6px;font-size:13px}
 body.goldenax-theme.adconex-theme #skills .skill-detail{background:#0d0d0d;border:1px solid #333}
 /* Fill the section's content width instead of leaving a 940px block at the left. */
-body.goldenax-theme.adconex-theme #skills .skills-layout{width:100%;max-width:none;grid-template-columns:clamp(300px,27vw,360px) minmax(0,1fr);gap:clamp(28px,3vw,44px)}
+body.goldenax-theme.adconex-theme #skills .skills-layout{width:100%;max-width:none;grid-template-columns:clamp(270px,25vw,320px) minmax(0,1fr);gap:clamp(28px,3vw,44px)}
 body.goldenax-theme.adconex-theme #skills .skills-sidebar{gap:14px}
 body.goldenax-theme.adconex-theme #skills .skill-tab img{width:60%;height:60%;max-width:72px;max-height:72px}
 body.goldenax-theme.adconex-theme #skills .skill-detail{padding:clamp(30px,3vw,44px);justify-content:center}
