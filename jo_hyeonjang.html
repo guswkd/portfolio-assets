@@ -5626,9 +5626,10 @@ if(adconexCover) document.body.style.setProperty('--adconex-hero-image',`url(${J
 const referenceCollage=document.createElement('div');
 referenceCollage.className='ac-reference-collage';
 referenceCollage.setAttribute('aria-hidden','true');
-Array.from(document.querySelectorAll(creativeImageSelector)).slice(0,4).forEach(source=>{
+Array.from(document.querySelectorAll(creativeImageSelector)).forEach(source=>{
   const picture=document.createElement('img');
   picture.src=source.src;picture.alt='';picture.loading='lazy';
+  picture.style.objectPosition=source.dataset.heroPosition || 'center';
   referenceCollage.append(picture);
 });
 const acOpening=document.createElement('div');
@@ -5644,6 +5645,20 @@ function updateAcOpening(){
   const distance=Math.max(1,hero.offsetHeight-innerHeight);
   const progress=Math.max(0,Math.min(1,-hero.getBoundingClientRect().top/distance));
   acOpening.style.setProperty('--ac-progress',progress.toFixed(3));
+  // 스크롤에 맞춰 다음 소재를 대각선 경계로 펼칩니다. 역방향 스크롤도 동일하게 되돌아갑니다.
+  const slides = Array.from(referenceCollage.children);
+  const scene = progress * Math.max(0, slides.length - 1);
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  slides.forEach((slide,index)=>{
+    const reveal = Math.max(0,Math.min(1,scene-index+1));
+    const visible = index === 0 || reveal > 0;
+    slide.style.visibility = visible ? 'visible' : 'hidden';
+    slide.style.zIndex = String(index);
+    slide.style.clipPath = index === 0 || reduceMotion
+      ? 'none'
+      : `polygon(0 0, ${reveal*130}% 0, ${reveal*130-30}% 100%, 0 100%)`;
+    if(reduceMotion) slide.style.visibility = index === Math.round(scene) ? 'visible' : 'hidden';
+  });
 }
 function scheduleAcOpening(){if(!acScrollFrame) acScrollFrame=requestAnimationFrame(updateAcOpening)}
 window.addEventListener('scroll',scheduleAcOpening,{passive:true});
