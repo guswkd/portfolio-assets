@@ -4779,14 +4779,6 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
 
 </section>
 
-<!-- AWARDS: 실제 수상·선정 성과가 준비되면 hidden을 제거해 공개합니다. -->
-<section class="awards-section" id="awards" data-chapter="남겨진 훈장" hidden>
-  <h2 class="section-heading">남겨진 <span class="title-outline">훈장</span></h2>
-</section>
-
-<!-- CHECK POINT: 대행사 실무 적합도 확인 기준 -->
-<!-- 메인 흐름 개편으로 보류: hidden 속성을 제거하면 SUMMARY가 다시 표시됩니다. -->
-
 <script>
 
 /*
@@ -4794,7 +4786,7 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #skills::before{
   자주 조정하는 순서·시간·애니메이션 값은 이 객체에서 관리합니다.
 */
 const PORTFOLIO_CONFIG = Object.freeze({
-  sectionOrder:['profile','experience','campaign','awards','skills'],
+  sectionOrder:['profile','experience','campaign','skills'],
   lightModeHours:{ start:7, end:19 },
   keyword:{
     desktopDuration:7200,
@@ -4836,7 +4828,6 @@ const talentKeywords = [
 const activeTalentKeywords = new Set();
 
 let keywordIndex = 0;
-const recentKeywordPoints = [];
 
 const modeToggle = document.querySelector('.mode-toggle');
 const contactToggle = document.querySelector('.contact-toggle');
@@ -4859,7 +4850,6 @@ const skillLevels = {
 };
 const projectCards = document.querySelectorAll('.project-card');
 const portfolioNavLinks = document.querySelectorAll('.portfolio-nav a');
-const campaignFilterButtons = document.querySelectorAll('.campaign-filter-button');
 const projectModal = document.querySelector('.project-modal');
 const projectModalBox = document.querySelector('.project-modal-box');
 const projectModalClose = document.querySelector('.project-modal-close');
@@ -4904,127 +4894,18 @@ function setupSkillLogoFallbacks(){
   });
 }
 
-function getCampaignViewType(text){
-  return /코삭|kosac|cosac|코다|koda/i.test(text.normalize('NFC')) ? 'pdf' : 'video';
-}
-
-function getCampaignLabels(text){
-  const normalizedText = text.normalize('NFC').toLowerCase();
-
-  if(/코삭|kosac|cosac|코다|koda/i.test(normalizedText)){
-    return ['제안서'];
-  }
-
-  if(/알바몬\s*(2026|26)|(2026|26)\s*알바몬|albamon\s*(2026|26)|(2026|26)\s*albamon/.test(normalizedText)){
-    return ['브랜드 캠페인','AI'];
-  }
-
-  if(/클리오|clio/.test(normalizedText)) return ['AI'];
-  if(/lvmh/.test(normalizedText)) return ['리뷰'];
-  if(/알바몬|albamon|카누|kanu/.test(normalizedText)) return ['브랜드 캠페인'];
-
-  const labels = ['브랜드 캠페인'];
-  return [...new Set(labels)];
-}
-
-function setCampaignLabel(card, sourceText){
-  const info = card.querySelector('.project-info');
-  if(!info) return;
-
-  const actions = getProjectActions(card);
-  let labelGroup = card.querySelector('.project-labels');
-  if(!labelGroup){
-    labelGroup = document.createElement('div');
-    labelGroup.className = 'project-labels';
-    actions.appendChild(labelGroup);
-  }
-
-  const campaignLabels = card.classList.contains('roas-card') ? ['광고 운영 성과'] : getCampaignLabels(sourceText);
-  labelGroup.innerHTML = '';
-
-  campaignLabels.forEach((campaignLabel)=>{
-    const label = document.createElement('span');
-    label.className = 'project-label';
-    label.innerText = campaignLabel;
-    labelGroup.appendChild(label);
-  });
-
-  card.dataset.labels = campaignLabels.join('|');
-}
-
-function setCampaignViewButton(card, sourceText){
-  const actions = getProjectActions(card);
-  const assetUrl = card.dataset.assetUrl?.trim() || '';
-
-  let button = card.querySelector('.project-view-button');
-  if(!button){
-    button = document.createElement('a');
-    button.className = 'project-view-button';
-    button.target = '_blank';
-    button.rel = 'noopener noreferrer';
-    actions.insertBefore(button, actions.firstChild);
-  }
-
-  const viewType = getCampaignViewType(sourceText);
-  button.innerText = card.dataset.assetLabel || (viewType === 'pdf' ? 'PDF 보기' : '영상 보기');
-  button.classList.toggle('pdf', viewType === 'pdf');
-  button.dataset.viewType = viewType;
-  button.hidden = !assetUrl;
-  button.dataset.assetUrl = assetUrl;
-  button.href = assetUrl || '#';
-}
-
-function getProjectActions(card){
-  const info = card.querySelector('.project-info');
-  let actions = card.querySelector('.project-actions');
-
-  if(!actions && info){
-    actions = document.createElement('div');
-    actions.className = 'project-actions';
-    info.appendChild(actions);
-  }
-
-  return actions;
-}
-
-function filterCampaignCards(filter){
-  const activeFilter = filter || 'all';
-  const hasVisibleCards = Array.from(projectCards).some((card)=>{
-    const labels = (card.dataset.labels || '').split('|').filter(Boolean);
-    return activeFilter === 'all' || labels.includes(activeFilter);
-  });
-
-  projectCards.forEach((card)=>{
-    const labels = (card.dataset.labels || '').split('|').filter(Boolean);
-    const isVisible = activeFilter === 'all' || !hasVisibleCards || labels.includes(activeFilter);
-    card.classList.toggle('hidden-by-filter', !isVisible);
-  });
-}
-
+// 성과 카드의 공통 라벨만 생성합니다. 소재와 그래프는 각 미리보기 버튼으로 엽니다.
 function setupCampaignCards(){
-  projectCards.forEach((card)=>{
-    const image = card.querySelector('img');
-    const title = card.querySelector('.project-title');
-    const sourceText = `${image?.src || ''} ${image?.alt || ''} ${title?.innerText || ''}`;
-
-    setCampaignLabel(card, sourceText);
-    setCampaignViewButton(card, sourceText);
+  projectCards.forEach(card=>{
+    const actions = document.createElement('div');
+    actions.className = 'project-actions';
+    actions.innerHTML = '<div class="project-labels"><span class="project-label">광고 운영 성과</span></div>';
+    card.querySelector('.project-info').append(actions);
   });
-
-  const activeFilter = document.querySelector('.campaign-filter-button.active')?.dataset.filter || 'all';
-  filterCampaignCards(activeFilter);
 }
 
 setupSkillLogoFallbacks();
 setupCampaignCards();
-
-campaignFilterButtons.forEach((button)=>{
-  button.addEventListener('click',()=>{
-    campaignFilterButtons.forEach((item)=>item.classList.remove('active'));
-    button.classList.add('active');
-    filterCampaignCards(button.dataset.filter);
-  });
-});
 
 function reorderPortfolioSections(){
   const heroSection = document.querySelector('.hero');
@@ -5121,6 +5002,7 @@ revealTargets.forEach((item,index)=>{
 });
 
 function spawnTalentKeyword(){
+  if(document.hidden || keywordCloud?.getClientRects().length === 0) return;
   if(!keywordCloud || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     return;
   }
@@ -5258,19 +5140,11 @@ function getKeywordPoint(keywordText = '', keywordSize = 13){
     });
 
     if(!isInsideHeroText && !overlapsActiveKeyword){
-      rememberKeywordPoint(point);
       return point;
     }
   }
 
   return null;
-}
-
-function rememberKeywordPoint(point){
-  recentKeywordPoints.push(point);
-  if(recentKeywordPoints.length > 5){
-    recentKeywordPoints.shift();
-  }
 }
 
 function startTalentKeywords(){
@@ -5372,9 +5246,11 @@ document.querySelectorAll('.creative-video-preview').forEach(button=>{
   });
 });
 function closeProjectModal(){
-  creativeVideo.pause();
-  creativeVideo.removeAttribute('src');
-  creativeVideo.load();
+  if(creativeVideo.hasAttribute('src')){
+    creativeVideo.pause();
+    creativeVideo.removeAttribute('src');
+    creativeVideo.load();
+  }
   creativeVideo.hidden = true;
   projectModalImage.hidden = false;
   projectModal.classList.remove('active');
@@ -5383,26 +5259,11 @@ function closeProjectModal(){
 }
 
 projectCards.forEach(card=>{
-  if(card.classList.contains('roas-card')){
-    card.querySelector('.roas-preview').addEventListener('click',()=>openProjectModal(card));
-    return;
-  }
-  card.addEventListener('keydown',(event)=>{
-    if(event.target === card && (event.key === 'Enter' || event.key === ' ')){event.preventDefault();openProjectModal(card);}
-  });
-  card.addEventListener('click',()=>{
-    openProjectModal(card);
-  });
+  card.querySelector('.roas-preview').addEventListener('click',()=>openProjectModal(card));
 });
 
 document.querySelectorAll('.creative-preview').forEach(button=>{
   button.addEventListener('click',()=>openProjectModal(button));
-});
-
-document.querySelectorAll('.project-view-button').forEach(button=>{
-  button.addEventListener('click',(e)=>{
-    e.stopPropagation();
-  });
 });
 
 projectModalClose.addEventListener('click', closeProjectModal);
@@ -5629,19 +5490,19 @@ for(let round=0;round<creativeRounds;round++){
 }
 const adconexCover = mixedCreativeImages[0];
 if(adconexCover) document.body.style.setProperty('--adconex-hero-image',`url(${JSON.stringify(adconexCover.src)})`);
-const referenceCollage=document.createElement('div');
-referenceCollage.className='ac-creative-board';
-referenceCollage.setAttribute('aria-hidden','true');
+const creativeBoard=document.createElement('div');
+creativeBoard.className='ac-creative-board';
+creativeBoard.setAttribute('aria-hidden','true');
 mixedCreativeImages.forEach(source=>{
   const picture=document.createElement('img');
   picture.src=source.src;picture.alt='';picture.decoding='async';
   picture.style.objectPosition=source.dataset.heroPosition || 'center';
-  referenceCollage.append(picture);
+  creativeBoard.append(picture);
 });
 const acOpening=document.createElement('div');
 acOpening.className='ac-opening';
 acOpening.innerHTML='<div class="ac-opening-copy"><p>JO HYEONJANG · PORTFOLIO</p><h1><span>언제나</span><span><em>현장이</em> 답이다.</span></h1><small>Scroll Down ↓</small></div>';
-acOpening.prepend(referenceCollage);
+acOpening.prepend(creativeBoard);
 document.querySelector('.hero').prepend(acOpening);
 const acHero = document.querySelector('.hero');
 const acReducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -5656,7 +5517,7 @@ function updateAcOpening(){
   acLastProgress=progress;
   const eased=progress*progress*(3-2*progress);
   acOpening.style.setProperty('--ac-progress',progress.toFixed(4));
-  referenceCollage.style.setProperty('--board-scale',(2.25-1.45*eased).toFixed(4));
+  creativeBoard.style.setProperty('--board-scale',(2.25-1.45*eased).toFixed(4));
 }
 function scheduleAcOpening(){if(!acScrollFrame) acScrollFrame=requestAnimationFrame(updateAcOpening)}
 window.addEventListener('scroll',scheduleAcOpening,{passive:true});
