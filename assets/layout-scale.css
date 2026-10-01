@@ -99,3 +99,15 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile .profil
  body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile .profile-card{grid-template-columns:1fr;gap:24px}
  body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile :is(.profile-title,.profile-copy,.profile-keywords){grid-column:1;grid-row:auto}
 }
+
+/* Profile alignment and explicit contrast in both Goldenax color modes. */
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) .gx-about-track #profile{--profile-ink:#f5f5f5;--profile-muted:#c5c5c5;width:100%;max-width:1368px;margin:0 auto;padding:72px clamp(24px,6vw,80px);box-sizing:border-box;background:#080808;text-align:left;display:block}
+body.goldenax-theme.light-mode:not(.adconex-theme):not(.motherbrain-theme) .gx-about-track #profile{--profile-ink:#151515;--profile-muted:#454545;background:#fff}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile>:is(.section-heading,.section-intro,.profile-layout){position:relative;left:auto;right:auto;top:auto;transform:none;width:100%;max-width:none;margin-left:0;margin-right:0;text-align:left;opacity:1}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile .section-heading{color:var(--profile-ink);-webkit-text-fill-color:var(--profile-ink);background:none;-webkit-text-stroke:0}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile .section-heading .title-outline{background:none;color:#e60021;-webkit-text-fill-color:#e60021;-webkit-text-stroke:0}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile .profile-title{color:var(--profile-ink);-webkit-text-fill-color:var(--profile-ink);opacity:1}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile :is(.section-intro,.profile-copy,.profile-keywords span){color:var(--profile-muted);-webkit-text-fill-color:var(--profile-muted);opacity:1}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile .profile-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:40px}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile .profile-kicker{background:none;border:0;border-radius:0;padding:0;justify-self:start}
+@media(max-width:820px){body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme) #profile .profile-card{grid-template-columns:1fr}}
