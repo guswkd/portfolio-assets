@@ -5619,12 +5619,14 @@ try{storedPortfolioVersion=localStorage.getItem(portfolioVersionKey)}catch(error
 const linkedPortfolioVersion = new URLSearchParams(location.search).get('version');
 setPortfolioVersion(Object.hasOwn(portfolioVersions,linkedPortfolioVersion||'') ? linkedPortfolioVersion :
   Object.hasOwn(portfolioVersions,storedPortfolioVersion||'') ? storedPortfolioVersion : 'goldenax');
-const adconexCover = document.querySelector('.project-card img');
+// 현장 밖의 장식 이미지는 광고 소재에서만 가져옵니다. 성과 그래프는 재사용하지 않습니다.
+const creativeImageSelector = '#campaign .brand-creative-grid img';
+const adconexCover = document.querySelector(creativeImageSelector);
 if(adconexCover) document.body.style.setProperty('--adconex-hero-image',`url(${JSON.stringify(adconexCover.src)})`);
 const referenceCollage=document.createElement('div');
 referenceCollage.className='ac-reference-collage';
 referenceCollage.setAttribute('aria-hidden','true');
-Array.from(document.querySelectorAll('.project-card img')).slice(0,4).forEach(source=>{
+Array.from(document.querySelectorAll(creativeImageSelector)).slice(0,4).forEach(source=>{
   const picture=document.createElement('img');
   picture.src=source.src;picture.alt='';picture.loading='lazy';
   referenceCollage.append(picture);
@@ -5721,7 +5723,7 @@ if(document.body.classList.contains('goldenax-theme')){
     const windowElement = document.createElement('div');
     windowElement.className = 'gx-about-window';
     windowElement.setAttribute('aria-hidden','true');
-    const source = document.querySelector('.project-card img');
+    const source = document.querySelector(creativeImageSelector);
     if(source){
       const backdrop = document.createElement('img');
       backdrop.src = source.currentSrc || source.src;
