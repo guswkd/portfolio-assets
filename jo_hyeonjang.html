@@ -4365,16 +4365,12 @@ body.normal-theme .experience-card{height:auto;min-width:0}
 </style>
 <style>
 /* Blend the monochrome PNG paper into each tile without altering its artwork. */
-body #skills .skills-sidebar .skill-tab[data-name="ChatGPT"] img{width:72px;height:72px;max-width:70%;max-height:70%;object-fit:contain;mix-blend-mode:multiply;filter:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
-body:not(.light-mode) #skills .skills-sidebar .skill-tab[data-name="ChatGPT"] img{filter:invert(1);mix-blend-mode:screen}
 </style>
 <style>
 body.normal-theme #skills .skills-layout{--normal-board:440px;grid-template-columns:var(--normal-board) minmax(0,1fr);height:auto;align-items:start}
 body.normal-theme #skills .skills-sidebar{width:var(--normal-board);height:var(--normal-board);min-height:0;aspect-ratio:1;padding:0;margin:0;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
 body.normal-theme #skills .skills-sidebar .skill-tab{width:100%;height:100%;min-height:0;box-sizing:border-box;aspect-ratio:1;transform:none!important}
 body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;box-sizing:border-box}
-body #skills .skills-sidebar .skill-tab[data-name="ChatGPT"] img{width:56px;height:56px;mix-blend-mode:normal!important;filter:none}
-body:not(.light-mode) #skills .skills-sidebar .skill-tab[data-name="ChatGPT"] img{filter:invert(1);mix-blend-mode:normal!important}
 @media(min-width:821px) and (max-width:1100px){body.normal-theme #skills .skills-layout{--normal-board:360px}body.normal-theme #skills .skill-detail{height:360px;padding:24px}}
 @media(max-width:820px){body.normal-theme #skills .skills-layout{grid-template-columns:minmax(0,1fr)}body.normal-theme #skills .skills-sidebar{width:100%;max-width:440px;height:auto;aspect-ratio:1}body.normal-theme #skills .skill-detail{height:460px}}
 </style></head>
@@ -4543,9 +4539,9 @@ body:not(.light-mode) #skills .skills-sidebar .skill-tab[data-name="ChatGPT"] im
         <span class="skill-logo-fallback">Pr</span>
       </div>
 
-      <div class="skill-tab" data-name="ChatGPT">
-        <img src="assets/logos/chatgpt-transparent.png" alt="ChatGPT" width="128" height="128" loading="lazy" title="ChatGPT — OpenAI">
-        <span class="skill-logo-fallback">GPT</span>
+      <div class="skill-tab" data-name="Illustrator">
+        <img src="assets/logos/illustrator.svg" alt="Illustrator" width="128" height="128" loading="lazy">
+        <span class="skill-logo-fallback">Ai</span>
       </div>
     </div>
 
@@ -4864,7 +4860,7 @@ const skillBarometerFill = document.querySelector('.skill-barometer-fill');
 const skillScaleLabels = document.querySelectorAll('.skill-scale-labels span');
 // 일반 도구만 숙련도를 표시하고 광고 매체에는 등급을 표시하지 않습니다.
 const skillLevels = {
-  'PowerPoint': '상', 'Excel': '상', 'ChatGPT': '상',
+  'PowerPoint': '상', 'Excel': '상', 'Illustrator': '중상',
   'Photoshop': '중', 'Premiere Pro': '중'
 };
 const projectCards = document.querySelectorAll('.project-card');
@@ -4982,10 +4978,10 @@ const skillCopy = {
     "title": "숏폼·디지털 광고 영상 편집",
     "description": "숏폼 및 디지털 광고 영상 편집\n컷 편집, 자막과 기본 모션 작업"
   },
-  "ChatGPT": {
-    "category": "업무 보조",
-    "title": "리서치·아이디어·기획 구조화",
-    "description": "시장·경쟁사 리서치와 아이데이션\n카피 베리에이션 및 기획 구조화"
+  "Illustrator": {
+    "category": "제작",
+    "title": "제안 시안·광고 소재 수정",
+    "description": "벡터 그래픽과 광고 레이아웃 작업\n제안 시안 제작·소재 수정·도식화"
   }
 };
 
