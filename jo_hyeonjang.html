@@ -4363,6 +4363,11 @@ body.normal-theme .experience-grid{height:auto;grid-auto-rows:auto;align-items:s
 body.normal-theme .experience-card{height:auto;min-width:0}
 @media(max-width:820px){body.normal-theme :is(#profile,#skills,#experience,#campaign){padding-block:60px}body.normal-theme .experience-grid{grid-template-columns:1fr}body.normal-theme .profile-card,body.normal-theme .skill-detail{padding:24px}}
 </style>
+<style>
+/* Blend the monochrome PNG paper into each tile without altering its artwork. */
+body #skills .skills-sidebar .skill-tab[data-name="ChatGPT"] img{width:72px;height:72px;max-width:70%;max-height:70%;object-fit:contain;mix-blend-mode:multiply;filter:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+body:not(.light-mode) #skills .skills-sidebar .skill-tab[data-name="ChatGPT"] img{filter:invert(1);mix-blend-mode:screen}
+</style>
 </head>
 
 <body class="goldenax-theme">
