@@ -1,0 +1,44 @@
+/* ilgram: monochrome surfaces, green accents and elliptical hero forms. */
+@import url('https://vendor-cdn.imweb.me/css/spocahansans.css');
+.company-logo-ilgram{display:none!important}
+body.goldenax-theme.ilgram-theme{--gx-accent:#01d176;--gx-bg:#fff;--gx-text:#111;--gx-muted:#666;--gx-surface:#f6f6f6;--gx-raised:#eee;--gx-line:#ddd;font-family:'Spoqa Han Sans','Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:#fff;color:#111}
+body.goldenax-theme.ilgram-theme :is(h1,h2,h3,h4,button,a){font-family:inherit}
+body.goldenax-theme.ilgram-theme .site-header{height:72px;background:#fff;transform:none!important;visibility:visible;pointer-events:auto;border-bottom:1px solid #eee}
+body.goldenax-theme.ilgram-theme .company-brand{left:24px;top:10px;transform:none}
+body.goldenax-theme.ilgram-theme .company-brand img{display:none!important}
+body.goldenax-theme.ilgram-theme .company-brand .company-logo-ilgram{display:block!important;width:110px;height:50px;object-fit:contain;filter:none}
+body.goldenax-theme.ilgram-theme .site-header .portfolio-nav{height:72px;transform:none!important;background:transparent;justify-content:flex-end;padding:0 32px 0 170px;gap:36px}
+body.goldenax-theme.ilgram-theme .portfolio-nav a{font-size:20px;color:#111;font-weight:700}
+body.goldenax-theme.ilgram-theme .site-header .header-contact-button{display:block!important;color:#111;border:0;background:none;font-size:20px;font-weight:700;padding:0}
+body.goldenax-theme.ilgram-theme :is(.contact-toggle,.gx-about-window,.mb-chapter-object){display:none!important}
+body.goldenax-theme.ilgram-theme .hero{position:relative;isolation:isolate;min-height:100svh;padding-top:72px;background:#000!important;overflow:hidden}
+body.goldenax-theme.ilgram-theme .hero::before{content:'';position:absolute;inset:90px 3vw 32px;z-index:0;background:radial-gradient(ellipse 17% 50% at 16% 50%,#111 99%,transparent 100%),radial-gradient(ellipse 17% 50% at 33% 50%,#111 99%,transparent 100%),radial-gradient(ellipse 17% 50% at 50% 50%,#111 99%,transparent 100%),radial-gradient(ellipse 17% 50% at 67% 50%,#111 99%,transparent 100%),radial-gradient(ellipse 17% 50% at 84% 50%,#111 99%,transparent 100%);pointer-events:none}
+body.goldenax-theme.ilgram-theme .hero-copy{z-index:2;--hero-line:transparent}
+body.goldenax-theme.ilgram-theme .hero-cell{color:#fff;-webkit-text-fill-color:#fff;-webkit-text-stroke:0;border-color:transparent;background:transparent;text-shadow:none}
+body.goldenax-theme.ilgram-theme .hero-cell.hero-accent{color:#01d176;-webkit-text-fill-color:#01d176}
+body.goldenax-theme.ilgram-theme .keyword-cloud{display:block;z-index:1}
+body.goldenax-theme.ilgram-theme .talent-keyword{color:#fff}
+body.goldenax-theme.ilgram-theme .scroll-indicator{color:#01d176;border-color:#01d176}
+body.goldenax-theme.ilgram-theme .gx-about-track{height:auto;min-height:0}
+body.goldenax-theme.ilgram-theme .gx-about-track .profile-section{position:relative;height:auto;min-height:0;padding:100px 6vw;background:#fff}
+body.goldenax-theme.ilgram-theme .gx-about-track .profile-layout{opacity:1;transform:none}
+body.goldenax-theme.ilgram-theme .gx-about-track .profile-title{background:none;color:#111;-webkit-text-fill-color:#111}
+body.goldenax-theme.ilgram-theme .gx-about-track :is(.section-heading,.profile-copy,.profile-quote-source){color:#111}
+body.goldenax-theme.ilgram-theme .title-outline{--chapter-fill-color:#01b969}
+body.goldenax-theme.ilgram-theme :is(.experience-card,.project-card,.skill-tab,.skill-detail){border-radius:0;box-shadow:none}
+body.goldenax-theme.ilgram-theme #skills::before{display:none}
+body.goldenax-theme.ilgram-theme #skills{background:#111;color:#fff;--gx-text:#fff;--gx-muted:#ccc;--gx-surface:#171717}
+body.goldenax-theme.ilgram-theme #skills :is(.section-heading,.section-intro,.skill-name,.skill-description,.skill-detail-card h4,.skill-detail-card p){color:#fff!important}
+body.goldenax-theme.ilgram-theme #skills .section-heading .title-outline{--chapter-fill-color:#01d176;--chapter-base-color:#999}
+body.goldenax-theme.ilgram-theme #skills .skill-tab.active{border-color:#01d176}
+body.goldenax-theme.ilgram-theme .scroll-progress-bar{background:#01d176}
+@media(max-width:820px){
+ body.goldenax-theme.ilgram-theme .site-header{height:64px}
+ body.goldenax-theme.ilgram-theme .company-brand{left:18px;top:8px}
+ body.goldenax-theme.ilgram-theme .company-brand .company-logo-ilgram{width:96px;height:46px}
+ body.goldenax-theme.ilgram-theme .header-menu-toggle{display:flex;color:#111;top:10px}
+ body.goldenax-theme.ilgram-theme .site-header .portfolio-nav{display:none}
+ body.goldenax-theme.ilgram-theme.header-menu-open .site-header .portfolio-nav{display:flex;position:fixed;inset:64px 0 0;height:calc(100svh - 64px);padding:32px;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:28px;background:#fff}
+ body.goldenax-theme.ilgram-theme .hero{padding-top:64px}
+}
+@media(prefers-reduced-motion:reduce){body.goldenax-theme.ilgram-theme .keyword-cloud{display:none}}

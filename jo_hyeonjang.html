@@ -4373,7 +4373,7 @@ body.normal-theme #skills .skills-sidebar .skill-tab{width:100%;height:100%;min-
 body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;box-sizing:border-box}
 @media(min-width:821px) and (max-width:1100px){body.normal-theme #skills .skills-layout{--normal-board:360px}body.normal-theme #skills .skill-detail{height:360px;padding:24px}}
 @media(max-width:820px){body.normal-theme #skills .skills-layout{grid-template-columns:minmax(0,1fr)}body.normal-theme #skills .skills-sidebar{width:100%;max-width:440px;height:auto;aspect-ratio:1}body.normal-theme #skills .skill-detail{height:460px}}
-</style></head>
+</style><link rel="stylesheet" href="assets/ilgram.css?v=20261028"></head>
 
 <body class="goldenax-theme">
 
@@ -4389,6 +4389,7 @@ body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;
   <button class="header-contact-button" type="button"><span class="default-contact-copy">CONTACT</span><span class="ac-contact-copy">Conex us</span></button>
 </nav>
 <div class="company-brand">
+  <img class="company-logo-ilgram" src="assets/ilgram-logo.png" alt="일그램" width="110" height="50">
   <img class="company-logo-goldenax theme-swap-logo" src="assets/logos/goldenax.png" data-dark-src="assets/logos/goldenax.png" data-light-src="assets/logos/goldenax-color.png" alt="골드넥스" width="56" height="30">
   <img class="company-logo-adconex" src="assets/logos/adconex-header-official.png" alt="애드커넥스" width="156" height="47">
   <img class="company-logo-motherbrain" src="assets/logos/motherbrain.png" alt="마더브레인" width="142" height="36">
@@ -5429,14 +5430,13 @@ window.addEventListener('keydown',event=>{
 // 버전 추가 시 이 목록과 해당 CSS 클래스를 추가하세요.
 const portfolioVersions = {
   normal:{className:'normal-theme',label:'Normal'},
-  adconex:{className:'adconex-theme',label:'ADCONEX'},
-  motherbrain:{className:'motherbrain-theme',label:'mother brain'},
+  ilgram:{className:'ilgram-theme',label:'일그램'},
   goldenax:{className:'',label:'Goldenax'}
 };
 const portfolioVersionKey = 'portfolio-visual-version-v1';
 function setPortfolioVersion(name,remember=false){
   if(!Object.hasOwn(portfolioVersions,name)) return false;
-  document.body.classList.remove('adconex-theme','motherbrain-theme','normal-theme','gx-red-scene');
+  document.body.classList.remove('adconex-theme','motherbrain-theme','ilgram-theme','normal-theme','gx-red-scene');
   document.body.classList.toggle('goldenax-theme',name !== 'normal');
   const selected = portfolioVersions[name];
   if(selected.className) document.body.classList.add(selected.className);
@@ -5454,7 +5454,7 @@ function setPortfolioVersion(name,remember=false){
 let storedPortfolioVersion;
 try{storedPortfolioVersion=localStorage.getItem(portfolioVersionKey)}catch(error){}
 const requestedPortfolioVersion = new URLSearchParams(location.search).get('version');
-const linkedPortfolioVersion = requestedPortfolioVersion === 'nm' ? 'normal' : requestedPortfolioVersion;
+const linkedPortfolioVersion = requestedPortfolioVersion === 'nm' ? 'normal' : requestedPortfolioVersion === 'ig' ? 'ilgram' : requestedPortfolioVersion;
 setPortfolioVersion(Object.hasOwn(portfolioVersions,linkedPortfolioVersion||'') ? linkedPortfolioVersion :
   Object.hasOwn(portfolioVersions,storedPortfolioVersion||'') ? storedPortfolioVersion : 'goldenax');
 // 현장 밖의 장식 이미지는 광고 소재에서만 가져옵니다. 성과 그래프는 재사용하지 않습니다.
@@ -5522,13 +5522,13 @@ scheduleAcOpening();
 const versionDialog = document.createElement('dialog');
 versionDialog.className='version-command';
 versionDialog.setAttribute('aria-label','포트폴리오 버전 전환');
-versionDialog.innerHTML='<form><label for="portfolio-version-command">버전 명령</label><input id="portfolio-version-command" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="gn / ac / mb / nm"><p role="status">gn, ac, mb 또는 nm를 입력하세요.</p><div class="version-command-actions"><button type="button">취소</button><button type="submit">전환</button></div></form>';
+versionDialog.innerHTML='<form><label for="portfolio-version-command">버전 명령</label><input id="portfolio-version-command" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="gn / ig / nm"><p role="status">gn, ig 또는 nm를 입력하세요.</p><div class="version-command-actions"><button type="button">취소</button><button type="submit">전환</button></div></form>';
 document.body.append(versionDialog);
 const versionInput=versionDialog.querySelector('input');
 function openVersionCommand(){
   if(versionDialog.open) return;
   versionInput.value='';
-  versionDialog.querySelector('[role="status"]').textContent='gn, ac, mb 또는 nm를 입력하세요.';
+  versionDialog.querySelector('[role="status"]').textContent='gn, ig 또는 nm를 입력하세요.';
   versionDialog.showModal();
   versionInput.focus();
 }
@@ -5536,9 +5536,9 @@ versionDialog.querySelector('button[type="button"]').addEventListener('click',()
 versionDialog.querySelector('form').addEventListener('submit',event=>{
   event.preventDefault();
   const command = versionInput.value.trim().toLowerCase();
-  const version = command === 'gn' ? 'goldenax' : command === 'ac' ? 'adconex' : command === 'mb' ? 'motherbrain' : command === 'nm' ? 'normal' : '';
+  const version = command === 'gn' ? 'goldenax' : command === 'ig' ? 'ilgram' : command === 'nm' ? 'normal' : '';
   if(version && setPortfolioVersion(version,true)) versionDialog.close();
-  else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: gn / ac / mb / nm';
+  else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: gn / ig / nm';
 });
 // gn은 버전 선택창을 여는 고정 히든 명령입니다. 테마 선택은 창 안에서만 합니다.
 let versionKeyBuffer = '';
@@ -5607,7 +5607,7 @@ if(document.getElementById('profile')){
   function renderScrollBackground(){
     backgroundFrame = 0;
     const light = document.body.classList.contains('light-mode');
-    const neutralTheme = document.body.classList.contains('normal-theme') || document.body.classList.contains('adconex-theme') || document.body.classList.contains('motherbrain-theme');
+    const neutralTheme = document.body.classList.contains('normal-theme') || document.body.classList.contains('ilgram-theme') || document.body.classList.contains('adconex-theme') || document.body.classList.contains('motherbrain-theme');
     document.body.style.setProperty('--gx-scroll-bg',light || neutralTheme ? '#fff' : '#000');
     if(neutralTheme){
       document.body.classList.remove('gx-red-scene');
