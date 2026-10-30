@@ -41,7 +41,48 @@ body.goldenax-theme.ilgram-theme .scroll-progress-bar{background:#01d176}
  body.goldenax-theme.ilgram-theme.header-menu-open .site-header .portfolio-nav{display:flex;position:fixed;inset:64px 0 0;height:calc(100svh - 64px);padding:32px;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:28px;background:#fff}
  body.goldenax-theme.ilgram-theme .hero{padding-top:64px}
 }
-@media(prefers-reduced-motion:reduce){body.goldenax-theme.ilgram-theme .keyword-cloud{display:none}}
+/* Slow background motion keeps the headline stable and readable. */
+body.goldenax-theme.ilgram-theme .hero::before{
+ animation:ilgram-unfold 1.5s cubic-bezier(.22,1,.36,1) both,
+   ilgram-orbit 14s ease-in-out 1.5s infinite alternate;
+ transform-origin:50% 50%;
+}
+body.goldenax-theme.ilgram-theme .hero-copy.hero-grid-sequence .hero-cell>span{
+ animation:ilgram-type-in 1.15s cubic-bezier(.22,1,.36,1) both;
+}
+body.goldenax-theme.ilgram-theme .hero-copy.hero-grid-sequence .hero-cell:nth-child(-n+3)>span{animation-delay:.4s}
+body.goldenax-theme.ilgram-theme .hero-copy.hero-grid-sequence .hero-cell:nth-child(n+4):nth-child(-n+6)>span{animation-delay:.7s}
+body.goldenax-theme.ilgram-theme .hero-copy.hero-grid-sequence .hero-cell:nth-child(n+7)>span{animation-delay:1s}
+body.goldenax-theme.ilgram-theme .keyword-cloud{animation:ilgram-soft-in 1.2s ease 1.2s both}
+body.goldenax-theme.ilgram-theme .scroll-indicator{animation:ilgram-soft-in .8s ease 1.8s both}
+body.goldenax-theme.ilgram-theme .talent-keyword{
+ color:#b9e8d0;filter:none;text-shadow:0 0 16px rgba(1,209,118,.18);
+ animation-name:ilgram-keyword-glow;
+}
+@keyframes ilgram-unfold{
+ from{transform:translate3d(0,5%,0) rotate(-8deg) scale(.68);opacity:0}
+ to{transform:translate3d(-1.5%,1%,0) rotate(-4deg) scale(.96);opacity:.7}
+}
+@keyframes ilgram-soft-in{from{opacity:0}to{opacity:1}}
+@keyframes ilgram-orbit{
+ from{transform:translate3d(-1.5%,1%,0) rotate(-4deg) scale(.96);opacity:.7}
+ to{transform:translate3d(1.5%,-1%,0) rotate(4deg) scale(1.06);opacity:1}
+}
+@keyframes ilgram-type-in{
+ from{opacity:0;transform:translate3d(0,24px,0);filter:blur(4px)}
+ to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}
+}
+@keyframes ilgram-keyword-glow{
+ 0%,100%{opacity:0;transform:translate(-50%,-40%)}
+ 22%,70%{opacity:.72;transform:translate(-50%,-50%)}
+ 45%{opacity:.38;transform:translate(-50%,-55%)}
+}
+@media(prefers-reduced-motion:reduce){
+ body.goldenax-theme.ilgram-theme .keyword-cloud{display:none}
+ body.goldenax-theme.ilgram-theme .scroll-indicator,
+ body.goldenax-theme.ilgram-theme .hero::before,
+ body.goldenax-theme.ilgram-theme .hero-copy.hero-grid-sequence .hero-cell>span{animation:none;transform:none;opacity:1;filter:none}
+}
 
 /* Override legacy Goldenax profile rules without changing the archived theme. */
 body.goldenax-theme.ilgram-theme .gx-about-track #profile#profile{
