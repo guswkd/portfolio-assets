@@ -4399,6 +4399,21 @@ body.normal-theme #skills .skills-sidebar .skill-tab{width:100%;height:100%;min-
 body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;box-sizing:border-box}
 @media(min-width:821px) and (max-width:1100px){body.normal-theme #skills .skills-layout{--normal-board:360px}body.normal-theme #skills .skill-detail{height:360px;padding:24px}}
 @media(max-width:820px){body.normal-theme #skills .skills-layout{grid-template-columns:minmax(0,1fr)}body.normal-theme #skills .skills-sidebar{width:100%;max-width:440px;height:auto;aspect-ratio:1}body.normal-theme #skills .skill-detail{height:460px}}
+.bat-intro{display:none}
+body.bat-theme{--gx-accent:#1827b8}
+body.bat-theme .hero{background:#161617;color:white}
+body.bat-theme .hero .hero-grid-sequence{display:none}
+body.bat-theme .bat-intro{display:block;position:relative;z-index:2;text-align:left;width:min(85%,1160px);pointer-events:none}
+.bat-intro small{font:700 clamp(13px,1.1vw,18px)/1.4 Arial,sans-serif;letter-spacing:.1em}
+.bat-intro h1{margin:.3em 0 0;font-size:clamp(46px,8vw,126px);line-height:1.06;letter-spacing:-.065em;color:#fff}
+.bat-intro em{font-style:normal;color:#c0c9ff}
+body.bat-theme .hero .scroll-indicator{color:#fff}
+body.bat-theme.light-mode .site-header .portfolio-nav{inset:0 0 auto;max-width:none;width:auto;min-height:56px;border-radius:0;justify-content:flex-end;padding:0 clamp(12px,4vw,64px);background:white;color:#151515;border:0;border-bottom:1px solid #ddd;gap:clamp(8px,2vw,28px);transform:none;backdrop-filter:none}
+body.bat-theme.light-mode .site-header .portfolio-nav::before{content:"BAT";padding:0;margin-right:auto;color:#121212;font:bold italic clamp(23px,3vw,36px)/1 Arial,sans-serif;letter-spacing:-.09em}
+body.bat-theme.light-mode .site-header .portfolio-nav a{display:inline-flex;opacity:1;max-width:none;min-height:44px;padding:0 2px;color:#151515;font-size:clamp(15px,1.4vw,20px)}
+body.bat-theme .header-menu-toggle,body.bat-theme .header-contact-button{display:none}
+body.bat-theme :is(.experience-card,.skill-tab,.skill-detail){border-radius:2px}
+@media(prefers-reduced-motion:no-preference){body.bat-theme .bat-intro h1{animation:bat-rise .65s ease-out both}@keyframes bat-rise{from{transform:translateY(.2em);opacity:0}to{transform:none;opacity:1}}}
 </style><link rel="stylesheet" href="assets/ilgram.css?v=20261030-heading-scale"></head>
 
 <body class="goldenax-theme">
@@ -4445,6 +4460,7 @@ body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;
 
 
 <section class="hero" id="hero">
+  <div class="bat-intro"><small>BAT / 조현장 포트폴리오</small><h1>언제나<br><em>현장</em>이 답이다.</h1></div>
 
     <!-- EDIT: 첫 화면 배경 키워드 / 실제 단어는 아래 script의 talentKeywords 배열에서 수정 -->
     <div class="keyword-cloud" aria-hidden="true"></div>
@@ -5468,16 +5484,18 @@ window.addEventListener('keydown',event=>{
 // 버전 추가 시 이 목록과 해당 CSS 클래스를 추가하세요.
 const portfolioVersions = {
   normal:{className:'normal-theme',label:'Normal'},
+  bat:{className:'bat-theme',label:'BAT'},
   ilgram:{className:'ilgram-theme',label:'일그램'},
   goldenax:{className:'',label:'Goldenax'}
 };
 const portfolioVersionKey = 'portfolio-visual-version-v1';
 function setPortfolioVersion(name,remember=false){
   if(!Object.hasOwn(portfolioVersions,name)) return false;
-  document.body.classList.remove('adconex-theme','motherbrain-theme','ilgram-theme','normal-theme','gx-red-scene');
-  document.body.classList.toggle('goldenax-theme',name !== 'normal');
+  document.body.classList.remove('adconex-theme','motherbrain-theme','ilgram-theme','normal-theme','bat-theme','gx-red-scene');
+  document.body.classList.toggle('goldenax-theme',name !== 'normal' && name !== 'bat');
   const selected = portfolioVersions[name];
   if(selected.className) document.body.classList.add(selected.className);
+  if(name==='bat') document.body.classList.add('normal-theme');
   document.body.dataset.portfolioVersion = name;
   syncThemeControl();
   if(remember){
@@ -5560,13 +5578,13 @@ scheduleAcOpening();
 const versionDialog = document.createElement('dialog');
 versionDialog.className='version-command';
 versionDialog.setAttribute('aria-label','포트폴리오 버전 전환');
-versionDialog.innerHTML='<form><label for="portfolio-version-command">버전 명령</label><input id="portfolio-version-command" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="gn / ig / nm"><p role="status">gn, ig 또는 nm를 입력하세요.</p><div class="version-command-actions"><button type="button">취소</button><button type="submit">전환</button></div></form>';
+versionDialog.innerHTML='<form><label for="portfolio-version-command">버전 명령</label><input id="portfolio-version-command" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="gn / ig / bat / nm"><p role="status">gn, ig, bat 또는 nm를 입력하세요.</p><div class="version-command-actions"><button type="button">취소</button><button type="submit">전환</button></div></form>';
 document.body.append(versionDialog);
 const versionInput=versionDialog.querySelector('input');
 function openVersionCommand(){
   if(versionDialog.open) return;
   versionInput.value='';
-  versionDialog.querySelector('[role="status"]').textContent='gn, ig 또는 nm를 입력하세요.';
+  versionDialog.querySelector('[role="status"]').textContent='gn, ig, bat 또는 nm를 입력하세요.';
   versionDialog.showModal();
   versionInput.focus();
 }
@@ -5574,9 +5592,9 @@ versionDialog.querySelector('button[type="button"]').addEventListener('click',()
 versionDialog.querySelector('form').addEventListener('submit',event=>{
   event.preventDefault();
   const command = versionInput.value.trim().toLowerCase();
-  const version = command === 'gn' ? 'goldenax' : command === 'ig' ? 'ilgram' : command === 'nm' ? 'normal' : '';
+  const version = command === 'gn' ? 'goldenax' : command === 'ig' ? 'ilgram' : command === 'bat' ? 'bat' : command === 'nm' ? 'normal' : '';
   if(version && setPortfolioVersion(version,true)) versionDialog.close();
-  else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: gn / ig / nm';
+  else versionDialog.querySelector('[role="status"]').textContent='명령을 확인해 주세요: gn / ig / bat / nm';
 });
 // gn은 버전 선택창을 여는 고정 히든 명령입니다. 테마 선택은 창 안에서만 합니다.
 let versionKeyBuffer = '';
