@@ -40,3 +40,16 @@ body.innored-theme #profile .profile-layout,body.innored-theme #campaign#campaig
 body.innored-theme #experience .experience-card{grid-template-columns:1fr;gap:14px}
 body.innored-theme #skills .skills-sidebar{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
+/* The full-page backdrop must not inherit the normal theme's animated grid. */
+body.innored-theme.light-mode,body.innored-theme.light-mode .background{background:#fff}
+body.innored-theme .background::after{display:none}
+body.innored-theme #hero{background-image:linear-gradient(100deg,rgba(8,8,8,.73),rgba(8,8,8,.52)),url("creatives/onska/seongsu-popup-preview.webp");background-size:cover;background-position:center 43%;background-color:#171717}
+body.innored-theme #hero .hero-copy{--hero-line:rgba(255,255,255,.56);filter:none}
+body.innored-theme #hero .hero-cell{background:rgba(0,0,0,.36);color:#fff;-webkit-text-fill-color:currentColor;text-shadow:none}
+body.innored-theme #hero .hero-accent{background:#bd0d19}
+body.innored-theme #hero .talent-keyword,body.innored-theme #hero .cta-arrow-option{color:#fff}
+body.innored-theme #profile .swot-plane{background:#fff;border:1px solid #ddd}
+body.innored-theme #experience{background:#f2f2f2}
+body.innored-theme #campaign{background:white}
+body.innored-theme #skills{background-color:#181818;background-image:radial-gradient(circle at 91% 0%,#f91120 0 clamp(90px,14vw,220px),transparent calc(clamp(90px,14vw,220px) + 1px))}
+@media(max-width:780px){body.innored-theme #skills{background-image:radial-gradient(circle at 100% 0%,#f91120 0 52px,transparent 53px)}}
