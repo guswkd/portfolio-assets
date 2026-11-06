@@ -4332,20 +4332,23 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme):not(.ilgram-them
 }
 </style>
 <style>
-#profile .swot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:0;width:100%;text-align:left;border-top:2px solid currentColor}
-#profile .swot-item{padding:clamp(20px,3vw,40px) 0;border-bottom:1px solid currentColor;min-width:0}
-#profile .swot-item:nth-child(odd){padding-right:clamp(18px,3vw,40px);border-right:1px solid currentColor}
-#profile .swot-item:nth-child(even){padding-left:clamp(18px,3vw,40px)}
-#profile .swot-item dt{display:flex;align-items:baseline;gap:10px;font-size:15px;font-weight:700}
-#profile .swot-item dt b{font-size:clamp(28px,3vw,44px);line-height:1;color:var(--gx-accent,currentColor)}
-#profile .swot-score{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
-#profile .swot-meter{display:inline-block;width:clamp(70px,8vw,104px);height:8px;background:linear-gradient(to right,currentColor var(--fill),transparent var(--fill)),linear-gradient(currentColor,currentColor);background-color:transparent;background-size:100% 100%,100% 1px;background-position:left center;background-repeat:no-repeat;-webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 3px),transparent calc(20% - 3px) 20%);mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 3px),transparent calc(20% - 3px) 20%)}
-#profile .swot-item dd{margin:14px 0 0;font-size:clamp(15px,1.2vw,18px);line-height:1.7;word-break:keep-all;overflow-wrap:break-word}
-#profile .swot-item strong{display:block;margin-bottom:6px;font-size:clamp(19px,2vw,28px);line-height:1.35}
-@media(max-width:600px){
- #profile .swot-grid{grid-template-columns:1fr}
- #profile .swot-item:nth-child(n){padding:20px 0;border-right:0}
+/* SWOT shares the chapter's text color and each version's accent. */
+#profile{
+  --swot-accent:var(--gx-accent,#93c5fd);
+  --swot-line:color-mix(in srgb,currentColor 18%,transparent);
 }
+body.normal-theme.light-mode #profile{--swot-accent:#345785}
+#profile .swot-legend{display:block;margin-top:8px;font-size:.82em;font-weight:500;letter-spacing:.015em}
+#profile .swot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(24px,4vw,64px);margin:0;width:100%;text-align:left;color:var(--profile-ink,inherit)}
+#profile .swot-item{padding:clamp(22px,2.6vw,36px) 0;min-width:0;border-top:1px solid var(--swot-line)}
+#profile .swot-item dt{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700}
+#profile .swot-item dt b{display:grid;place-items:center;width:2em;height:2em;border-radius:var(--gx-radius,9px);font-size:15px;line-height:1;color:inherit;background:color-mix(in srgb,var(--swot-accent) 15%,transparent)}
+body.ilgram-theme #profile .swot-item dt b{border-radius:0}
+#profile .swot-score{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+#profile .swot-meter{display:block;width:clamp(76px,8vw,110px);height:6px;border-radius:2px;background:linear-gradient(to right,var(--swot-accent) var(--fill),var(--swot-line) var(--fill));-webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 2px),transparent calc(20% - 2px) 20%);mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 2px),transparent calc(20% - 2px) 20%)}
+#profile .swot-item dd{margin:16px 0 0;font-size:clamp(15px,1.15vw,18px);line-height:1.75;word-break:keep-all;overflow-wrap:anywhere;color:var(--profile-muted,inherit)}
+#profile .swot-item strong{display:block;margin-bottom:7px;font-size:clamp(19px,1.8vw,26px);letter-spacing:-.035em;line-height:1.35;color:var(--profile-ink,inherit)}
+@media(max-width:600px){#profile .swot-grid{grid-template-columns:1fr}}
 /* One signature responsibility per experience; the other tags stay neutral. */
 #experience .exp-meta .role-key{
   background:var(--role-ink,#334155);border-color:var(--role-ink,#334155);color:#fff;font-weight:700;
@@ -4480,7 +4483,7 @@ body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;
   <h2 class="section-heading">
     현재의 <span class="title-outline">조현장</span>
   </h2>
-  <p class="section-intro">캠페인을 운영하며 돌아본 나의 SWOT<br>업무에 미치는 영향 · 정성 평가 · 1 낮음 — 3 보통 — 5 높음</p>
+  <p class="section-intro">캠페인을 운영하며 돌아본 나의 SWOT<span class="swot-legend">업무에 미치는 영향 · 정성 평가　1 낮음 / 3 보통 / 5 높음</span></p>
 
   <div class="profile-layout">
 
