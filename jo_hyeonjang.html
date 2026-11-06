@@ -4421,7 +4421,7 @@ body.bat-theme .bat-logo{display:block;width:clamp(36px,4vw,49px);height:auto;co
 body.bat-theme.light-mode .site-header .portfolio-nav a{display:inline-flex;opacity:1;max-width:none;min-height:44px;padding:0 2px;color:#fff;font-size:clamp(15px,1.4vw,20px)}
 body.bat-theme .header-menu-toggle,body.bat-theme .header-contact-button{display:none}
 body.bat-theme :is(.experience-card,.skill-tab,.skill-detail){border-radius:2px}
-</style><link rel="stylesheet" href="assets/ilgram.css?v=shared-grid-2"></head>
+</style><link rel="stylesheet" href="assets/ilgram.css?v=shared-grid-2"><link rel="stylesheet" href="assets/innored-interiors.css?v=1"></head>
 
 <body class="goldenax-theme">
 
@@ -5509,7 +5509,7 @@ function setPortfolioVersion(name,remember=false){
   document.body.classList.toggle('goldenax-theme',name !== 'normal' && name !== 'bat' && name !== 'innored');
   const selected = portfolioVersions[name];
   if(selected.className) document.body.classList.add(selected.className);
-  if(name==='bat'||name==='innored') document.body.classList.add('normal-theme');
+  if(name==='bat') document.body.classList.add('normal-theme');
   document.body.dataset.portfolioVersion = name;
   syncThemeControl();
   if(remember){
@@ -5677,7 +5677,7 @@ if(document.getElementById('profile')){
   function renderScrollBackground(){
     backgroundFrame = 0;
     const light = document.body.classList.contains('light-mode');
-    const neutralTheme = document.body.classList.contains('normal-theme') || document.body.classList.contains('ilgram-theme') || document.body.classList.contains('adconex-theme') || document.body.classList.contains('motherbrain-theme');
+    const neutralTheme = document.body.classList.contains('innored-theme') || document.body.classList.contains('normal-theme') || document.body.classList.contains('ilgram-theme') || document.body.classList.contains('adconex-theme') || document.body.classList.contains('motherbrain-theme');
     document.body.style.setProperty('--gx-scroll-bg',light || neutralTheme ? '#fff' : '#000');
     if(neutralTheme){
       document.body.classList.remove('gx-red-scene');
