@@ -53,3 +53,36 @@ body.innored-theme #experience{background:#f2f2f2}
 body.innored-theme #campaign{background:white}
 body.innored-theme #skills{background-color:#181818;background-image:radial-gradient(circle at 91% 0%,#f91120 0 clamp(90px,14vw,220px),transparent calc(clamp(90px,14vw,220px) + 1px))}
 @media(max-width:780px){body.innored-theme #skills{background-image:radial-gradient(circle at 100% 0%,#f91120 0 52px,transparent 53px)}}
+/* Campaign navigation, reading surfaces and closing contact share the same visual vocabulary. */
+.ir-ending,.ir-dismiss{display:none}
+body.innored-theme{--ir-red:#f91120;--ir-ink:#191919;--ir-paper:#f2f2f2}
+body.innored-theme.light-mode .scroll-progress-bar{background:var(--ir-red);box-shadow:none;animation:none}
+body.innored-theme .site-header{background:rgba(20,20,20,.96)}
+body.innored-theme.header-menu-open .site-header{background:var(--ir-ink)}
+body.innored-theme.header-menu-open .site-header .portfolio-nav{box-sizing:border-box;height:calc(100svh - 68px);overflow:auto;max-height:none;justify-content:center;align-items:stretch;padding:24px 8vw 8vh;background:var(--ir-ink);counter-reset:ir-link}
+body.innored-theme.header-menu-open .site-header .portfolio-nav a{display:flex;justify-content:flex-start;gap:20px;flex:none;padding:12px 0;border-top:1px solid #555;border-radius:0;line-height:1.1;font-size:clamp(30px,min(6vw,9vh),88px);color:white;background:none;counter-increment:ir-link}
+body.innored-theme.header-menu-open .portfolio-nav a::before{content:"0" counter(ir-link);color:#ff6971;font:600 14px/1 Arial,sans-serif}
+body.innored-theme .site-header :is(button,a):focus-visible,body.innored-theme #campaign button:focus-visible{outline:3px solid var(--ir-red);outline-offset:2px}
+body.innored-theme #profile{--swot-s:#b90f1a;--swot-w:#463d3d;--swot-o:#852530;--swot-t:#615759}
+body.innored-theme #profile .swot-plane{border:0;border-radius:0;background:var(--ir-paper);padding:clamp(18px,3vw,42px)}
+body.innored-theme #experience .exp-label{color:#ab0e19;background:transparent;border:0;padding:0;letter-spacing:.08em}
+body.innored-theme #experience .exp-meta span{background:#fff;border:1px solid #ccc;box-shadow:none;color:var(--ir-ink)}
+body.innored-theme #experience .exp-meta .role-key{border-color:var(--ir-ink);background:var(--ir-ink);color:#fff}
+body.innored-theme #campaign .roas-preview-label{color:white;background:var(--ir-ink);border-radius:99px;padding:7px 12px}
+body.innored-theme #skills .skill-barometer-fill{background:var(--ir-red);box-shadow:none}
+body.innored-theme #skills .skill-barometer-track{background:#444;border:1px solid #777;box-shadow:none}
+body.innored-theme .project-modal{background:rgba(15,15,15,.95);backdrop-filter:none}
+body.innored-theme .project-modal-box{background:#181818;border:0;border-radius:0;box-shadow:none}
+body.innored-theme .project-modal-close,body.innored-theme .ir-dismiss{width:44px;height:44px;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:white;color:#191919;cursor:pointer;font:normal 28px/1 Arial,sans-serif}
+body.innored-theme .ir-ending{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;padding:clamp(38px,6vw,90px) 5vw;background:var(--ir-red);color:#171717}
+body.innored-theme .ir-ending a{font-size:clamp(35px,7vw,110px);font-weight:750;letter-spacing:-.065em;line-height:1;text-decoration:none;color:inherit}
+body.innored-theme .ir-ending span{font-size:15px;font-weight:650}
+body.innored-theme.light-mode .contact-panel{box-sizing:border-box;width:min(100%,480px);right:0;transform:translateX(101%);visibility:hidden;background:var(--ir-ink);color:white;border:0;box-shadow:none;backdrop-filter:none;padding:clamp(24px,5vw,64px)}
+body.innored-theme.light-mode .contact-panel.active{transform:none;visibility:visible}
+body.innored-theme .contact-panel .ir-dismiss{position:absolute;right:20px;top:20px}
+body.innored-theme .contact-inner h2{color:white;font-size:clamp(44px,6vw,74px);letter-spacing:-.065em}
+body.innored-theme .contact-inner p{color:#eee;border-top:1px solid #555;padding-top:12px}
+body.innored-theme .version-command{border:1px solid #555;background:var(--ir-ink);border-radius:16px}
+body.innored-theme .version-command button{border-radius:99px}
+body.innored-theme .version-command button[type=submit]{background:var(--ir-red);color:#121212}
+@media(max-width:540px){body.innored-theme .ir-ending{align-items:flex-start;flex-direction:column}}

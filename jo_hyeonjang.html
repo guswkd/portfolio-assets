@@ -4421,7 +4421,7 @@ body.bat-theme .bat-logo{display:block;width:clamp(36px,4vw,49px);height:auto;co
 body.bat-theme.light-mode .site-header .portfolio-nav a{display:inline-flex;opacity:1;max-width:none;min-height:44px;padding:0 2px;color:#fff;font-size:clamp(15px,1.4vw,20px)}
 body.bat-theme .header-menu-toggle,body.bat-theme .header-contact-button{display:none}
 body.bat-theme :is(.experience-card,.skill-tab,.skill-detail){border-radius:2px}
-</style><link rel="stylesheet" href="assets/ilgram.css?v=shared-grid-2"><link rel="stylesheet" href="assets/innored-interiors.css?v=2"></head>
+</style><link rel="stylesheet" href="assets/ilgram.css?v=shared-grid-2"><link rel="stylesheet" href="assets/innored-interiors.css?v=3"></head>
 
 <body class="goldenax-theme">
 
@@ -4462,6 +4462,7 @@ body.bat-theme :is(.experience-card,.skill-tab,.skill-detail){border-radius:2px}
 </button>
 <button class="contact-toggle" type="button" aria-label="Contact 연락처 열기"><img class="contact-brand" src="assets/logos/goldenax.png" alt="" aria-hidden="true"><span>Contact</span><svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M7 5h12v12"/></svg></button>
 <div class="contact-panel">
+  <button class="ir-dismiss" type="button" aria-label="연락처 닫기">×</button>
   <div class="contact-inner">
     <!-- EDIT: 연락처 / 이메일, 전화번호, SNS만 본인 정보로 수정 -->
     <h2>CONTACT</h2>
@@ -5425,6 +5426,9 @@ window.addEventListener('click',(e)=>{
 
 // 모바일 메뉴와 연락처 버튼을 초기화한 뒤 스크롤 동작을 연결합니다.
 const headerMenuToggle=document.querySelector('.header-menu-toggle');
+function closeIrContact(){contactPanel.classList.remove('active');document.querySelector('.ir-contact').focus()}
+document.querySelector('.ir-dismiss').addEventListener('click',closeIrContact);
+window.addEventListener('keydown',event=>{if(event.key==='Escape' && document.body.classList.contains('innored-theme') && contactPanel.classList.contains('active')) closeIrContact()});
 document.querySelector('.ir-contact').addEventListener('click',event=>{event.stopPropagation();setHeaderMenu(false);contactToggle.click()});
 function setHeaderMenu(open){
   document.body.classList.toggle('header-menu-open',open);
@@ -5790,5 +5794,6 @@ if(document.getElementById('profile')){
   document.fonts?.ready.then(schedule);
 })();
 </script>
+<footer class="ir-ending"><a href="mailto:guswkd725@naver.com">Work with me ↗</a><span>조현장 · Contact</span></footer>
 </body>
 </html>
