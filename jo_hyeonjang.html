@@ -4348,6 +4348,9 @@ body:is(.light-mode,.ilgram-theme) #profile{--swot-s:#126344;--swot-w:#8a490d;--
 #profile .swot-meter{display:block;width:clamp(60px,7vw,106px);height:9px;background:linear-gradient(to right,var(--tone) var(--fill),color-mix(in srgb,var(--tone) 22%,transparent) var(--fill));-webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 3px),transparent calc(20% - 3px) 20%);mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 3px),transparent calc(20% - 3px) 20%)}
 #profile .swot-item dd{margin:20px 0 0;font-size:clamp(18px,1.65vw,23px);line-height:1.72;word-break:keep-all;overflow-wrap:anywhere}
 #profile .swot-item strong{display:block;margin-bottom:10px;font-size:clamp(24px,2.35vw,34px);letter-spacing:-.035em;line-height:1.35}
+#profile .swot-plane{width:100%;margin:0 0 clamp(24px,4vw,56px);text-align:center;color:var(--profile-ink,inherit)}
+#profile .swot-plane svg{display:block;width:100%;max-width:640px;height:auto;margin:auto;overflow:visible;font-family:inherit}
+#profile .swot-plane figcaption{margin-top:12px;font-size:clamp(15px,1.3vw,19px);line-height:1.55;word-break:keep-all}
 @media(max-width:760px){#profile .swot-grid{grid-template-columns:1fr}}
 /* One signature responsibility per experience; the other tags stay neutral. */
 #experience .exp-meta .role-key{
@@ -4487,6 +4490,20 @@ body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;
 
   <div class="profile-layout">
 
+    <figure class="swot-plane">
+      <svg viewBox="0 0 400 304" role="img" aria-labelledby="swot-plot-title swot-plot-desc">
+        <title id="swot-plot-title">내부·외부 요인과 긍정·부정 영향에 따른 SWOT 분포</title>
+        <desc id="swot-plot-desc">강점은 내부 긍정 5점, 보완점은 내부 부정 3점, 기회는 외부 긍정 4점, 위협은 외부 부정 3점. 중심에서 바깥 원으로 한 칸마다 1점입니다.</desc>
+        <g fill="none" stroke="currentColor" opacity=".17"><circle cx="200" cy="152" r="22"/><circle cx="200" cy="152" r="44"/><circle cx="200" cy="152" r="66"/><circle cx="200" cy="152" r="88"/><circle cx="200" cy="152" r="110"/></g>
+        <path d="M75 152H325 M200 28V276" fill="none" stroke="currentColor" opacity=".5"/>
+        <g fill="currentColor" text-anchor="middle" font-size="17" font-weight="650"><text x="200" y="19">긍정적 영향</text><text x="200" y="298">부정적 영향</text><text x="35" y="158">내부 요인</text><text x="365" y="158">외부 환경</text></g>
+        <g fill="var(--swot-s)"><circle cx="122.22" cy="74.22" r="6"/><text x="122.22" y="62.22" text-anchor="middle" font-size="18" font-weight="750">S 강점 5</text></g>
+        <g fill="var(--swot-o)"><circle cx="262.23" cy="89.77" r="6"/><text x="262.23" y="77.77" text-anchor="middle" font-size="18" font-weight="750">O 기회 4</text></g>
+        <g fill="var(--swot-w)"><circle cx="153.33" cy="198.67" r="6"/><text x="153.33" y="223.67" text-anchor="middle" font-size="18" font-weight="750">W 보완점 3</text></g>
+        <g fill="var(--swot-t)"><circle cx="246.67" cy="198.67" r="6"/><text x="246.67" y="223.67" text-anchor="middle" font-size="18" font-weight="750">T 위협 3</text></g>
+      </svg>
+      <figcaption>영향도는 중심에서 바깥으로 읽습니다. 원 한 칸 = 1점</figcaption>
+    </figure>
     <dl class="swot-grid" aria-label="조현장의 SWOT 분석">
       <div class="swot-item" data-factor="S"><dt><b aria-hidden="true">S</b> 강점<span class="swot-score"><i class="swot-meter" style="--fill:100%" aria-hidden="true"></i>5/5</span></dt>
         <dd><strong>기획부터 집행까지 직접</strong>제안서에서 정한 방향을 광고 소재와 매체 세팅으로 옮깁니다. 집행 뒤에는 매출과 광고비를 함께 보며 다음 운영안을 잡습니다.</dd>
