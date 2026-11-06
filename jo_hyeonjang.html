@@ -4332,6 +4332,18 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme):not(.ilgram-them
 }
 </style>
 <style>
+#profile .swot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:0;width:100%;text-align:left;border-top:2px solid currentColor}
+#profile .swot-item{padding:clamp(20px,3vw,40px) 0;border-bottom:1px solid currentColor;min-width:0}
+#profile .swot-item:nth-child(odd){padding-right:clamp(18px,3vw,40px);border-right:1px solid currentColor}
+#profile .swot-item:nth-child(even){padding-left:clamp(18px,3vw,40px)}
+#profile .swot-item dt{display:flex;align-items:baseline;gap:10px;font-size:15px;font-weight:700}
+#profile .swot-item dt b{font-size:clamp(28px,3vw,44px);line-height:1;color:var(--gx-accent,currentColor)}
+#profile .swot-item dd{margin:14px 0 0;font-size:clamp(15px,1.2vw,18px);line-height:1.7;word-break:keep-all;overflow-wrap:break-word}
+#profile .swot-item strong{display:block;margin-bottom:6px;font-size:clamp(19px,2vw,28px);line-height:1.35}
+@media(max-width:600px){
+ #profile .swot-grid{grid-template-columns:1fr}
+ #profile .swot-item:nth-child(n){padding:20px 0;border-right:0}
+}
 /* One signature responsibility per experience; the other tags stay neutral. */
 #experience .exp-meta .role-key{
   background:var(--role-ink,#334155);border-color:var(--role-ink,#334155);color:#fff;font-weight:700;
@@ -4466,26 +4478,24 @@ body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;
   <h2 class="section-heading">
     현재의 <span class="title-outline">조현장</span>
   </h2>
-  <p class="section-intro">기획을 실행하고, 성과로 확인하는 마케터</p>
+  <p class="section-intro">캠페인을 운영하며 돌아본 나의 SWOT</p>
 
   <div class="profile-layout">
 
-    <article class="profile-card">
-      <div class="profile-kicker">MARKETING · CREATIVE · PERFORMANCE</div>
-      <h2 class="profile-title">
-        공들인 카피도,<br>
-        반응이 다르면 바꿉니다.
-      </h2>
-      <p class="profile-copy">
-        소재를 만들 때는 한 가지를 먼저 정합니다. 이 광고를 처음 본 사람이 무엇을 기억했으면 하는지.
-        그게 흐려지면 마음에 드는 문장도 덜어냅니다.<br><br>
-        구매 캠페인에서 클릭은 늘었는데 구매가 따라오지 않으면, 광고와 상품 페이지를 나란히 봅니다.
-        광고에서 기대한 것과 클릭 뒤에 보이는 것이 맞는지, 그 차이부터 살핍니다.
-      </p>
-      <div class="profile-keywords" aria-label="핵심 역량">
-        <span>기획 구체화</span><span>소재 제작</span><span>매체 운영</span><span>결과 확인</span>
+    <dl class="swot-grid" aria-label="조현장의 SWOT 분석">
+      <div class="swot-item"><dt><b aria-hidden="true">S</b> 강점</dt>
+        <dd><strong>기획부터 집행까지 직접</strong>제안서에서 정한 방향을 광고 소재와 매체 세팅으로 옮깁니다. 집행 뒤에는 매출과 광고비를 함께 보며 다음 운영안을 잡습니다.</dd>
       </div>
-    </article>
+      <div class="swot-item"><dt><b aria-hidden="true">W</b> 보완점</dt>
+        <dd><strong>어디까지 다듬을지 정하는 일</strong>문구 한 줄이나 작은 간격도 눈에 들어오면 더 다듬고 싶습니다. 제 완벽주의가 속도를 늦추지 않도록, 꼭 고칠 것과 집행 후 확인할 것을 나누는 게 과제입니다.</dd>
+      </div>
+      <div class="swot-item"><dt><b aria-hidden="true">O</b> 기회</dt>
+        <dd><strong>두 매체에서 얻는 두 가지 답</strong>ADESII처럼 같은 브랜드를 Meta와 네이버에서 운영하면 매체별 반응을 비교할 수 있습니다. 그 차이는 다음 소재와 예산 배분을 시험할 단서입니다.</dd>
+      </div>
+      <div class="swot-item"><dt><b aria-hidden="true">T</b> 위협</dt>
+        <dd><strong>숫자 뒤에 달라진 조건</strong>예산이나 행사 일정이 바뀌면 같은 소재도 다른 성과를 낼 수 있습니다. 월별 수치를 비교할 때는 집행 기간과 프로모션부터 확인할 필요가 있습니다.</dd>
+      </div>
+    </dl>
 
   </div>
 
