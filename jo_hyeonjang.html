@@ -4338,6 +4338,8 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme):not(.ilgram-them
 #profile .swot-item:nth-child(even){padding-left:clamp(18px,3vw,40px)}
 #profile .swot-item dt{display:flex;align-items:baseline;gap:10px;font-size:15px;font-weight:700}
 #profile .swot-item dt b{font-size:clamp(28px,3vw,44px);line-height:1;color:var(--gx-accent,currentColor)}
+#profile .swot-score{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
+#profile .swot-meter{display:inline-block;width:clamp(70px,8vw,104px);height:8px;background:linear-gradient(to right,currentColor var(--fill),transparent var(--fill)),linear-gradient(currentColor,currentColor);background-color:transparent;background-size:100% 100%,100% 1px;background-position:left center;background-repeat:no-repeat;-webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 3px),transparent calc(20% - 3px) 20%);mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 3px),transparent calc(20% - 3px) 20%)}
 #profile .swot-item dd{margin:14px 0 0;font-size:clamp(15px,1.2vw,18px);line-height:1.7;word-break:keep-all;overflow-wrap:break-word}
 #profile .swot-item strong{display:block;margin-bottom:6px;font-size:clamp(19px,2vw,28px);line-height:1.35}
 @media(max-width:600px){
@@ -4478,21 +4480,21 @@ body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;
   <h2 class="section-heading">
     현재의 <span class="title-outline">조현장</span>
   </h2>
-  <p class="section-intro">캠페인을 운영하며 돌아본 나의 SWOT</p>
+  <p class="section-intro">캠페인을 운영하며 돌아본 나의 SWOT<br>업무에 미치는 영향 · 정성 평가 · 1 낮음 — 3 보통 — 5 높음</p>
 
   <div class="profile-layout">
 
     <dl class="swot-grid" aria-label="조현장의 SWOT 분석">
-      <div class="swot-item"><dt><b aria-hidden="true">S</b> 강점</dt>
+      <div class="swot-item"><dt><b aria-hidden="true">S</b> 강점<span class="swot-score"><i class="swot-meter" style="--fill:100%" aria-hidden="true"></i>5/5</span></dt>
         <dd><strong>기획부터 집행까지 직접</strong>제안서에서 정한 방향을 광고 소재와 매체 세팅으로 옮깁니다. 집행 뒤에는 매출과 광고비를 함께 보며 다음 운영안을 잡습니다.</dd>
       </div>
-      <div class="swot-item"><dt><b aria-hidden="true">W</b> 보완점</dt>
+      <div class="swot-item"><dt><b aria-hidden="true">W</b> 보완점<span class="swot-score"><i class="swot-meter" style="--fill:60%" aria-hidden="true"></i>3/5</span></dt>
         <dd><strong>어디까지 다듬을지 정하는 일</strong>문구 한 줄이나 작은 간격도 눈에 들어오면 더 다듬고 싶습니다. 제 완벽주의가 속도를 늦추지 않도록, 꼭 고칠 것과 집행 후 확인할 것을 나누는 게 과제입니다.</dd>
       </div>
-      <div class="swot-item"><dt><b aria-hidden="true">O</b> 기회</dt>
+      <div class="swot-item"><dt><b aria-hidden="true">O</b> 기회<span class="swot-score"><i class="swot-meter" style="--fill:80%" aria-hidden="true"></i>4/5</span></dt>
         <dd><strong>두 매체에서 얻는 두 가지 답</strong>ADESII처럼 같은 브랜드를 Meta와 네이버에서 운영하면 매체별 반응을 비교할 수 있습니다. 그 차이는 다음 소재와 예산 배분을 시험할 단서입니다.</dd>
       </div>
-      <div class="swot-item"><dt><b aria-hidden="true">T</b> 위협</dt>
+      <div class="swot-item"><dt><b aria-hidden="true">T</b> 위협<span class="swot-score"><i class="swot-meter" style="--fill:60%" aria-hidden="true"></i>3/5</span></dt>
         <dd><strong>숫자 뒤에 달라진 조건</strong>예산이나 행사 일정이 바뀌면 같은 소재도 다른 성과를 낼 수 있습니다. 월별 수치를 비교할 때는 집행 기간과 프로모션부터 확인할 필요가 있습니다.</dd>
       </div>
     </dl>
