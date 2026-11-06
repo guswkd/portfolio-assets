@@ -4332,23 +4332,23 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme):not(.ilgram-them
 }
 </style>
 <style>
-/* SWOT shares the chapter's text color and each version's accent. */
-#profile{
-  --swot-accent:var(--gx-accent,#93c5fd);
-  --swot-line:color-mix(in srgb,currentColor 18%,transparent);
-}
-body.normal-theme.light-mode #profile{--swot-accent:#345785}
-#profile .swot-legend{display:block;margin-top:8px;font-size:.82em;font-weight:500;letter-spacing:.015em}
-#profile .swot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(24px,4vw,64px);margin:0;width:100%;text-align:left;color:var(--profile-ink,inherit)}
-#profile .swot-item{padding:clamp(22px,2.6vw,36px) 0;min-width:0;border-top:1px solid var(--swot-line)}
-#profile .swot-item dt{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700}
-#profile .swot-item dt b{display:grid;place-items:center;width:2em;height:2em;border-radius:var(--gx-radius,9px);font-size:15px;line-height:1;color:inherit;background:color-mix(in srgb,var(--swot-accent) 15%,transparent)}
-body.ilgram-theme #profile .swot-item dt b{border-radius:0}
-#profile .swot-score{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
-#profile .swot-meter{display:block;width:clamp(76px,8vw,110px);height:6px;border-radius:2px;background:linear-gradient(to right,var(--swot-accent) var(--fill),var(--swot-line) var(--fill));-webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 2px),transparent calc(20% - 2px) 20%);mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 2px),transparent calc(20% - 2px) 20%)}
-#profile .swot-item dd{margin:16px 0 0;font-size:clamp(15px,1.15vw,18px);line-height:1.75;word-break:keep-all;overflow-wrap:anywhere;color:var(--profile-muted,inherit)}
-#profile .swot-item strong{display:block;margin-bottom:7px;font-size:clamp(19px,1.8vw,26px);letter-spacing:-.035em;line-height:1.35;color:var(--profile-ink,inherit)}
-@media(max-width:600px){#profile .swot-grid{grid-template-columns:1fr}}
+/* Shared SWOT categories; light and dark palettes are optimized for text contrast. */
+#profile{--swot-s:#7ce4b2;--swot-w:#ffc378;--swot-o:#91bdff;--swot-t:#ffa1ac}
+body:is(.light-mode,.ilgram-theme) #profile{--swot-s:#126344;--swot-w:#8a490d;--swot-o:#245b9d;--swot-t:#a5364c}
+#profile .swot-item[data-factor="S"]{--tone:var(--swot-s)}
+#profile .swot-item[data-factor="W"]{--tone:var(--swot-w)}
+#profile .swot-item[data-factor="O"]{--tone:var(--swot-o)}
+#profile .swot-item[data-factor="T"]{--tone:var(--swot-t)}
+#profile .swot-legend{display:block;margin-top:10px;font-size:clamp(16px,1.4vw,20px);font-weight:500;line-height:1.6}
+#profile .swot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,2vw,32px);margin:0;width:100%;text-align:left;color:var(--profile-ink,inherit)}
+#profile .swot-item{padding:clamp(18px,2.2vw,32px);min-width:0;border-top:3px solid var(--tone);background:linear-gradient(150deg,color-mix(in srgb,var(--tone) 10%,transparent),transparent 90%)}
+#profile .swot-item dt{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;font-size:clamp(20px,1.7vw,25px);line-height:1.35;font-weight:700;color:var(--tone)}
+#profile .swot-item dt b{font-size:clamp(30px,2.7vw,42px);line-height:1;font-weight:800}
+#profile .swot-score{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:clamp(17px,1.4vw,21px);font-variant-numeric:tabular-nums;white-space:nowrap}
+#profile .swot-meter{display:block;width:clamp(60px,7vw,106px);height:9px;background:linear-gradient(to right,var(--tone) var(--fill),color-mix(in srgb,var(--tone) 22%,transparent) var(--fill));-webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 3px),transparent calc(20% - 3px) 20%);mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 3px),transparent calc(20% - 3px) 20%)}
+#profile .swot-item dd{margin:20px 0 0;font-size:clamp(18px,1.65vw,23px);line-height:1.72;word-break:keep-all;overflow-wrap:anywhere}
+#profile .swot-item strong{display:block;margin-bottom:10px;font-size:clamp(24px,2.35vw,34px);letter-spacing:-.035em;line-height:1.35}
+@media(max-width:760px){#profile .swot-grid{grid-template-columns:1fr}}
 /* One signature responsibility per experience; the other tags stay neutral. */
 #experience .exp-meta .role-key{
   background:var(--role-ink,#334155);border-color:var(--role-ink,#334155);color:#fff;font-weight:700;
@@ -4488,16 +4488,16 @@ body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;
   <div class="profile-layout">
 
     <dl class="swot-grid" aria-label="조현장의 SWOT 분석">
-      <div class="swot-item"><dt><b aria-hidden="true">S</b> 강점<span class="swot-score"><i class="swot-meter" style="--fill:100%" aria-hidden="true"></i>5/5</span></dt>
+      <div class="swot-item" data-factor="S"><dt><b aria-hidden="true">S</b> 강점<span class="swot-score"><i class="swot-meter" style="--fill:100%" aria-hidden="true"></i>5/5</span></dt>
         <dd><strong>기획부터 집행까지 직접</strong>제안서에서 정한 방향을 광고 소재와 매체 세팅으로 옮깁니다. 집행 뒤에는 매출과 광고비를 함께 보며 다음 운영안을 잡습니다.</dd>
       </div>
-      <div class="swot-item"><dt><b aria-hidden="true">W</b> 보완점<span class="swot-score"><i class="swot-meter" style="--fill:60%" aria-hidden="true"></i>3/5</span></dt>
+      <div class="swot-item" data-factor="W"><dt><b aria-hidden="true">W</b> 보완점<span class="swot-score"><i class="swot-meter" style="--fill:60%" aria-hidden="true"></i>3/5</span></dt>
         <dd><strong>어디까지 다듬을지 정하는 일</strong>문구 한 줄이나 작은 간격도 눈에 들어오면 더 다듬고 싶습니다. 제 완벽주의가 속도를 늦추지 않도록, 꼭 고칠 것과 집행 후 확인할 것을 나누는 게 과제입니다.</dd>
       </div>
-      <div class="swot-item"><dt><b aria-hidden="true">O</b> 기회<span class="swot-score"><i class="swot-meter" style="--fill:80%" aria-hidden="true"></i>4/5</span></dt>
+      <div class="swot-item" data-factor="O"><dt><b aria-hidden="true">O</b> 기회<span class="swot-score"><i class="swot-meter" style="--fill:80%" aria-hidden="true"></i>4/5</span></dt>
         <dd><strong>두 매체에서 얻는 두 가지 답</strong>ADESII처럼 같은 브랜드를 Meta와 네이버에서 운영하면 매체별 반응을 비교할 수 있습니다. 그 차이는 다음 소재와 예산 배분을 시험할 단서입니다.</dd>
       </div>
-      <div class="swot-item"><dt><b aria-hidden="true">T</b> 위협<span class="swot-score"><i class="swot-meter" style="--fill:60%" aria-hidden="true"></i>3/5</span></dt>
+      <div class="swot-item" data-factor="T"><dt><b aria-hidden="true">T</b> 위협<span class="swot-score"><i class="swot-meter" style="--fill:60%" aria-hidden="true"></i>3/5</span></dt>
         <dd><strong>숫자 뒤에 달라진 조건</strong>예산이나 행사 일정이 바뀌면 같은 소재도 다른 성과를 낼 수 있습니다. 월별 수치를 비교할 때는 집행 기간과 프로모션부터 확인할 필요가 있습니다.</dd>
       </div>
     </dl>
