@@ -13,8 +13,8 @@ body.goldenax-theme.ilgram-theme .site-header .header-contact-button{display:blo
 body.goldenax-theme.ilgram-theme :is(.contact-toggle,.gx-about-window,.mb-chapter-object){display:none!important}
 body.goldenax-theme.ilgram-theme .hero{position:relative;isolation:isolate;min-height:100svh;padding-top:72px;background:#000!important;overflow:hidden}
 body.goldenax-theme.ilgram-theme .hero::before{content:'';position:absolute;inset:90px 3vw 32px;z-index:0;background:radial-gradient(ellipse 17% 50% at 16% 50%,#111 99%,transparent 100%),radial-gradient(ellipse 17% 50% at 33% 50%,#111 99%,transparent 100%),radial-gradient(ellipse 17% 50% at 50% 50%,#111 99%,transparent 100%),radial-gradient(ellipse 17% 50% at 67% 50%,#111 99%,transparent 100%),radial-gradient(ellipse 17% 50% at 84% 50%,#111 99%,transparent 100%);pointer-events:none}
-body.goldenax-theme.ilgram-theme .hero-copy{z-index:2;--hero-line:transparent}
-body.goldenax-theme.ilgram-theme .hero-cell{color:#fff;-webkit-text-fill-color:#fff;-webkit-text-stroke:0;border-color:transparent;background:transparent;text-shadow:none}
+body.goldenax-theme.ilgram-theme .hero-copy{z-index:2;--hero-line:rgba(255,255,255,.5)}
+body.goldenax-theme.ilgram-theme .hero-cell{color:#fff;-webkit-text-fill-color:#fff;-webkit-text-stroke:0;border-color:var(--hero-line);background:transparent;text-shadow:none}
 body.goldenax-theme.ilgram-theme .hero-cell.hero-accent{color:#01d176;-webkit-text-fill-color:#01d176}
 body.goldenax-theme.ilgram-theme .keyword-cloud{display:block;z-index:1}
 body.goldenax-theme.ilgram-theme .talent-keyword{color:#fff}
