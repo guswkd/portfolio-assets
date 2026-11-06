@@ -4332,6 +4332,12 @@ body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme):not(.ilgram-them
 }
 </style>
 <style>
+/* One signature responsibility per experience; the other tags stay neutral. */
+#experience .exp-meta .role-key{
+  background:var(--role-ink,#334155);border-color:var(--role-ink,#334155);color:#fff;font-weight:700;
+}
+body[data-portfolio-version="ilgram"] #experience{--role-ink:#176546}
+body[data-portfolio-version="goldenax"] #experience{--role-ink:#a91933}
 /* Normal restores the original unbranded theme while sharing current content. */
 body.normal-theme{--gx-surface:#fff;--gx-text:#111827}
 body.normal-theme .company-brand,body.normal-theme .contact-brand,body.normal-theme .ac-contact-copy,body.normal-theme .gx-about-window,body.normal-theme .ac-opening{display:none!important}
@@ -4637,7 +4643,7 @@ body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;
         <span>광고 전략·브랜딩 기획</span>
         <span>데이터 분석·리포트 작성</span>
         <span>생성형 AI·크리에이티브 실습</span>
-        <span>광고 제안서 작성·발표</span>
+        <span class="role-key">광고 제안서 작성·발표</span>
       </div>
 
     </div>
@@ -4666,7 +4672,7 @@ body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;
       </div>
 
       <div class="exp-meta">
-        <span>미디어 믹스 작성</span>
+        <span class="role-key">미디어 믹스 작성</span>
         <span>캠페인 세팅·운영</span>
         <span>로우데이터 정리·성과 리포팅</span>
         <span>매체 제작 가이드 작성</span>
@@ -4697,7 +4703,7 @@ body.normal-theme #skills .skill-detail{height:var(--normal-board);min-height:0;
       </div>
 
       <div class="exp-meta">
-        <span>매체별 캠페인 구축·운영</span>
+        <span class="role-key">매체별 캠페인 구축·운영</span>
         <span>KPI·성과 모니터링</span>
         <span>성과 데이터 분석·리포팅</span>
         <span>광고주 커뮤니케이션</span>
