@@ -6,7 +6,7 @@ const themes={
  normal:{name:'노멀',accent:'334155'},
  goldenax:{name:'골드넥스',accent:'EB0029',logo:'assets/logos/goldenax-color.png'},
  ilgram:{name:'일그램',accent:'008A50',logo:'assets/ilgram-logo.png'},
- bat:{name:'BAT',accent:'1827B8',logo:'assets/logos/bat.jpg'},
+ bat:{name:'BAT',accent:'111111',logo:'assets/logos/bat.jpg'},
  innored:{name:'이노레드',accent:'F91120',logo:'assets/logos/innored.svg',dark:true}
 };
 const text=(root,selector)=>root.querySelector(selector)?.textContent.trim()||'';
@@ -57,12 +57,17 @@ async function build(version){
  return {ppt,filename:'조현장_포트폴리오_'+theme.name+'.pptx'};
 }
 window.buildPortfolioPpt=build;
+function updateExportLabel(){if(!button.disabled)button.textContent=(themes[document.body.dataset.portfolioVersion]?.name||'노멀')+' PPT 다운로드'}
+updateExportLabel();
+window.addEventListener('portfolio-version-change',updateExportLabel);
+const hero=document.getElementById('hero');
+if(hero)new IntersectionObserver(([entry])=>document.body.classList.toggle('bat-past-hero',!entry.isIntersecting),{threshold:0}).observe(hero);
 button.addEventListener('click',async()=>{
  if(button.disabled)return;
  const version=document.body.dataset.portfolioVersion||'normal';
  button.disabled=true;button.textContent='PPT 만드는 중…';status.textContent='현재 버전의 포트폴리오를 정리합니다.';
  try{const {ppt,filename}=await build(version);await ppt.writeFile({fileName:filename});status.textContent='다운로드를 시작했습니다.'}
  catch(error){console.error(error);status.textContent='다운로드 실패. '+error.message}
- finally{button.disabled=false;button.textContent='PPT 다운로드'}
+ finally{button.disabled=false;updateExportLabel()}
 });
 })();

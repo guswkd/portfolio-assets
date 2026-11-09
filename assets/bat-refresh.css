@@ -1,0 +1,66 @@
+/* Shared export access and BAT visual system, scoped to avoid theme leakage. */
+.ppt-export{position:fixed!important;left:24px;bottom:24px;z-index:1200!important;padding:0!important;background:transparent!important;text-align:left!important;max-width:min(340px,calc(100vw - 48px))}
+.ppt-export button{display:inline-flex;align-items:center;gap:14px;min-height:48px;padding:12px 20px!important;background:#171717!important;color:#fff!important;border:1px solid #777!important;box-shadow:0 3px 16px #0002}
+.ppt-export button::after{content:"↓";font-size:20px}
+.ppt-export p:empty{display:none}
+.ppt-export p:not(:empty){padding:10px 14px;background:#fff;color:#171717;border:1px solid #ddd;border-radius:8px;line-height:1.5}
+body.bat-theme{--gx-accent:#111;--gx-text:#111;--gx-bg:#fff;--gx-surface:#fff;background:#fff;color:#111;font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif}
+body.bat-theme .background{background:#fff!important}
+body.bat-theme .scroll-progress-bar{background:#111}
+body.bat-theme .hero{background:#000!important;color:#fff;min-height:100svh;overflow:hidden}
+body.bat-theme .hero-copy{--hero-line:#444}
+body.bat-theme .hero-cell{color:#aaa!important;-webkit-text-fill-color:currentColor!important;border-color:#444!important;text-shadow:none!important}
+body.bat-theme .hero-cell.hero-accent{color:#fff!important}
+body.bat-theme .hero-cell.hero-accent::before{display:none}
+body.bat-theme .keyword{color:#aaa!important}
+body.bat-theme .scroll-down{color:#fff!important}
+body.bat-theme .site-header{display:block;position:fixed;inset:0 0 auto;height:100px;z-index:1100;background:transparent}
+body.bat-theme .site-header .portfolio-nav{position:absolute!important;inset:0!important;display:flex!important;width:100%!important;max-width:none!important;min-height:100px!important;height:100px;padding:22px 5.5vw!important;box-sizing:border-box;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:none!important;backdrop-filter:none!important}
+body.bat-theme .site-header .portfolio-nav::before{display:none!important}
+body.bat-theme .bat-logo{display:block;width:48px;height:48px;color:#fff;margin:0 auto 0 0}
+body.bat-theme .site-header .portfolio-nav a{display:none!important}
+body.bat-theme .site-header .header-menu-toggle{display:grid!important;position:absolute;top:24px;right:5vw;width:48px;height:48px;padding:10px;z-index:2;background:transparent;border:0;border-radius:0;color:#fff}
+body.bat-theme .header-menu-toggle svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.5}
+body.bat-theme.bat-past-hero .site-header{background:#fffffff2;backdrop-filter:blur(12px)}
+body.bat-theme.bat-past-hero :is(.bat-logo,.header-menu-toggle){color:#111}
+body.bat-theme.header-menu-open .site-header{height:100svh;background:#fff!important}
+body.bat-theme.header-menu-open .site-header .portfolio-nav{height:100svh;padding-top:100px!important;flex-direction:column;justify-content:center;align-items:flex-start;gap:12px}
+body.bat-theme.header-menu-open .bat-logo{position:absolute;top:24px;left:5.5vw;color:#111}
+body.bat-theme.header-menu-open .header-menu-toggle{color:#111}
+body.bat-theme.header-menu-open .site-header .portfolio-nav a{display:block!important;font-size:clamp(36px,6vw,80px)!important;font-weight:500;color:#111!important;max-width:none;opacity:1;padding:0;line-height:1.2}
+body.bat-theme :is(#profile,#experience,#campaign,#skills){width:100%!important;max-width:none!important;padding:100px 5.5vw!important;background:#fff!important;color:#111}
+body.bat-theme :is(#profile,#experience,#campaign,#skills)>.section-heading{font-size:clamp(38px,5vw,76px)!important;font-weight:600;letter-spacing:-.055em}
+body.bat-theme .title-outline{color:#111!important;-webkit-text-fill-color:#111!important;-webkit-text-stroke:0!important;background:none!important}
+body.bat-theme .title-outline::before,body.bat-theme .title-outline::after{display:none!important}
+body.bat-theme :is(#profile,#experience,#campaign,#skills)>.section-intro{font-size:clamp(17px,1.5vw,22px)!important;color:#555!important;max-width:780px!important}
+body.bat-theme #profile{--swot-s:#111;--swot-w:#777;--swot-o:#333;--swot-t:#888}
+body.bat-theme #profile :is(.swot-plane,.swot-item){background:none;border-radius:0;box-shadow:none}
+body.bat-theme #profile .swot-item{border-top:1px solid #aaa}
+body.bat-theme #experience{--role-ink:#111}
+body.bat-theme .experience-card{background:transparent!important;color:#111;border:0;border-top:1px solid #999;border-radius:0;padding:32px 0;box-shadow:none}
+body.bat-theme .exp-meta span{border-radius:0;background:transparent;color:#444;border-color:#ccc}
+body.bat-theme .exp-meta .role-key{background:#111;color:#fff;border-color:#111}
+body.bat-theme #campaign .projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:64px 32px!important}
+body.bat-theme #campaign .project-card{border-radius:0;box-shadow:none;border:0;transition:transform .45s ease}
+body.bat-theme #campaign .roas-card{background:#f4f4f2!important;color:#111;padding:28px;border:0!important}
+body.bat-theme #campaign .roas-value{color:#111}
+body.bat-theme #skills .skills-layout{--normal-board:360px;gap:64px}
+body.bat-theme #skills .skill-tab{background:#f4f4f2;border:1px solid transparent;border-radius:0;box-shadow:none}
+body.bat-theme #skills .skill-tab.active,body.bat-theme #skills .skill-tab:hover{border-color:#111;background:#eee}
+body.bat-theme #skills .skill-detail{background:transparent!important;color:#111!important;border:0;border-left:1px solid #aaa;border-radius:0;box-shadow:none}
+body.bat-theme #skills :is(.skill-detail-title,.skill-detail-sub,.skill-detail-card){color:#111!important}
+body.bat-theme .contact-toggle{position:fixed;top:auto;right:24px;bottom:24px;background:#111;color:#fff;border-radius:0;transform:none}
+body.bat-theme .site-header .header-menu-toggle{z-index:1201}
+body.bat-theme .scroll-indicator,body.bat-theme .cta-arrow-option{color:#fff!important;filter:none}
+@media(max-width:820px){
+ .ppt-export{left:16px;bottom:16px;max-width:calc(100vw - 32px)}
+ .ppt-export button{min-height:44px;font-size:14px!important;padding:10px 16px!important}
+ body.bat-theme :is(#profile,#experience,#campaign,#skills){padding:72px 24px!important}
+ body.bat-theme #campaign .projects{grid-template-columns:1fr!important;gap:36px!important}
+ body.bat-theme #skills .skills-layout{gap:32px}
+ body.bat-theme #skills .skill-detail{border-left:0;border-top:1px solid #aaa;height:auto;min-height:320px}
+ body.bat-theme .site-header,body.bat-theme .site-header .portfolio-nav{height:80px;min-height:80px!important}
+ body.bat-theme .bat-logo{width:40px;height:40px}
+ body.bat-theme .site-header .header-menu-toggle{top:18px}
+}
+@media(prefers-reduced-motion:reduce){body.bat-theme *{scroll-behavior:auto!important;transition:none!important}}
