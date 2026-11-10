@@ -3,6 +3,8 @@ body.monq-theme .background{background:#fff!important}
 body.monq-theme .background::before,body.monq-theme .background::after,body.monq-theme .keyword-cloud{display:none}
 body.monq-theme .site-header{display:block;position:fixed;inset:0 0 auto;height:80px;background:#fffffff2;z-index:1100}
 .mq-brand{display:none}
+.mq-symbol{display:none}
+body.monq-theme .mq-symbol{display:block;position:absolute;right:24px;top:22px;width:40px;height:40px;object-fit:contain;pointer-events:none}
 body.monq-theme .mq-brand{display:block;position:absolute;left:32px;top:22px;text-decoration:none;color:#ab3028;font-size:25px;font-weight:800;line-height:1;letter-spacing:0}
 body.monq-theme .mq-brand img{display:block;width:44px;height:36px;object-fit:contain}
 body.monq-theme .site-header .portfolio-nav{display:flex;position:absolute;inset:0 70px 0 auto;max-width:none;width:auto;gap:24px;border:0;background:none;transform:none;backdrop-filter:none;overflow:visible}
@@ -32,7 +34,8 @@ body.monq-theme .contact-panel{background:#fff;color:#111;border-left:1px solid 
 body.monq-theme .contact-inner :is(h2,p){color:#111}
 @media(max-width:700px){
  body.monq-theme .mq-brand{left:22px;font-size:21px}
- body.monq-theme .site-header .portfolio-nav{right:18px;gap:14px}
+ body.monq-theme .site-header .portfolio-nav{right:66px;gap:10px}
+ body.monq-theme .mq-symbol{right:16px;top:24px;width:32px;height:32px}
  body.monq-theme .site-header .portfolio-nav a{font-size:13px!important}
  body.monq-theme #hero{min-height:650px;padding-top:100px}
  body.monq-theme #hero .hero-copy{--hero-cell:86px}

@@ -10,6 +10,14 @@
   brand.append(logo);
   brand.setAttribute('aria-label', '몽규 버전 첫 화면');
   document.querySelector('.site-header')?.append(brand);
+  const symbol = document.createElement('img');
+  symbol.className = 'mq-symbol';
+  symbol.src = 'assets/logos/monq-symbol.png';
+  symbol.alt = '';
+  symbol.setAttribute('aria-hidden', 'true');
+  symbol.width = 40;
+  symbol.height = 40;
+  document.querySelector('.site-header')?.append(symbol);
   const input = document.querySelector('#portfolio-version-command');
   if (input) input.placeholder = 'gn / ig / bat / ir / mq / nm';
   const status = document.querySelector('.version-command [role="status"]');
