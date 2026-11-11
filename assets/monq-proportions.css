@@ -1,33 +1,15 @@
 @font-face{font-family:MONQ Pretendard;src:url(fonts/Pretendard-Medium.subset.woff2) format("woff2");font-weight:400 500;font-display:swap}
 @font-face{font-family:MONQ Pretendard;src:url(fonts/Pretendard-Bold.subset.woff2) format("woff2");font-weight:600 900;font-display:swap}
-.mq-hero-intro,.mq-hero-work{display:none}
-/* Measured against monq.kr at 1440, 1920 and 390 CSS pixels. */
-body.monq-theme{--mq-side:60px;--mq-header:88px;--mq-menu:225px;--type-section:60px;font-family:"Helvetica Neue","MONQ Pretendard",sans-serif;letter-spacing:0}
-body.monq-theme .scroll-progress{display:none}
-body.monq-theme .scroll-progress-bar{display:none}
+/* Reference dimensions only; preserve the portfolio's existing flow. */
+body.monq-theme{--mq-side:60px;--mq-header:88px;--type-section:60px;font-family:"Helvetica Neue","MONQ Pretendard",sans-serif;letter-spacing:0}
 body.monq-theme .site-header{height:var(--mq-header);background:#fff;border:0;box-shadow:none}
 body.monq-theme .mq-brand{left:var(--mq-side);top:50%;transform:translateY(-50%);font-size:0}
 body.monq-theme .mq-brand img{width:40px;height:auto}
-body.monq-theme .mq-symbol{width:30px;height:35px;right:calc(var(--mq-side) - 19.5px);top:calc(50% + 3px);transform:translateY(-50%)}
-body.monq-theme .site-header .header-menu-toggle{display:grid;place-items:center;position:absolute;right:calc(var(--mq-side) - 12px);top:50%;transform:translateY(-50%);width:44px;height:44px;padding:12px;border:0;border-radius:0;background:transparent;color:#111;z-index:3;cursor:pointer}
-body.monq-theme .header-menu-toggle svg{display:none}
-body.monq-theme .header-menu-toggle:before,body.monq-theme .header-menu-toggle:after{content:"";position:absolute;width:20px;height:2px;background:currentColor;top:18px;left:12px;transition:transform .2s}
-body.monq-theme .header-menu-toggle:after{top:24px}
-body.monq-theme.header-menu-open .header-menu-toggle:before{transform:translateY(3px) rotate(45deg)}
-body.monq-theme.header-menu-open .header-menu-toggle:after{transform:translateY(-3px) rotate(-45deg)}
-body.monq-theme .site-header .portfolio-nav{display:none}
-body.monq-theme.header-menu-open .site-header .portfolio-nav{display:flex;position:absolute;inset:var(--mq-header) 0 auto auto;width:var(--mq-menu);height:auto;min-height:0;max-width:none;padding:30px 40px 40px;background:#fff;border-left:1px solid #eee;border-bottom:1px solid #eee;border-radius:0;box-shadow:none;flex-direction:column;align-items:stretch;gap:12px;overflow:auto;max-height:calc(100svh - var(--mq-header));transform:none}
-body.monq-theme.header-menu-open .portfolio-nav a,body.monq-theme.header-menu-open .header-contact-button{display:flex;align-items:center;justify-content:flex-start;opacity:1;max-width:none;min-height:44px;margin:0;padding:0;border:0;border-radius:0;background:none;color:#111;font-size:24px!important;font-weight:500;line-height:1.3;text-align:left}
-body.monq-theme .contact-toggle{display:none}
-body.monq-theme #hero{min-height:0;height:auto;justify-content:flex-start;padding:180px 0 0;overflow:hidden;gap:0}
-body.monq-theme #hero>.hero-copy{--hero-cell:90px;--hero-gap:8px;--hero-border:1px;flex:none;margin:0;animation:mq-title-enter .8s ease both}
-body.monq-theme #hero .hero-cell{font-size:60px!important;font-weight:700;line-height:1!important}
-body.monq-theme #hero .hero-cell>span{animation:none;opacity:1;filter:none;transform:none}
-body.monq-theme #hero>.scroll-indicator{display:none}
-body.monq-theme .mq-hero-intro{display:block;font-size:20px;line-height:25px;font-weight:400;text-align:center;color:#111;margin:50px var(--mq-side) 0;max-width:1000px;word-break:keep-all}
-body.monq-theme .mq-hero-intro br{display:none}
-body.monq-theme .mq-hero-work{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;gap:16px;width:50%;aspect-ratio:16/9;margin-top:120px;overflow:hidden;background:#f7f7f7;text-decoration:none}
-body.monq-theme .mq-hero-work img{display:block;min-width:0;width:100%;height:100%;max-height:100%;object-fit:contain}
+body.monq-theme .mq-symbol{width:30px;height:35px;right:var(--mq-side);top:50%;transform:translateY(-50%)}
+body.monq-theme .site-header .header-menu-toggle{display:none}
+body.monq-theme .site-header .portfolio-nav{display:flex;inset:0 calc(var(--mq-side) + 60px) 0 auto;gap:24px;height:var(--mq-header);padding:0;border-radius:0}
+body.monq-theme .site-header .portfolio-nav a{font-size:16px!important}
+body.monq-theme .contact-toggle{display:flex}
 body.monq-theme :is(#profile,#experience,#campaign,#skills){width:100%;max-width:none;height:auto;min-height:0;margin:160px 0 0;padding:0 var(--mq-side);scroll-margin-top:calc(var(--mq-header) + 32px)}
 body.monq-theme :is(#profile,#experience,#campaign,#skills)>.section-heading{font-size:60px!important;font-weight:500;line-height:1.05!important;margin:0 0 24px;letter-spacing:0!important;text-shadow:none;filter:none}
 body.monq-theme :is(#profile,#experience,#campaign,#skills)>.section-intro{font-size:20px!important;line-height:1.5;margin:0 0 50px;color:#555}
@@ -49,20 +31,13 @@ body.monq-theme .skill-detail-sub{font-size:18px!important;line-height:1.5}
 body.monq-theme .contact-panel{width:min(450px,100vw);padding-top:calc(var(--mq-header) + 32px);right:0;transform:translateX(100%);visibility:hidden;pointer-events:none}
 body.monq-theme .contact-panel.active{transform:none;visibility:visible;pointer-events:auto}
 body.monq-theme .contact-panel .ir-dismiss{display:grid;place-items:center;position:absolute;right:20px;top:12px;width:44px;height:44px;background:none;border:0;border-radius:0;color:#111;font-size:28px;cursor:pointer}
-@keyframes mq-title-enter{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-@media(min-width:1600px){body.monq-theme #hero>.hero-copy{--hero-cell:108px}body.monq-theme #hero .hero-cell{font-size:72px!important}}
-@media(min-width:1800px){body.monq-theme #hero>.hero-copy{--hero-cell:122px}body.monq-theme #hero .hero-cell{font-size:80px!important}}
 @media(max-width:1480px){body.monq-theme{--mq-side:40px}}
 @media(max-width:900px){
- body.monq-theme{--mq-side:20px;--mq-header:50px;--mq-menu:260px;--type-section:28px}
+ body.monq-theme{--mq-side:20px;--mq-header:50px;--type-section:28px}
  body.monq-theme .mq-brand img{width:34px}
- body.monq-theme .mq-symbol{display:none}
- body.monq-theme #hero{padding-top:105px}
- body.monq-theme #hero>.hero-copy{--hero-cell:46px;--hero-gap:4px}
- body.monq-theme #hero .hero-cell{font-size:30px!important}
- body.monq-theme .mq-hero-intro{font-size:14px;line-height:19px;margin:15px 8% 15px}
- body.monq-theme .mq-hero-intro br{display:block}
- body.monq-theme .mq-hero-work{width:100%;gap:6px;margin-top:120px}
+ body.monq-theme .mq-symbol{display:block;width:26px;height:30px}
+ body.monq-theme .site-header .portfolio-nav{right:calc(var(--mq-side) + 46px);gap:10px}
+ body.monq-theme .site-header .portfolio-nav a{font-size:13px!important}
  body.monq-theme :is(#profile,#experience,#campaign,#skills){margin-top:70px;padding:0 var(--mq-side)}
  body.monq-theme :is(#profile,#experience,#campaign,#skills)>.section-heading{font-size:28px!important;line-height:1.15!important;margin-bottom:18px}
  body.monq-theme :is(#profile,#experience,#campaign,#skills)>.section-intro{font-size:14px!important;line-height:1.5;margin-bottom:30px}
@@ -82,6 +57,3 @@ body.monq-theme .contact-panel .ir-dismiss{display:grid;place-items:center;posit
  body.monq-theme #skills{padding-bottom:70px}
 }
 @media(max-width:480px){body.monq-theme :is(#profile,#experience,#campaign,#skills)>.section-heading{font-size:24px!important}}
-@media(min-width:481px) and (max-width:700px){body.monq-theme #hero>.hero-copy{--hero-cell:52px}body.monq-theme #hero .hero-cell{font-size:34px!important}}
-@media(min-width:701px) and (max-width:900px){body.monq-theme #hero>.hero-copy{--hero-cell:66px}body.monq-theme #hero .hero-cell{font-size:44px!important}}
-@media(prefers-reduced-motion:reduce){body.monq-theme #hero>.hero-copy{animation:none}}
