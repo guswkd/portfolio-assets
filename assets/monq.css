@@ -12,14 +12,14 @@ body.monq-theme .portfolio-nav::before{display:none}
 body.monq-theme .site-header .portfolio-nav a{opacity:1;max-width:none;padding:0;min-height:44px;color:#111}
 body.monq-theme .header-contact-button{display:none}
 body.monq-theme .contact-toggle{background:#ab3028;color:white;border:0;border-radius:0;top:auto;bottom:24px;right:24px;transform:none}
-body.monq-theme #hero{min-height:760px;height:auto;padding:112px 24px 58px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;gap:28px}
+body.monq-theme #hero{--hero-cell:128px;--hero-gap:10px;min-height:max(640px,100svh);height:auto;padding:100px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;gap:0}
 body.monq-theme #hero .hero-copy{--hero-cell:128px;--hero-gap:10px;--hero-line:#b8b8b8;filter:none}
 body.monq-theme #hero .hero-copy::before,
 body.monq-theme #hero .hero-copy::after{background:var(--hero-line);box-shadow:0 calc(var(--hero-cell) + var(--hero-gap)) 0 var(--hero-line)}
 body.monq-theme #hero .hero-cell{font-size:82px!important;font-weight:800;color:#111!important;-webkit-text-fill-color:#111!important;border-color:var(--hero-line)!important;background:none;text-shadow:none}
 body.monq-theme #hero .hero-cell.hero-accent{color:#ab3028!important;-webkit-text-fill-color:#ab3028!important}
 body.monq-theme .hero-accent::before{display:none}
-body.monq-theme .scroll-indicator{position:relative;inset:auto;transform:none;margin:0;color:#ab3028}
+body.monq-theme #hero .scroll-indicator{position:absolute;inset:calc(50% + var(--hero-cell) * 1.5 + var(--hero-gap) + 24px) auto auto 50%;transform:translateX(-50%);margin:0;color:#ab3028}
 body.monq-theme .cta-arrow-option{color:#ab3028;filter:none}
 body.monq-theme :is(#profile,#experience,#campaign,#skills){padding-block:96px}
 body.monq-theme :is(.experience-card,.roas-card,.skill-detail,.skill-tab){border-radius:0;box-shadow:none;background:#fff;color:#111}
@@ -37,7 +37,7 @@ body.monq-theme .contact-inner :is(h2,p){color:#111}
  body.monq-theme .site-header .portfolio-nav{right:66px;gap:10px}
  body.monq-theme .mq-symbol{right:16px;top:24px;width:32px;height:32px}
  body.monq-theme .site-header .portfolio-nav a{font-size:13px!important}
- body.monq-theme #hero{min-height:650px;padding-top:100px}
+ body.monq-theme #hero{--hero-cell:86px;min-height:max(520px,100svh)}
  body.monq-theme #hero .hero-copy{--hero-cell:86px}
  body.monq-theme #hero .hero-cell{font-size:56px!important}
  body.monq-theme #campaign#campaign .projects{grid-template-columns:1fr}
