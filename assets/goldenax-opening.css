@@ -1,0 +1,14 @@
+/* Keep the opening focused; other agency themes retain their own motion. */
+body[data-portfolio-version="goldenax"] #hero :is(.version-motion-layer,.keyword-cloud){display:none}
+body[data-portfolio-version="goldenax"] #hero{min-height:max(640px,100svh);padding:100px 24px;gap:0;background:var(--gx-bg)}
+body[data-portfolio-version="goldenax"] #hero>.hero-copy{--hero-cell:128px;--hero-gap:12px;filter:none;animation:gx-opening-reveal 1.2s ease both}
+body[data-portfolio-version="goldenax"] #hero .hero-cell>span{animation:none!important;transform:none!important;opacity:1!important;filter:none!important}
+body[data-portfolio-version="goldenax"] #hero>.scroll-indicator{position:absolute;inset:calc(50% + 238px) auto auto 50%;transform:translateX(-50%);margin:0}
+@keyframes gx-opening-reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:700px){
+ body[data-portfolio-version="goldenax"] #hero{min-height:max(520px,100svh)}
+ body[data-portfolio-version="goldenax"] #hero>.hero-copy{--hero-cell:86px}
+ body[data-portfolio-version="goldenax"] #hero .hero-cell{font-size:56px!important}
+ body[data-portfolio-version="goldenax"] #hero>.scroll-indicator{top:calc(50% + 175px)}
+}
+@media(prefers-reduced-motion:reduce){body[data-portfolio-version="goldenax"] #hero>.hero-copy{animation:none}}
