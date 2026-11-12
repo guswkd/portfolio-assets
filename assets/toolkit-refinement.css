@@ -1,0 +1,48 @@
+/* Shared toolkit polish: quiet surfaces, consistent curves, smaller marks. */
+body #skills .skills-sidebar .skill-tab {
+  border-radius: 16px !important;
+  overflow: hidden;
+  background-image: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+/* Keep the original corner frames, without the pastel glow. */
+body #skills .skill-tab::before,
+body #skills .skill-tab::after {
+  border-color: currentColor !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: .22;
+}
+body #skills .skill-tab.active::before,
+body #skills .skill-tab.active::after { opacity: .55; }
+body #skills .skills-sidebar .skill-tab img {
+  width: 48% !important;
+  height: 48% !important;
+  max-width: 56px !important;
+  max-height: 56px !important;
+  object-fit: contain;
+  filter: none !important;
+}
+body #skills .skill-detail {
+  border-radius: 20px !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+body #skills .skill-detail-card {
+  border-radius: 12px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+body.monq-theme #skills .skill-tab,
+body.normal-theme.light-mode #skills .skill-tab { background-color: #f5f5f4 !important; }
+body.monq-theme #skills .skill-tab.active,
+body.normal-theme.light-mode #skills .skill-tab.active { background-color: #eaeae8 !important; }
+body.monq-theme #skills .skill-detail { background-color: #fafaf9 !important; border: 1px solid #dededb; }
+@media (max-width: 600px) {
+  body #skills .skills-sidebar .skill-tab { border-radius: 12px !important; }
+  body #skills .skills-sidebar .skill-tab img { max-width: 44px !important; max-height: 44px !important; }
+  body #skills .skill-detail { border-radius: 16px !important; }
+}

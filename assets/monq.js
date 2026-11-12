@@ -31,9 +31,9 @@
   menu.className = 'mq-menu';
   menu.setAttribute('aria-label', '포트폴리오 사이드 메뉴');
   menu.innerHTML = `<div class="mq-menu-inner">
-    <div class="mq-menu-top"><span lang="en" aria-label="한국어">KR</span><button class="mq-menu-close" type="button" aria-label="메뉴 닫기">×</button></div>
+    <div class="mq-menu-top"><button class="mq-menu-close" type="button" aria-label="메뉴 닫기">×</button></div>
     <nav aria-label="포트폴리오 섹션"><a href="#profile">현재</a><a href="#experience">흔적</a><a href="#campaign">현장</a><a href="#skills">확장</a><a href="mailto:guswkd725@naver.com">Contact <span aria-hidden="true">›</span></a></nav>
-    <address><a href="mailto:guswkd725@naver.com">guswkd725@naver.com</a><span>조현장</span><a href="tel:01071682504">010-7168-2504</a><a href="https://www.instagram.com/jjnowfield/">@jjnowfield</a></address>
+    <address><a href="mailto:guswkd725@naver.com"><span>guswkd725@</span><wbr><span>naver.com</span></a><span>조현장</span><a href="tel:01071682504">010-7168-2504</a><a href="https://www.instagram.com/jjnowfield/">@jjnowfield</a></address>
   </div>`;
   document.body.append(menu);
   let closing;
