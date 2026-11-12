@@ -1,4 +1,5 @@
 .mq-menu-trigger{display:none}
+body.monq-theme .contact-toggle{display:none!important}
 body.monq-theme .site-header .portfolio-nav{display:none!important}
 body.monq-theme .mq-symbol{display:block!important;right:calc(var(--mq-side,32px) + 60px);pointer-events:none}
 body.monq-theme .mq-menu-trigger{display:flex;position:absolute;right:var(--mq-side,32px);top:50%;transform:translateY(-50%);flex-direction:column;justify-content:center;gap:7px;width:44px;height:44px;padding:9px;border:0;background:none;color:#111;cursor:pointer}
