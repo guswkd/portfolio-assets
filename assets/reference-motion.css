@@ -107,24 +107,32 @@ body.innored-theme .hero-copy{animation:ir-copy-enter 1s cubic-bezier(.22,1,.36,
 @keyframes ir-media-enter{from{transform:scale(1.08)}to{transform:scale(1)}}
 @keyframes ir-copy-enter{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-/* Ilgram: translucent one-gram loops roll gently across a green field. */
-body.goldenax-theme.ilgram-theme .hero{background:#5bcf82!important}
+/* Ilgram reference: black opening with dark elliptical forms; green is an accent. */
+body.goldenax-theme.ilgram-theme .hero{background:#000!important;--identity-accent:#5bc980}
 body.goldenax-theme.ilgram-theme .hero::before{display:none}
-body.goldenax-theme.ilgram-theme .hero-cell,
-body.goldenax-theme.ilgram-theme .hero-cell.hero-accent{
-  color:#111!important;
-  -webkit-text-fill-color:#111!important;
-  border-color:rgba(17,17,17,.34)!important;
+body.goldenax-theme.ilgram-theme .hero-copy{--hero-line:#626262!important}
+body.goldenax-theme.ilgram-theme .hero-cell{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  border-color:var(--hero-line)!important;
+  text-shadow:none!important;
 }
-body.goldenax-theme.ilgram-theme .version-motion-layer{inset:18% -5% -20%;opacity:.52}
+body.goldenax-theme.ilgram-theme .hero-cell.hero-accent{
+  color:#5bc980!important;-webkit-text-fill-color:#5bc980!important;
+}
+body.goldenax-theme.ilgram-theme .hero-copy::before,
+body.goldenax-theme.ilgram-theme .hero-copy::after{
+  background:var(--hero-line)!important;
+}
+body.goldenax-theme.ilgram-theme .version-motion-layer{inset:0 -5%;opacity:1}
 body.goldenax-theme.ilgram-theme .version-motion-layer>i{
-  top:8%;
+  top:20%;
   width:23%;
-  height:82%;
+  height:60%;
   border-radius:50%;
-  background:rgba(255,255,255,.17);
-  transform:skewX(-8deg);
-  animation:ilgram-loop-roll 10s ease-in-out infinite alternate;
+  background:#111;
+  transform-origin:center;
+  animation:ilgram-loop-roll 8s cubic-bezier(.45,0,.55,1) infinite;
 }
 body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(1){left:-3%;animation-delay:-1s}
 body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(2){left:17%;animation-delay:-3s}
@@ -132,8 +140,8 @@ body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(3){left:37%;a
 body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(4){left:57%;animation-delay:-7s}
 body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(5){left:77%;animation-delay:-9s}
 @keyframes ilgram-loop-roll{
-  from{transform:translate3d(-3%,2%,0) skewX(-8deg) scaleY(.92)}
-  to{transform:translate3d(5%,-2%,0) skewX(8deg) scaleY(1.06)}
+  0%,100%{transform:scaleX(.72) scaleY(.78)}
+  45%,55%{transform:scaleX(1.18) scaleY(1.12)}
 }
 
 /* Interior entrances inherit the motion language of each reference. */
@@ -150,7 +158,7 @@ body.goldenax-theme.ilgram-theme .reveal-item.is-visible{transform:none}
   body.bat-theme .version-motion-layer>i:first-child{animation:bat-mobile-drift 16s ease-in-out infinite alternate}
   body.bat-theme .version-motion-layer>i:first-child{width:min(58vw,330px)}
   body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .version-motion-layer{inset:14% 2% 10%}
-  body.goldenax-theme.ilgram-theme .version-motion-layer{inset:28% -24% -14%}
+  body.goldenax-theme.ilgram-theme .version-motion-layer{inset:0 -24%}
   body.goldenax-theme.ilgram-theme .version-motion-layer>i{width:34%}
   body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(1){left:-18%}
   body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(2){left:10%}
