@@ -1,5 +1,5 @@
 /* Keep the 3x3 hero readable on wide Windows displays without dominating the viewport. */
 @media (min-width: 1200px) {
   .hero-copy { --hero-cell: clamp(112px, 8.2vw, 132px); --hero-gap: 16px; }
-  .hero-cell { font-size: clamp(50px, 5.4vw, 88px); }
+  .hero-cell { font-size: clamp(44px, 4.7vw, 74px); }
 }
