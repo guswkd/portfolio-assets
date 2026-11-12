@@ -46,9 +46,10 @@
   }
   function closeMenu() {
     menu.classList.remove('is-visible');
-    closing = setTimeout(finishClose, matchMedia('(prefers-reduced-motion:reduce)').matches ? 0 : 320);
+    closing = setTimeout(finishClose, matchMedia('(prefers-reduced-motion:reduce)').matches ? 0 : 400);
   }
   trigger.addEventListener('click', () => {
+    menu.classList.remove('mq-keyboard');
     clearTimeout(closing);
     menu.showModal();
     document.body.classList.add('mq-menu-open');
@@ -56,6 +57,8 @@
     requestAnimationFrame(() => requestAnimationFrame(() => menu.classList.add('is-visible')));
   });
   menu.querySelector('.mq-menu-close').addEventListener('click', closeMenu);
+  menu.addEventListener('keydown', event => {if(event.key==='Tab')menu.classList.add('mq-keyboard')});
+  menu.addEventListener('click', event => {if(event.target===menu && event.clientX < menu.getBoundingClientRect().left)closeMenu()});
   menu.addEventListener('cancel', event => {event.preventDefault(); closeMenu()});
   menu.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', event => {
     event.preventDefault();
