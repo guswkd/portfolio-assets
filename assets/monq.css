@@ -27,7 +27,7 @@ body.monq-theme #hero .hero-copy::after{background:var(--hero-line);box-shadow:0
 body.monq-theme #hero .hero-cell{font-size:82px!important;font-weight:800;color:#111!important;-webkit-text-fill-color:#111!important;border-color:var(--hero-line)!important;background:none;text-shadow:none}
 body.monq-theme #hero .hero-cell.hero-accent{color:#ab3028!important;-webkit-text-fill-color:#ab3028!important}
 body.monq-theme .hero-accent::before{display:none}
-body.monq-theme #hero .scroll-indicator{position:absolute;inset:calc(50% + var(--hero-cell) * 1.5 + var(--hero-gap) + 24px) auto auto 50%;transform:translateX(-50%);margin:0;color:#ab3028}
+body.monq-theme #hero .scroll-indicator{position:absolute;inset:calc(50% + var(--hero-cell) * 1.5 + var(--hero-gap) + 32px) auto auto 50%;transform:translateX(-50%);margin:0;color:#ab3028}
 body.monq-theme .cta-arrow-option{color:#ab3028;filter:none}
 body.monq-theme :is(#profile,#experience,#campaign,#skills){padding-block:96px}
 body.monq-theme :is(.experience-card,.roas-card,.skill-detail,.skill-tab){border-radius:0;box-shadow:none;background:#fff;color:#111}
