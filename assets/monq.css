@@ -1,6 +1,14 @@
 body.monq-theme{--gx-accent:#ab3028;--gx-text:#111;--gx-surface:#fff;--identity-accent:#ab3028;background:#fff;color:#111}
+body.monq-theme .scroll-progress-bar{
+  background:var(--gx-accent)!important;
+  box-shadow:0 0 7px rgba(171,48,40,.5),0 2px 14px rgba(171,48,40,.28)!important;
+  animation:none;
+  contain:layout;
+}
 body.monq-theme .background{background:#fff!important}
-body.monq-theme .background::before,body.monq-theme .background::after,body.monq-theme .keyword-cloud{display:none}
+body.monq-theme .background::before,body.monq-theme .background::after{display:none}
+body.monq-theme .keyword-cloud{display:block!important;opacity:.72;z-index:1}
+body.monq-theme .keyword-cloud .talent-keyword{color:#777;filter:none;text-shadow:none}
 body.monq-theme .site-header{display:block;position:fixed;inset:0 0 auto;height:80px;background:#fffffff2;z-index:1100}
 .mq-brand{display:none}
 .mq-symbol{display:none}
