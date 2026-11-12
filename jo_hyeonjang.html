@@ -5947,6 +5947,12 @@ body[data-portfolio-version="goldenax"]{--identity-accent:#c90024}
 body[data-portfolio-version="bat"]{--identity-accent:#1827b8}
 body[data-portfolio-version="innored"]{--identity-accent:#c20c1b}
 body[data-portfolio-version="ilgram"]{--identity-accent:#007340}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme):not(.ilgram-theme) .keyword-cloud{
+  display:block!important;opacity:.72;z-index:3;
+}
+body.goldenax-theme:not(.adconex-theme):not(.motherbrain-theme):not(.ilgram-theme) .keyword-cloud .talent-keyword{
+  color:rgba(17,17,17,.52);filter:none;text-shadow:none;
+}
 /* Hero cue follows the selected brand rather than the default purple. */
 body #hero .scroll-indicator .cta-arrow-option.is-selected{
   color:var(--identity-accent)!important;
