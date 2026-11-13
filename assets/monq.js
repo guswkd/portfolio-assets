@@ -17,7 +17,6 @@
   symbol.setAttribute('aria-hidden', 'true');
   symbol.width = 40;
   symbol.height = 40;
-  document.querySelector('.site-header')?.append(symbol);
   const trigger = document.createElement('button');
   trigger.className = 'mq-menu-trigger';
   trigger.type = 'button';
@@ -25,6 +24,7 @@
   trigger.setAttribute('aria-controls', 'mq-menu');
   trigger.setAttribute('aria-expanded', 'false');
   trigger.innerHTML = '<span></span><span></span>';
+  trigger.prepend(symbol);
   document.querySelector('.site-header')?.append(trigger);
   const menu = document.createElement('dialog');
   menu.id = 'mq-menu';

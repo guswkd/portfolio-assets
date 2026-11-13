@@ -4,6 +4,11 @@ body.monq-theme .site-header .portfolio-nav{display:none!important}
 body.monq-theme .mq-symbol{display:block!important;right:var(--mq-side,32px);top:calc(50% + 3px);transform:translate(65%,-50%);z-index:1;pointer-events:none}
 body.monq-theme .mq-menu-trigger{display:flex;position:absolute;right:calc(var(--mq-side,32px) - 12px);top:50%;transform:translateY(-50%);z-index:2;box-sizing:border-box;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:12px;border:0;background:none;color:#111;cursor:pointer}
 .mq-menu-trigger span{height:2px;width:20px;flex-shrink:0;background:currentColor}
+/* Keep the mark attached to the hamburger at every viewport aspect ratio. */
+body.monq-theme .site-header .mq-menu-trigger{overflow:visible;isolation:isolate}
+body.monq-theme .site-header .mq-menu-trigger>.mq-symbol{position:absolute;left:22px;right:auto;top:calc(50% + 3px);width:30px;height:35px;margin:0;transform:translateY(-50%);z-index:-1;object-fit:contain}
+body.monq-theme .site-header .mq-menu-trigger>span{position:relative;z-index:1}
+@media(max-width:900px){body.monq-theme .site-header .mq-menu-trigger>.mq-symbol{width:26px;height:30px}}
 body.mq-menu-open{overflow:hidden!important}
 /* Reference screenshot: 450 physical pixels at 2x = 225 CSS pixels. */
 .mq-menu{box-sizing:border-box;position:fixed;inset:0 0 0 auto;width:min(225px,100vw);height:100%;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#c9091b;color:#fff;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);font-family:"Helvetica Neue","MONQ Pretendard",sans-serif}
