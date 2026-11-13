@@ -2,8 +2,8 @@
 @font-face{font-family:MONQ Pretendard;src:url(fonts/Pretendard-Bold.subset.woff2) format("woff2");font-weight:600 900;font-display:swap}
 /* Reference dimensions only; preserve the portfolio's existing flow. */
 body.monq-theme{--mq-side:60px;--mq-header:88px;--type-section:60px;font-family:"Helvetica Neue","MONQ Pretendard",sans-serif;letter-spacing:0}
-body.monq-theme .site-header{height:var(--mq-header);background:#fff;border:0;box-shadow:none}
-body.monq-theme .mq-brand{left:var(--mq-side);top:50%;transform:translateY(-50%);font-size:0}
+body.monq-theme[data-portfolio-version] .site-header{height:var(--mq-header);min-height:0;padding:0;box-sizing:border-box;background:#fff;border:0;box-shadow:none}
+body.monq-theme[data-portfolio-version] .site-header .mq-brand{left:var(--mq-side);top:0;height:var(--mq-header);display:flex;align-items:center;justify-content:center;transform:none;margin:0;padding:0;font-size:0}
 body.monq-theme .mq-brand img{width:40px;height:auto}
 body.monq-theme .mq-symbol{width:30px;height:35px;right:var(--mq-side);top:50%;transform:translateY(-50%)}
 body.monq-theme .site-header .header-menu-toggle{display:none}
