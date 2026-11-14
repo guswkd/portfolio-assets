@@ -1,0 +1,59 @@
+@font-face{font-family:MONQ Pretendard;src:url(fonts/Pretendard-Medium.subset.woff2) format("woff2");font-weight:400 500;font-display:swap}
+@font-face{font-family:MONQ Pretendard;src:url(fonts/Pretendard-Bold.subset.woff2) format("woff2");font-weight:600 900;font-display:swap}
+/* Reference dimensions only; preserve the portfolio's existing flow. */
+body.monq-theme{--mq-side:60px;--mq-header:88px;--type-section:60px;font-family:"Helvetica Neue","MONQ Pretendard",sans-serif;letter-spacing:0}
+body.monq-theme[data-portfolio-version] .site-header{height:var(--mq-header);min-height:0;padding:0;box-sizing:border-box;background:#fff;border:0;box-shadow:none}
+body.monq-theme[data-portfolio-version] .site-header .mq-brand{left:var(--mq-side);top:0;height:var(--mq-header);display:flex;align-items:center;justify-content:center;transform:none;margin:0;padding:0;font-size:0}
+body.monq-theme .mq-brand img{width:40px;height:auto}
+body.monq-theme .mq-symbol{width:30px;height:35px;right:var(--mq-side);top:50%;transform:translateY(-50%)}
+body.monq-theme .site-header .header-menu-toggle{display:none}
+body.monq-theme .site-header .portfolio-nav{display:flex;inset:0 calc(var(--mq-side) + 60px) 0 auto;gap:24px;height:var(--mq-header);padding:0;border-radius:0}
+body.monq-theme .site-header .portfolio-nav a{font-size:16px!important}
+body.monq-theme .contact-toggle{display:flex}
+body.monq-theme :is(#profile,#experience,#campaign,#skills){width:100%;max-width:none;height:auto;min-height:0;margin:160px 0 0;padding:0 var(--mq-side);scroll-margin-top:calc(var(--mq-header) + 32px)}
+body.monq-theme :is(#profile,#experience,#campaign,#skills)>.section-heading{font-size:60px!important;font-weight:500;line-height:1.05!important;margin:0 0 24px;letter-spacing:0!important;text-shadow:none;filter:none}
+body.monq-theme :is(#profile,#experience,#campaign,#skills)>.section-intro{font-size:20px!important;line-height:1.5;margin:0 0 50px;color:#555}
+body.monq-theme[data-portfolio-version] #profile .swot-grid{max-width:none;width:100%;gap:44px 60px}
+body.monq-theme[data-portfolio-version] #profile .swot-item{padding-top:20px}
+body.monq-theme[data-portfolio-version] #profile .swot-item strong{font-size:26px;font-weight:700;line-height:1.4}
+body.monq-theme[data-portfolio-version] #profile .swot-item dd{font-size:18px;line-height:1.65}
+body.monq-theme #experience .experience-grid{gap:32px}
+body.monq-theme #experience .experience-card{padding:28px 0;border:0;border-top:1px solid #ccc}
+body.monq-theme #experience .exp-org{font-size:24px!important;line-height:1.3}
+body.monq-theme #experience .exp-role{font-size:18px!important;line-height:1.5}
+body.monq-theme #campaign#campaign .projects{gap:60px 40px}
+body.monq-theme #campaign .project-title{font-size:36px!important;font-weight:500;line-height:1.2}
+body.monq-theme #campaign .project-info{padding-block:24px 16px}
+body.monq-theme #campaign .roas-value{font-size:24px!important;line-height:1.4}
+body.monq-theme #skills{padding-bottom:120px}
+body.monq-theme .skill-detail-title{font-size:30px!important}
+body.monq-theme .skill-detail-sub{font-size:18px!important;line-height:1.5}
+body.monq-theme .contact-panel{width:min(450px,100vw);padding-top:calc(var(--mq-header) + 32px);right:0;transform:translateX(100%);visibility:hidden;pointer-events:none}
+body.monq-theme .contact-panel.active{transform:none;visibility:visible;pointer-events:auto}
+body.monq-theme .contact-panel .ir-dismiss{display:grid;place-items:center;position:absolute;right:20px;top:12px;width:44px;height:44px;background:none;border:0;border-radius:0;color:#111;font-size:28px;cursor:pointer}
+@media(max-width:1480px){body.monq-theme{--mq-side:40px}}
+@media(max-width:900px){
+ body.monq-theme{--mq-side:20px;--mq-header:50px;--type-section:28px}
+ body.monq-theme .mq-brand img{width:34px}
+ body.monq-theme .mq-symbol{display:block;width:26px;height:30px}
+ body.monq-theme .site-header .portfolio-nav{right:calc(var(--mq-side) + 46px);gap:10px}
+ body.monq-theme .site-header .portfolio-nav a{font-size:13px!important}
+ body.monq-theme :is(#profile,#experience,#campaign,#skills){margin-top:70px;padding:0 var(--mq-side)}
+ body.monq-theme :is(#profile,#experience,#campaign,#skills)>.section-heading{font-size:28px!important;line-height:1.15!important;margin-bottom:18px}
+ body.monq-theme :is(#profile,#experience,#campaign,#skills)>.section-intro{font-size:14px!important;line-height:1.5;margin-bottom:30px}
+ body.monq-theme[data-portfolio-version] #profile .swot-grid{grid-template-columns:1fr;gap:28px}
+ body.monq-theme[data-portfolio-version] #profile .swot-item strong{font-size:20px}
+ body.monq-theme[data-portfolio-version] #profile .swot-item dd{font-size:15px}
+ body.monq-theme #experience .experience-grid{grid-template-columns:1fr;gap:16px}
+ body.monq-theme #experience .exp-org{font-size:22px!important}
+ body.monq-theme #experience .exp-role{font-size:15px!important}
+ body.monq-theme #campaign#campaign .projects{grid-template-columns:1fr;gap:40px}
+ body.monq-theme #campaign .project-title{font-size:24px!important}
+ body.monq-theme #campaign .roas-value{font-size:20px!important}
+ body.monq-theme .skills-layout{grid-template-columns:1fr}
+ body.monq-theme .skills-sidebar{max-width:350px}
+ body.monq-theme .skill-detail-title{font-size:24px!important}
+ body.monq-theme .skill-detail-sub{font-size:15px!important}
+ body.monq-theme #skills{padding-bottom:70px}
+}
+@media(max-width:480px){body.monq-theme :is(#profile,#experience,#campaign,#skills)>.section-heading{font-size:24px!important}}

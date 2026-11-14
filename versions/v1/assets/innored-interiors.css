@@ -1,0 +1,88 @@
+/* INNORED interiors: shared content, independent chapter layouts. */
+body.innored-theme{--gx-text:#171717;--gx-surface:#fff;--role-ink:#b80815}
+body.innored-theme :is(.gx-about-window,.ac-opening,.company-brand,.contact-brand){display:none!important}
+body.innored-theme .gx-about-track{height:auto}
+body.innored-theme :is(#profile,#experience,#campaign,#skills){position:relative;inset:auto;box-sizing:border-box;width:100%;max-width:none;height:auto;min-height:0;margin:0;padding:clamp(64px,8vw,130px) max(5vw,calc((100% - 1400px)/2));background:#fff;color:#161616;scroll-margin-top:68px;text-align:left}
+body.innored-theme :is(#profile,#experience,#campaign,#skills)>:is(.section-heading,.section-intro,.profile-layout,.experience-grid,.projects,.skills-layout){width:100%;max-width:none;margin-inline:0;text-align:left}
+body.innored-theme :is(#profile,#experience,#campaign,#skills)>.section-heading{font-size:clamp(44px,6vw,96px);letter-spacing:-.065em;line-height:1.1;margin-block:0 18px;color:inherit}
+body.innored-theme :is(#profile,#experience,#campaign,#skills)>.section-intro{margin-block:0 clamp(32px,4vw,64px);color:inherit;font-size:clamp(16px,1.5vw,21px)}
+body.innored-theme .section-heading .title-outline{--chapter-fill-color:#d00e20;--chapter-base-color:#7e686a}
+body.innored-theme #profile{--profile-ink:#161616}
+body.innored-theme #profile .profile-layout{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start;gap:clamp(20px,4vw,72px)}
+body.innored-theme #profile .swot-plane{margin:0;padding:24px 12px;background:#f5f4f2;border-radius:16px}
+body.innored-theme #profile .swot-grid{grid-template-columns:1fr;gap:0}
+body.innored-theme #profile .swot-item{background:none;border-top:1px solid #bbb;padding:18px 0}
+body.innored-theme #profile .swot-item dd{margin-top:10px;font-size:17px}
+body.innored-theme #profile .swot-item strong{font-size:clamp(21px,2vw,29px)}
+body.innored-theme #experience{background:#f4f3f1}
+body.innored-theme #experience .experience-grid{display:block}
+body.innored-theme #experience .experience-card{display:grid;grid-template-columns:minmax(90px,.32fr) minmax(0,1.1fr) minmax(0,1fr);gap:24px;align-items:center;height:auto;min-height:0;padding:28px 0;margin:0;border:0;border-top:1px solid #aaa;border-radius:0;background:none;box-shadow:none}
+body.innored-theme #experience .exp-meta{margin:0}
+body.innored-theme #campaign#campaign .projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,5vw,72px) 3vw}
+body.innored-theme #campaign#campaign .roas-card{display:flex;flex-direction:column;background:none;border:0;border-top:2px solid #161616;border-radius:0;box-shadow:none;padding:0}
+body.innored-theme #campaign#campaign .project-info{order:-1;padding:18px 0 12px}
+body.innored-theme #campaign#campaign .project-title{font-size:clamp(28px,3.3vw,48px);letter-spacing:-.055em}
+body.innored-theme #campaign .roas-value{color:#bd0c19}
+body.innored-theme #campaign .brand-creatives{margin:16px 0 0}
+body.innored-theme #skills{background:#1b1b1b;color:white}
+body.innored-theme #skills .section-heading .title-outline{--chapter-fill-color:#ff6670;--chapter-base-color:#c3a7ab}
+body.innored-theme #skills .skills-layout{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start;height:auto;gap:clamp(24px,4vw,68px)}
+body.innored-theme #skills .skills-sidebar{width:100%;height:auto;margin:0;padding:0;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:none;gap:8px}
+body.innored-theme #skills .skill-tab{width:100%;height:auto;min-height:44px;aspect-ratio:1.6;border:0;border-radius:12px;background:#fafafa;box-shadow:none;transform:none}
+body.innored-theme #skills .skill-tab.active{box-shadow:inset 0 0 0 4px #f91120}
+body.innored-theme #skills .skill-tab img{max-width:58%;max-height:54px;object-fit:contain}
+body.innored-theme #skills .skill-tab::before,body.innored-theme #skills .skill-tab::after{display:none}
+body.innored-theme #skills .skill-detail{width:100%;height:auto;min-height:0;border:0;border-top:2px solid #ff525e;border-radius:0;padding:24px 0;background:none;box-shadow:none}
+body.innored-theme #skills .skill-detail :is(.skill-detail-title,.skill-detail-sub,.skill-detail-card,.skill-detail-card p,.skill-detail-card strong,.skill-scale-labels span){color:#fafafa}
+body.innored-theme #skills .skill-detail-card{background:none;border:0;border-top:1px solid #777;border-radius:0}
+@media(max-width:780px){
+body.innored-theme #profile .profile-layout,body.innored-theme #campaign#campaign .projects,body.innored-theme #skills .skills-layout{grid-template-columns:minmax(0,1fr)}
+body.innored-theme #experience .experience-card{grid-template-columns:1fr;gap:14px}
+body.innored-theme #skills .skills-sidebar{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+/* The full-page backdrop must not inherit the normal theme's animated grid. */
+body.innored-theme.light-mode,body.innored-theme.light-mode .background{background:#fff}
+body.innored-theme .background::after{display:none}
+body.innored-theme #hero{background-image:linear-gradient(100deg,rgba(8,8,8,.73),rgba(8,8,8,.52)),url("creatives/onska/seongsu-popup-preview.webp");background-size:cover;background-position:center 43%;background-color:#171717}
+body.innored-theme #hero .hero-copy{--hero-line:rgba(255,255,255,.56);filter:none}
+body.innored-theme #hero .hero-cell{background:rgba(0,0,0,.36);color:#fff;-webkit-text-fill-color:currentColor;text-shadow:none}
+body.innored-theme #hero .hero-accent{background:#bd0d19}
+body.innored-theme #hero .talent-keyword,body.innored-theme #hero .cta-arrow-option{color:#fff}
+body.innored-theme #profile .swot-plane{background:#fff;border:1px solid #ddd}
+body.innored-theme #experience{background:#f2f2f2}
+body.innored-theme #campaign{background:white}
+body.innored-theme #skills{background-color:#181818;background-image:radial-gradient(circle at 91% 0%,#f91120 0 clamp(90px,14vw,220px),transparent calc(clamp(90px,14vw,220px) + 1px))}
+@media(max-width:780px){body.innored-theme #skills{background-image:radial-gradient(circle at 100% 0%,#f91120 0 52px,transparent 53px)}}
+/* Campaign navigation, reading surfaces and closing contact share the same visual vocabulary. */
+.ir-ending,.ir-dismiss{display:none}
+body.innored-theme{--ir-red:#f91120;--ir-ink:#191919;--ir-paper:#f2f2f2}
+body.innored-theme.light-mode .scroll-progress-bar{background:var(--ir-red);box-shadow:none;animation:none}
+body.innored-theme .site-header{background:rgba(20,20,20,.96)}
+body.innored-theme.header-menu-open .site-header{background:var(--ir-ink)}
+body.innored-theme.header-menu-open .site-header .portfolio-nav{box-sizing:border-box;height:calc(100svh - 68px);overflow:auto;max-height:none;justify-content:center;align-items:stretch;padding:24px 8vw 8vh;background:var(--ir-ink);counter-reset:ir-link}
+body.innored-theme.header-menu-open .site-header .portfolio-nav a{display:flex;justify-content:flex-start;gap:20px;flex:none;padding:12px 0;border-top:1px solid #555;border-radius:0;line-height:1.1;font-size:clamp(30px,min(6vw,9vh),88px);color:white;background:none;counter-increment:ir-link}
+body.innored-theme.header-menu-open .portfolio-nav a::before{content:"0" counter(ir-link);color:#ff6971;font:600 14px/1 Arial,sans-serif}
+body.innored-theme .site-header :is(button,a):focus-visible,body.innored-theme #campaign button:focus-visible{outline:3px solid var(--ir-red);outline-offset:2px}
+body.innored-theme #profile{--swot-s:#b90f1a;--swot-w:#463d3d;--swot-o:#852530;--swot-t:#615759}
+body.innored-theme #profile .swot-plane{border:0;border-radius:0;background:var(--ir-paper);padding:clamp(18px,3vw,42px)}
+body.innored-theme #experience .exp-label{color:#ab0e19;background:transparent;border:0;padding:0;letter-spacing:.08em}
+body.innored-theme #experience .exp-meta span{background:#fff;border:1px solid #ccc;box-shadow:none;color:var(--ir-ink)}
+body.innored-theme #experience .exp-meta .role-key{border-color:var(--ir-ink);background:var(--ir-ink);color:#fff}
+body.innored-theme #campaign .roas-preview-label{color:white;background:var(--ir-ink);border-radius:99px;padding:7px 12px}
+body.innored-theme #skills .skill-barometer-fill{background:var(--ir-red);box-shadow:none}
+body.innored-theme #skills .skill-barometer-track{background:#444;border:1px solid #777;box-shadow:none}
+body.innored-theme .project-modal{background:rgba(15,15,15,.95);backdrop-filter:none}
+body.innored-theme .project-modal-box{background:#181818;border:0;border-radius:0;box-shadow:none}
+body.innored-theme .project-modal-close,body.innored-theme .ir-dismiss{width:44px;height:44px;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:white;color:#191919;cursor:pointer;font:normal 28px/1 Arial,sans-serif}
+body.innored-theme .ir-ending{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;padding:clamp(38px,6vw,90px) 5vw;background:var(--ir-red);color:#171717}
+body.innored-theme .ir-ending a{font-size:clamp(35px,7vw,110px);font-weight:750;letter-spacing:-.065em;line-height:1;text-decoration:none;color:inherit}
+body.innored-theme .ir-ending span{font-size:15px;font-weight:650}
+body.innored-theme.light-mode .contact-panel{box-sizing:border-box;width:min(100%,480px);right:0;transform:translateX(101%);visibility:hidden;background:var(--ir-ink);color:white;border:0;box-shadow:none;backdrop-filter:none;padding:clamp(24px,5vw,64px)}
+body.innored-theme.light-mode .contact-panel.active{transform:none;visibility:visible}
+body.innored-theme .contact-panel .ir-dismiss{position:absolute;right:20px;top:20px}
+body.innored-theme .contact-inner h2{color:white;font-size:clamp(44px,6vw,74px);letter-spacing:-.065em}
+body.innored-theme .contact-inner p{color:#eee;border-top:1px solid #555;padding-top:12px}
+body.innored-theme .version-command{border:1px solid #555;background:var(--ir-ink);border-radius:16px}
+body.innored-theme .version-command button{border-radius:99px}
+body.innored-theme .version-command button[type=submit]{background:var(--ir-red);color:#121212}
+@media(max-width:540px){body.innored-theme .ir-ending{align-items:flex-start;flex-direction:column}}

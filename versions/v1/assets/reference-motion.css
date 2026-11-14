@@ -1,0 +1,181 @@
+/* Motion signatures derived from each reference site's current opening behavior. */
+.hero .version-motion-layer.motion-paused,
+.hero .version-motion-layer.motion-paused>i,
+.hero .version-motion-layer.motion-paused::before,
+.hero .version-motion-layer.motion-paused::after{animation-play-state:paused!important}
+.hero>.version-motion-layer{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+.hero>.version-motion-layer>i{position:absolute;display:block}
+.hero>:is(.hero-copy,.scroll-indicator){position:relative;z-index:2}
+/* Absolutely positioned children need a full-size cloud, not a zero-height flow box. */
+.hero>.keyword-cloud{position:absolute;inset:0;z-index:2}
+body.normal-theme:not(.bat-theme) .version-motion-layer{display:none}
+
+/* Goldenax: campaign images reveal through faceted brand shapes. */
+body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .version-motion-layer{
+  inset:10% 10% 8%;
+  opacity:.5;
+}
+body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .version-motion-layer>i{
+  width:42%;
+  height:42%;
+  background:
+    linear-gradient(rgba(230,0,33,.66),rgba(230,0,33,.66)),
+    var(--reference-motion-image,linear-gradient(135deg,#e60021,#63000f));
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  animation:gx-facet-enter 1.15s cubic-bezier(.22,1,.36,1) both,
+    gx-facet-drift 15s ease-in-out 1.5s infinite alternate;
+}
+body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .version-motion-layer>i:nth-child(1){left:4%;top:4%;clip-path:polygon(0 0,100% 0,72% 100%,22% 100%);animation-delay:.08s,1.5s}
+body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .version-motion-layer>i:nth-child(2){right:4%;top:4%;clip-path:polygon(0 0,100% 0,78% 100%,28% 100%);animation-delay:.18s,1.7s}
+body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .version-motion-layer>i:nth-child(3){left:17%;bottom:2%;clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);animation-delay:.28s,1.9s}
+body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .version-motion-layer>i:nth-child(4){right:17%;bottom:2%;clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);animation-delay:.38s,2.1s}
+body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .version-motion-layer>i:nth-child(5){display:none}
+@keyframes gx-facet-enter{
+  from{opacity:0;transform:translateY(42px) scale(.82);filter:blur(10px)}
+  to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+}
+@keyframes gx-facet-drift{
+  from{background-position:42% 50%;transform:translate3d(-5px,0,0)}
+  to{background-position:58% 50%;transform:translate3d(5px,-7px,0)}
+}
+
+/* BAT: a single sculptural object turns slowly behind the statement. */
+body.bat-theme .version-motion-layer>i{display:none}
+body.bat-theme .version-motion-layer>i:first-child{
+  display:block;
+  left:50%;
+  top:50%;
+  width:min(34vw,430px);
+  aspect-ratio:.72;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.02) 50%,rgba(255,255,255,.16)),
+    var(--reference-motion-image,linear-gradient(145deg,#777,#191919));
+  background-size:cover;
+  filter:grayscale(1) contrast(1.25) brightness(.7);
+  clip-path:polygon(18% 0,95% 8%,76% 43%,100% 71%,58% 100%,12% 82%,28% 48%,0 22%);
+  transform:translate(-50%,-50%);
+  animation:bat-object-enter 1.4s cubic-bezier(.22,1,.36,1) both,
+    bat-object-turn 16s ease-in-out 1.4s infinite alternate;
+}
+@keyframes bat-object-enter{
+  from{opacity:0;transform:translate(-50%,-45%) scale(.72) rotate(-12deg);filter:grayscale(1) blur(12px)}
+  to{opacity:.88;transform:translate(-50%,-50%) scale(1) rotate(0);filter:grayscale(1) contrast(1.25) brightness(.7) blur(0)}
+}
+@keyframes bat-object-turn{
+  0%{transform:translate(-50%,-50%) perspective(900px) rotateY(-12deg) rotateZ(-2deg);clip-path:polygon(18% 0,95% 8%,76% 43%,100% 71%,58% 100%,12% 82%,28% 48%,0 22%)}
+  50%{transform:translate(-50%,-52%) perspective(900px) rotateY(10deg) rotateZ(2deg);clip-path:polygon(8% 8%,82% 0,100% 34%,79% 65%,93% 94%,40% 100%,0 76%,19% 42%)}
+  100%{transform:translate(-50%,-49%) perspective(900px) rotateY(-6deg) rotateZ(1deg);clip-path:polygon(22% 0,100% 18%,82% 49%,94% 84%,52% 100%,0 72%,18% 39%,4% 12%)}
+}
+
+/* Innored: a compact loader opens into a slowly zooming campaign scene. */
+body.innored-theme .version-motion-layer{
+  background:
+    linear-gradient(100deg,rgba(8,8,8,.48),rgba(8,8,8,.22)),
+    url("creatives/onska/seongsu-popup-preview.webp") center 43%/cover;
+  transform:scale(1.08);
+  animation:ir-media-enter 8s cubic-bezier(.2,.65,.25,1) both;
+}
+body.innored-theme .version-motion-layer>i{display:none}
+body.innored-theme .version-motion-layer::before,
+body.innored-theme .version-motion-layer::after{content:"";position:absolute;z-index:3;pointer-events:none}
+body.innored-theme .version-motion-layer::before{
+  inset:0;
+  background:#151b19;
+  animation:ir-curtain-open 1.25s cubic-bezier(.76,0,.24,1) .2s both;
+}
+body.innored-theme .version-motion-layer::after{
+  left:50%;top:50%;width:82px;height:32px;border-radius:99px;background:#f2f2f2;
+  animation:ir-loader-pill 1.1s cubic-bezier(.76,0,.24,1) both;
+}
+body.innored-theme .hero-copy{animation:ir-copy-enter 1s cubic-bezier(.22,1,.36,1) 1s both}
+@keyframes ir-loader-pill{
+  0%{opacity:0;transform:translate(-50%,-50%) scaleX(.3)}
+  28%{opacity:1;transform:translate(-50%,-50%) scaleX(1)}
+  70%{opacity:1;transform:translate(-50%,-50%) scaleX(1)}
+  100%{opacity:0;transform:translate(-50%,-50%) scaleX(3.2)}
+}
+@keyframes ir-curtain-open{
+  0%,58%{clip-path:inset(0)}
+  100%{clip-path:inset(50% 0)}
+}
+@keyframes ir-media-enter{from{transform:scale(1.08)}to{transform:scale(1)}}
+@keyframes ir-copy-enter{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* Ilgram reference: black opening with dark elliptical forms; green is an accent. */
+body.goldenax-theme.ilgram-theme .hero{background:#000!important;--identity-accent:#5bc980}
+body.goldenax-theme.ilgram-theme .hero::before{display:none}
+body.goldenax-theme.ilgram-theme .hero-copy{--hero-line:#626262!important}
+body.goldenax-theme.ilgram-theme .hero-cell{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  border-color:var(--hero-line)!important;
+  text-shadow:none!important;
+}
+body.goldenax-theme.ilgram-theme .hero-cell.hero-accent{
+  color:#5bc980!important;-webkit-text-fill-color:#5bc980!important;
+}
+body.goldenax-theme.ilgram-theme .hero-copy::before,
+body.goldenax-theme.ilgram-theme .hero-copy::after{
+  background:var(--hero-line)!important;
+}
+body.goldenax-theme.ilgram-theme .version-motion-layer{inset:0 -5%;opacity:1}
+body.goldenax-theme.ilgram-theme .version-motion-layer>i{
+  top:20%;
+  width:23%;
+  height:60%;
+  border-radius:50%;
+  background:#111;
+  transform-origin:center;
+  animation:ilgram-loop-roll 8s cubic-bezier(.45,0,.55,1) infinite;
+}
+body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(1){left:-3%;animation-delay:-1s}
+body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(2){left:17%;animation-delay:-3s}
+body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(3){left:37%;animation-delay:-5s}
+body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(4){left:57%;animation-delay:-7s}
+body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(5){left:77%;animation-delay:-9s}
+@keyframes ilgram-loop-roll{
+  0%,100%{transform:scaleX(.72) scaleY(.78)}
+  45%,55%{transform:scaleX(1.18) scaleY(1.12)}
+}
+
+/* Interior entrances inherit the motion language of each reference. */
+body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .reveal-item{clip-path:inset(0 0 100% 0);transform:translateY(34px)}
+body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .reveal-item.is-visible{clip-path:inset(0);transform:none}
+body.bat-theme .reveal-item{clip-path:inset(0 100% 0 0);transform:translateX(32px);transition-duration:1.05s}
+body.bat-theme .reveal-item.is-visible{clip-path:inset(0);transform:none}
+body.innored-theme .reveal-item{transform:translateY(28px) scale(.985);transition-duration:1s}
+body.innored-theme .reveal-item.is-visible{transform:none}
+body.goldenax-theme.ilgram-theme .reveal-item{transform:translateY(22px);transition-duration:.85s}
+body.goldenax-theme.ilgram-theme .reveal-item.is-visible{transform:none}
+
+@media(max-width:700px){
+  body.bat-theme .version-motion-layer>i:first-child{animation:bat-mobile-drift 16s ease-in-out infinite alternate}
+  body.bat-theme .version-motion-layer>i:first-child{width:min(58vw,330px)}
+  body.goldenax-theme:not(.ilgram-theme):not(.adconex-theme):not(.motherbrain-theme) .version-motion-layer{inset:14% 2% 10%}
+  body.goldenax-theme.ilgram-theme .version-motion-layer{inset:0 -24%}
+  body.goldenax-theme.ilgram-theme .version-motion-layer>i{width:34%}
+  body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(1){left:-18%}
+  body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(2){left:10%}
+  body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(3){left:38%}
+  body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(4){left:66%}
+  body.goldenax-theme.ilgram-theme .version-motion-layer>i:nth-child(5){left:94%}
+}
+@keyframes bat-mobile-drift{
+  from{transform:translate(-50%,-50%) rotate(-2deg)}
+  to{transform:translate(-50%,-52%) rotate(2deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  .version-motion-layer,.version-motion-layer>i,.version-motion-layer::before,.version-motion-layer::after,
+  body.innored-theme .hero-copy{animation:none!important;transform:none!important;filter:none!important}
+  body.innored-theme .version-motion-layer::before,body.innored-theme .version-motion-layer::after{display:none}
+  body.bat-theme .version-motion-layer>i:first-child{transform:translate(-50%,-50%)!important;opacity:.88}
+  body.bat-theme .reveal-item{clip-path:none!important;transform:none!important;opacity:1!important}
+}

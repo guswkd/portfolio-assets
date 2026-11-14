@@ -1,0 +1,10 @@
+/* Keep the 3x3 hero readable on wide Windows displays without dominating the viewport. */
+/* Independent translation preserves each theme's centering and arrow animation. */
+body #hero > .scroll-indicator { translate: 0 20px; }
+@media (max-width: 760px) {
+  body #hero > .scroll-indicator { translate: 0 12px; }
+}
+@media (min-width: 1200px) {
+  .hero-copy { --hero-cell: clamp(112px, 8.2vw, 132px); --hero-gap: 16px; }
+  .hero-cell { font-size: clamp(44px, 4.7vw, 74px); }
+}

@@ -5,6 +5,7 @@
   if (!endpoint || location.hostname !== 'guswkd.github.io') return;
   if (navigator.doNotTrack === '1' || navigator.globalPrivacyControl) return;
   const versions = new Set(['normal', 'goldenax', 'ilgram', 'bat', 'innored', 'monq']);
+  const release = /_v1\.html$/.test(location.pathname) ? 'v1' : 'v2';
   const version = () => {
     const value = document.body.dataset.portfolioVersion || 'normal';
     return versions.has(value) ? value : 'normal';
@@ -15,8 +16,8 @@
     if (current === previous || !window.goatcounter?.count) return;
     if (window.goatcounter.filter?.()) return;
     window.goatcounter.count({
-      path: '/portfolio/' + current,
-      title: 'Portfolio · ' + current
+      path: '/portfolio/' + release + '/' + current,
+      title: 'Portfolio · ' + release + ' · ' + current
     });
     previous = current;
   };
