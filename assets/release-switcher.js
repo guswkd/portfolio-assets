@@ -18,7 +18,7 @@
   input.removeAttribute('id');
   input.hidden = true;
   input.after(select);
-  const release = /_v1\.html$/.test(location.pathname) ? 'v1' : 'v2';
+  const release = /\/versions\/v1\//.test(location.pathname) ? 'v1' : 'v2';
   new MutationObserver(() => {
     if (!dialog.open) return;
     select.value = release + '_' + (document.body.dataset.portfolioVersion || 'normal');
@@ -35,7 +35,8 @@
       return;
     }
     const url = new URL(location.href);
-    url.pathname = url.pathname.replace(/[^/]+$/, nextRelease === 'v1' ? 'jo_hyeonjang_v1.html' : 'jo_hyeonjang.html');
+    const root = new URL('.', document.baseURI);
+    url.pathname = root.pathname + (nextRelease === 'v1' ? 'versions/v1/index.html' : 'jo_hyeonjang.html');
     url.searchParams.set('version', theme);
     url.hash = '';
     location.assign(url.href);

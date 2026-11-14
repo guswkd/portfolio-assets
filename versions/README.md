@@ -1,7 +1,8 @@
 # Portfolio releases
 
 - v2: `jo_hyeonjang.html` (existing public URL; active working version)
-- v1: `jo_hyeonjang_v1.html` (snapshot created 2026-11-14)
+- v1: `versions/v1/index.html` (internal snapshot, accessed through the switcher)
+- The redundant public `jo_hyeonjang_v1.html` has been removed.
 - Theme selection remains `?version=normal|goldenax|ilgram|bat|innored|monq`.
 - v1 references frozen CSS/JS assets under `versions/v1/assets`.
 - Do not update v1 or its frozen assets when editing v2 unless explicitly asked.
