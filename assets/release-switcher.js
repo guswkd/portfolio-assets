@@ -11,7 +11,7 @@
     for (const [theme, label] of Object.entries(themes)) {
       const option = document.createElement('option');
       option.value = release + '_' + theme;
-      option.textContent = release + '_' + label;
+      option.textContent = (release === 'v1' ? '확인본' : '회사제출본') + '_' + label;
       select.append(option);
     }
   }
