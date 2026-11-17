@@ -5,3 +5,15 @@ body:not(.monq-theme) #hero > .hero-copy{position:relative}
 .ae-role-intro p:not(.ae-role-title){margin:0;max-width:760px;font-size:clamp(15px,1.3vw,18px);line-height:1.8;word-break:keep-all}
 body.monq-theme .ae-role-label,body.monq-theme .ae-role-intro,[hidden].ae-role-label,[hidden].ae-role-intro{display:none!important}
 @media(max-width:760px){.ae-role-intro{margin-bottom:32px}.ae-role-label{bottom:calc(100% + 16px)}}
+.ae-direction{margin:0 0 64px;padding:28px;border:1px solid currentColor;border-radius:18px;color:inherit}
+.ae-direction[hidden]{display:none!important}
+.ae-direction>h3{margin:0 0 26px;font-size:clamp(21px,2vw,28px);line-height:1.4}
+.ae-direction-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.ae-direction-grid article{min-width:0;display:flex;flex-direction:column}
+.ae-direction-number{font-size:15px;font-weight:700;color:var(--accent,currentColor)}
+.ae-direction h4{margin:10px 0 12px;font-size:23px;line-height:1.4}
+.ae-direction p{margin:0;font-size:17px;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+.ae-direction-evidence{margin-top:auto;padding-top:24px}
+.ae-direction-evidence>span{display:block;border-top:1px solid currentColor;padding-top:16px;margin-bottom:8px;font-size:12px;opacity:.65}
+.ae-direction-evidence p{font-size:14px;opacity:.8}
+@media(max-width:760px){.ae-direction{padding:22px;margin-bottom:40px}.ae-direction-grid{grid-template-columns:1fr;gap:30px}.ae-direction-evidence{padding-top:16px}}
