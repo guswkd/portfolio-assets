@@ -13,7 +13,7 @@
   const direction = document.createElement('section');
   direction.className = 'ae-direction';
   direction.setAttribute('aria-labelledby', 'ae-direction-title');
-  direction.innerHTML = `<h3 id="ae-direction-title">골드넥스에서 하고 싶은 일</h3><div class="ae-direction-grid">
+  direction.innerHTML = `<h3 id="ae-direction-title">지원 직무와 연결되는 경험</h3><div class="ae-direction-grid">
     <article><span class="ae-direction-number">01</span><h4>캠페인 기획</h4><p>브랜드가 전할 메시지를 정하고, 콘텐츠와 매체를 제안하고 싶습니다.</p><div class="ae-direction-evidence"><span>연결되는 경험</span><p>광고 제안서 작성·발표<br>미디어믹스 업무, 소재·카피 기획</p></div></article>
     <article><span class="ae-direction-number">02</span><h4>팀 협업</h4><p>광고주 요청을 정리하고, 팀과 실행 방향을 맞추는 역할을 맡고 싶습니다.</p><div class="ae-direction-evidence"><span>연결되는 경험</span><p>KODA 교육 프로젝트 조장<br>광고주 커뮤니케이션·성과 보고</p></div></article>
     <article><span class="ae-direction-number">03</span><h4>운영·보고</h4><p>일정과 집행 결과를 챙기고, 확인한 반응을 다음 광고에 반영하고 싶습니다.</p><div class="ae-direction-evidence"><span>연결되는 경험</span><p>타깃·예산 운영, 캠페인 모니터링<br>일간·주간 리포팅, 개선 방향 제안</p></div></article>
