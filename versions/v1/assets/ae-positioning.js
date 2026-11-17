@@ -4,7 +4,7 @@
   if (!hero || !heading) return;
   const role = document.createElement('p');
   role.className = 'ae-role-label';
-  role.textContent = '디지털 마케팅 AE · 조현장';
+  role.textContent = 'Digital Marketing AE · 조현장';
   hero.append(role);
   const intro = document.createElement('div');
   intro.className = 'ae-role-intro';
@@ -15,10 +15,12 @@
   const defaultIntro = intro.innerHTML;
   const strength = document.querySelector('.swot-item[data-factor="S"] dd');
   const originalStrength = strength?.innerHTML;
+  const jobTitles = [...document.querySelectorAll('.exp-role')].map(element => ({ element, original: element.textContent, english: ({ '미디어플래너': 'Media Planner', '퍼포먼스 마케터': 'Performance Marketer' })[element.textContent.trim()] }));
   const sync = () => {
     const monq = document.body.dataset.portfolioVersion === 'monq';
     const goldenax = document.body.dataset.portfolioVersion === 'goldenax';
-    role.textContent = goldenax ? '디지털마케팅 AE 지원 · 조현장' : '디지털 마케팅 AE · 조현장';
+    role.textContent = 'Digital Marketing AE · 조현장';
+    jobTitles.forEach(({ element, original, english }) => { if (english) element.textContent = monq ? original : english; });
     intro.innerHTML = goldenax ? '<p class="ae-role-title">누구에게, 어떤 말을, 어디서 전할지<br>기획하는 AE가 되고 싶습니다.</p><p>광고를 운영하며 소재와 타깃에 따라 달라지는 반응을 봤습니다. 이 경험을 바탕으로 브랜드가 전할 메시지를 정하고, 캠페인과 SNS 콘텐츠로 풀어내는 일을 하고 싶습니다.</p><p>골드넥스에서는 광고주의 요청을 정리해 브랜드 제안서와 실행 계획에 담는 일부터 맡고 싶습니다. 팀과 콘텐츠·매체 방향을 맞추고, 일정과 운영 결과를 챙기며 다음 제안까지 이어가는 AE를 목표로 합니다.</p>' : defaultIntro;
     if (strength) strength.innerHTML = goldenax ? '<strong>기획 내용을 문서로, 운영 결과를 보고로</strong>캠페인 제안서 구성과 미디어믹스 작성 경험이 있습니다. 광고 운영에서는 소재·카피를 기획하고 타깃과 예산을 관리했습니다. 집행 결과를 리포트로 정리해 광고주에게 보고하고 개선 방향을 제안했습니다.' : originalStrength;
     role.hidden = intro.hidden = monq;
