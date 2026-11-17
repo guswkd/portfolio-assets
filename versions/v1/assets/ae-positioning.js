@@ -12,10 +12,18 @@
   heading.after(intro);
   const opportunity = document.querySelector('.swot-item[data-factor="O"] dd');
   const original = opportunity?.innerHTML;
+  const defaultIntro = intro.innerHTML;
+  const strength = document.querySelector('.swot-item[data-factor="S"] dd');
+  const originalStrength = strength?.innerHTML;
   const sync = () => {
     const monq = document.body.dataset.portfolioVersion === 'monq';
+    const goldenax = document.body.dataset.portfolioVersion === 'goldenax';
+    role.textContent = goldenax ? '디지털마케팅 AE 지원 · 조현장' : '디지털 마케팅 AE · 조현장';
+    intro.innerHTML = goldenax ? '<p class="ae-role-title">광고 기획을 맡고 싶습니다.<br>운영 경험을 캠페인 제안으로 이어가겠습니다.</p><p>미디어믹스와 성과 리포트를 작성하고, 광고 소재·카피 기획부터 타깃·예산 운영, 광고주 보고까지 맡았습니다. 집행 과정에서 확인한 반응을 바탕으로 매체와 메시지를 제안하는 디지털마케팅 AE를 목표로 합니다.</p>' : defaultIntro;
+    if (strength) strength.innerHTML = goldenax ? '<strong>기획 내용을 문서로, 운영 결과를 보고로</strong>캠페인 제안서 구성과 미디어믹스 작성 경험이 있습니다. 광고 운영에서는 소재·카피를 기획하고 타깃과 예산을 관리했습니다. 집행 결과를 리포트로 정리해 광고주에게 보고하고 개선 방향을 제안했습니다.' : originalStrength;
     role.hidden = intro.hidden = monq;
     if (opportunity) opportunity.innerHTML = monq ? original : '<strong>매체 운영에서 캠페인 기획으로</strong>NMG에서 미디어믹스와 리포팅을, 그로스비에서 광고 운영과 광고주 소통을 경험했습니다. 다음에는 광고주의 요청과 운영 데이터를 함께 검토해 캠페인 계획을 제안하는 역할까지 맡고 싶습니다.';
+    if (goldenax && opportunity) opportunity.innerHTML = '<strong>운영 경험을 광고 기획의 근거로</strong>소재·타깃·예산을 운영하며 확인한 반응을 다음 캠페인의 매체와 카피 기획에 활용하고 싶습니다. 제안의 근거를 문서로 정리하고 광고주에게 설명하는 역할까지 넓혀가겠습니다.';
   };
   window.addEventListener('portfolio-version-change', sync);
   sync();
