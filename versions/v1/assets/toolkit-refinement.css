@@ -1,4 +1,4 @@
-/* Shared toolkit polish: quiet surfaces, consistent curves, smaller marks. */
+/* Shared toolkit polish: quiet surfaces and consistent curves. */
 body #skills .skills-sidebar .skill-tab {
   border-radius: 16px !important;
   overflow: hidden;
@@ -41,8 +41,16 @@ body.normal-theme.light-mode #skills .skill-tab { background-color: #f5f5f4 !imp
 body.monq-theme #skills .skill-tab.active,
 body.normal-theme.light-mode #skills .skill-tab.active { background-color: #eaeae8 !important; }
 body.monq-theme #skills .skill-detail { background-color: #fafaf9 !important; border: 1px solid #dededb; }
+/* Ilgram: let the marks scale with the cards instead of the shared 56px cap. */
+body[data-portfolio-version="ilgram"] #skills .skills-sidebar .skill-tab img {
+  width: 60% !important;
+  height: 60% !important;
+  max-width: 96px !important;
+  max-height: 96px !important;
+}
 @media (max-width: 600px) {
   body #skills .skills-sidebar .skill-tab { border-radius: 12px !important; }
   body #skills .skills-sidebar .skill-tab img { max-width: 44px !important; max-height: 44px !important; }
   body #skills .skill-detail { border-radius: 16px !important; }
+  body[data-portfolio-version="ilgram"] #skills .skills-sidebar .skill-tab img { max-width: 64px !important; max-height: 64px !important; }
 }
